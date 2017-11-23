@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 作为登录、登出、以及普通的页面跳转使用 -->
+	<package name="system" namespace="/System" extends="struts-default">
+		<action name="system_*" class="com.teacherms.system.action.SystemAction"
+			method="{1}">
+			<result name="page_index">/WEB-INF/views/index.jsp</result>
+			<result name="exit">/login.jsp</result>
+		</action>
+	</package>
+</struts>

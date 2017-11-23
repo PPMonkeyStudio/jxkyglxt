@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="paper" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class=" modal-dialog">
+			<div id="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">论文</h4>
+				</div>
+				<div class="modal-body">
+					<div id="main_body">
+						<form class="info_form">
+							<table class="tab">
+								<tbody class="basic">
+									<tr>
+										<td>工号：</td>
+										<td><input name="teacherPaper.userId"
+											class="form-control table_infomation" type="text"></td>
+									</tr>
+									<tr>
+										<td>姓名：</td>
+										<td><input class="form-control table_infomation"
+											type="text"></td>
+									</tr>
+								</tbody>
+								<tr>
+									<td>论文名称：</td>
+									<td><input name="teacherPaper.paperName"
+										class="form-control table_infomation" type="text"></td>
+								</tr>
+								<tr>
+									<td>作者：</td>
+									<td><input name="teacherPaper.authorUserNames"
+										class="form-control table_infomation" type="text"></td>
+								</tr>
+								<tr>
+									<td>作者工号_排名：</td>
+									<td><input name="teacherPaper.authorUserIds"
+										class="form-control table_infomation" type="text"></td>
+								</tr>
+								<tr>
+									<td>论文类别：</td>
+									<td><select name="teacherPaper.paperType"
+										class="form-control table_infomation">
+											<option>科研</option>
+											<option>教研</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td>发表期刊：</td>
+									<td><input name="teacherPaper.periodical"
+										class="form-control table_infomation" type="text"></td>
+								</tr>
+								<tr>
+									<td>期号：</td>
+									<td><input name="teacherPaper.periodicalNo"
+										class="form-control table_infomation" type="text"></td>
+								</tr>
+								<tr>
+									<td>发表日期：</td>
+									<td><input name="teacherPaper.publishTime"
+										class="form-control laydate-icon table_infomation" type="text"></td>
+								</tr>
+								<tr>
+									<td>收录情况：</td>
+									<td><select name="teacherPaper.includedSituation"
+										class="form-control table_infomation">
+											<option>SCI</option>
+											<option>SSCI</option>
+											<option>EI</option>
+											<option>ISTP</option>
+											<option>CSCD</option>
+											<option>CSSCI</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td>他引次数：</td>
+									<td><input name="teacherPaper.totalCitations"
+										class="form-control table_infomation" type="text"></td>
+								</tr>
+								<tr>
+									<td>是否与行业联合发表：</td>
+									<td><select name="teacherPaper.sfyhylhfb"
+										class="form-control table_infomation">
+											<option>否</option>
+											<option>是</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td>是否与地方联合发表：</td>
+									<td><select name="teacherPaper.sfydflhfb"
+										class="form-control table_infomation">
+											<option>否</option>
+											<option>是</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td>是否与国际联合发表：</td>
+									<td><select name="teacherPaper.sfygjlhfb"
+										class="form-control table_infomation">
+											<option>否</option>
+											<option>是</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td>是否是跨学科论文：</td>
+									<td><select name="teacherPaper.sfskxklw"
+										class="form-control table_infomation">
+											<option>否</option>
+											<option>是</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td>成果字数：</td>
+									<td><input name="teacherPaper.wordsNum"
+										class="form-control table_infomation" type="text"></td>
+								</tr>
+								<tr>
+									<td>附件地址：</td>
+									<td><input name="teacherPaper.attachmentPath"
+										class="form-control table_infomation" type="text"></td>
+								</tr>
+								<tr>
+									<td>数据状态：：</td>
+									<td><select name="teacherPaper.dataStatus" id="dataStatus"
+										class="form-control table_infomation">
+											<option value="10">个人可添加、修改</option>
+											<option value="20">院系管理员可添加、修改、删除、审核</option>
+											<option value="30">科研处管理员修改、审核</option>
+											<option value="40">固化</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td>创建时间：</td>
+									<td><input name="teacherPaper.createTime"
+										class="form-control  table_infomation" type="text"></td>
+								</tr>
+							</table>
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+					</button>
+					<input name="teacherPaper.paperId" id="tableid" type="hidden" />
+					<button type="button" class="btn btn-danger review-info"
+						data-dismiss="modal">信息未审核</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+</body>
+</html>

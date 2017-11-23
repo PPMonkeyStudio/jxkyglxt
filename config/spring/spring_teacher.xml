@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Aciton注入servcie -->
+	<bean id="adminAction" class="com.teacherms.satffinfomanage.action.TeacherAction"
+		scope="prototype">
+		<property name="teacherService" ref="teacherService"></property>
+	</bean>
+
+
+
+	<!-- service注入dao层 -->
+	<bean id="teacherService"
+		class="com.teacherms.staffinfomanage.service.impl.TeacherServiceImpl">
+		<property name="teacherDao" ref="teacherDao"></property>
+	</bean>
+
+
+
+
+	<!-- dao注入sessionFactory -->
+	<bean id="teacherDao" class="com.teacherms.satffinfomanage.dao.impl.TeacherDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+</beans>
