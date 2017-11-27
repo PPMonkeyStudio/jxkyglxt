@@ -34,7 +34,6 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void addinfo(List<Object> list) {
 		try {
-			System.out.println(list.size());
 			for (Object obj : list) {
 				Field f = obj.getClass().getDeclaredFields()[0];
 				f.setAccessible(true);
@@ -122,17 +121,14 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public XSSFWorkbook getExcel(String query_num, String tableName, String query_id) {
+	public XSSFWorkbook getExcel(String query_name, String tableName, String query_id) {
 		// 创建List<Object>
-		List<Map<String, String>> list_all = new ArrayList<Map<String, String>>();
+		List<Object> list_all = new ArrayList<Object>();
 		// 分割所要查询的信息表ID
 		String[] id = query_id.substring(0, query_id.length() - 1).split(",");
 		// 循环查询每一个所要查询的信息表，并记录到list_all中
 		for (int i = 0; i < id.length; i++) {
-			list_all.addAll(adminDao.expoortToExecl_getTableInfo(tableName,
-					getExportToGetInfoByQuery_num(query_num, tableName), getTableInfoIdName(tableName), id[i]));
-			// list_all.add(adminDao.getAInfomationByTableId(tableName,
-			// getTableInfoIdName(tableName), id[i]));
+			list_all.add(adminDao.getAInfomationByTableId(tableName, getTableInfoIdName(tableName), id[i]));
 		}
 
 		/**
@@ -141,9 +137,8 @@ public class AdminServiceImpl implements AdminService {
 		 * 3.MapUtil.java2Map(list_all):将list_all中的对象全部用MapUtil封装到List<Map<String,String>>中
 		 * 返回一个execl表
 		 */
-		System.out.println(list_all.get(0).toString());
-		XSSFWorkbook workbook = ExportExcelCollection.exportExcel(query_num, ExcelHead.getExcelHeadArray(tableName),
-				list_all);
+		XSSFWorkbook workbook = ExportExcelCollection.exportExcel(query_name, ExcelHead.getExcelHeadArray(tableName),
+				MapUtil.java2Map(list_all));
 		return workbook;
 	}
 
@@ -354,46 +349,6 @@ public class AdminServiceImpl implements AdminService {
 		return str;
 	}
 
-	private String getExportToGetInfoByQuery_num(String query_num, String tableName) {
-		Class cla = null;
-		String queryname = "";
-		if (("TeacherAward").equals(tableName)) {
-			cla = TeacherAward.class;
-		}
-		if (("TeacherInfo").equals(tableName)) {
-			cla = TeacherInfo.class;
-		}
-		if (("TeacherPaper").equals(tableName)) {
-			cla = TeacherPaper.class;
-		}
-		if (("TeacherPatent").equals(tableName)) {
-			cla = TeacherPatent.class;
-		}
-		if (("TeacherProject").equals(tableName)) {
-			cla = TeacherProject.class;
-		}
-		if (("TeacherWorks").equals(tableName)) {
-			cla = TeacherWorks.class;
-		}
-		Field[] fields = cla.getDeclaredFields();
-		int index = 0;
-		if (query_num == null || "".equals(query_num)) {
-			for (Field field : fields) {
-				queryname += field.getName() + ",";
-			}
-		} else {
-			for (Field field : fields) {
-				if (query_num.contains(index + "")) {
-					queryname += field.getName() + ",";
-				}
-				index++;
-			}
-		}
-		queryname = queryname.substring(0, queryname.length() - 1);
-		return queryname;
-	}
-
-	// ------------------------------------------------------------------------------忽略
 	private Object objReplace(Object obj) {
 		Object obj_result = null;
 		if (obj.getClass() == TeacherAward.class) {

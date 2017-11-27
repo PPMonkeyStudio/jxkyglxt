@@ -23,12 +23,4 @@ public interface SystemDao {
 	 */
 	Role getUserRoleByRoleId(String roleId);
 
-	/**
-	 * 更新用户
-	 * 
-	 * @param user
-	 *            用户对象
-	 */
-	void updata(User user);
-
 }

@@ -22,15 +22,4 @@ public interface SystemService {
 	 */
 	String getUserRoleNameByRoleId(String roleId);
 
-	/**
-	 * ---修改密码
-	 * 
-	 * @param password
-	 *            新密码
-	 * @param string
-	 *            用户的id
-	 * @return
-	 */
-	String resetPassword(String password, String string);
-
 }

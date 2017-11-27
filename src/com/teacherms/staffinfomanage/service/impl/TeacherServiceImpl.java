@@ -198,10 +198,6 @@ public class TeacherServiceImpl implements TeacherService {
 			if ("".equals(id) || id == null) {
 				f.set(obj, uuid.getUuid());
 			}
-			// 设置信息表的userid
-			Field setuserid = cla.getDeclaredField("userId");
-			setuserid.setAccessible(true);
-			setuserid.set(obj, userid);
 			// 修改数据属性为10，
 			Field dataStatus = cla.getDeclaredField("dataStatus");
 			dataStatus.setAccessible(true);

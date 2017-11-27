@@ -61,7 +61,6 @@ public class ExcelToBean2 {
 				str = new String(str.getBytes("utf-8"), "ISO-8859-1").trim();
 				if (userPropertiesBundle.containsKey(str)) {
 					columnName[i] = userPropertiesBundle.getString(str);
-					System.out.println(userPropertiesBundle.getString(str));
 				}
 			}
 		} catch (UnsupportedEncodingException e) {
@@ -74,31 +73,18 @@ public class ExcelToBean2 {
 			// row
 			for (int rowIndex = 1; rowIndex < sheet.getPhysicalNumberOfRows(); rowIndex++) {
 				XSSFRow row = sheet.getRow(rowIndex);
-				if (getCellValue(row.getCell(0)) == null || "".equals(getCellValue(row.getCell(0)))) {
-					break;
-				}
 				Map<String, Object> map = new HashMap<String, Object>();
-				// cell
-				for (int cellIndex = 0; cellIndex < row.getLastCellNum(); cellIndex++) {
+				for (int cellIndex = 0; cellIndex < row.getPhysicalNumberOfCells(); cellIndex++) {
+					// cell
 					XSSFCell cell = row.getCell(cellIndex);
-					/*
-					 * map.put(columnName[cellIndex].trim(),
-					 * getCellValue(cell));
-					 */
-					// 该列值在对应的java对象中有值
-					if (columnName[cellIndex] != null && columnName[cellIndex].trim().length() > 0) {
+					if (columnName[cellIndex] != null && columnName[cellIndex].trim().length() > 0) { // 该列值在对应的java对象中有值
 						// 取出当前cell的值和对应Javabean类的属性放入到map中
 						map.put(columnName[cellIndex].trim(), getCellValue(cell));
-						System.out.println(columnName[cellIndex].trim() + "----------" + getCellValue(cell));
-
 					}
-
 				}
 				result.add(map);
-				System.out.println(rowIndex);
 			}
 		}
-		System.out.println(result.size());
 		return result;
 	}
 
@@ -152,9 +138,6 @@ public class ExcelToBean2 {
 	public static <T> List<T> toObjectPerproList(List<Map<String, Object>> list, Class<T> clazz) throws Exception {
 		T t = null;
 		List<T> returnList = new LinkedList<T>();
-
-		System.out.println(list.size());
-
 		for (int i = 0; i < list.size(); i++) {
 			// 利用反射创建Class对应的对象
 			t = clazz.newInstance();
@@ -254,15 +237,6 @@ public class ExcelToBean2 {
 			field.set(object, value);
 		} catch (IllegalAccessException e) {
 			System.out.println("不可能抛出的异常");
-		} catch (IllegalArgumentException e) {
-			System.out.println("int-to-String");
-			try {
-				field.set(object, value + "");
-			} catch (IllegalArgumentException e1) {
-				// e1.printStackTrace();
-			} catch (IllegalAccessException e1) {
-				// e.printStackTrace();
-			}
 		}
 	}
 }

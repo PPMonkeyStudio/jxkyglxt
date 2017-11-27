@@ -2,8 +2,6 @@ package com.teacherms.satffinfomanage.dao;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-
 import com.teacherms.all.domain.*;
 
 public interface AdminDao {
@@ -81,21 +79,5 @@ public interface AdminDao {
 	 * @return 部门对象
 	 */
 	Department getDepartmentById(String departmentId);
-
-	/**
-	 * ---导出execl所用的特定查询信息表信息
-	 * 
-	 * @param tableName
-	 *            信息表名
-	 * @param exportToGetInfoByQuery_num
-	 *            所要查询的字段
-	 * @param tableInfoIdName
-	 *            信息表中的信息ID名称
-	 * @param string
-	 *            信息id
-	 * @return 信息对象
-	 */
-	List<Map<String, String>> expoortToExecl_getTableInfo(String tableName, String exportToGetInfoByQuery_num,
-			String tableInfoIdName, String string);
 
 }

@@ -1,0 +1,73 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.form-control {
+	width: 150px;
+	display: inline-block !important;
+}
+
+#all_options {
+	width: 150px;
+	height:32px;
+}
+
+.input_div {
+	/*display: none;*/
+	display: inline-block !important;
+	width: 210px;
+	
+}
+
+.input_div input {
+	width: 150px !important;
+	height: 32px;
+}
+
+.After_div {
+	display: inline-block !important;
+}
+
+.btn-primary {
+	background-color: whitesmoke;
+	height: 28px;
+	width:48px;
+	background-color: #42A5F5;
+	text-align: center;
+}
+
+.table th,
+tbody {
+	text-align: center;
+}
+
+.title {
+	height: 1px;
+	border-top: 1px solid #CDCDCD;
+	height: 20px !important;
+	text-align: center;
+}
+
+.title td {
+	position: relative;
+	left: -3%;
+	top: -10px;
+	background: #fff;
+	padding: 0 20px;
+	font-size: 18px;
+	color: #42A5F5;
+}
+
+.tab {
+	width: 100%;
+	table-layout: fixed;
+}
+
+.tab tr {
+	height: 35px;
+}
+
+#page a:hover {
+	cursor: pointer;
+}

@@ -32,12 +32,4 @@ public class SystemServiceImpl implements SystemService {
 		return role.getRoleName();
 	}
 
-	@Override
-	public String resetPassword(String password, String userid) {
-		User user = systemDao.getUserByUser_id(userid);
-		user.setPassword(md5.GetMD5Code(password));
-		systemDao.updata(user);
-		return "success";
-	}
-
 }

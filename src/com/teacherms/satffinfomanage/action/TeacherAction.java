@@ -1,9 +1,5 @@
 package com.teacherms.satffinfomanage.action;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -12,11 +8,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.fileupload.FileItem;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
-import org.apache.xmlbeans.impl.util.Base64;
 import org.junit.Test;
 
 import com.google.gson.Gson;
@@ -36,15 +30,13 @@ import util.*;
 
 public class TeacherAction extends ActionSupport {
 	private TeacherService teacherService;
-	private User sessionuser;
+	private static User sessionuser;
+
+
 
 	private String query_name;// 导出execl表的属性条件,逗号隔开
 	private String query_id;// 导出execl表的ID字段条件,逗号隔开
 	private String time_interval;// 时间区间
-
-	private File[] file; // execl文件
-	private String[] fileFileName; // file+FileName为固定写法,否则取不到
-	private String[] fileContentType; // file+ContentType为固定写法
 
 	private String page; // 分页
 	private String tableName;// 查询的表名
@@ -62,8 +54,10 @@ public class TeacherAction extends ActionSupport {
 	private TeacherWorks teacherWorks;
 	private User user;
 
+	
+	
+	
 	public TeacherAction() {
-		super();
 		sessionuser = (User) ActionContext.getContext().getSession().get("user");
 	}
 
@@ -187,72 +181,6 @@ public class TeacherAction extends ActionSupport {
 		}
 	}
 
-	public void uploadAttachment() {
-		try {
-			FileInputStream fis = null;
-			FileOutputStream fos = null;
-			for (int i = 0; i < file.length; i++) {
-				if (file[i].getName() != null) {
-					fis = new FileInputStream(file[i]);
-					// E盘+Attachment+用户名称+信息表名称+信息id_i(i为1,2,3)+.jpeg或png或gif
-					File file2 = new File("E:\\Attachment\\" + sessionuser.getUserName() + "\\" + tableName);
-					if (!file2.exists()) {
-						file2.mkdirs();
-					}
-					fos = new FileOutputStream(file2.getPath() + "\\1_" + fileFileName[i].replaceAll(".jpg", "") + "."
-							+ fileContentType[i].replaceAll("image/", ""));
-
-					byte[] bt = new byte[1024];
-					int hasRead = 0;
-					// 循环从输入流中读取数据
-					while ((hasRead = fis.read(bt)) > 0) {
-						// 每读取一个，即写入文件输出流，读了多少就写多少
-						fos.write(bt, 0, hasRead);
-					}
-
-					/*long size = file[i].length();
-					byte[] temp = new byte[(int) size];
-					fis.read(temp, 0, (int) size);
-					byte[] data = temp;
-					data = Base64.encode(data);
-
-					OutputStream out = null;
-					HttpServletResponse response = ServletActionContext.getResponse();
-					response.setContentType("image/jpeg");
-					out = response.getOutputStream();
-					out.write(data);*/
-
-					fis.close();
-					fos.close();
-					fos.flush();
-					//out.close();
-				}
-			}
-		} catch (Error e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void checkAttachment() {
-		// Attachment+用户名称+信息表名称+信息id_i(i为1,2,3)+.jpeg或png或gif
-		String FPath = "E:\\Attachment\\" + sessionuser.getUserName() + "\\" + tableName;
-		File[] files = new File(FPath).listFiles();
-		int file_num = 0;
-		File tempFile;
-		String tempName = null;
-		for (int i = 0; i < files.length; i++) {
-			tempFile = files[i];
-			tempName = tempFile.getName();
-			if (tempName.equals(tableId)) {
-				File file = new File(FPath + "\\" + tableId + "_*.jpeg");
-
-				file_num++;
-			}
-		}
-	}
-
 	public void setTeacherService(TeacherService teacherService) {
 		this.teacherService = teacherService;
 	}
@@ -343,30 +271,6 @@ public class TeacherAction extends ActionSupport {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public File[] getFile() {
-		return file;
-	}
-
-	public void setFile(File[] file) {
-		this.file = file;
-	}
-
-	public String[] getFileFileName() {
-		return fileFileName;
-	}
-
-	public void setFileFileName(String[] fileFileName) {
-		this.fileFileName = fileFileName;
-	}
-
-	public String[] getFileContentType() {
-		return fileContentType;
-	}
-
-	public void setFileContentType(String[] fileContentType) {
-		this.fileContentType = fileContentType;
 	}
 
 }

@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -47,16 +46,6 @@ public class ExportExcelCollection {
 		int index = 0;
 		// 遍历集合数据
 		for (Map<String, String> map : list) {
-			// map排序
-			Map<String, String> treemap = new TreeMap<String, String>();
-			int index_key = 0;
-			for (String key : map.keySet()) {
-				if (key.equals(index_key))
-					treemap.put(key, map.get(key));
-				index_key++;
-			}
-			map = treemap;
-			System.out.println(map.toString());
 			// 表中行数
 			index++;
 			// 创建一行

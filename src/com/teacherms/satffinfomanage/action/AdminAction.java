@@ -41,7 +41,7 @@ import util.PageVO;
 public class AdminAction extends ActionSupport {
 	private AdminService adminService;
 
-	private String query_num;// 导出execl表的属性条件,逗号隔开
+	private String query_name;// 导出execl表的属性条件,逗号隔开
 	private String query_id;// 导出execl表的ID字段条件,逗号隔开
 	private String time_interval;// 时间区间
 
@@ -148,7 +148,7 @@ public class AdminAction extends ActionSupport {
 
 	// 导出信息excel表 用MAP集合
 	public void ExportExcelCollection() {
-		XSSFWorkbook workbook = adminService.getExcel(query_num, tableName, query_id);
+		XSSFWorkbook workbook = adminService.getExcel(query_name, tableName, query_id);
 		OutputStream out = null;
 		try {
 			HttpServletResponse response = ServletActionContext.getResponse();
@@ -249,8 +249,8 @@ public class AdminAction extends ActionSupport {
 		this.teacherInfo = teacherInfo;
 	}
 
-	public void setQuery_num(String query_num) {
-		this.query_num = query_num;
+	public void setQuery_name(String query_name) {
+		this.query_name = query_name;
 	}
 
 	public void setQuery_id(String query_id) {
@@ -305,8 +305,8 @@ public class AdminAction extends ActionSupport {
 		return adminService;
 	}
 
-	public String getQuery_num() {
-		return query_num;
+	public String getQuery_name() {
+		return query_name;
 	}
 
 	public String getQuery_id() {

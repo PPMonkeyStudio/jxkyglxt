@@ -66,19 +66,6 @@ public class SystemAction extends ActionSupport {
 		}
 	}
 
-	// 修改密码
-	public void resetPassword() {
-		try {
-			User user = (User) ActionContext.getContext().getSession().get("user");
-			String result = systemService.resetPassword(password, user.getUserId());
-			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
-			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	}
-
 	// 退出登录
 	public String exit() {
 		ActionContext.getContext().getSession().remove("user");

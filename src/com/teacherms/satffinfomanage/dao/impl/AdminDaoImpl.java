@@ -1,8 +1,6 @@
 package com.teacherms.satffinfomanage.dao.impl;
 
 import java.util.List;
-import java.util.Map;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import com.teacherms.all.domain.*;
@@ -76,14 +74,6 @@ public class AdminDaoImpl implements AdminDao {
 	public String addInfo(Object obj) {
 		System.out.println(obj.toString());
 		return getSession().save(obj).toString();
-	}
-
-	@Override
-	public List<Map<String, String>> expoortToExecl_getTableInfo(String tableName, String exportToGetInfoByQuery_num,
-			String tableInfoIdName, String string) {
-		String hql = "select new map(" + exportToGetInfoByQuery_num + ") from " + tableName + " where "
-				+ tableInfoIdName + " = '" + string + "'";
-		return getSession().createQuery(hql).list();
 	}
 
 }
