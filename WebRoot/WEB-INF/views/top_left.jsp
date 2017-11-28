@@ -1,10 +1,25 @@
-<!DOCTYPE html>
-<html>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<!-- bootstrap 3.0.2 -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'MyJsp.jsp' starting page</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+<!-- bootstrap 3.0.2 -->
 		<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<!-- font Awesome -->
 		<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -12,9 +27,9 @@
 		<link href="css/style.css" rel="stylesheet" type="text/css" />
 
 		<link rel="stylesheet" href="css/top_left.css" />
-	</head>
-
-	<body class="skin-black">
+  </head>
+  
+ <body class="skin-black">
 		<!-- header logo: style can be found in header.less -->
 		<header class="header">
 			<a class="logo">
@@ -133,10 +148,10 @@
 							<div id="subPages" class="collapse" aria-expanded="false" style="height: 0px;">
 								<ul class="nav">
 									<li>
-										<a href="" class="">信息审核</a>
+										<a class="">信息审核</a>
 									</li>
 									<li>
-										<a href="" class="">信息管理</a>
+										<a class="">信息管理</a>
 									</li>
 								</ul>
 							</div>
@@ -186,6 +201,6 @@
 		<script src="js/bootstrap.min.js" type="text/javascript"></script>
 		<!-- Director App -->
 		<script src="js/app.js" type="text/javascript"></script>
+			<script src="js/main_index.js" type="text/javascript"></script>
 	</body>
-
 </html>
