@@ -9,6 +9,11 @@ public class PageAction extends ActionSupport {
 		return "page_index";
 	}
 
+	// 导入导航栏
+	public String page_nav() {
+		return "page_nav";
+	}
+
 	// 页面跳转到teacher_award.jsp
 	public String page_teacher_award() {
 		ActionContext.getContext().getValueStack().set("page", "teacher");

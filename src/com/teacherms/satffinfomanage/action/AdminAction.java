@@ -41,14 +41,17 @@ import util.PageVO;
 public class AdminAction extends ActionSupport {
 	private AdminService adminService;
 
-	private String query_name;// 导出execl表的属性条件,逗号隔开
-	private String query_id;// 导出execl表的ID字段条件,逗号隔开
-	private String time_interval;// 时间区间
+	// 导出
+	private String export_name;// 导出execl表的属性条件,逗号隔开
+	private String export_id;// 导出execl表的ID字段条件,逗号隔开
 
+	// 附件
 	private File file; // execl文件
 	private String fileFileName; // file+FileName为固定写法,否则取不到
 	private String fileContentType; // file+ContentType为固定写法
 
+	// 信息筛选查询
+	private String time_interval;// 时间区间,逗号隔开
 	private String page;// 分页
 	private String tableName;// 查询的表名
 	private String tableId; // 查询表的ID
@@ -148,7 +151,7 @@ public class AdminAction extends ActionSupport {
 
 	// 导出信息excel表 用MAP集合
 	public void ExportExcelCollection() {
-		XSSFWorkbook workbook = adminService.getExcel(query_name, tableName, query_id);
+		XSSFWorkbook workbook = adminService.getExcel(export_name, tableName, export_id);
 		OutputStream out = null;
 		try {
 			HttpServletResponse response = ServletActionContext.getResponse();
@@ -249,14 +252,6 @@ public class AdminAction extends ActionSupport {
 		this.teacherInfo = teacherInfo;
 	}
 
-	public void setQuery_name(String query_name) {
-		this.query_name = query_name;
-	}
-
-	public void setQuery_id(String query_id) {
-		this.query_id = query_id;
-	}
-
 	public void setDataState(String dataState) {
 		this.dataState = dataState;
 	}
@@ -303,14 +298,6 @@ public class AdminAction extends ActionSupport {
 
 	public AdminService getAdminService() {
 		return adminService;
-	}
-
-	public String getQuery_name() {
-		return query_name;
-	}
-
-	public String getQuery_id() {
-		return query_id;
 	}
 
 	public String getTime_interval() {
@@ -371,6 +358,22 @@ public class AdminAction extends ActionSupport {
 
 	public User getUser() {
 		return user;
+	}
+
+	public String getExport_name() {
+		return export_name;
+	}
+
+	public void setExport_name(String export_name) {
+		this.export_name = export_name;
+	}
+
+	public String getExport_id() {
+		return export_id;
+	}
+
+	public void setExport_id(String export_id) {
+		this.export_id = export_id;
 	}
 
 }

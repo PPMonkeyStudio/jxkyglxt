@@ -30,14 +30,14 @@ import util.*;
 
 public class TeacherAction extends ActionSupport {
 	private TeacherService teacherService;
-	private static User sessionuser;
+	// 登录用户
+	private User sessionuser;
 
-
-
+	// 导出
 	private String query_name;// 导出execl表的属性条件,逗号隔开
 	private String query_id;// 导出execl表的ID字段条件,逗号隔开
 	private String time_interval;// 时间区间
-
+	// 查询条件
 	private String page; // 分页
 	private String tableName;// 查询的表名
 	private String tableId; // 查询表的ID
@@ -54,9 +54,6 @@ public class TeacherAction extends ActionSupport {
 	private TeacherWorks teacherWorks;
 	private User user;
 
-	
-	
-	
 	public TeacherAction() {
 		sessionuser = (User) ActionContext.getContext().getSession().get("user");
 	}
