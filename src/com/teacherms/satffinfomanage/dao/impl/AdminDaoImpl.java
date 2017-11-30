@@ -28,7 +28,7 @@ public class AdminDaoImpl implements AdminDao {
 			String collegeName) {
 		String hql = "select " + selectinfo + " from " + table
 				+ " t,User u,Department d where u.userId=t.userId and u.departmentId=d.departmentId and d.departmentName='"
-				+ collegeName + "' and t.dataStatus = '" + status + "'" + time + " order by t.createTime asc";
+				+ collegeName + "' and t.dataStatus = '" + status + "'" + time;
 		System.out.println(hql);
 		return getSession().createQuery(hql).list();
 	}
