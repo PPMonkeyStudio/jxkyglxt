@@ -329,22 +329,28 @@ public class AdminServiceImpl implements AdminService {
 	private String getSqlToQueryByTableName(String tableName) {
 		String str = null;
 		if (("TeacherAward").equals(tableName)) {
-			str = "t.userId,u.userName,t.awardName,t.awardType,t.awardLevel,t.awardCertificationNo,t.createTime,t.awardId";
+			//
+			str = "t.achievementName,t.awardName,t.awardUserNames,t.awardType,t.awardClass,t.awardDate,t.awardId";
 		}
 		if (("TeacherInfo").equals(tableName)) {
-			str = "t.userId,u.userName,t.professionalTitle,t.teacherCertificateNo,t.teachingType,t.createTime,t.teacherInfoId";
+
+			str = "t.userId,u.userName,t.employeeType,t.jobStatue,t.workDate,t.teacherInfoId";
 		}
 		if (("TeacherPaper").equals(tableName)) {
-			str = "t.userId,u.userName,t.paperName,t.paperType,t.createTime,t.paperId";
+			//
+			str = "t.paperName,t.authorUserNames,t.paperType,t.includedSituation,t.publishTime,t.paperId";
 		}
 		if (("TeacherPatent").equals(tableName)) {
-			str = "t.userId,u.userName,t.patentName,t.patentType,t.authorizationNo,t.createTime,t.patentId";
+			//
+			str = "t.patentName,t.authorUserNames,t.patentType,t.authorizationNo,t.approvedDate,t.patentId";
 		}
 		if (("TeacherProject").equals(tableName)) {
-			str = "t.userId,u.userName,t.projectName,t.projectSource,t.projectNo,t.createTime,t.projectId";
+			//
+			str = "t.projectName,t.projectSource,t.projectUserNames,t.level,t.endUpDatet,t.projectId";
 		}
 		if (("TeacherWorks").equals(tableName)) {
-			str = "t.userId,u.userName,t.worksName,t.worksType,t.selectedSituation,t.createTime,t.worksId";
+			//
+			str = "t.worksName,t.worksType,t.selectedSituation,t.publishTime,t.worksId";
 		}
 		return str;
 	}
