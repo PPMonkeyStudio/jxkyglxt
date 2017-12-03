@@ -2,18 +2,18 @@
 <html>
 <body>
 	<!-- 模态框（Modal） -->
-	<div class="modal fade" id="paper" tabindex="-1" role="dialog"
+	<div class="modal fade" id="paper_modal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class=" modal-dialog">
-			<div id="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">论文</h4>
-				</div>
-				<div class="modal-body">
-					<div id="main_body">
-						<form class="info_form">
+			<form id="info_form">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">论文</h4>
+					</div>
+					<div class="modal-body">
+						<div id="main_body">
 							<table class="tab">
 								<tbody class="basic">
 									<tr>
@@ -140,17 +140,18 @@
 										class="form-control  table_infomation" type="text"></td>
 								</tr>
 							</table>
-						</form>
+
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+						</button>
+						<input name="teacherPatent.patentId" id="tableid" type="hidden" />
+						<button type="button" class="btn btn-danger review-info"
+							data-dismiss="modal">信息未审核</button>
 					</div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
-					</button>
-					<input name="teacherPaper.paperId" id="tableid" type="hidden" />
-					<button type="button" class="btn btn-danger review-info"
-						data-dismiss="modal">信息未审核</button>
-				</div>
-			</div>
+			</form>
 			<!-- /.modal-content -->
 		</div>
 		<!-- /.modal -->

@@ -24,7 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
 		<!--管理员查看信息时右侧内容-->
-		<section class="content">
+		<section class="content" id="content">
 			<div class="row">
 				<div class="col-md-12">
 					<!--breadcrumbs start -->
@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<li>
 							<a><i class="fa fa-home"></i> 首页</a>
 						</li>
-						<li class="active">信息查看</li>
+						<li class="active">信息管理</li>
 					</ul>
 					<!--breadcrumbs end -->
 				</div>
@@ -87,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<!--筛选&查询&添加按钮位置-->
 					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
 					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-plus"></i>添加用户</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>用户信息导出</button>
+					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>用户信息导出</button>
 					<!--按条件筛选-->
 					<div id="search">
 						<label>按条件搜索：</label>
@@ -126,6 +126,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<th>职工类型</th>
 								<th>职工状态</th>
 								<th>状态</th>
+								<th>操作</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -162,7 +163,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
 					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>奖励信息导出</button>
+					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>奖励信息导出</button>
 					<div id="search">
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
@@ -233,7 +234,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
 					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>著作信息导出</button>
+					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>著作信息导出</button>
 					<div id="search">
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
@@ -300,7 +301,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
 					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>论文信息导出</button>
+					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>论文信息导出</button>
 					<div id="search">
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
@@ -371,7 +372,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
 					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>专利信息导出</button>
+					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>专利信息导出</button>
 					<div id="search">
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
@@ -436,7 +437,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
 					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>专利信息导出</button>
+					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>专利信息导出</button>
 					<div id="search">
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
@@ -477,7 +478,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<td>专利</td>
 								<td>122455</td>
 								<td><button class="btn btn-default btn-xs" title="解除固化"><i class="fa fa-chain-broken"></i></button>
-									<button class="btn btn-default btn-xs" title="查看"><i class="fa fa-search-plus"  aria-hidden="true"></i></button>
+									<button class="btn btn-default btn-xs " title="查看"><i class="fa fa-search-plus"  aria-hidden="true"></i></button>
 								</td>
 							</tr>
 						</tbody>

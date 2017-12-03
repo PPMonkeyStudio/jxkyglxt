@@ -59,7 +59,7 @@
 				dataType : "json",
 				success : function(xhr_data) {
 					if (xhr_data.result == "success") {
-						location.href = "Page/page_index";
+						location.href = "main_index.jsp";
 					}
 				},
 				error : function() {}
