@@ -1,5 +1,7 @@
 package util;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.junit.Before;
@@ -38,6 +40,12 @@ public class JunitTest {
 	@Test
 	public void test11() {
 		PageVO<Object> list = adminService.getSpecifiedInformationByPaging("TeacherAward", "1", "", "20", "信息与计算机工程学院");
+		System.out.println(new Gson().toJson(list));
+	}
+
+	@Test
+	public void test12() {
+		List<Object> list = adminService.getTeacherTableInfoById("TeacherAward", "0c52c25a-b844-4e6d-9b33-576e8938c611");
 		System.out.println(new Gson().toJson(list));
 	}
 

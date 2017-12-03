@@ -32,7 +32,7 @@ public interface AdminService {
 	 *            数据的ID
 	 * @return 信息记录对象
 	 */
-	List<Object[]> getTeacherTableInfoById(String tableName, String tableId);
+	List<Object> getTeacherTableInfoById(String tableName, String tableId);
 
 	/**
 	 * ---管理员修改信息状态+修改信息内容
