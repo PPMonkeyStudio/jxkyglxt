@@ -48,7 +48,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public PageVO<Object[]> getSpecifiedInformationByPaging(String tableName, String page, String time_interval,
+	public PageVO<Object> getSpecifiedInformationByPaging(String tableName, String page, String time_interval,
 			String dataState, String collegeName) {
 		// 每页记录数
 		int pageSize = 10;
@@ -57,7 +57,7 @@ public class AdminServiceImpl implements AdminService {
 		// 查询长度
 		int toindex = pageSize;
 		// 创建list
-		List<Object[]> list = new ArrayList<Object[]>();
+		List<Object> list = new ArrayList<Object>();
 		// 设置查询时间区间，如果time_interval为空则不执行
 		if (!"".equals(time_interval) && time_interval != null) {
 			time_interval = "and t.createTime between '" + time_interval.split(",")[0] + "' and '"
@@ -67,8 +67,7 @@ public class AdminServiceImpl implements AdminService {
 		System.out.println(time_interval);
 		if (!"".equals(tableName) && tableName != null) {
 			// 指定条件tableName查询，数据状态"20"
-			list = adminDao.getAllStatusInfo(getSqlToQueryByTableName(tableName), tableName, time_interval, dataState,
-					collegeName);
+			list = adminDao.getAllStatusInfo(tableName, time_interval, dataState, collegeName);
 		}
 		System.out.println(list.size());
 		// 总记录数
@@ -89,7 +88,7 @@ public class AdminServiceImpl implements AdminService {
 			toindex = totalSize - (pageIndex - 1) * pageSize;
 		}
 		// 设置VO内参数页码，每页记录数，总记录数
-		PageVO<Object[]> pageVO = new PageVO<Object[]>(pageIndex, pageSize, totalSize);
+		PageVO<Object> pageVO = new PageVO<Object>(pageIndex, pageSize, totalSize);
 		pageVO.setObjDatas(list.subList((pageIndex - 1) * pageSize, (pageIndex - 1) * pageSize + toindex));
 		return pageVO;
 	}

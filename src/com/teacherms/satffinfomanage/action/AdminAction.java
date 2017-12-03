@@ -78,8 +78,9 @@ public class AdminAction extends ActionSupport {
 	// 分页查询获取指定---未审核or固化---信息（给指定参数）并进行时间排序（属于自己学院的信息）
 	public void getSpecifiedInformationByPaging() {
 		try {
-			PageVO<Object[]> list = adminService.getSpecifiedInformationByPaging(tableName, page == null ? "1" : page,
+			PageVO<Object> list = adminService.getSpecifiedInformationByPaging(tableName, page == null ? "1" : page,
 					time_interval, dataState, getSecondaryCollegeInfo("name"));
+			System.out.println(new Gson().toJson(list));
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(list));
 		} catch (IOException e) {
