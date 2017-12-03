@@ -20,7 +20,7 @@ public interface AdminService {
 	 *            页码
 	 * @return 对象
 	 */
-	PageVO<Object[]> getSpecifiedInformationByPaging(String tableName, String page, String time_interval,
+	PageVO<Object> getSpecifiedInformationByPaging(String tableName, String page, String time_interval,
 			String dataState, String collegeName);
 
 	/**
