@@ -39,9 +39,9 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public List<Object[]> getInfoById(String tableName, String IdName, String tableId) {
-		String hql = "select u.userId,u.userName,t from " + tableName + " t,User u where t.userId=u.userId and t."
-				+ IdName + " = '" + tableId + "'";
+	public List<Object> getInfoById(String tableName, String IdName, String tableId) {
+		String hql = "select t,u from " + tableName + " t,User u where t.userId=u.userId and t." + IdName + " = '"
+				+ tableId + "'";
 		return getSession().createQuery(hql).list();
 	}
 

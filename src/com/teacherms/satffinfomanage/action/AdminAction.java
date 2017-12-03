@@ -91,7 +91,7 @@ public class AdminAction extends ActionSupport {
 	// 通过ID获取单条信息
 	public void getTeacherTableInfoById() {
 		try {
-			List<Object[]> list = adminService.getTeacherTableInfoById(tableName, tableId);
+			List<Object> list = adminService.getTeacherTableInfoById(tableName, tableId);
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(list));
 		} catch (IOException e) {

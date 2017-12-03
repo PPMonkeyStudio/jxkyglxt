@@ -94,10 +94,10 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<Object[]> getTeacherTableInfoById(String tableName, String tableId) {
+	public List<Object> getTeacherTableInfoById(String tableName, String tableId) {
 		// list内部的元素为Object(字符串)+Object(字符串)+Object(对象)
-		List<Object[]> list = adminDao.getInfoById(tableName, getTableInfoIdName(tableName), tableId);
-		// 将最后的对象转化为数组
+		List<Object> list = adminDao.getInfoById(tableName, getTableInfoIdName(tableName), tableId);
+		/*// 将最后的对象转化为数组
 		Class cla = list.get(0)[2].getClass();
 		try {
 			// 创建与对象属性值等长的数组
@@ -114,7 +114,7 @@ public class AdminServiceImpl implements AdminService {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
-		}
+		}*/
 		// 返回List<Object[]>---list内部的元素为Object(字符串)+Object(字符串)+Object[]数组)
 		return list;
 	}

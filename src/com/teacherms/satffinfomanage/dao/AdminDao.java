@@ -33,7 +33,7 @@ public interface AdminDao {
 	 *            数据的ID
 	 * @return 信息记录对象
 	 */
-	List<Object[]> getInfoById(String tableName, String IdName, String tableId);
+	List<Object> getInfoById(String tableName, String IdName, String tableId);
 
 	/**
 	 * 更新对象
