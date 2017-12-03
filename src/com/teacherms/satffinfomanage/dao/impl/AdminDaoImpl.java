@@ -25,7 +25,7 @@ public class AdminDaoImpl implements AdminDao {
 
 	@Override
 	public List<Object> getAllStatusInfo(String table, String time, String status, String collegeName) {
-		String hql = "from " + table
+		String hql = "select t,u from " + table
 				+ " t,User u,Department d where u.userId=t.userId and u.departmentId=d.departmentId and d.departmentName='"
 				+ collegeName + "' and t.dataStatus = '" + status + "'" + time;
 		System.out.println(hql);
