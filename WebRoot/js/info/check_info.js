@@ -41,11 +41,12 @@ function checkInfo(){
 		$.post("/teacherms/Admin/admin_getTeacherTableInfoById",
 				{tableId:$(this).siblings().val(),tableName:"TeacherInfo"},function(xhr){
 				var inf = $('.table_infomation');
-				var xh=xhr.ObjDatas[0];
-				 $("#info_modal input,select").each(function(){
+				$("#info_modal input,select").each(function(){
 					 var na= $(this).attr("name").split(".")[1];
-					 $(this).val(xh[0].na);
+					 alert(xhr[0][0]);
+					 $(this).val(xhr[0][0][na]);
 				},"json");
+	})
 	})
 	$(".setButton").on("click",function(){
 		//显示出模态框

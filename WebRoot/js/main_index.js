@@ -12,6 +12,7 @@ $(function(){
 	
 	$('.sidebar-menu .nav li a').click(function(){
 	$(this).addClass("Atfer_li");
+	$('a[href="#user"]').click();
 	$(this).parent().siblings().children().removeClass("Atfer_li");
 		if(($(this).text())=="信息审核"){
 			$('.right-side').load('exam_pageinfo.jsp #content',selectSeacher(),function(){
@@ -26,7 +27,6 @@ $(function(){
 						$('#user').load('exam_pageinfo.jsp  #user_table_audit',function(){
 							data.tableName="TeacherInfo";
 							data.dataState="20";
-							getExamInfo(data);
 							examInfo();
 						});
 						break;
@@ -35,7 +35,6 @@ $(function(){
 						$('#award').load('exam_pageinfo.jsp #award_table_audit',function(){
 							data.tableName="TeacherAward";
 							data.dataState="20";
-							getExamInfo(data);
 							examAward();
 						});
 						break;
@@ -44,7 +43,6 @@ $(function(){
 						$('#works').load('exam_pageinfo.jsp #works_table_audit',function(){
 							data.tableName="TeacherWorks";
 							data.dataState="20";
-							getExamInfo(data);
 							examWorks();
 						});
 						break;
@@ -71,7 +69,6 @@ $(function(){
 						$('#project').load('exam_pageinfo.jsp #project_table_audit',function(){
 							data.tableName="TeacherProject";
 							data.dataState="20";
-							getExamInfo(data);
 							examProject();
 						});
 						break;
@@ -91,7 +88,6 @@ $(function(){
 							$('#user').load('check_pageinfo.jsp  #user_table_view',function(){
 								data.tableName="TeacherInfo";
 								data.dataState="40";
-								getCheckInfo(data);
 								checkInfo();
 							});
 							break;
@@ -99,7 +95,6 @@ $(function(){
 							$('#award').load('check_pageinfo.jsp #award_table_view',function(){
 								data.tableName="TeacherAward";
 								data.dataState="20";
-								getCheckInfo(data);
 								checkAward();
 							});
 							break;
@@ -107,7 +102,6 @@ $(function(){
 							$('#works').load('check_pageinfo.jsp #works_table_view',function(){
 								data.tableName="TeacherWorks";
 								data.dataState="20";
-								getCheckInfo(data);
 								checkWorks();
 							});
 							break;
@@ -115,7 +109,6 @@ $(function(){
 							$('#paper').load('check_pageinfo.jsp #paper_table_view',function(){
 								data.tableName="TeacherPaper";
 								data.dataState="20";
-								getCheckInfo(data);
 								checkPaper();
 							});
 							break;
@@ -123,7 +116,6 @@ $(function(){
 							$('#patent').load('check_pageinfo.jsp #patent_table_view',function(){
 								data.tableName="TeacherPatent";
 								data.dataState="20";
-								getCheckInfo(data);
 								checkPatent();
 							});
 							break;
@@ -131,7 +123,6 @@ $(function(){
 							$('#project').load('check_pageinfo.jsp #project_table_view',function(){
 								data.tableName="TeacherProject";
 								data.dataState="20";
-								getCheckInfo(data);
 								checkProject();
 							});
 							break;

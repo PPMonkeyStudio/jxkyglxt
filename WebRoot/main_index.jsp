@@ -21,6 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 	<link rel="stylesheet" href="css/com.css" />
+	<link rel="stylesheet" href="css/export_modal.css" />
 	<link rel="stylesheet" href="css/need/laydate.css" />
 	<link rel="stylesheet" href="/css/bootstrap.min.css" />
 	
@@ -31,6 +32,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<jsp:include page="/modal/addInfo/project_modal.html" flush="true"></jsp:include>
 	<jsp:include page="/modal/addInfo/patent_modal.html" flush="true"></jsp:include> 
 	<jsp:include page="/modal/addInfo/ user_info_modal.html" flush="true"></jsp:include> 
+	
+	<jsp:include page="/modal/exportInfo/award_modal.html" flush="true"></jsp:include>
   </head>
   
  <body>
@@ -118,8 +121,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 -->
 			<script type="text/javascript" src="js/jquery-3.1.1.min.js" ></script>
 			<script type="text/javascript" src="js/bootstrap.min.js"></script>
-			<script type="text/javascript" src="js/com/exam_com.js" ></script>
-			<script type="text/javascript" src="js/com/check_com.js" ></script>
 			
 			<script type="text/javascript" src="js/main_index.js" ></script>
 			<script type="text/javascript" src="js/info/exam_info.js" ></script>

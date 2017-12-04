@@ -41,20 +41,35 @@ function checkAward(){
 		});
 		$.post("/teacherms/Admin/admin_getTeacherTableInfoById",
 				{tableId:$(this).siblings().val(),tableName:"TeacherAward"},function(xhr){
-				var inf = $('.table_infomation');
-				var xh=xhr.ObjDatas[0];
+
+					var inf = $('.table_infomation');
 				  $("#award_modal input,select").each(function(){
 					 var na= $(this).attr("name").split(".")[1];
+					
 				 if(na=="userId"){
-						 $(this).val(xh[0].userId);
+						 $(this).val(JSON.parse(xhr)[0][0].userId);
 					 }
 					 if(na=="userName"){
-						 $(this).val(xh[1].userName);
+						 $(this).val(JSON.parse(xhr)[0][1].userName);
 					 }
-					 $(this).val(xh[0][na]);
+					 alert(JSON.parse(xhr)[0][0][na]);
+					 $(this).val(JSON.parse(xhr)[0][0][na]);
 				  })
 				},"json");
 		$(".review-info").remove();
 	})
 	
+		$(".export_button").unbind().on("click",function(){
+			//显示出模态框
+			$('#export_award').modal({
+				keyboard : true
+			});
+		})
+		/*.append('<input type="checkbox">')*/
+		$('.export-info').click(function(){
+			$('#info_table tbody tr').each(function(){
+				 $(this).find("td:first").empty().append('<td><input type="checkbox"><td>')
+			})
+		})
+
 }

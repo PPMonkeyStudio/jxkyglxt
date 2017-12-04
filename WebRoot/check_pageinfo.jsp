@@ -117,7 +117,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					用户信息
 				</header>
 				<div class="panel-body table-responsive">
-					<table class="table table-hover">
+					<table class="table table-hover" id="info_table">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -185,7 +185,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					奖励信息
 				</header>
 				<div class="panel-body table-responsive">
-					<table class="table table-hover">
+					<table class="table table-hover" id="info_table">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -258,7 +258,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					著作信息
 				</header>
 				<div class="panel-body table-responsive">
-					<table class="table table-hover">
+					<table class="table table-hover" id="info_table">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -328,7 +328,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					论文信息
 				</header>
 				<div class="panel-body table-responsive">
-					<table class="table table-hover">
+					<table class="table table-hover" id="info_table">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -395,7 +395,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					专利信息
 				</header>
 				<div class="panel-body table-responsive">
-					<table class="table table-hover">
+					<table class="table table-hover" id="info_table">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -460,7 +460,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					课题(项目)信息
 				</header>
 				<div class="panel-body table-responsive">
-					<table class="table table-hover">
+					<table class="table table-hover" id="info_table">
 						<thead>
 							<tr>
 								<th>#</th>
