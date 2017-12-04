@@ -3,6 +3,7 @@ package com.teacherms.satffinfomanage.dao;
 import java.util.Collection;
 import java.util.List;
 import com.teacherms.all.domain.*;
+import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 
 public interface AdminDao {
 
@@ -33,7 +34,7 @@ public interface AdminDao {
 	 *            数据的ID
 	 * @return 信息记录对象
 	 */
-	List<Object> getInfoById(String tableName, String IdName, String tableId);
+	TableInfoAndUserVo getInfoById(String tableName, String IdName, String tableId);
 
 	/**
 	 * 更新对象

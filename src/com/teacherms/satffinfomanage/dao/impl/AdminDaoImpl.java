@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import com.teacherms.all.domain.*;
 import com.teacherms.satffinfomanage.dao.AdminDao;
+import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 
 public class AdminDaoImpl implements AdminDao {
 	private SessionFactory sessionFactory;
@@ -39,10 +40,10 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public List<Object> getInfoById(String tableName, String IdName, String tableId) {
-		String hql = "select t,u from " + tableName + " t,User u where t.userId=u.userId and t." + IdName + " = '"
-				+ tableId + "'";
-		return getSession().createQuery(hql).list();
+	public TableInfoAndUserVo getInfoById(String tableName, String IdName, String tableId) {
+		String hql = "select new com.teacherms.satffinfomanage.vo.TableInfoAndUserVo(t,u) from " + tableName
+				+ " t,User u where t.userId=u.userId and t." + IdName + " = '" + tableId + "'";
+		return (TableInfoAndUserVo) getSession().createQuery(hql).uniqueResult();
 	}
 
 	@Override

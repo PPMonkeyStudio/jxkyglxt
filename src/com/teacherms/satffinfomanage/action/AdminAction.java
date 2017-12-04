@@ -30,6 +30,7 @@ import com.teacherms.all.domain.TeacherProject;
 import com.teacherms.all.domain.TeacherWorks;
 import com.teacherms.all.domain.User;
 import com.teacherms.satffinfomanage.vo.AdminVo;
+import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 import com.teacherms.staffinfomanage.service.AdminService;
 
 import util.ExcelHead;
@@ -91,7 +92,7 @@ public class AdminAction extends ActionSupport {
 	// 通过ID获取单条信息
 	public void getTeacherTableInfoById() {
 		try {
-			List<Object> list = adminService.getTeacherTableInfoById(tableName, tableId);
+			TableInfoAndUserVo list = adminService.getTeacherTableInfoById(tableName, tableId);
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(list));
 		} catch (IOException e) {

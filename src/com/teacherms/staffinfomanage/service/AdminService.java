@@ -8,6 +8,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.teacherms.all.domain.TeacherAward;
 import com.teacherms.all.domain.TeacherInfo;
+import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 
 import util.PageVO;
 
@@ -32,7 +33,7 @@ public interface AdminService {
 	 *            数据的ID
 	 * @return 信息记录对象
 	 */
-	List<Object> getTeacherTableInfoById(String tableName, String tableId);
+	TableInfoAndUserVo getTeacherTableInfoById(String tableName, String tableId);
 
 	/**
 	 * ---管理员修改信息状态+修改信息内容
