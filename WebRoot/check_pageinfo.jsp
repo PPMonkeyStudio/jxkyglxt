@@ -266,6 +266,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<th>主编</th>
 								<th>著作类别</th>
 								<th>入选情况</th>
+								<th>出版社</th>
 								<th>操作</th>
 							</tr>
 						</thead>
