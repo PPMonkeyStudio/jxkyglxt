@@ -8,10 +8,13 @@
 			}
 			
 			.sidebar .sidebar-menu>li>div>ul>li>a:hover {
+			cursor:pointer;
 				background-color: #425164;
+				
 			}
 			
 			.sidebar .sidebar-menu .nav>li>a {
+		
 				padding-left: 60px;
 				padding-top: 10px;
 				padding-bottom: 10px;

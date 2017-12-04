@@ -1,0 +1,48 @@
+*{
+	margin:0;
+	padding:0;
+}
+   
+ #check  input + label {
+	transition: color .7s ease;
+}
+ #check input:checked + label {
+	color: red;
+}
+
+#modal-content{
+padding:0;
+}
+.modal-lg{
+	width:65%;
+}
+
+.tab_content{
+	width:100%;
+	max-height: calc(100vh - 15.6rem);
+    overflow: auto;
+}
+.group-list{
+	width:100%;
+	height:60px;
+	padding-left:10px;
+	background: rgba(0,0,0,.015);
+    border: 1px solid rgba(0,0,0,.04);
+}
+.group-list input{
+	margin-top:25px !important;
+}
+#check ul:first-child{
+	color:#42a5f5;
+}
+ input[type=checkbox]{
+	outline:0 !important;
+}
+
+.group-list li{
+	width:20%;
+	height:60px;
+	line-height:60px;
+	float:left;
+	list-style:none;
+}

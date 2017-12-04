@@ -173,7 +173,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</aside>
 
 			<aside class="right-side">
-				<section class="content">
+				<section class="content" >
 					<div class="row">
 						<div class="col-md-12">
 							<!--breadcrumbs start -->

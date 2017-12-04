@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 
 		<!--管理员审核信息时右侧内容-->
-		<section class="content">
+		<section class="content" id="content">
 			<div class="row">
 				<div class="col-md-12">
 					<!--breadcrumbs start -->
@@ -79,6 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 		</section>
+
 		<!----------------------------------------------------------------------------------->
 		<!--管理员审核用户信息的表格-->
 		<div id="user_table_audit">
@@ -115,15 +116,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					用户信息
 				</header>
 				<div class="panel-body table-responsive">
-					<table class="table table-hover">
+					<table class="table table-hover ">
 						<thead>
 							<tr>
 								<th>#</th>
 								<th>工号</th>
 								<th>姓名</th>
+								<th>职称级别</th>
 								<th>职工类型</th>
-								<th>职工状态</th>
-								<th>状态</th>
+								<th>授课类型</th>
+								<th>授课状态</th>
+								<th>操作</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -261,6 +264,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<th>主编</th>
 								<th>著作类别</th>
 								<th>入选情况</th>
+								<th>出版社</th>
 								<th>操作</th>
 							</tr>
 						</thead>
@@ -461,7 +465,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<th>#</th>
 								<th>课题(项目)名称</th>
 								<th>成员姓名</th>
-								<th>来源</th>
+								<th>项目来源</th>
+								<th>级别</th>
 								<th>立项编号或批准文号</th>
 								<th>操作</th>
 							</tr>

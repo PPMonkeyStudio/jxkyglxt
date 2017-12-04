@@ -14,7 +14,6 @@
 }
 
 .input_div {
-	/*display: none;*/
 	display: inline-block !important;
 	width: 210px;
 	
@@ -27,6 +26,9 @@
 
 .After_div {
 	display: inline-block !important;
+}
+.Atfer_li{
+	background-color:#425164;
 }
 
 .btn-primary {
@@ -41,7 +43,15 @@
 tbody {
 	text-align: center;
 }
-
+.table td{
+	max-width:200px;
+	overflow:hidden;
+}
+.table button{
+	width:25px;
+	height:25px;
+	margin-left:5px;
+}
 .title {
 	height: 1px;
 	border-top: 1px solid #CDCDCD;
@@ -60,14 +70,17 @@ tbody {
 }
 
 .tab {
-	width: 100%;
-	table-layout: fixed;
+	width: 100% !important;
+	table-layout: fixed !important;
 }
 
 .tab tr {
-	height: 35px;
+	height: 35px !important;
 }
-
+#info_modal .modal-lg{
+	background:white;
+	width:800px;
+}
 #page a:hover {
 	cursor: pointer;
 }
