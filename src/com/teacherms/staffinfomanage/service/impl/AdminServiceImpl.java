@@ -11,6 +11,7 @@ import java.lang.reflect.Field;
 import com.teacherms.all.domain.*;
 import com.teacherms.satffinfomanage.dao.AdminDao;
 import com.teacherms.satffinfomanage.vo.AdminVo;
+import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 import com.teacherms.staffinfomanage.service.AdminService;
 
 import util.ExcelHead;
@@ -94,9 +95,9 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<Object> getTeacherTableInfoById(String tableName, String tableId) {
+	public TableInfoAndUserVo getTeacherTableInfoById(String tableName, String tableId) {
 		// list内部的元素为Object(字符串)+Object(字符串)+Object(对象)
-		List<Object> list = adminDao.getInfoById(tableName, getTableInfoIdName(tableName), tableId);
+		TableInfoAndUserVo list = adminDao.getInfoById(tableName, getTableInfoIdName(tableName), tableId);
 		/*// 将最后的对象转化为数组
 		Class cla = list.get(0)[2].getClass();
 		try {

@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.google.gson.Gson;
+import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 import com.teacherms.staffinfomanage.service.AdminService;
 import com.teacherms.staffinfomanage.service.TeacherService;
 import com.teacherms.system.service.SystemService;
@@ -45,7 +46,7 @@ public class JunitTest {
 
 	@Test
 	public void test12() {
-		List<Object> list = adminService.getTeacherTableInfoById("TeacherAward", "0c52c25a-b844-4e6d-9b33-576e8938c611");
+		TableInfoAndUserVo list = adminService.getTeacherTableInfoById("TeacherAward", "0c52c25a-b844-4e6d-9b33-576e8938c611");
 		System.out.println(new Gson().toJson(list));
 	}
 
