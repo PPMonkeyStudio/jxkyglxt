@@ -98,24 +98,16 @@ public class AdminServiceImpl implements AdminService {
 	public TableInfoAndUserVo getTeacherTableInfoById(String tableName, String tableId) {
 		// list内部的元素为Object(字符串)+Object(字符串)+Object(对象)
 		TableInfoAndUserVo list = adminDao.getInfoById(tableName, getTableInfoIdName(tableName), tableId);
-		/*// 将最后的对象转化为数组
-		Class cla = list.get(0)[2].getClass();
-		try {
-			// 创建与对象属性值等长的数组
-			Object[] oo = new Object[cla.getDeclaredFields().length];
-			// 遍历每一个属性，并且获得属性值，存入数组中
-			for (int i = 0; i < oo.length; i++) {
-				Field f = cla.getDeclaredFields()[i];
-				f.setAccessible(true);
-				oo[i] = f.get(list.get(0)[2]);
-			}
-			// list中对象的位置转存为数组
-			list.get(0)[2] = oo;
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}*/
+		/*
+		 * // 将最后的对象转化为数组 Class cla = list.get(0)[2].getClass(); try { //
+		 * 创建与对象属性值等长的数组 Object[] oo = new
+		 * Object[cla.getDeclaredFields().length]; // 遍历每一个属性，并且获得属性值，存入数组中 for
+		 * (int i = 0; i < oo.length; i++) { Field f =
+		 * cla.getDeclaredFields()[i]; f.setAccessible(true); oo[i] =
+		 * f.get(list.get(0)[2]); } // list中对象的位置转存为数组 list.get(0)[2] = oo; }
+		 * catch (IllegalArgumentException e) { e.printStackTrace(); } catch
+		 * (IllegalAccessException e) { e.printStackTrace(); }
+		 */
 		// 返回List<Object[]>---list内部的元素为Object(字符串)+Object(字符串)+Object[]数组)
 		return list;
 	}
@@ -125,7 +117,7 @@ public class AdminServiceImpl implements AdminService {
 		// 创建List<Object>
 		List<Object> list_all = new ArrayList<Object>();
 		// 分割所要查询的信息表ID
-		String[] id = query_id.substring(0, query_id.length() - 1).split(",");
+		String[] id = query_id.substring(0, query_id.length()).split(",");
 		// 循环查询每一个所要查询的信息表，并记录到list_all中
 		for (int i = 0; i < id.length; i++) {
 			list_all.add(adminDao.getAInfomationByTableId(tableName, getTableInfoIdName(tableName), id[i]));

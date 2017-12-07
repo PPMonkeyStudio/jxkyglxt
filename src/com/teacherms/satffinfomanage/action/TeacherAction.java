@@ -61,7 +61,7 @@ public class TeacherAction extends ActionSupport {
 	// 教职工分页获取指定的信息
 	public void userGetTableInfoInPaging() {
 		try {
-			PageVO<Object[]> listAdmin = teacherService.getTableInfoInPaging(sessionuser.getUserId(), tableName,
+			PageVO<Object> listAdmin = teacherService.getTableInfoInPaging(sessionuser.getUserId(), tableName,
 					page == null ? "1" : page, time_interval);
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(listAdmin));

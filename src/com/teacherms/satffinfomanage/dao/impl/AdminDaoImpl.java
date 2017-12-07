@@ -49,6 +49,7 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public Object getAInfomationByTableId(String tableName, String tableInfoIdName, String string) {
 		String hql = " from " + tableName + " where " + tableInfoIdName + " = '" + string + "'";
+		System.out.println(hql);
 		return getSession().createQuery(hql).uniqueResult();
 	}
 

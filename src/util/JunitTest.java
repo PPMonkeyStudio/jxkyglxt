@@ -1,10 +1,13 @@
 package util;
 
-import java.util.List;
+import java.io.*;
 
 import javax.annotation.Resource;
 
-import org.junit.Before;
+import com.teacherms.all.domain.*;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -46,8 +49,29 @@ public class JunitTest {
 
 	@Test
 	public void test12() {
-		TableInfoAndUserVo list = adminService.getTeacherTableInfoById("TeacherAward", "0c52c25a-b844-4e6d-9b33-576e8938c611");
+		TableInfoAndUserVo list = adminService.getTeacherTableInfoById("TeacherAward",
+				"0c52c25a-b844-4e6d-9b33-576e8938c611");
 		System.out.println(new Gson().toJson(list));
+	}
+
+	@Test
+	public void test_export() {
+		XSSFWorkbook workbook = adminService.getExcel("1,2,3,4,5,6", "TeacherAward",
+				"86902b8f-6f7f-4c39-9970-b126e2a2ff5b,88e32f69-8508-4648-b98d-acb1c859cd31");
+		try {
+			FileOutputStream out = new FileOutputStream("E:/Attachment/张三/TeacherAward/test.xlsx");
+			workbook.write(out);
+			out.flush();
+			out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void test_teacher_getallinfo() {
+		PageVO<Object> listAdmin = teacherService.getTableInfoInPaging("1001", "TeacherAward", "1", "");
+		System.out.println(new Gson().toJson(listAdmin));
 	}
 
 }

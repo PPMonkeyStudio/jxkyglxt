@@ -42,7 +42,7 @@ import util.PageVO;
 public class AdminAction extends ActionSupport {
 	private AdminService adminService;
 
-	// 导出
+	// 导出 
 	private String export_name;// 导出execl表的属性条件,逗号隔开
 	private String export_id;// 导出execl表的ID字段条件,逗号隔开
 

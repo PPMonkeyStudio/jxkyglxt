@@ -7,7 +7,7 @@ import com.teacherms.all.domain.User;
 
 public interface TeacherDao {
 
-	List<Object[]> getTableInfo(String query, String tableName, String tableUserIds, String userid, String time, int i,
+	List<Object> getTableInfo(String time_interval, String tableName, String tableUserIds, String userid, int i,
 			int toindex);
 
 	Long getCountInOnetable(String userid, String tableUserIds, String tableName);
