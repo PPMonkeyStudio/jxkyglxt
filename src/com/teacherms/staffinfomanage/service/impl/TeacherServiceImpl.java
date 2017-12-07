@@ -118,10 +118,10 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public List<Object[]> userGetTableInfoByTableId(String tableName, String tableId) {
+	public List<Object> userGetTableInfoByTableId(String tableName, String tableId) {
 		// list内部的元素为Object(字符串)+Object(字符串)+Object(对象)
-		List<Object[]> list = teacherDao.getTableInfoByTableId(tableName, getTableInfoIdName(tableName), tableId);
-		// 将最后的对象转化为数组
+		List<Object> list = teacherDao.getTableInfoByTableId(tableName, getTableInfoIdName(tableName), tableId);
+		/*// 将最后的对象转化为数组
 		Class cla = list.get(0)[2].getClass();
 		try {
 			// 创建与对象属性值等长的数组
@@ -138,7 +138,7 @@ public class TeacherServiceImpl implements TeacherService {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
-		}
+		}*/
 		// 返回List<Object[]>---list内部的元素为Object(字符串)+Object(字符串)+Object[]数组)
 		return list;
 	}

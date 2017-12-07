@@ -12,11 +12,11 @@ public interface TeacherDao {
 
 	Long getCountInOnetable(String userid, String tableUserIds, String tableName);
 
-	List<Object[]> getTableInfoByTableId(String tableName, String tableInfoIdName, String tableId);
+	List<Object> getTableInfoByTableId(String tableName, String tableInfoIdName, String tableId);
 
 	String addTableInfo(Object obj);
 
-	List<Object[]> getAllStatusInfo(String selectinfo, String table, String time, String status);
+	List<Object> getAllStatusInfo(String table, String time, String status);
 
 	/**
 	 * 返回信息查询对象

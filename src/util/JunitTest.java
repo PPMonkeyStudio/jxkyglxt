@@ -1,6 +1,7 @@
 package util;
 
 import java.io.*;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -74,4 +75,10 @@ public class JunitTest {
 		System.out.println(new Gson().toJson(listAdmin));
 	}
 
+	@Test
+	public void test_teacher_getoneinfo() {
+		List<Object> listAdmin = teacherService.userGetTableInfoByTableId("TeacherAward",
+				"6ca50c5a-f45d-4fd2-82fc-1d9fb34e67df");
+		System.out.println(new Gson().toJson(listAdmin));
+	}
 }

@@ -35,7 +35,7 @@ public interface TeacherService {
 	 * @param userid
 	 * @return 信息对象
 	 */
-	List<Object[]> userGetTableInfoByTableId(String tableName, String tableId);
+	List<Object> userGetTableInfoByTableId(String tableName, String tableId);
 
 	/**
 	 * ---用户添加用户的信息

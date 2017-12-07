@@ -31,10 +31,9 @@ public class TeacherDaoImpl implements TeacherDao {
 	}
 
 	@Override
-	public List<Object[]> getAllStatusInfo(String selectinfo, String table, String time, String status) {
-		String hql = "select " + selectinfo + " from " + table
-				+ " t,User u where u.userId=t.userId and t.dataStatus = '" + status + "'" + time
-				+ " order by t.createTime asc";
+	public List<Object> getAllStatusInfo(String table, String time, String status) {
+		String hql = "select t from " + table + " t,User u where u.userId=t.userId and t.dataStatus = '" + status + "'"
+				+ time + " order by t.createTime asc";
 		return getSession().createQuery(hql).list();
 	}
 
@@ -46,9 +45,9 @@ public class TeacherDaoImpl implements TeacherDao {
 	}
 
 	@Override
-	public List<Object[]> getTableInfoByTableId(String tableName, String tableInfoIdName, String tableId) {
-		String hql = "select u.userId,u.userName,t from " + tableName + " t,User u where t.userId=u.userId and t."
-				+ tableInfoIdName + " = '" + tableId + "'";
+	public List<Object> getTableInfoByTableId(String tableName, String tableInfoIdName, String tableId) {
+		String hql = "select t from " + tableName + " t,User u where t.userId=u.userId and t." + tableInfoIdName
+				+ " = '" + tableId + "'";
 		// String hql = " from " + tableName + "where " + tableInfoIdName + " =
 		// '" + tableId + "'";
 		return getSession().createQuery(hql).list();
