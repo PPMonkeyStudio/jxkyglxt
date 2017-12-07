@@ -33,7 +33,7 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public PageVO<Object[]> getTableInfoInPaging(String userid, String tableName, String page, String time_interval) {
+	public PageVO<Object> getTableInfoInPaging(String userid, String tableName, String page, String time_interval) {
 		// 依据不同的tableName获取实体化类不同的UserId进行模糊查询
 		String tableUserIds = null;
 		switch (tableName) {
@@ -86,12 +86,12 @@ public class TeacherServiceImpl implements TeacherService {
 			toindex = totalSize - (pageIndex - 1) * pageSize;
 		}
 		// 创建list
-		List<Object[]> list = new ArrayList<Object[]>();
+		List<Object> list = new ArrayList<Object>();
 		// 获取信息表中的信息
-		list.addAll(teacherDao.getTableInfo(getSqlToQueryByTableName(tableName), time_interval, tableName, tableUserIds,
-				userid, (pageIndex - 1) * pageSize, toindex));
+		list.addAll(teacherDao.getTableInfo(time_interval, tableName, tableUserIds, userid, (pageIndex - 1) * pageSize,
+				toindex));
 		// 设置VO内参数页码，每页记录数，总记录数
-		PageVO<Object[]> pageVO = new PageVO<Object[]>(pageIndex, pageSize, totalSize);
+		PageVO<Object> pageVO = new PageVO<Object>(pageIndex, pageSize, totalSize);
 		pageVO.setObjDatas(list);
 		return pageVO;
 	}

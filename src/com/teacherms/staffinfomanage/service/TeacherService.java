@@ -23,7 +23,7 @@ public interface TeacherService {
 	 * @param time_interval
 	 * @return 查询结果封装到PageVO<Object[]>中
 	 */
-	PageVO<Object[]> getTableInfoInPaging(String userid, String tableName, String page, String time_interval);
+	PageVO<Object> getTableInfoInPaging(String userid, String tableName, String page, String time_interval);
 
 	/**
 	 * ---用户通过信息ID获取单条信息
