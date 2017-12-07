@@ -100,28 +100,45 @@ function selectSeacher(){
 		if($("#Inputu"+$(this).val()).length>0){
 			return;
 		}else{
-			$("#search").append('<div id="Inputu'+$(this).val()+'" class="input_div  form-group">'+
+			$(".all_options").after('<div id="Inputu'+$(this).val()+'" class="input_div  form-group">'+
 					'<input type="text"  placeholder="'+pla+'" class="form-control"/>'+
-					'<button class="btn btn-primary">取消</button></div>')
-			
-		
+					'<button class="btn btn-primary cancel">取消</button></div>')
 		}
-	/*$("#Input"+content).show().addClass("After_div")*/
 	$('.input_div button').click(function(){
 		$(this).parent().remove();
 	});
-	 /*$(document).on("click",".input_div button",function(){
-		 $(this).parent().remove();
-	 })*/
 	})
 }
 
+/*导出模态框js*/
+$(function() {
+	$("#export").click(function() {
+		$("input[name='checkbox']:checkbox:checked").each(function() {
+			data.query_num += $(this).val() + ",";
+		});
+	});
+	$("#btn1").click(function() {
+		$("input[name='checkbox']").attr("checked", "true");
+	});
+	$("#btn2").click(function() {
+		$("input[name='checkbox']").removeAttr("checked");
+	});
+	$("#btn3").click(function() {
+		$("input[name='checkbox']").each(function() {
+			if ($(this).attr("checked")) {
+				$(this).removeAttr("checked");
+			} else {
+				$(this).attr("checked", "true");
+			}
+		});
+	});
+});
+
+/*  输入身份证号自动填入性别，出生日期     */
 $(function(){
-		 /*  输入身份证号自动填入性别，出生日期     */
 		$(document).on("blur",".card_num",function(){
 			var reg=/^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/; 
 						var card_num = $(".card_num").val();
-							
 						if(reg.test(card_num) === false){
 							$(this).addClass('error_form ').val("");
 						}else{
@@ -135,7 +152,6 @@ $(function(){
 						$(".bir").val(card_num.substring(6, 10) + "-" + card_num.substring(10, 12) + "-" + card_num.substring(12, 14));
 						}
 		});
-		
 		
 		$(document).on("keyup",".card_num",function(event){
 				if(event.keyCode == 13) {
@@ -157,7 +173,6 @@ $(function(){
 							}
 							}
 					})	
-					
 		})
 	 
 function time(){
@@ -196,4 +211,13 @@ function time(){
 		laydate(start);
 		laydate(end);
 }
+/*$(function(){
+	$('#last_ul li').hover(function(){
+		$('#addImg').src = "img/add(1).png";
+	},function(){
+		$('#addImg').src = "img/add(2).png";
+	})
+})*/
+
+
 

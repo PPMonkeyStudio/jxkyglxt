@@ -280,7 +280,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							type="text" placeholder="请输入专业任教时间"></td>
 						<td>是否实验技术人员：</td>
 						<td><select class="form-control table_infomation">
-								<option>否</option>
+								<option>否</option>  
 								<option>是</option>
 						</select></td>
 

@@ -10,10 +10,9 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>My JSP 'login.jsp' starting page</title>
+<title>登录</title>
 
 <link rel="stylesheet" href="<%=basePath%>/css/bootstrap.min.css" />
-<link rel="stylesheet" href="<%=basePath%>/css/teacher_award.css" />
 <link rel="stylesheet" href="<%=basePath%>/css/login.css" />
 </head>
 <body>

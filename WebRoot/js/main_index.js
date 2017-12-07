@@ -4,26 +4,21 @@ var data = {
 		page : 1,
 		time_interval : "",
 		tableId : "",
-		query_num : "",
-		query_id : "",
+		export_name : "",
+		export_id : "",
 			}
-
 $(function(){
-	
+	$('.right-side').load('index_info.jsp #content');
 	$('.sidebar-menu .nav li a').click(function(){
 	$(this).addClass("Atfer_li");
-	$('a[href="#user"]').click();
 	$(this).parent().siblings().children().removeClass("Atfer_li");
 		if(($(this).text())=="信息审核"){
 			$('.right-side').load('exam_pageinfo.jsp #content',selectSeacher(),function(){
 				$('.nav-tabs li a').unbind().click(function(){
 					if($(this).parent('li').attr('class') == 'active') return;
 					var a_href = $(this).attr("href");
-					
 					switch(a_href) {
-					
 					case '#user':
-						
 						$('#user').load('exam_pageinfo.jsp  #user_table_audit',function(){
 							data.tableName="TeacherInfo";
 							data.dataState="20";
@@ -31,7 +26,6 @@ $(function(){
 						});
 						break;
 					case '#award':
-						
 						$('#award').load('exam_pageinfo.jsp #award_table_audit',function(){
 							data.tableName="TeacherAward";
 							data.dataState="20";
@@ -39,7 +33,6 @@ $(function(){
 						});
 						break;
 					case '#works':
-						
 						$('#works').load('exam_pageinfo.jsp #works_table_audit',function(){
 							data.tableName="TeacherWorks";
 							data.dataState="20";
@@ -51,16 +44,13 @@ $(function(){
 						$('#paper').load('exam_pageinfo.jsp #paper_table_audit',function(){
 							data.tableName="TeacherPaper";
 							data.dataState="20";
-							getExamInfo(data);
 							examPaper();
 						});
 						break;
 					case '#patent':
-					
 						$('#patent').load('exam_pageinfo.jsp #patent_table_audit',function(){
 							data.tableName="TeacherPatent";
 							data.dataState="20";
-							getExamInfo(data);
 							examPatent();
 						});
 						break;
