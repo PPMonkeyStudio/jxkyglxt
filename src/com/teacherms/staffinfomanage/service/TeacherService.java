@@ -74,9 +74,9 @@ public interface TeacherService {
 	 * 
 	 * @param userId
 	 *            登录用户id
-	 * @return 数组
+	 * @return 对象
 	 */
-	List<Object[]> userGetTeacherInfo(String userId);
+	Object userGetTeacherInfo(String userId);
 
 	/**
 	 * ---用户补全或重新填写基本信息

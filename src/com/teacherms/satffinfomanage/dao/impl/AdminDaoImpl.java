@@ -7,6 +7,7 @@ import com.teacherms.all.domain.*;
 import com.teacherms.satffinfomanage.dao.AdminDao;
 import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 
+@SuppressWarnings("unchecked")
 public class AdminDaoImpl implements AdminDao {
 	private SessionFactory sessionFactory;
 
@@ -51,6 +52,12 @@ public class AdminDaoImpl implements AdminDao {
 		String hql = " from " + tableName + " where " + tableInfoIdName + " = '" + string + "'";
 		System.out.println(hql);
 		return getSession().createQuery(hql).uniqueResult();
+	}
+
+	@Override
+	public List<Object> export_getAInfomationByTableId(String tableName, String tableInfoIdName, String query_id) {
+		String hql = "from " + tableName + " where " + tableInfoIdName + " in (" + query_id + ")";
+		return getSession().createQuery(hql).list();
 	}
 
 	@Override

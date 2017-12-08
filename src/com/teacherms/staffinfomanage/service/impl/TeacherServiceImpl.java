@@ -3,6 +3,7 @@ package com.teacherms.staffinfomanage.service.impl;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -98,14 +99,14 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Override
 	public XSSFWorkbook getExcel(String query_name, String tableName, String query_id) {
-		// 创建List<Object>
-		List<Object> list_all = new ArrayList<Object>();
-		// 分割所要查询的信息表ID
-		String[] id = query_id.substring(0, query_id.length() - 1).split(",");
-		// 循环查询每一个所要查询的信息表，并记录到list_all中
-		for (int i = 0; i < id.length; i++) {
-			list_all.add(teacherDao.getTableInfoByTableId(tableName, getTableInfoIdName(tableName), id[i]));
+		int index = 0;
+		String[] exportid_arr = query_id.split(",");
+		for (String str : exportid_arr) {
+			exportid_arr[index] = "'" + str + "'";
+			index++;
 		}
+		List<Object> list_all = teacherDao.export_getAInfomationByTableId(tableName, getTableInfoIdName(tableName),
+				Arrays.toString(exportid_arr).replaceAll("[\\[\\]]", ""));
 		/**
 		 * 1.query_num：传入所需要查询的字段
 		 * 2.ExcelHead.getExcelHeadArray(tableName)：依据tablename传入表格头信息
@@ -113,7 +114,7 @@ public class TeacherServiceImpl implements TeacherService {
 		 * 返回一个execl表
 		 */
 		XSSFWorkbook workbook = ExportExcelCollection.exportExcel(query_name, ExcelHead.getExcelHeadArray(tableName),
-				MapUtil.java2Map(list_all));
+				MapUtil.java2Map(list_all, query_name));
 		return workbook;
 	}
 
@@ -121,24 +122,16 @@ public class TeacherServiceImpl implements TeacherService {
 	public List<Object> userGetTableInfoByTableId(String tableName, String tableId) {
 		// list内部的元素为Object(字符串)+Object(字符串)+Object(对象)
 		List<Object> list = teacherDao.getTableInfoByTableId(tableName, getTableInfoIdName(tableName), tableId);
-		/*// 将最后的对象转化为数组
-		Class cla = list.get(0)[2].getClass();
-		try {
-			// 创建与对象属性值等长的数组
-			Object[] oo = new Object[cla.getDeclaredFields().length];
-			// 遍历每一个属性，并且获得属性值，存入数组中
-			for (int i = 0; i < oo.length; i++) {
-				Field f = cla.getDeclaredFields()[i];
-				f.setAccessible(true);
-				oo[i] = f.get(list.get(0)[2]);
-			}
-			// list中对象的位置转存为数组
-			list.get(0)[2] = oo;
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}*/
+		/*
+		 * // 将最后的对象转化为数组 Class cla = list.get(0)[2].getClass(); try { //
+		 * 创建与对象属性值等长的数组 Object[] oo = new
+		 * Object[cla.getDeclaredFields().length]; // 遍历每一个属性，并且获得属性值，存入数组中 for
+		 * (int i = 0; i < oo.length; i++) { Field f =
+		 * cla.getDeclaredFields()[i]; f.setAccessible(true); oo[i] =
+		 * f.get(list.get(0)[2]); } // list中对象的位置转存为数组 list.get(0)[2] = oo; }
+		 * catch (IllegalArgumentException e) { e.printStackTrace(); } catch
+		 * (IllegalAccessException e) { e.printStackTrace(); }
+		 */
 		// 返回List<Object[]>---list内部的元素为Object(字符串)+Object(字符串)+Object[]数组)
 		return list;
 	}
@@ -151,9 +144,9 @@ public class TeacherServiceImpl implements TeacherService {
 		 */
 		String rusult = "error";
 		try {
-			List<Object[]> list = teacherDao.getTeacherInfoByUserId(userId);
+			TeacherInfo teach = (TeacherInfo) teacherDao.getTeacherInfoByUserId(userId);
 			// 获取TeacherInfo类中全部的属性
-			Class cla = TeacherInfo.class;
+			Class<TeacherInfo> cla = TeacherInfo.class;
 			Field[] f = cla.getDeclaredFields();
 			for (int i = 0; i < f.length; i++) {
 				// 设置可以使用
@@ -162,7 +155,7 @@ public class TeacherServiceImpl implements TeacherService {
 				if (str != null && str != "") {
 					continue;
 				} else {
-					f[i].set(teacherInfo, f[i].get(list.get(0)));
+					f[i].set(teacherInfo, f[i].get(teach));
 				}
 			}
 			// 修改数据状态为管理员审核状态
@@ -185,9 +178,9 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Override
 	public String addTableInfo(String userid, Object obj, String tableName) {
-		String re = null;
+		String result = null;
 		try {
-			Class cla = obj.getClass();
+			Class<? extends Object> cla = obj.getClass();
 			// 获取对象中第一个属性
 			Field f = cla.getDeclaredField(getTableInfoIdName(tableName));
 			// 属性设置可以访问
@@ -203,12 +196,12 @@ public class TeacherServiceImpl implements TeacherService {
 			dataStatus.setAccessible(true);
 			dataStatus.set(obj, "10");
 
-			re = teacherDao.addTableInfo(obj);
+			result = teacherDao.addTableInfo(obj);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return re;
+		return result;
 	}
 
 	@Override
@@ -233,7 +226,7 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public List<Object[]> userGetTeacherInfo(String userId) {
+	public Object userGetTeacherInfo(String userId) {
 		return teacherDao.getTeacherInfoByUserId(userId);
 	}
 

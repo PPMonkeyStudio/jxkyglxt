@@ -36,9 +36,9 @@ public interface TeacherDao {
 	 * 
 	 * @param userId
 	 *            用户id
-	 * @return 数组
+	 * @return 用户信息对象
 	 */
-	List<Object[]> getTeacherInfoByUserId(String userId);
+	Object getTeacherInfoByUserId(String userId);
 
 	/**
 	 * 更新对象
@@ -57,5 +57,15 @@ public interface TeacherDao {
 	 * @return 用户对像
 	 */
 	User getUserByUserId(String userId);
+
+	/**
+	 * ---导出专用
+	 * 
+	 * @param tableName
+	 * @param tableInfoIdName
+	 * @param replaceAll
+	 * @return
+	 */
+	List<Object> export_getAInfomationByTableId(String tableName, String tableInfoIdName, String replaceAll);
 
 }

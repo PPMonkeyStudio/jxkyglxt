@@ -54,15 +54,21 @@ public class TeacherDaoImpl implements TeacherDao {
 	}
 
 	@Override
+	public List<Object> export_getAInfomationByTableId(String tableName, String tableInfoIdName, String query_id) {
+		String hql = "from " + tableName + " where " + tableInfoIdName + " in (" + query_id + ")";
+		return getSession().createQuery(hql).list();
+	}
+
+	@Override
 	public Object getTableObjectByTableId(String tableName, String tableInfoIdName, String tableId) {
 		String hql = "from " + tableName + " where " + tableInfoIdName + "='" + tableId + "'";
 		return getSession().createQuery(hql).uniqueResult();
 	}
 
 	@Override
-	public List<Object[]> getTeacherInfoByUserId(String userId) {
+	public Object getTeacherInfoByUserId(String userId) {
 		String hql = "from TeacherInfo where userId = '" + userId + "'";
-		return getSession().createQuery(hql).list();
+		return getSession().createQuery(hql).uniqueResult();
 	}
 
 	@Override
@@ -72,7 +78,6 @@ public class TeacherDaoImpl implements TeacherDao {
 	}
 
 	@Override
-	@Transactional
 	public String addTableInfo(Object obj) {
 		try {
 			getSession().saveOrUpdate(obj);

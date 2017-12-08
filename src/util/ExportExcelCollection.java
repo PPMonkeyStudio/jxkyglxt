@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFRichTextString;
@@ -15,7 +16,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExportExcelCollection {
-	public static XSSFWorkbook exportExcel(String query_num, String[] headers, List<Map<String, String>> list) {
+	public static XSSFWorkbook exportExcel(String export_num, String[] headers, List<Map<String, String>> list) {
 		// 声明一个工作薄
 		XSSFWorkbook workbook = new XSSFWorkbook();
 		// 生成一个表格
@@ -26,17 +27,20 @@ public class ExportExcelCollection {
 		XSSFRow row = sheet.createRow(0);
 		// 表格头部的列数
 		int cell_num = 0;
-
-		if (query_num != null)
+		if (export_num != null) {
+			// 将所需要导出的属性索引（字符串）分割成数组
+			String[] arr_num = export_num.split(",");
+			// 循环
 			for (short i = 0; i < headers.length; i++) {
-				if (query_num.contains(i + "")) {
+				// 判断是否选中
+				if (ArrayUtils.contains(arr_num, i + "")) {
 					XSSFCell cell = row.createCell(cell_num);
 					XSSFRichTextString text = new XSSFRichTextString(headers[i]);
 					cell.setCellValue(text);
 					cell_num++;
 				}
 			}
-		else
+		} else
 			for (short i = 0; i < headers.length; i++) {
 				XSSFCell cell = row.createCell(i);
 				XSSFRichTextString text = new XSSFRichTextString(headers[i]);
@@ -53,6 +57,7 @@ public class ExportExcelCollection {
 			// 列数
 			short in = 0;
 			for (String str : map.keySet()) {
+
 				// 一行中创建列
 				XSSFCell cell = row.createCell(in);
 				try {
