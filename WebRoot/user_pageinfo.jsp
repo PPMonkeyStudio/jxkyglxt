@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	<body>
 
 		<!--管理员审核信息时右侧内容-->
-		<section class="content">
+		<section class="content" id="content">
 			<div class="row">
 				<div class="col-md-12">
 					<!--breadcrumbs start -->
@@ -86,9 +86,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
 					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-plus"></i>添加</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>导出</button>
+					<button class="btn btn-default btn-addon btn-sm export-info-button"><i class="fa fa-share-square"></i>导出</button>
 					<!--按条件筛选-->
 					<div id="search">
 						<label>按条件搜索：</label>
@@ -108,6 +107,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="teachingDate">任教时间</option>
 			<option value="workDate">参加工作时间</option>
 		</select>
+							<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
+		
 		</div>
 				</div>
 			</div>
@@ -119,15 +120,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="panel-body table-responsive" id="panel-body">
 				<form id="info-form">
 			
-				<table class="tab">
+				<table class="tab " id="userInfo-table">
 				<tr></tr>
 				<tr  class="title"><td>基本信息</td></tr>
 					<tr>
 						<!-- name="teacherInfo." -->
 						<td>工号：</td>
-						<td><input class="form-control table_infomation" type="text"></td>
+						<td><input name="teacherInfo.userId"
+						class="form-control table_infomation" type="text"></td>
 						<td>姓名:</td>
-						<td><input name="username"
+						<td><input name="teacherInfo.userName"
 							class="form-control table_infomation" type="text"></td>
 					</tr>
 					<tr>
@@ -415,9 +417,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
 					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-plus"></i>添加</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>导出</button>
+					<button class="btn btn-default btn-addon btn-sm export-info-button"><i class="fa fa-share-square"></i>导出</button>
 					<div id="search">
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
@@ -429,6 +430,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="awardLevel">获奖级别</option>
 			<option value="awardTime">获奖时间</option>
 		</select>
+							<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
+		
 		</div>
 					<!--<input type="text" class="form-control" />-->
 				</div>
@@ -488,9 +491,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
 					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-plus"></i>添加</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>导出</button>
+					<button class="btn btn-default btn-addon btn-sm export-info-button"><i class="fa fa-share-square"></i>导出</button>
 					<div id="search">
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
@@ -504,6 +506,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="worksDate">入选时间</option>
 			<option value="worksAuthority">主编（作者）</option>
 		</select>
+							<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
+		
 		</div>
 					<!--<input type="text" class="form-control" />-->
 				</div>
@@ -522,6 +526,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<th>主编</th>
 								<th>著作类别</th>
 								<th>入选情况</th>
+								<th>出版社</th>
 								<th>操作</th>
 							</tr>
 						</thead>
@@ -557,9 +562,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
 					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-plus"></i>添加</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>导出</button>
+					<button class="btn btn-default btn-addon btn-sm export-info-button"><i class="fa fa-share-square"></i>导出</button>
 					<div id="search">
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
@@ -575,6 +579,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="paperWordsNum">成果字数</option>
 			<option value="paperTime">发表时间</option>
 		</select>
+							<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
+		
 		</div>
 					<!--<input type="text" class="form-control" />-->
 				</div>
@@ -630,9 +636,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
 					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-plus"></i>添加</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>导出</button>
+					<button class="btn btn-default btn-addon btn-sm export-info-button"><i class="fa fa-share-square"></i>导出</button>
 					<div id="search">
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
@@ -644,6 +649,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="paperlisenceNum">授权号</option>
 			<option value="patentTime">获奖时间</option>
 		</select>
+							<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
+		
 		</div>
 					<!--<input type="text" class="form-control" />-->
 				</div>
@@ -697,9 +704,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
 					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-plus"></i>添加</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>导出</button>
+					<button class="btn btn-default btn-addon btn-sm export-info-button"><i class="fa fa-share-square"></i>导出</button>
 					<div id="search">
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
@@ -711,6 +717,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="projectTime">立项时间</option>
 			<option value="projectcheckTime">结题验收时间</option>
 		</select>
+							<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
+		
 		</div>
 					<!--<input type="text" class="form-control" />-->
 				</div>

@@ -50,6 +50,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<script type="text/javascript" src="js/patent/check_patent.js" ></script>
 			<script type="text/javascript" src="js/project/check_project.js" ></script>
 			<script type="text/javascript" src="js/works/check_works.js" ></script>
+			
+			<script type="text/javascript" src="js/info/user_info.js" ></script>
+			<script type="text/javascript" src="js/award/user_award.js" ></script>
+			<script type="text/javascript" src="js/paper/user_paper.js" ></script>
+			<script type="text/javascript" src="js/patent/user_patent.js" ></script>
+			<script type="text/javascript" src="js/project/user_project.js" ></script>
+			<script type="text/javascript" src="js/works/user_works.js" ></script>
 		<script type="text/javascript" src="js/main.js" ></script>
 		<script type="text/javascript" src="js/laydate.js" ></script>
 	

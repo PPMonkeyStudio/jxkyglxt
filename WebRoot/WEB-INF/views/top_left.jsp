@@ -157,8 +157,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<!-- sidebar menu: : style can be found in sidebar.less -->
 					<ul class="sidebar-menu">
 						<li>
-							<a href="#subPages" data-toggle="collapse" class="collapsed" aria-expanded="false"><i class="fa fa-user"></i> <span>教师信息</span> <i class="icon-submenu fa fa-angle-left"></i></a>
-							<div id="subPages" class="collapse" aria-expanded="false" style="height: 0px;">
+							<a href="#sub" data-toggle="collapse" class="collapsed" aria-expanded="false"><i class="fa fa-user"></i> <span>教师信息</span> <i class="icon-submenu fa fa-angle-left"></i></a>
+							<div id="sub" class="collapse" aria-expanded="false" style="height: 0px;">
 								<ul class="nav">
 									<li>
 										<a class="">信息审核</a>
@@ -170,7 +170,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 						</li>
 						</ul>
-						<!-- 
+						
 						<ul class="sidebar-menu">
 						<li>
 							<a href="#subPages" data-toggle="collapse" class="collapsed" aria-expanded="false"><i class="fa fa-user"></i> <span>教师信息</span> <i class="icon-submenu fa fa-angle-left"></i></a>
@@ -183,7 +183,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 						</li>
 						</ul>
- -->
+
 			</aside>
 
 			<aside class="right-side">
