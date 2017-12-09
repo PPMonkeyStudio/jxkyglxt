@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import com.teacherms.all.domain.*;
 import com.teacherms.satffinfomanage.dao.AdminDao;
+import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 
 public class AdminDaoImpl implements AdminDao {
 	private SessionFactory sessionFactory;
@@ -24,11 +25,10 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public List<Object[]> getAllStatusInfo(String selectinfo, String table, String time, String status,
-			String collegeName) {
-		String hql = "select " + selectinfo + " from " + table
+	public List<Object> getAllStatusInfo(String table, String time, String status, String collegeName) {
+		String hql = "select t,u from " + table
 				+ " t,User u,Department d where u.userId=t.userId and u.departmentId=d.departmentId and d.departmentName='"
-				+ collegeName + "' and t.dataStatus = '" + status + "'" + time + " order by t.createTime asc";
+				+ collegeName + "' and t.dataStatus = '" + status + "'" + time;
 		System.out.println(hql);
 		return getSession().createQuery(hql).list();
 	}
@@ -40,15 +40,16 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public List<Object[]> getInfoById(String tableName, String IdName, String tableId) {
-		String hql = "select u.userId,u.userName,t from " + tableName + " t,User u where t.userId=u.userId and t."
-				+ IdName + " = '" + tableId + "'";
-		return getSession().createQuery(hql).list();
+	public TableInfoAndUserVo getInfoById(String tableName, String IdName, String tableId) {
+		String hql = "select new com.teacherms.satffinfomanage.vo.TableInfoAndUserVo(t,u) from " + tableName
+				+ " t,User u where t.userId=u.userId and t." + IdName + " = '" + tableId + "'";
+		return (TableInfoAndUserVo) getSession().createQuery(hql).uniqueResult();
 	}
 
 	@Override
 	public Object getAInfomationByTableId(String tableName, String tableInfoIdName, String string) {
 		String hql = " from " + tableName + " where " + tableInfoIdName + " = '" + string + "'";
+		System.out.println(hql);
 		return getSession().createQuery(hql).uniqueResult();
 	}
 

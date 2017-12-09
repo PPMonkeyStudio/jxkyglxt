@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-	<div class="modal fade" id="award" tabindex="-1" role="dialog"
+	<div class="modal fade" id="award_modal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class=" modal-dialog">
 			<form id="info_form">
@@ -9,7 +9,7 @@
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">信息审核</h4>
+						<h4 class="modal-title" id="myModalLabel">奖励</h4>
 					</div>
 					<div class="modal-body">
 						<div id="main_body">
@@ -22,7 +22,8 @@
 									</tr>
 									<tr>
 										<td>姓名：</td>
-										<td><input class="form-control table_infomation"
+										<td><input value="" name="teacherAward.userName"
+										class="form-control table_infomation"
 											type="text"></td>
 									</tr>
 								</tbody>

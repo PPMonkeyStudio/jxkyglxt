@@ -11,6 +11,7 @@ import java.lang.reflect.Field;
 import com.teacherms.all.domain.*;
 import com.teacherms.satffinfomanage.dao.AdminDao;
 import com.teacherms.satffinfomanage.vo.AdminVo;
+import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 import com.teacherms.staffinfomanage.service.AdminService;
 
 import util.ExcelHead;
@@ -48,7 +49,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public PageVO<Object[]> getSpecifiedInformationByPaging(String tableName, String page, String time_interval,
+	public PageVO<Object> getSpecifiedInformationByPaging(String tableName, String page, String time_interval,
 			String dataState, String collegeName) {
 		// 每页记录数
 		int pageSize = 10;
@@ -57,7 +58,7 @@ public class AdminServiceImpl implements AdminService {
 		// 查询长度
 		int toindex = pageSize;
 		// 创建list
-		List<Object[]> list = new ArrayList<Object[]>();
+		List<Object> list = new ArrayList<Object>();
 		// 设置查询时间区间，如果time_interval为空则不执行
 		if (!"".equals(time_interval) && time_interval != null) {
 			time_interval = "and t.createTime between '" + time_interval.split(",")[0] + "' and '"
@@ -67,8 +68,7 @@ public class AdminServiceImpl implements AdminService {
 		System.out.println(time_interval);
 		if (!"".equals(tableName) && tableName != null) {
 			// 指定条件tableName查询，数据状态"20"
-			list = adminDao.getAllStatusInfo(getSqlToQueryByTableName(tableName), tableName, time_interval, dataState,
-					collegeName);
+			list = adminDao.getAllStatusInfo(tableName, time_interval, dataState, collegeName);
 		}
 		System.out.println(list.size());
 		// 总记录数
@@ -89,33 +89,25 @@ public class AdminServiceImpl implements AdminService {
 			toindex = totalSize - (pageIndex - 1) * pageSize;
 		}
 		// 设置VO内参数页码，每页记录数，总记录数
-		PageVO<Object[]> pageVO = new PageVO<Object[]>(pageIndex, pageSize, totalSize);
+		PageVO<Object> pageVO = new PageVO<Object>(pageIndex, pageSize, totalSize);
 		pageVO.setObjDatas(list.subList((pageIndex - 1) * pageSize, (pageIndex - 1) * pageSize + toindex));
 		return pageVO;
 	}
 
 	@Override
-	public List<Object[]> getTeacherTableInfoById(String tableName, String tableId) {
+	public TableInfoAndUserVo getTeacherTableInfoById(String tableName, String tableId) {
 		// list内部的元素为Object(字符串)+Object(字符串)+Object(对象)
-		List<Object[]> list = adminDao.getInfoById(tableName, getTableInfoIdName(tableName), tableId);
-		// 将最后的对象转化为数组
-		Class cla = list.get(0)[2].getClass();
-		try {
-			// 创建与对象属性值等长的数组
-			Object[] oo = new Object[cla.getDeclaredFields().length];
-			// 遍历每一个属性，并且获得属性值，存入数组中
-			for (int i = 0; i < oo.length; i++) {
-				Field f = cla.getDeclaredFields()[i];
-				f.setAccessible(true);
-				oo[i] = f.get(list.get(0)[2]);
-			}
-			// list中对象的位置转存为数组
-			list.get(0)[2] = oo;
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
+		TableInfoAndUserVo list = adminDao.getInfoById(tableName, getTableInfoIdName(tableName), tableId);
+		/*
+		 * // 将最后的对象转化为数组 Class cla = list.get(0)[2].getClass(); try { //
+		 * 创建与对象属性值等长的数组 Object[] oo = new
+		 * Object[cla.getDeclaredFields().length]; // 遍历每一个属性，并且获得属性值，存入数组中 for
+		 * (int i = 0; i < oo.length; i++) { Field f =
+		 * cla.getDeclaredFields()[i]; f.setAccessible(true); oo[i] =
+		 * f.get(list.get(0)[2]); } // list中对象的位置转存为数组 list.get(0)[2] = oo; }
+		 * catch (IllegalArgumentException e) { e.printStackTrace(); } catch
+		 * (IllegalAccessException e) { e.printStackTrace(); }
+		 */
 		// 返回List<Object[]>---list内部的元素为Object(字符串)+Object(字符串)+Object[]数组)
 		return list;
 	}
@@ -125,7 +117,7 @@ public class AdminServiceImpl implements AdminService {
 		// 创建List<Object>
 		List<Object> list_all = new ArrayList<Object>();
 		// 分割所要查询的信息表ID
-		String[] id = query_id.substring(0, query_id.length() - 1).split(",");
+		String[] id = query_id.substring(0, query_id.length()).split(",");
 		// 循环查询每一个所要查询的信息表，并记录到list_all中
 		for (int i = 0; i < id.length; i++) {
 			list_all.add(adminDao.getAInfomationByTableId(tableName, getTableInfoIdName(tableName), id[i]));
@@ -329,22 +321,28 @@ public class AdminServiceImpl implements AdminService {
 	private String getSqlToQueryByTableName(String tableName) {
 		String str = null;
 		if (("TeacherAward").equals(tableName)) {
-			str = "t.userId,u.userName,t.awardName,t.awardType,t.awardLevel,t.awardCertificationNo,t.createTime,t.awardId";
+			//
+			str = "t.achievementName,t.awardName,t.awardUserNames,t.awardType,t.awardClass,t.awardDate,t.awardId";
 		}
 		if (("TeacherInfo").equals(tableName)) {
-			str = "t.userId,u.userName,t.professionalTitle,t.teacherCertificateNo,t.teachingType,t.createTime,t.teacherInfoId";
+
+			str = "t.userId,u.userName,t.employeeType,t.jobStatue,t.workDate,t.teacherInfoId";
 		}
 		if (("TeacherPaper").equals(tableName)) {
-			str = "t.userId,u.userName,t.paperName,t.paperType,t.createTime,t.paperId";
+			//
+			str = "t.paperName,t.authorUserNames,t.paperType,t.includedSituation,t.publishTime,t.paperId";
 		}
 		if (("TeacherPatent").equals(tableName)) {
-			str = "t.userId,u.userName,t.patentName,t.patentType,t.authorizationNo,t.createTime,t.patentId";
+			//
+			str = "t.patentName,t.authorUserNames,t.patentType,t.authorizationNo,t.approvedDate,t.patentId";
 		}
 		if (("TeacherProject").equals(tableName)) {
-			str = "t.userId,u.userName,t.projectName,t.projectSource,t.projectNo,t.createTime,t.projectId";
+			//
+			str = "t.projectName,t.projectSource,t.projectUserNames,t.level,t.endUpDatet,t.projectId";
 		}
 		if (("TeacherWorks").equals(tableName)) {
-			str = "t.userId,u.userName,t.worksName,t.worksType,t.selectedSituation,t.createTime,t.worksId";
+			//
+			str = "t.worksName,t.worksType,t.selectedSituation,t.publishTime,t.worksId";
 		}
 		return str;
 	}

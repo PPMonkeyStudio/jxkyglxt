@@ -10,7 +10,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     
     <title>My JSP 'MyJsp.jsp' starting page</title>
-    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -24,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
 		<!--管理员查看信息时右侧内容-->
-		<section class="content">
+		<section class="content" id="content">
 			<div class="row">
 				<div class="col-md-12">
 					<!--breadcrumbs start -->
@@ -32,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<li>
 							<a><i class="fa fa-home"></i> 首页</a>
 						</li>
-						<li class="active">信息查看</li>
+						<li class="active">信息管理</li>
 					</ul>
 					<!--breadcrumbs end -->
 				</div>
@@ -85,11 +84,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
 					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-plus"></i>添加用户</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>用户信息导出</button>
+					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>用户信息导出</button>
 					<!--按条件筛选-->
 					<div id="search">
+					<form name="search_group">
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control ">
 			<option value="">请选择</option>
@@ -107,17 +106,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="teachingDate">任教时间</option>
 			<option value="workDate">参加工作时间</option>
 		</select>
+			<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
+		</form>
 		</div>
 					<!--<input type="text" class="form-control" />-->
 				</div>
 			</div>
 			<!--查询存放信息的表格-->
 			<section class="panel">
-				<header class="panel-heading">
+				<header class="panel-heading second-panel-heading">
 					用户信息
 				</header>
 				<div class="panel-body table-responsive">
-					<table class="table table-hover">
+					<table class="table table-hover" id="info_table">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -126,21 +127,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<th>职工类型</th>
 								<th>职工状态</th>
 								<th>状态</th>
+								<th>操作</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>1001</td>
-								<td>李希勇</td>
-								<td>在编</td>
-								<td>在职</td>
-								<td>
-									<button class="btn btn-default btn-xs" title="解除固化"><i class="fa fa-chain-broken"></i></button>
-									<button class="btn btn-default btn-xs" title="修改"><i class="fa fa-pencil-square-o" ></i></button>
-									<button class="btn btn-default btn-xs" title="设置"><i class="fa fa-cog" ></i></button>
-								</td>
-							</tr>
+							
 						</tbody>
 					</table>
 					<div id="page">
@@ -161,9 +152,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>奖励信息导出</button>
+					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>奖励信息导出</button>
 					<div id="search">
+					<form name="search_group">
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
 			<option value="">请选择</option>
@@ -174,17 +165,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="awardLevel">获奖级别</option>
 			<option value="awardTime">获奖时间</option>
 		</select>
+			<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
+		
+		</form>
 		</div>
 					<!--<input type="text" class="form-control" />-->
 				</div>
 			</div>
 			<!--查询存放信息的表格-->
 			<section class="panel">
-				<header class="panel-heading">
+				<header class="panel-heading second-panel-heading">
 					奖励信息
 				</header>
 				<div class="panel-body table-responsive">
-					<table class="table table-hover">
+					<table class="table table-hover" id="info_table">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -199,19 +193,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Face</td>
-								<td>Mark</td>
-								<td>李希勇</td>
-								<td>教学成果</td>
-								<td>国家自然科学</td>
-								<td>一等奖</td>
-								<td>国家级</td>
-								<td><button class="btn btn-default btn-xs" title="解除固化"><i class="fa fa-chain-broken"></i></button>
-									<button class="btn btn-default btn-xs" title="查看"><i class="fa fa-search-plus"  aria-hidden="true"></i></button>
-								</td>
-							</tr>   
+							
 						</tbody>
 					</table>
 					<div id="page">
@@ -232,9 +214,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>著作信息导出</button>
+					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>著作信息导出</button>
 					<div id="search">
+					<form name="search_group">
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
 			<option value="">请选择</option>
@@ -247,17 +229,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="worksDate">入选时间</option>
 			<option value="worksAuthority">主编（作者）</option>
 		</select>
+							<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
+		
+		</form>
 		</div>
 					<!--<input type="text" class="form-control" />-->
 				</div>
 			</div>
 			<!--查询存放信息的表格-->
 			<section class="panel">
-				<header class="panel-heading">
+				<header class="panel-heading second-panel-heading">
 					著作信息
 				</header>
 				<div class="panel-body table-responsive">
-					<table class="table table-hover">
+					<table class="table table-hover" id="info_table">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -265,20 +250,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<th>主编</th>
 								<th>著作类别</th>
 								<th>入选情况</th>
+								<th>出版社</th>
 								<th>操作</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Face</td>
-								<td>李希勇</td>
-								<td>专著</td>
-								<td>国家级规划教材</td>
-								<td><button class="btn btn-default btn-xs" title="解除固化"><i class="fa fa-chain-broken"></i></button>
-									<button class="btn btn-default btn-xs" title="查看"><i class="fa fa-search-plus"  aria-hidden="true"></i></button>
-								</td>
-							</tr>
+							
 						</tbody>
 					</table>
 					<div id="page">
@@ -299,9 +276,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>论文信息导出</button>
+					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>论文信息导出</button>
 					<div id="search">
+					<form name="search_group">
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
 			<option value="">请选择</option>
@@ -316,17 +293,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="paperWordsNum">成果字数</option>
 			<option value="paperTime">发表时间</option>
 		</select>
+							<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
+		
+		</form>
 		</div>
 					<!--<input type="text" class="form-control" />-->
 				</div>
 			</div>
 			<!--查询存放信息的表格-->
 			<section class="panel">
-				<header class="panel-heading">
+				<header class="panel-heading second-panel-heading">
 					论文信息
 				</header>
 				<div class="panel-body table-responsive">
-					<table class="table table-hover">
+					<table class="table table-hover" id="info_table">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -339,17 +319,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Face</td>
-								<td>李希勇</td>
-								<td>科研</td>
-								<td>SCI</td>
-								<td>2017-2-2</td>
-								<td><button class="btn btn-default btn-xs" title="解除固化"><i class="fa fa-chain-broken"></i></button>
-									<button class="btn btn-default btn-xs" title="查看"><i class="fa fa-search-plus"  aria-hidden="true"></i></button>
-								</td>
-							</tr>
+							
 						</tbody>
 					</table>
 					<div id="page">
@@ -370,9 +340,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>专利信息导出</button>
+					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>专利信息导出</button>
 					<div id="search">
+					<form name="search_group">
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
 			<option value="">请选择</option>
@@ -383,17 +353,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="paperlisenceNum">授权号</option>
 			<option value="patentTime">获奖时间</option>
 		</select>
+							<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
+		
+		</form>
 		</div>
 					<!--<input type="text" class="form-control" />-->
 				</div>
 			</div>
 			<!--查询存放信息的表格-->
-			<section class="panel">
-				<header class="panel-heading">
+			<section class="panel"> 
+				<header class="panel-heading second-panel-heading">
 					专利信息
 				</header>
 				<div class="panel-body table-responsive">
-					<table class="table table-hover">
+					<table class="table table-hover" id="info_table">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -405,16 +378,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Face</td>
-								<td>李希勇</td>
-								<td>专利</td>
-								<td>122455</td>
-								<td><button class="btn btn-default btn-xs" title="解除固化"><i class="fa fa-chain-broken"></i></button>
-									<button class="btn btn-default btn-xs" title="查看"><i class="fa fa-search-plus"  aria-hidden="true"></i></button>
-								</td>
-							</tr>
+							
 						</tbody>
 					</table>
 					<div id="page">
@@ -435,9 +399,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>专利信息导出</button>
+					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>专利信息导出</button>
 					<div id="search">
+					<form name="search_group"action="">
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
 			<option value="">请选择</option>
@@ -448,17 +412,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="projectTime">立项时间</option>
 			<option value="projectcheckTime">结题验收时间</option>
 		</select>
+							<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
+		
+		</form>
 		</div>
 					<!--<input type="text" class="form-control" />-->
 				</div>
 			</div>
 			<!--查询存放信息的表格-->
 			<section class="panel">
-				<header class="panel-heading">
+				<header class="panel-heading second-panel-heading">
 					课题(项目)信息
 				</header>
 				<div class="panel-body table-responsive">
-					<table class="table table-hover">
+					<table class="table table-hover" id="info_table">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -470,16 +437,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>李希勇</td>
-								<td>Face</td>
-								<td>专利</td>
-								<td>122455</td>
-								<td><button class="btn btn-default btn-xs" title="解除固化"><i class="fa fa-chain-broken"></i></button>
-									<button class="btn btn-default btn-xs" title="查看"><i class="fa fa-search-plus"  aria-hidden="true"></i></button>
-								</td>
-							</tr>
+							
 						</tbody>
 					</table>
 					<div id="page">

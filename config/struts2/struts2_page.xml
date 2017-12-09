@@ -7,6 +7,7 @@
 		<action name="*" class="com.teacherms.system.action.PageAction"
 			method="{1}">
 			<result name="page_index">/WEB-INF/views/index.jsp</result>
+			<result name="page_nav">/WEB-INF/views/top_left.jsp</result>
 
 			<result name="page_teacher_award">/WEB-INF/views/teacher_award.jsp</result>
 			<result name="page_teacher_works">/WEB-INF/views/teacher_works.jsp</result>

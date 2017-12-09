@@ -3,8 +3,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<!-- 测试注入action -->
+
+	<bean id="test" class="util.JunitTest" scope="prototype">
+		<property name="teacherService" ref="teacherService"></property>
+	</bean>
+
 	<!-- Aciton注入servcie -->
-	<bean id="adminAction" class="com.teacherms.satffinfomanage.action.TeacherAction"
+	<bean id="teacherAction" class="com.teacherms.satffinfomanage.action.TeacherAction"
 		scope="prototype">
 		<property name="teacherService" ref="teacherService"></property>
 	</bean>

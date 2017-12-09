@@ -26,73 +26,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 		<link href="css/style.css" rel="stylesheet" type="text/css" />
 
-		<link rel="stylesheet" href="css/index.css" />
-		
-		<link rel="stylesheet" href="css/com.css" />
-		<link rel="stylesheet" href="css/need/laydate.css" />
-		<script type="text/javascript" src="js/jquery-3.1.1.min.js" ></script>
-		<script type="text/javascript" src="js/com.js" ></script>
-		<script type="text/javascript" src="js/laydate.js" ></script>
-		
-		<style>
-				.sidebar .sidebar-menu>li>a[data-toggle="collapse"]:hover {
-				background-color: #425164;
-			}
+		<link rel="stylesheet" href="css/top_left.css" />
 			
-			.sidebar .sidebar-menu>li>a[data-toggle="collapse"]:hover,
-			.sidebar .sidebar-menu>li>a[data-toggle="collapse"]:focus {
-				background-color: #425164;
-			}
-			
-			.sidebar .sidebar-menu>li>div>ul>li>a:hover {
-				background-color: #425164;
-			}
-			
-			.sidebar .sidebar-menu .nav>li>a {
-				padding-left: 60px;
-				padding-top: 10px;
-				padding-bottom: 10px;
-			}
-			
-			.sidebar .sidebar-menu>li>a[data-toggle="collapse"] .icon-submenu {
-				display: inline-block;
-				vertical-align: middle;
-				*vertical-align: auto;
-				*zoom: 1;
-				*display: inline;
-				-webkit-transition: all 0.2s ease-out;
-				-moz-transition: all 0.2s ease-out;
-				-ms-transition: all 0.2s ease-out;
-				-o-transition: all 0.2s ease-out;
-				transition: all 0.2s ease-out;
-				float: right;
-				position: relative;
-				top: 5px;
-				line-height: 1.1;
-				-moz-transform: rotate(-90deg);
-				-ms-transform: rotate(-90deg);
-				-webkit-transform: rotate(-90deg);
-				transform: rotate(-90deg);
-			}
-			
-			.sidebar .sidebar-menu>li>a[data-toggle="collapse"] .icon-submenu {
-				-moz-transform: rotate(0deg);
-				-ms-transform: rotate(0deg);
-				-webkit-transform: rotate(0deg);
-				transform: rotate(0deg);
-			}
-			#search{
-				margin-top:10px;
-			}
-		</style>
-		
+  <jsp:include page="/modal/addInfo/award_modal.html" flush="true"></jsp:include>
+	<jsp:include page="/modal/addInfo/info_modal.html" flush="true"></jsp:include>
+	<jsp:include page="/modal/addInfo/paper_modal.html" flush="true"></jsp:include>
+	<jsp:include page="/modal/addInfo/works_modal.html" flush="true"></jsp:include>
+	<jsp:include page="/modal/addInfo/project_modal.html" flush="true"></jsp:include>
+	<jsp:include page="/modal/addInfo/patent_modal.html" flush="true"></jsp:include> 
+	<jsp:include page="/modal/addInfo/ user_info_modal.html" flush="true"></jsp:include> 
+	<jsp:include page="/modal/exportInfo/info_modal.html" flush="true"></jsp:include>
+	<jsp:include page="/modal/exportInfo/award_modal.html" flush="true"></jsp:include>
+	<jsp:include page="/modal/exportInfo/paper_modal.html" flush="true"></jsp:include>
+	<jsp:include page="/modal/exportInfo/patent_modal.html" flush="true"></jsp:include>
+	<jsp:include page="/modal/exportInfo/project_modal.html" flush="true"></jsp:include>
+	<jsp:include page="/modal/exportInfo/works_modal.html" flush="true"></jsp:include>
   </head>
   
-  	<body class="skin-black">
+ <body class="skin-black">
 		<!-- header logo: style can be found in header.less -->
 		<header class="header">
 			<a class="logo">
-				教学科研管理系统
+				本科数据管理系统
 			</a>
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top" role="navigation">
@@ -145,7 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<li class="dropdown user user-menu">
 							<a class="dropdown-toggle" data-toggle="dropdown">
 								<i class="fa fa-user"></i>
-								<span>Teacher <i class="caret"></i></span>
+								<span>Jane Doe <i class="caret"></i></span>
 							</a>
 							<ul class="dropdown-menu dropdown-custom dropdown-menu-right">
 								<li class="dropdown-header text-center">Account</li>
@@ -156,9 +111,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</li>
 								<li class="divider"></li>
 								<li>
-									<!--<a>
+									<a>
 										<i class="fa fa-magnet fa-fw pull-right" aria-hidden="true"></i> 导入信息
-									</a>-->
+									</a>
 									<a data-toggle="modal" href="#modal-user-settings">
 										<i class="fa fa-cog fa-fw pull-right"></i> 修改信息
 									</a>
@@ -184,7 +139,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<img src="img/26115.jpg" class="img-circle" alt="User Image" />
 						</div>
 						<div class="pull-left info">
-							<p>Hello, Teacher</p>
+							<p>Hello, Admin</p>
 
 							<a><i class="fa fa-circle text-success"></i> Online</a>
 						</div>
@@ -201,38 +156,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<!-- /.search form -->
 					<!-- sidebar menu: : style can be found in sidebar.less -->
 					<ul class="sidebar-menu">
-
+						<li>
+							<a href="#sub" data-toggle="collapse" class="collapsed" aria-expanded="false"><i class="fa fa-user"></i> <span>教师信息</span> <i class="icon-submenu fa fa-angle-left"></i></a>
+							<div id="sub" class="collapse" aria-expanded="false" style="height: 0px;">
+								<ul class="nav">
+									<li>
+										<a class="">信息审核</a>
+									</li>
+									<li>
+										<a class="">信息管理</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						</ul>
+						
+						<ul class="sidebar-menu">
 						<li>
 							<a href="#subPages" data-toggle="collapse" class="collapsed" aria-expanded="false"><i class="fa fa-user"></i> <span>教师信息</span> <i class="icon-submenu fa fa-angle-left"></i></a>
 							<div id="subPages" class="collapse" aria-expanded="false" style="height: 0px;">
 								<ul class="nav">
 									<li>
-										<a href="" class="">首页</a>
-									</li>
-									<li>
-										<a href="" class="">信息管理</a>
+										<a class="">信息查看</a>
 									</li>
 								</ul>
 							</div>
 						</li>
+						</ul>
 
-						<!--<li class="active">
-							<a href="index.html">
-								<i class="fa fa-user"></i> <span>教师信息</span>
-							</a>
-						</li>-->
-						<!--<li>
-							<a href="general.html">
-								<i class="fa fa-gavel"></i> <span>General</span>
-							</a>
-						</li>-->
-					</ul>
-				</section>
-				<!-- /.sidebar -->
 			</aside>
 
 			<aside class="right-side">
-				<section class="content">
+				<section class="content" >
 					<div class="row">
 						<div class="col-md-12">
 							<!--breadcrumbs start -->
@@ -243,54 +198,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<!--<li>
 									<a >Dashboard</a>
 								</li>-->
-								<li class="active">信息</li>
+								<!--<li class="active">信息查看</li>-->
 							</ul>
-							<!--breadcrumbs end -->
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<!--breadcrumbs start -->
-							<section class="panel general">
-								<header class="panel-heading tab-bg-dark-navy-blue">
-									<ul class="nav nav-tabs">
-										<li>
-											<a data-toggle="tab" href="#user">教师信息</a>
-										</li>
-										<li class="">
-											<a data-toggle="tab" href="#award">奖励</a>
-										</li>
-										<li class="">
-											<a data-toggle="tab" href="#works">著作</a>
-										</li>
-										<li class="">
-											<a data-toggle="tab" href="#paper">论文</a>
-										</li>
-										<li class="">
-											<a data-toggle="tab" href="#patent">专利</a>
-										</li>
-										<li class="">
-											<a data-toggle="tab" href="#project">项目(课题)</a>
-										</li>
-									</ul>
-								</header>
-								<div class="panel-body">
-									<div class="tab-content">
-										<div id="user" class="tab-pane active">
-										</div>
-										<div id="award" class="tab-pane">
-										</div>
-										<div id="works" class="tab-pane">
-										</div>
-										<div id="paper" class="tab-pane">
-										</div>
-										<div id="patent" class="tab-pane">
-										</div>
-										<div id="project" class="tab-pane">
-										</div>
-									</div>
-								</div>
-							</section>
 							<!--breadcrumbs end -->
 						</div>
 					</div>
@@ -299,43 +208,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!-- /.right-side -->
 		</div>
 		<!-- ./wrapper -->
-
-		<!-- jQuery -->
-		<script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
-		<!-- Bootstrap -->
-		<script src="js/bootstrap.min.js" type="text/javascript"></script>
 		<!-- Director App -->
 		<script src="js/app.js" type="text/javascript"></script>
-		<script type="text/javascript">
-			$('.nav-tabs li a').click(function() {
-				if($(this).parent('li').attr('class') == 'active') return;
-				var a_href = $(this).attr("href");
-				switch(a_href) {
-					case '#user':
-						$('#user').load('user_pageinfo.jsp #user_table_audit' );
-						break;
-					case '#award':
-						$('#award').load('user_pageinfo.jsp #award_table_audit');
-						break;
-					case '#works':
-						$('#works').load('user_pageinfo.jsp #works_table_audit');
-						break;
-					case '#paper':
-						$('#paper').load('user_pageinfo.jsp #paper_table_audit');
-						break;
-					case '#patent':
-						$('#patent').load('user_pageinfo.jsp #patent_table_audit');
-						break;
-					case '#project':
-						$('#project').load('user_pageinfo.jsp #project_table_audit');
-						break;
-					default:
-						break;
-				}
-			})
-			
-
-		</script>
-
+			<script src="js/main_index.js" type="text/javascript"></script>
 	</body>
 </html>

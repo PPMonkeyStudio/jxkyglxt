@@ -10,10 +10,9 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>My JSP 'login.jsp' starting page</title>
+<title>登录</title>
 
 <link rel="stylesheet" href="<%=basePath%>/css/bootstrap.min.css" />
-<link rel="stylesheet" href="<%=basePath%>/css/teacher_award.css" />
 <link rel="stylesheet" href="<%=basePath%>/css/login.css" />
 </head>
 <body>
@@ -59,7 +58,7 @@
 				dataType : "json",
 				success : function(xhr_data) {
 					if (xhr_data.result == "success") {
-						location.href = "Page/page_index";
+						location.href = "main_index.jsp";
 					}
 				},
 				error : function() {}

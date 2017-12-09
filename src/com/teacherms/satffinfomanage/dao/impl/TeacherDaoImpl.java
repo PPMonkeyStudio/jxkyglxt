@@ -22,10 +22,10 @@ public class TeacherDaoImpl implements TeacherDao {
 	}
 
 	@Override
-	public List<Object[]> getTableInfo(String selectinfo, String time_interval, String tableName, String tableUserIds,
-			String userid, int begin, int toindex) {
-		String hql = "select " + selectinfo + " from " + tableName + " t where t." + tableUserIds + " like '%" + userid
-				+ "%' and t.dataStatus in (10,40) " + time_interval + " order by t.createTime asc";
+	public List<Object> getTableInfo(String time_interval, String tableName, String tableUserIds, String userid,
+			int begin, int toindex) {
+		String hql = "select t from " + tableName + " t,User u where t." + tableUserIds + " like '%" + userid
+				+ "%' and u.userId =" + userid + time_interval + " order by t.createTime asc";
 		System.out.println(hql);
 		return getSession().createQuery(hql).setFirstResult(begin).setMaxResults(toindex).list();
 	}

@@ -3,6 +3,7 @@ package com.teacherms.satffinfomanage.dao;
 import java.util.Collection;
 import java.util.List;
 import com.teacherms.all.domain.*;
+import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 
 public interface AdminDao {
 
@@ -13,7 +14,7 @@ public interface AdminDao {
 	 *            指定的状态
 	 * @return 对象list集合
 	 */
-	List<Object[]> getAllStatusInfo(String sql, String table, String time, String status, String collegeName);
+	List<Object> getAllStatusInfo(String table, String time, String status, String collegeName);
 
 	/**
 	 * ---通过ID获取用户信息
@@ -33,7 +34,7 @@ public interface AdminDao {
 	 *            数据的ID
 	 * @return 信息记录对象
 	 */
-	List<Object[]> getInfoById(String tableName, String IdName, String tableId);
+	TableInfoAndUserVo getInfoById(String tableName, String IdName, String tableId);
 
 	/**
 	 * 更新对象

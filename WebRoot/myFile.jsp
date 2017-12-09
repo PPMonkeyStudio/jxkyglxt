@@ -19,16 +19,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js" ></script>
   </head>
   
-  <body>
+  <body onload="getinfo()">
   <div id="one">
-  
+ <table calss="table"></table>
   </div>
   
   <script>
-  
+  function getinfo() {
+	  var data = {
+				tableName : "TeacherAward",
+				dataState : "20",
+				page : 1,
+				time_interval : "",
+				tableId : "",
+			}
+		//清楚原来的数据
+		$.ajax({
+			url : "/teacherms/Admin/admin_getSpecifiedInformationByPaging",
+			type : "post",
+			async : false,
+			timeout : 3000,
+			data : data,
+			dataType : "json",
+			success : function(xhr_data) {
+				alert(xhr_data);
+				/*  for (var i = 0; i < xhr_data.ObjDatas.length; i++) {
+					var str = "<tr>";
+					for (var j = 0; j < xhr_data.ObjDatas[i].length; j++) {
+						if (j == xhr_data.ObjDatas[i].length - 1) {
+							str += '<td><input type="hidden" value="' + xhr_data.ObjDatas[i][j] + '" ><img class="checkimg" src="/teacherms/img/review6.png" /></td>'
+							continue;
+						}
+						str += "<td>" + xhr_data.ObjDatas[i][j] + "</td>";
+						alert(str);
+					}
+					
+					str += '</tr>';
+					$('.table').children('tbody').append(str); 
+				}  */
+			},
+			error : function() {}
+		});
+	}
+
   </script>
    </body>
 </html>

@@ -30,6 +30,7 @@ import com.teacherms.all.domain.TeacherProject;
 import com.teacherms.all.domain.TeacherWorks;
 import com.teacherms.all.domain.User;
 import com.teacherms.satffinfomanage.vo.AdminVo;
+import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 import com.teacherms.staffinfomanage.service.AdminService;
 
 import util.ExcelHead;
@@ -41,14 +42,17 @@ import util.PageVO;
 public class AdminAction extends ActionSupport {
 	private AdminService adminService;
 
-	private String query_name;// 导出execl表的属性条件,逗号隔开
-	private String query_id;// 导出execl表的ID字段条件,逗号隔开
-	private String time_interval;// 时间区间
+	// 导出 
+	private String export_name;// 导出execl表的属性条件,逗号隔开
+	private String export_id;// 导出execl表的ID字段条件,逗号隔开
 
+	// 附件
 	private File file; // execl文件
 	private String fileFileName; // file+FileName为固定写法,否则取不到
 	private String fileContentType; // file+ContentType为固定写法
 
+	// 信息筛选查询
+	private String time_interval;// 时间区间,逗号隔开
 	private String page;// 分页
 	private String tableName;// 查询的表名
 	private String tableId; // 查询表的ID
@@ -75,8 +79,9 @@ public class AdminAction extends ActionSupport {
 	// 分页查询获取指定---未审核or固化---信息（给指定参数）并进行时间排序（属于自己学院的信息）
 	public void getSpecifiedInformationByPaging() {
 		try {
-			PageVO<Object[]> list = adminService.getSpecifiedInformationByPaging(tableName, page == null ? "1" : page,
+			PageVO<Object> list = adminService.getSpecifiedInformationByPaging(tableName, page == null ? "1" : page,
 					time_interval, dataState, getSecondaryCollegeInfo("name"));
+			System.out.println(new Gson().toJson(list));
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(list));
 		} catch (IOException e) {
@@ -87,7 +92,7 @@ public class AdminAction extends ActionSupport {
 	// 通过ID获取单条信息
 	public void getTeacherTableInfoById() {
 		try {
-			List<Object[]> list = adminService.getTeacherTableInfoById(tableName, tableId);
+			TableInfoAndUserVo list = adminService.getTeacherTableInfoById(tableName, tableId);
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(list));
 		} catch (IOException e) {
@@ -148,7 +153,7 @@ public class AdminAction extends ActionSupport {
 
 	// 导出信息excel表 用MAP集合
 	public void ExportExcelCollection() {
-		XSSFWorkbook workbook = adminService.getExcel(query_name, tableName, query_id);
+		XSSFWorkbook workbook = adminService.getExcel(export_name, tableName, export_id);
 		OutputStream out = null;
 		try {
 			HttpServletResponse response = ServletActionContext.getResponse();
@@ -249,14 +254,6 @@ public class AdminAction extends ActionSupport {
 		this.teacherInfo = teacherInfo;
 	}
 
-	public void setQuery_name(String query_name) {
-		this.query_name = query_name;
-	}
-
-	public void setQuery_id(String query_id) {
-		this.query_id = query_id;
-	}
-
 	public void setDataState(String dataState) {
 		this.dataState = dataState;
 	}
@@ -303,14 +300,6 @@ public class AdminAction extends ActionSupport {
 
 	public AdminService getAdminService() {
 		return adminService;
-	}
-
-	public String getQuery_name() {
-		return query_name;
-	}
-
-	public String getQuery_id() {
-		return query_id;
 	}
 
 	public String getTime_interval() {
@@ -371,6 +360,22 @@ public class AdminAction extends ActionSupport {
 
 	public User getUser() {
 		return user;
+	}
+
+	public String getExport_name() {
+		return export_name;
+	}
+
+	public void setExport_name(String export_name) {
+		this.export_name = export_name;
+	}
+
+	public String getExport_id() {
+		return export_id;
+	}
+
+	public void setExport_id(String export_id) {
+		this.export_id = export_id;
 	}
 
 }
