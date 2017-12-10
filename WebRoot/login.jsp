@@ -29,7 +29,7 @@
 							placeholder="请输入用户名">
 					</div>
 					<div class="group-form">
-						<input class="form-control" type="text" name="password"
+						<input class="form-control" type="password" name="password"
 							placeholder="请输入密码">
 					</div>
 					<div class="group-form">

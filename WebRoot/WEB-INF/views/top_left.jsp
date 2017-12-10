@@ -34,7 +34,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<jsp:include page="/modal/addInfo/works_modal.html" flush="true"></jsp:include>
 	<jsp:include page="/modal/addInfo/project_modal.html" flush="true"></jsp:include>
 	<jsp:include page="/modal/addInfo/patent_modal.html" flush="true"></jsp:include> 
-	<jsp:include page="/modal/addInfo/ user_info_modal.html" flush="true"></jsp:include> 
+	<jsp:include page="/modal/addInfo/user_info_modal.html" flush="true"></jsp:include> 
+	<jsp:include page="/modal/addInfo/user_add.html" flush="true"></jsp:include> 
+	
 	<jsp:include page="/modal/exportInfo/info_modal.html" flush="true"></jsp:include>
 	<jsp:include page="/modal/exportInfo/award_modal.html" flush="true"></jsp:include>
 	<jsp:include page="/modal/exportInfo/paper_modal.html" flush="true"></jsp:include>
