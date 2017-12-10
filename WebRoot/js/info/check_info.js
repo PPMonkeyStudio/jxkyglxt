@@ -107,5 +107,10 @@ function checkInfo(){
 		});
 		
 	});
-
+	$('.add_button').unbind().on("click",function(){
+		$('#info_modal').modal({
+			keyboard : true
+		});
+		
+	})
 }

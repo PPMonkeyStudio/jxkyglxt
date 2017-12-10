@@ -100,7 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<li class="dropdown user user-menu">
 							<a class="dropdown-toggle" data-toggle="dropdown">
 								<i class="fa fa-user"></i>
-								<span>Jane Doe <i class="caret"></i></span>
+								<span>Admin <i class="caret"></i></span>
 							</a>
 							<ul class="dropdown-menu dropdown-custom dropdown-menu-right">
 								<li class="dropdown-header text-center">Account</li>
@@ -136,7 +136,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<!-- Sidebar user panel -->
 					<div class="user-panel">
 						<div class="pull-left image">
-							<img src="img/26115.jpg" class="img-circle" alt="User Image" />
+							<img src="img/login.jpg" class="img-circle" alt="User Image" />
 						</div>
 						<div class="pull-left info">
 							<p>Hello, Admin</p>

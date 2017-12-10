@@ -43,7 +43,6 @@ function checkAward(){
 				{tableId:$(this).siblings().val(),tableName:"TeacherAward"},function(xhr){
 
 					var inf = $('.table_infomation');
-					
 				  $("#award_modal input,select").each(function(){
 					 var na= $(this).attr("name").split(".")[1];
 				 if(na=="userId"){
@@ -54,6 +53,7 @@ function checkAward(){
 					 }
 				 else $(this).val(xhr.object[na]);
 				  })
+				  
 				},"json");
 		$(".review-info").remove();
 	})
@@ -101,5 +101,6 @@ function checkAward(){
 		});
 		
 	});
+	
 	
 }

@@ -124,47 +124,47 @@ $(function(){
 		}
 		 if(($(this).text())=="信息查看"){
 
-				$('.right-side').load('check_pageinfo.jsp #content',selectSeacher(),function(){
+				$('.right-side').load('user_pageinfo.jsp #content',selectSeacher(),function(){
 					$('.nav-tabs li a').unbind().click(function(){
 						if($(this).parent('li').attr('class') == 'active') return;
 						var a_href = $(this).attr("href");
 						switch(a_href){
 						case '#user':
-							$('#user').load('user_pageinfo.jsp  #user_table_audit',function(){
+							$('#user').load('user_pageinfo.jsp  #user_info_table_audit',function(xhr){
 								data.tableName="TeacherInfo";
 								data.dataState="40";
-								userInfo();
 							});
+							userInfo();
 							break;
 						case '#award':
-							$('#award').load('user_pageinfo.jsp #award_table_audit',function(){
+							$('#award').load('user_pageinfo.jsp #user_award_table_audit',function(){
 								data.tableName="TeacherAward";
 								data.dataState="20";
 								userAward();
 							});
 							break;
 						case '#works':
-							$('#works').load('user_pageinfo.jsp #works_table_audit',function(){
+							$('#works').load('user_pageinfo.jsp #user_works_table_audit',function(){
 								data.tableName="TeacherWorks";
 								data.dataState="20";
 								userWorks();
 							});
 							break;
 						case '#paper':
-							$('#paper').load('user_pageinfo.jsp #paper_table_audit',function(){
+							$('#paper').load('user_pageinfo.jsp #user_paper_table_audit',function(){
 								data.tableName="TeacherPaper";
 								data.dataState="20";
 								userPaper();
 							});
 							break;
 						case '#patent':
-							$('#patent').load('user_pageinfo.jsp #patent_table_audit',function(){
+							$('#patent').load('user_pageinfo.jsp #user_patent_table_audit',function(){
 								data.tableName="TeacherPatent";
 								userPatent();
 							});
 							break;
 						case '#project':
-							$('#project').load('user_pageinfo.jsp #project_table_audit',function(){
+							$('#project').load('user_pageinfo.jsp #user_project_table_audit',function(){
 								data.tableName="TeacherProject";
 								data.dataState="20";
 								userProject();
