@@ -133,8 +133,9 @@ $(function(){
 							$('#user').load('user_pageinfo.jsp  #user_info_table_audit',function(xhr){
 								data.tableName="TeacherInfo";
 								data.dataState="40";
+								userInfo();
 							});
-							userInfo();
+							
 							break;
 						case '#award':
 							$('#award').load('user_pageinfo.jsp #user_award_table_audit',function(){
