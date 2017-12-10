@@ -108,9 +108,9 @@ function checkInfo(){
 		});
 	});
 	$('.add_button').unbind().on("click",function(){
-		$('#info_modal').modal({
+		$('#add_user_modal').modal({
 			keyboard : true
 		});
-		$('#info_modal .basic').hide();
+	/*	$('#info_modal .basic').hide();*/
 	});
 }
