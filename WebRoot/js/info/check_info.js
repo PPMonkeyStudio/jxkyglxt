@@ -38,6 +38,7 @@ function checkInfo(){
 		$('#info_modal').modal({
 			keyboard : true
 		});
+		$('#info_modal .basic').show();
 		$.post("/teacherms/Admin/admin_getTeacherTableInfoById",
 				{tableId:$(this).siblings().val(),tableName:"TeacherInfo"},function(xhr){
 				$("#info_modal input,select").each(function(){
@@ -105,12 +106,11 @@ function checkInfo(){
 			data.export_id="";
 			$('.end-button').unbind().remove();
 		});
-		
 	});
 	$('.add_button').unbind().on("click",function(){
 		$('#info_modal').modal({
 			keyboard : true
 		});
-		
-	})
+		$('#info_modal .basic').hide();
+	});
 }
