@@ -34,19 +34,17 @@ function examAward(){
 			keyboard : true
 		})
 		$.post("/teacherms/Admin/admin_getTeacherTableInfoById",
-				{tableId:$(this).siblings().val(),tableName:"TeacherAward"},function(xsh_data){
-				var inf = $('.table_infomation');
-					xsh_data = xsh_data[0];
-					for (var i = 0; i < xsh_data.length; i++) {
-						if (i > 1) {
-							for (var j = 0; j < xsh_data[i].length; j++) {
-								$(inf[j + i]).val(xsh_data[i][j + 2]);
-							}
-						} else {
-							$(inf[i]).val(xsh_data[i]);
-						}
-					
-					}
+				{tableId:$(this).siblings().val(),tableName:"TeacherAward"},function(xhr){
+					 $("#award_modal input,select").each(function(){
+						 var na= $(this).attr("name").split(".")[1];
+					 if(na=="userId"){
+							 $(this).val(xhr.user.userId);
+						 }
+					 else	if(na=="userName"){
+							 $(this).val(xhr.user.userName);
+						 }
+					 else	 $(this).val(xhr.object[na]);
+					  })
 				},"json");
 	})
 	$(".solidButton").on("click",function(){

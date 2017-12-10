@@ -47,3 +47,6 @@
 				-webkit-transform: rotate(0deg);
 				transform: rotate(0deg);
 			}
+		.sub_pages{
+		display:none;
+		}

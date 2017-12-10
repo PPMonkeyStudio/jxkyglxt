@@ -19,7 +19,7 @@ function examWorks(){
 			    str+="<td>"+xhr[i][0].worksType+"</td>";
 			    str+="<td>"+xhr[i][0].selectedSituation+"</td>";
 			    str+="<td>"+xhr[i][0].press+"</td>"; 
-			    str+='<td><input type="hidden" value="' + xhr[i][0].awardId + '" ><button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button><button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button></td>';
+			    str+='<td><input type="hidden" value="' + xhr[i][0].worksId + '" ><button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button><button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button></td>';
 			   str+="</tr>";   
 			}
 			$('.table').children('tbody').append(str);
@@ -32,19 +32,18 @@ function examWorks(){
 			keyboard : true
 		})
 		$.post("/teacherms/Admin/admin_getTeacherTableInfoById",
-				{tableId:$(this).siblings().val(),tableName:"TeacherWorks"},function(xsh_data){
+				{tableId:$(this).siblings().val(),tableName:"TeacherWorks"},function(xhr){
 				var inf = $('.table_infomation');
-					xsh_data = xsh_data[0];
-					for (var i = 0; i < xsh_data.length; i++) {
-						if (i > 1) {
-							for (var j = 0; j < xsh_data[i].length; j++) {
-								$(inf[j + i]).val(xsh_data[i][j + 2]);
-							}
-						} else {
-							$(inf[i]).val(xsh_data[i]);
-						}
-					
-					}
+				$("#works_modal input,select").each(function(){
+					 var na= $(this).attr("name").split(".")[1];
+				 if(na=="userId"){
+						 $(this).val(xhr.user.userId);
+					 }
+				 else	if(na=="userName"){
+						 $(this).val(xhr.user.userName);
+					 }
+				 else	 $(this).val(xhr.object[na]);
+				  })
 				},"json");
 	})
 		$(".solidButton").on("click",function(){

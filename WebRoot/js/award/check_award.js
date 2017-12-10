@@ -45,31 +45,62 @@ function checkAward(){
 					var inf = $('.table_infomation');
 				  $("#award_modal input,select").each(function(){
 					 var na= $(this).attr("name").split(".")[1];
-					
 				 if(na=="userId"){
-						 $(this).val(JSON.parse(xhr)[0][0].userId);
+						 $(this).val(xhr.user.userId);
 					 }
-					 if(na=="userName"){
-						 $(this).val(JSON.parse(xhr)[0][1].userName);
+				 else if(na=="userName"){
+						 $(this).val(xhr.user.userName);
 					 }
-					 alert(JSON.parse(xhr)[0][0][na]);
-					 $(this).val(JSON.parse(xhr)[0][0][na]);
+				 else $(this).val(xhr.object[na]);
 				  })
+				  
 				},"json");
 		$(".review-info").remove();
 	})
-	
-		$(".export_button").unbind().on("click",function(){
-			//显示出模态框
-			$('#export_award').modal({
-				keyboard : true
-			});
-		})
-		/*.append('<input type="checkbox">')*/
-		$('.export-info').click(function(){
-			$('#info_table tbody tr').each(function(){
-				 $(this).find("td:first").empty().append('<td><input type="checkbox"><td>')
-			})
-		})
 
+	
+	$(".export_button").unbind().on("click",function(){
+		//显示出模态框
+		$('#export_award').modal({
+			keyboard : true
+		});
+	});
+	$('.export-info').unbind().click(function(){
+		$('.second-panel-heading').append('<button class="btn btn-primary end-button">确认导出</button>');
+		$('#info_table tbody tr').each(function(){
+			 $(this).find("td:first").empty().append('<input name="check" type="checkbox">');
+			 $(this).on("click",function(){
+				var check_attr= $(this).find('td input[name="check"]').is(":checked");
+				if(check_attr==false){
+					$(this).find('td input[name="check"]').attr("checked","true");
+				}
+				else{
+					$(this).find('td input[name="check"]').removeAttr("checked");
+				}
+			 })
+		});
+		$('.end-button').unbind().on("click",function(){
+		
+			$('#info_table tbody tr').each(function(){
+				if(($(this).find(' input[name="check"]').is(':checked'))==true){
+				data.export_id+=$(this).find('input[type="hidden"]').val()+',';
+				}
+			})
+			$('#export_award .group-list li input[name="checkbox"]').each(function(){
+				if(($(this).is(':checked'))==true){
+					data.export_name+=$(this).val()+',';
+				}
+			})
+			if (data.export_id != "" && data.export_name != "") {
+				location.href = "/teacherms/Admin/admin_ExportExcelCollection?tableName=TeacherAward&export_id=" + (data.export_id).substring(0,data.export_id.length-1) + "&export_name=" + (data.export_name).substring(0,data.export_name.length-1);
+			} else {
+				alert("请选择数据");
+			}
+			data.export_id="";
+			$('.end-button').unbind().remove();
+		});
+		
+	});
+	
+	
 }

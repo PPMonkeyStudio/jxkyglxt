@@ -40,13 +40,17 @@ function checkInfo(){
 		});
 		$.post("/teacherms/Admin/admin_getTeacherTableInfoById",
 				{tableId:$(this).siblings().val(),tableName:"TeacherInfo"},function(xhr){
-				var inf = $('.table_infomation');
 				$("#info_modal input,select").each(function(){
 					 var na= $(this).attr("name").split(".")[1];
-					 alert(xhr[0][0]);
-					 $(this).val(xhr[0][0][na]);
+				 if(na=="userId"){
+						 $(this).val(xhr.user.userId);
+					 }
+				 else if(na=="userName"){
+						 $(this).val(xhr.user.userName);
+					 }
+				 else $(this).val(xhr.object[na]);
+				  })
 				},"json");
-	})
 	})
 	$(".setButton").on("click",function(){
 		//显示出模态框
@@ -54,8 +58,59 @@ function checkInfo(){
 			keyboard : true
 		});
 	})
+
+	
+	$(".export_button").unbind().on("click",function(){
+		//显示出模态框
+		$('#export_info').modal({
+			keyboard : true
+		});
+	});
+
 	
 	
-	
-	
+	$('.export-info').unbind().click(function(){
+		$('.second-panel-heading').append('<button class="btn btn-primary end-button">确认导出</button>');
+		$('#info_table tbody tr').each(function(){
+			 $(this).find("td:first").empty().append('<input name="check" type="checkbox">');
+			 $(this).on("click",function(){
+				var check_attr= $(this).find('td input[name="check"]').is(":checked");
+				if(check_attr==false){
+					$(this).find('td input[name="check"]').attr("checked","true");
+				}
+				else{
+					$(this).find('td input[name="check"]').removeAttr("checked");
+				}
+			 })
+		});
+		
+		
+		$('.end-button').unbind().on("click",function(){
+		
+			$('#info_table tbody tr').each(function(){
+				if(($(this).find(' input[name="check"]').is(':checked'))==true){
+				data.export_id+=$(this).find('input[type="hidden"]').val()+',';
+				}
+			})
+			$('#export_info .group-list li input[name="checkbox"]').each(function(){
+				if(($(this).is(':checked'))==true){
+					data.export_name+=$(this).val()+',';
+				}
+			})
+			if (data.export_id != "" && data.export_name != "") {
+				location.href = "/teacherms/Admin/admin_ExportExcelCollection?tableName=TeacherInfo&export_id=" + (data.export_id).substring(0,data.export_id.length-1) + "&export_name=" + (data.export_name).substring(0,data.export_name.length-1);
+			} else {
+				alert("请选择数据");
+			}
+			data.export_id="";
+			$('.end-button').unbind().remove();
+		});
+		
+	});
+	$('.add_button').unbind().on("click",function(){
+		$('#info_modal').modal({
+			keyboard : true
+		});
+		
+	})
 }

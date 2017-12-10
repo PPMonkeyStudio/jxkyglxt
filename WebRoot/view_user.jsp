@@ -312,7 +312,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var a_href = $(this).attr("href");
 				switch(a_href) {
 					case '#user':
-						$('#user').load('user_pageinfo.jsp #user_table_audit' ,time());
+						$('#user').load('user_pageinfo.jsp #user_table_audit' );
 						break;
 					case '#award':
 						$('#award').load('user_pageinfo.jsp #award_table_audit');

@@ -1,31 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'MyJsp.jsp' starting page</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-
-  </head>
-  
  	<body>
-
 		<!--管理员审核信息时右侧内容-->
-		<section class="content">
+		<section class="content" id="content">
 			<div class="row">
 				<div class="col-md-12">
 					<!--breadcrumbs start -->
@@ -81,14 +59,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</section>
 		<!----------------------------------------------------------------------------------->
 		<!--管理员审核用户信息的表格-->
-		<div id="user_table_audit">
+		<div id="user_info_table_audit">
 			<!--表头上按钮组-->
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
 					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-plus"></i>添加</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>导出</button>
+					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>导出</button>
 					<!--按条件筛选-->
 					<div id="search">
 						<label>按条件搜索：</label>
@@ -108,26 +85,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="teachingDate">任教时间</option>
 			<option value="workDate">参加工作时间</option>
 		</select>
+			<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
+		
 		</div>
 				</div>
 			</div>
 			<!--查询存放信息的表格-->
 			<section class="panel">
-				<header class="panel-heading">
+				<header class="panel-heading second-panel-heading">
 					用户信息
 				</header>
 				<div class="panel-body table-responsive" id="panel-body">
 				<form id="info-form">
 			
-				<table class="tab">
+				<table class="tab " id="info_table">
 				<tr></tr>
 				<tr  class="title"><td>基本信息</td></tr>
 					<tr>
 						<!-- name="teacherInfo." -->
 						<td>工号：</td>
-						<td><input class="form-control table_infomation" type="text"></td>
+						<td><input name="teacherInfo.userId"
+						class="form-control table_infomation" type="text"></td>
 						<td>姓名:</td>
-						<td><input name="username"
+						<td><input name="teacherInfo.userName"
 							class="form-control table_infomation" type="text"></td>
 					</tr>
 					<tr>
@@ -252,14 +232,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<tr  class="title"><td>其他信息</td></tr>
 					<tr>
 						<td>授课类型：</td>
-						<td><select class="form-control table_infomation">
+						<td><select name="teacherInfo.teachingType"
+						class="form-control table_infomation">
 								<option>公共课、专业课</option>
 								<option>公共课</option>
 								<option>专业课</option>
 								<option>无授课</option>
 						</select></td>
 						<td>授课状态：</td>
-						<td><select class="form-control table_infomation">
+						<td><select name="teacherInfo.teachingStatus"
+						class="form-control table_infomation">
 								<option>授课</option>
 								<option>不授课进修</option>
 								<option>不授课病休</option>
@@ -267,37 +249,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<option>不授课其他</option>
 						</select></td>
 						<td>任教专业名称：</td>
-						<td><input class="form-control table_infomation" type="text"
+						<td><input name="teacherInfo.teachingProfessionName"
+						 class="form-control table_infomation" type="text"
 							placeholder="请输入任教专业名称"></td>
 
 					</tr>
 					<tr>
 						<td>任教专业代码：</td>
-						<td><input class="form-control table_infomation" type="text"
+						<td><input name="teacherInfo.teachingProfessionNo"
+						 class="form-control table_infomation" type="text"
 							placeholder="请输入任教专业代码"></td>
 						<td>专业任教时间：</td>
-						<td><input class="form-control table_infomation "
+						<td><input name="teacherInfo.professionTeachingDate"
+						class="form-control table_infomation "
 							type="text" placeholder="请输入专业任教时间"></td>
 						<td>是否实验技术人员：</td>
-						<td><select class="form-control table_infomation">
-								<option>否</option>
+						<td><select  name="teacherInfo.experimentalTechnicalPersonnel"
+						 class="form-control table_infomation">
+								<option>否</option>  
 								<option>是</option>
 						</select></td>
 
 					</tr>
 					<tr>
 						<td>是否双师型：</td>
-						<td><select class="form-control table_infomation">
+						<td><select name="teacherInfo.doubleTeacherType"
+						class="form-control table_infomation">
 								<option>否</option>
 								<option>是</option>
 						</select></td>
 						<td>是否工程背景：</td>
-						<td><select class="form-control table_infomation">
+						<td><select name="teacherInfo.engineeringBackground"
+						class="form-control table_infomation">
 								<option>否</option>
 								<option>是</option>
 						</select></td>
 						<td>是否行业背景：</td>
-						<td><select class="form-control table_infomation">
+						<td><select name="teacherInfo.industryBackground"
+						class="form-control table_infomation">
 								<option>否</option>
 								<option>是</option>
 						</select></td>
@@ -306,7 +295,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</tr>
 					<tr>
 						<td>行政职务级别：</td>
-						<td><select class="form-control table_infomation">
+						<td><select name="teacherInfo.administrativeRank"
+						class="form-control table_infomation">
 								<option>正厅级</option>
 								<option>副厅级</option>
 								<option>正处级</option>
@@ -315,23 +305,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<option>副科级及以下</option>
 						</select></td>
 						<td>研究生导师类型：</td>
-						<td><select class="form-control table_infomation">
+						<td><select name="teacherInfo.graduateTutorType"
+						class="form-control table_infomation">
 								<option>否</option>
 								<option>硕士生导师</option>
 								<option>博士生导师</option>
 								<option>硕士、博士生导师</option>
 						</select></td>
 						<td>校内指导博士生人数：</td>
-						<td><input class="form-control table_infomation" type="text"
+						<td><input name="teacherInfo.numberOfDoctor"
+						class="form-control table_infomation" type="text"
 							placeholder="请输入校内指导博士生人数"></td>
 
 					</tr>
 					<tr>
 						<td>校内指导硕士生人数：</td>
-						<td><input class="form-control table_infomation" type="text"
+						<td><input name="teacherInfo.numberOfMaster" 
+						class="form-control table_infomation" type="text"
 							placeholder="请输入校内指导硕士生人数"></td>
 						<td>职工类型：</td>
-						<td><select class="form-control table_infomation">
+						<td><select name="teacherInfo.employeeType"
+						class="form-control table_infomation">
 								<option>专任教师</option>
 								<option>行政人员</option>
 								<option>教辅人员</option>
@@ -343,7 +337,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<option>心理咨询人员</option>
 						</select></td>
 						<td>录用类型：</td>
-						<td><select class="form-control table_infomation">
+						<td><select name="teacherInfo.employmentType"
+						class="form-control table_infomation">
 								<option>在编</option>
 								<option>聘任</option>
 						</select></td>
@@ -351,7 +346,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</tr>
 					<tr>
 						<td>任职状态：</td>
-						<td><select class="form-control table_infomation">
+						<td><select name="teacherInfo.jobStatue" 
+						class="form-control table_infomation">
 								<option>在职</option>
 								<option>当年离职</option>
 								<option>请假</option>
@@ -359,7 +355,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<option>无</option>
 						</select></td>
 						<td>异动类型：</td>
-						<td><select class="form-control table_infomation">
+						<td><select  name="teacherInfo.transactionType"
+						class="form-control table_infomation">
 								<option>无</option>
 								<option>录用毕业生</option>
 								<option>外单位教师调入</option>
@@ -369,24 +366,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<option>自然减员</option>
 						</select></td>
 						<td>高校调入：</td>
-						<td><select class="form-control table_infomation">
+						<td><select name="teacherInfo.universityTransfer"
+						class="form-control table_infomation">
 								<option>否</option>
 								<option>是</option>
 						</select></td>
 					</tr>
 					<tr>
 						<td>本校毕业：</td>
-						<td><select class="form-control table_infomation">
+						<td><select name="teacherInfo.schoolGraduation"
+						class="form-control table_infomation">
 								<option>否</option>
 								<option>是</option>
 						</select></td>
 						<td>本校调整：</td>
-						<td><select class="form-control table_infomation">
+						<td><select name="teacherInfo.schoolAdjustment"
+						class="form-control table_infomation">
 								<option>否</option>
 								<option>是</option>
 						</select></td>
 						<td>校外教师类型：</td>
-						<td><select class="form-control table_infomation">
+						<td><select name="teacherInfo.offCampusTeacherType"
+						class="form-control table_infomation">
 								<option>否</option>
 								<option>外籍教师</option>
 								<option>其他高校教师</option>
@@ -396,7 +397,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</tr>
 					<tr>
 						<td>数据状态：</td>
-						<td><select class="form-control table_infomation">
+						<td><select name="teacherInfo.dataStatus" id="dataStatus"
+						class="form-control table_infomation">
 								<option value="10">个人可添加、修改</option>
 								<option value="20">审核中</option>
 								<option value="20">人事处管理员修改、审核</option>
@@ -410,14 +412,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 
 		<!--管理员审核奖励信息的表格-->
-		<div id="award_table_audit">
+		<div id="user_award_table_audit">
 			<!--表投上按钮组-->
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
 					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-plus"></i>添加</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>导出</button>
+					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>导出</button>
 					<div id="search">
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
@@ -429,17 +430,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="awardLevel">获奖级别</option>
 			<option value="awardTime">获奖时间</option>
 		</select>
+							<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
+		
 		</div>
 					<!--<input type="text" class="form-control" />-->
 				</div>
 			</div>
 			<!--查询存放信息的表格-->
 			<section class="panel">
-				<header class="panel-heading">
+				<header class="panel-heading second-panel-heading">
 					奖励信息
 				</header>
 				<div class="panel-body table-responsive">
-					<table class="table table-hover">
+					<table class="table table-hover" id="info_table">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -483,14 +486,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 
 		<!--管理员审核著作信息的表格-->
-		<div id="works_table_audit">
+		<div id="user_works_table_audit">
 			<!--表投上按钮组-->
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
 					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-plus"></i>添加</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>导出</button>
+					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>导出</button>
 					<div id="search">
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
@@ -504,17 +506,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="worksDate">入选时间</option>
 			<option value="worksAuthority">主编（作者）</option>
 		</select>
+							<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
+		
 		</div>
 					<!--<input type="text" class="form-control" />-->
 				</div>
 			</div>
 			<!--查询存放信息的表格-->
 			<section class="panel">
-				<header class="panel-heading">
+				<header class="panel-heading second-panel-heading">
 					著作信息
 				</header>
 				<div class="panel-body table-responsive">
-					<table class="table table-hover">
+					<table class="table table-hover" id="info_table">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -522,6 +526,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<th>主编</th>
 								<th>著作类别</th>
 								<th>入选情况</th>
+								<th>出版社</th>
 								<th>操作</th>
 							</tr>
 						</thead>
@@ -552,14 +557,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 
 		<!--管理员审核论文信息的表格-->
-		<div id="paper_table_audit">
+		<div id="user_paper_table_audit">
 			<!--表投上按钮组-->
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
 					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-plus"></i>添加</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>导出</button>
+					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>导出</button>
 					<div id="search">
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
@@ -575,17 +579,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="paperWordsNum">成果字数</option>
 			<option value="paperTime">发表时间</option>
 		</select>
+							<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
+		
 		</div>
 					<!--<input type="text" class="form-control" />-->
 				</div>
 			</div>
 			<!--查询存放信息的表格-->
 			<section class="panel">
-				<header class="panel-heading">
+				<header class="panel-heading second-panel-heading">
 					论文信息
 				</header>
 				<div class="panel-body table-responsive">
-					<table class="table table-hover">
+					<table class="table table-hover" id="info_table">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -625,14 +631,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 
 		<!--管理员审核专利信息的表格-->
-		<div id="patent_table_audit">
+		<div id="user_patent_table_audit">
 			<!--表投上按钮组-->
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
 					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-plus"></i>添加</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>导出</button>
+					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>导出</button>
 					<div id="search">
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
@@ -644,17 +649,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="paperlisenceNum">授权号</option>
 			<option value="patentTime">获奖时间</option>
 		</select>
+							<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
+		
 		</div>
 					<!--<input type="text" class="form-control" />-->
 				</div>
 			</div>
 			<!--查询存放信息的表格-->
 			<section class="panel">
-				<header class="panel-heading">
+				<header class="panel-heading second-panel-heading">
 					专利信息
 				</header>
 				<div class="panel-body table-responsive">
-					<table class="table table-hover">
+					<table class="table table-hover" id="info_table">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -692,14 +699,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 
 		<!--管理员审核课题(项目)信息的表格-->
-		<div id="project_table_audit">
+		<div id="user_project_table_audit">
 			<!--表投上按钮组-->
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
 					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-plus"></i>添加</button>
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-share-square"></i>导出</button>
+					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>导出</button>
 					<div id="search">
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
@@ -711,17 +717,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="projectTime">立项时间</option>
 			<option value="projectcheckTime">结题验收时间</option>
 		</select>
+							<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
+		
 		</div>
 					<!--<input type="text" class="form-control" />-->
 				</div>
 			</div>
 			<!--查询存放信息的表格-->
 			<section class="panel">
-				<header class="panel-heading">
+				<header class="panel-heading second-panel-heading">
 					课题(项目)信息
 				</header>
 				<div class="panel-body table-responsive">
-					<table class="table table-hover">
+					<table class="table table-hover" id="info_table">
 						<thead>
 							<tr>
 								<th>#</th>

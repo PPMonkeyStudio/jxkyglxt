@@ -27,13 +27,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<link href="css/style.css" rel="stylesheet" type="text/css" />
 
 		<link rel="stylesheet" href="css/top_left.css" />
+			
+  <jsp:include page="/modal/addInfo/award_modal.html" flush="true"></jsp:include>
+	<jsp:include page="/modal/addInfo/info_modal.html" flush="true"></jsp:include>
+	<jsp:include page="/modal/addInfo/paper_modal.html" flush="true"></jsp:include>
+	<jsp:include page="/modal/addInfo/works_modal.html" flush="true"></jsp:include>
+	<jsp:include page="/modal/addInfo/project_modal.html" flush="true"></jsp:include>
+	<jsp:include page="/modal/addInfo/patent_modal.html" flush="true"></jsp:include> 
+	<jsp:include page="/modal/addInfo/ user_info_modal.html" flush="true"></jsp:include> 
+	<jsp:include page="/modal/exportInfo/info_modal.html" flush="true"></jsp:include>
+	<jsp:include page="/modal/exportInfo/award_modal.html" flush="true"></jsp:include>
+	<jsp:include page="/modal/exportInfo/paper_modal.html" flush="true"></jsp:include>
+	<jsp:include page="/modal/exportInfo/patent_modal.html" flush="true"></jsp:include>
+	<jsp:include page="/modal/exportInfo/project_modal.html" flush="true"></jsp:include>
+	<jsp:include page="/modal/exportInfo/works_modal.html" flush="true"></jsp:include>
   </head>
   
  <body class="skin-black">
 		<!-- header logo: style can be found in header.less -->
 		<header class="header">
 			<a class="logo">
-				教学科研管理系统
+				本科数据管理系统
 			</a>
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top" role="navigation">
@@ -86,7 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<li class="dropdown user user-menu">
 							<a class="dropdown-toggle" data-toggle="dropdown">
 								<i class="fa fa-user"></i>
-								<span>Jane Doe <i class="caret"></i></span>
+								<span>Admin <i class="caret"></i></span>
 							</a>
 							<ul class="dropdown-menu dropdown-custom dropdown-menu-right">
 								<li class="dropdown-header text-center">Account</li>
@@ -122,10 +136,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<!-- Sidebar user panel -->
 					<div class="user-panel">
 						<div class="pull-left image">
-							<img src="img/26115.jpg" class="img-circle" alt="User Image" />
+							<img src="img/login.jpg" class="img-circle" alt="User Image" />
 						</div>
 						<div class="pull-left info">
-							<p>Hello, Jane</p>
+							<p>Hello, Admin</p>
 
 							<a><i class="fa fa-circle text-success"></i> Online</a>
 						</div>
@@ -142,10 +156,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<!-- /.search form -->
 					<!-- sidebar menu: : style can be found in sidebar.less -->
 					<ul class="sidebar-menu">
-
 						<li>
-							<a href="#subPages" data-toggle="collapse" class="collapsed" aria-expanded="false"><i class="fa fa-user"></i> <span>教师信息</span> <i class="icon-submenu fa fa-angle-left"></i></a>
-							<div id="subPages" class="collapse" aria-expanded="false" style="height: 0px;">
+							<a href="#sub" data-toggle="collapse" class="collapsed" aria-expanded="false"><i class="fa fa-user"></i> <span>教师信息</span> <i class="icon-submenu fa fa-angle-left"></i></a>
+							<div id="sub" class="collapse" aria-expanded="false" style="height: 0px;">
 								<ul class="nav">
 									<li>
 										<a class="">信息审核</a>
@@ -156,20 +169,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</ul>
 							</div>
 						</li>
+						</ul>
+						
+						<ul class="sidebar-menu">
+						<li>
+							<a href="#subPages" data-toggle="collapse" class="collapsed" aria-expanded="false"><i class="fa fa-user"></i> <span>教师信息</span> <i class="icon-submenu fa fa-angle-left"></i></a>
+							<div id="subPages" class="collapse" aria-expanded="false" style="height: 0px;">
+								<ul class="nav">
+									<li>
+										<a class="">信息查看</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						</ul>
 
-						<!--<li class="active">
-							<a href="index.html">
-								<i class="fa fa-user"></i> <span>教师信息</span>
-							</a>
-						</li>-->
-						<!--<li>
-							<a href="general.html">
-								<i class="fa fa-gavel"></i> <span>General</span>
-							</a>
-						</li>-->
-					</ul>
-				</section>
-				<!-- /.sidebar -->
 			</aside>
 
 			<aside class="right-side">
@@ -194,11 +208,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!-- /.right-side -->
 		</div>
 		<!-- ./wrapper -->
-
-		<!-- jQuery -->
-		<script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
-		<!-- Bootstrap -->
-		<script src="js/bootstrap.min.js" type="text/javascript"></script>
 		<!-- Director App -->
 		<script src="js/app.js" type="text/javascript"></script>
 			<script src="js/main_index.js" type="text/javascript"></script>
