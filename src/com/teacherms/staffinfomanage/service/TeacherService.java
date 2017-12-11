@@ -1,5 +1,6 @@
 package com.teacherms.staffinfomanage.service;
 
+import java.io.File;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -90,5 +91,34 @@ public interface TeacherService {
 	 * @return success为成功，其他为失败
 	 */
 	String completeBasicInformation(TeacherInfo teacherInfo, String userId, String username);
+
+	/**
+	 * ---用户附件上传
+	 * 
+	 * @param file1
+	 *            附件
+	 * @param file1FileName
+	 *            附件名字
+	 * @param file1ContentType
+	 *            附件类型
+	 * @param userName
+	 *            用户名称
+	 * @param tableName
+	 *            信息名称
+	 * @return
+	 */
+	String userAttachmentUpload(List<File> file1, List<String> file1FileName, List<String> file1ContentType,
+			String userName, String tableName);
+
+	/**
+	 * ---用户下载附件
+	 * 
+	 * @param tableName
+	 *            附件所属信息的名字
+	 * @param downloadInfoId
+	 *            附件的所属id
+	 * @return 文件集合
+	 */
+	List<File> downloadAttachment(String username, String tableName, String downloadInfoId);
 
 }

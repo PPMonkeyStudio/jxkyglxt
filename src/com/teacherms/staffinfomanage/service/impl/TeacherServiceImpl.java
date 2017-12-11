@@ -1,5 +1,11 @@
 package com.teacherms.staffinfomanage.service.impl;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -20,6 +26,7 @@ import com.teacherms.all.domain.User;
 import com.teacherms.satffinfomanage.dao.TeacherDao;
 import com.teacherms.staffinfomanage.service.TeacherService;
 
+import util.Attachment;
 import util.ExcelHead;
 import util.ExportExcelCollection;
 import util.MapUtil;
@@ -230,6 +237,60 @@ public class TeacherServiceImpl implements TeacherService {
 		return teacherDao.getTeacherInfoByUserId(userId);
 	}
 
+	@Override
+	public String userAttachmentUpload(List<File> file1, List<String> file1FileName, List<String> file1ContentType,
+			String userName, String tableName) {
+		String rusult = "success";
+		System.out.println(file1.size());
+		String path = "E:/Attachment/" + userName + "/" + tableName;
+		File file = new File(path);
+		try {
+			if (!file.exists()) {
+				System.out.println("创建新文件夹");
+				file.mkdirs();
+			}
+			for (int i = 0; i < file1.size(); i++) {
+				FileOutputStream out = new FileOutputStream(path + "/" + file1FileName.get(i));
+				InputStream in = new FileInputStream(file1.get(i));
+				byte[] buf = new byte[1024];
+				int length = 0;
+				while (-1 != (length = in.read(buf))) {
+					out.write(buf, 0, length);
+				}
+				in.close();
+				out.close();
+			}
+		} catch (FileNotFoundException e) {
+			rusult = "error";
+			e.printStackTrace();
+		} catch (IOException e) {
+			rusult = "error";
+			e.printStackTrace();
+		}
+		return rusult;
+	}
+
+	@Override
+	public List<File> downloadAttachment(String username, String tableName, String downloadInfoId) {
+		// Attachmentpath:E:/Attachment/
+		// 附件路径
+		String path = Attachment.getAttachmentpath() + username + "/" + tableName;
+		// 选取的附件集合、
+		List<File> List_attachment = new ArrayList<File>();
+		System.out.println(path);
+		File[] fs = new File(path).listFiles();
+		System.out.println(fs.length);
+		String[] downloadInfoId_arr = downloadInfoId.split(",");
+		for (String infoId : downloadInfoId_arr) {
+			for (File f1 : fs) {
+				if (f1.getName().indexOf(infoId) > -1) {
+					List_attachment.add(f1);
+				}
+			}
+		}
+		return List_attachment;
+	}
+
 	/**
 	 * ---通过查询信息表名字，获取信息表中第一个参数(****Id)的Name
 	 * 
@@ -308,4 +369,5 @@ public class TeacherServiceImpl implements TeacherService {
 		}
 		return str;
 	}
+
 }

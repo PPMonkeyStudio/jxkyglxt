@@ -1,6 +1,7 @@
 package util;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -8,6 +9,7 @@ import javax.annotation.Resource;
 import com.teacherms.all.domain.*;
 
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -94,5 +96,24 @@ public class JunitTest {
 		List<Object> listAdmin = teacherService.userGetTableInfoByTableId("TeacherAward",
 				"6ca50c5a-f45d-4fd2-82fc-1d9fb34e67df");
 		System.out.println(new Gson().toJson(listAdmin));
+	}
+
+	@Test
+	public void test_teacher_userAttachmentUpload() {
+		List<File> file1 = new ArrayList<File>();
+		List<String> file1FileName = new ArrayList<String>();
+		List<String> file1ContentType = new ArrayList<String>();
+		File fs = new File("E:/Attachment/imgtest");
+		File[] files = fs.listFiles();
+		System.out.println(files.length);
+		for (File file2 : files) {
+			if (!file2.isDirectory()) {
+				file1.add(file2);
+				file1FileName.add(file2.getName());
+				String path = file2.getAbsolutePath();
+				file1ContentType.add(path.substring(path.indexOf("."), path.length()));
+			}
+		}
+		teacherService.userAttachmentUpload(file1, file1FileName, file1ContentType, "何毅", "TeacherAward");
 	}
 }

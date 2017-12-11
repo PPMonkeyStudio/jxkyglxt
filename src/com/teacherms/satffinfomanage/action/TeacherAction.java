@@ -1,10 +1,21 @@
 package com.teacherms.satffinfomanage.action;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -37,12 +48,20 @@ public class TeacherAction extends ActionSupport {
 	private String query_name;// 导出execl表的属性条件,逗号隔开
 	private String query_id;// 导出execl表的ID字段条件,逗号隔开
 	private String time_interval;// 时间区间
+
+	// 附件
+	private List<File> file1; // execl,图片文件
+	private List<String> file1FileName; // file+FileName为固定写法
+	private List<String> file1ContentType; // file+ContentType为固定写法
+	private String downloadInfoId; // 图片下载的信息表的id
+
 	// 查询条件
 	private String page; // 分页
 	private String tableName;// 查询的表名
 	private String tableId; // 查询表的ID
 	private String dataState; // 数据状态
 
+	// 用户名字
 	private String username;
 
 	// 信息表
@@ -142,6 +161,7 @@ public class TeacherAction extends ActionSupport {
 		}
 	}
 
+	// 获取用户名字信息
 	public void userGetUserName() {
 		try {
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
@@ -173,6 +193,75 @@ public class TeacherAction extends ActionSupport {
 					out.close();
 				}
 			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	// 用户附件上传
+	public void userAttachmentUpload() {
+		try {
+			String result = teacherService.userAttachmentUpload(file1, file1FileName, file1ContentType,
+					sessionuser.getUserName(), tableName);
+			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
+			ServletActionContext.getResponse().getWriter().write(result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 图片打包下载
+	public void downloadAttachment() {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		List<File> attachments = teacherService.downloadAttachment("张三", tableName, downloadInfoId);
+		/**
+		 * 创建一个临时压缩文件,把文件流全部注入到这个文件中 这里的文件你可以自定义是.rar还是.zip
+		 */
+		File file = new File("E:/Attachment/zip/zi.zip");
+		byte[] buf = new byte[1024];
+		try {
+			file.createNewFile();
+
+			ZipOutputStream zipOut = new ZipOutputStream(new FileOutputStream(file));
+			for (File f : attachments) {
+				// new the BuuferedInputStream
+				FileInputStream in = new FileInputStream(f);
+				// the file entry ,set the file name in the zip
+				// file
+				zipOut.putNextEntry(new ZipEntry(f.getName()));
+				// 向压缩文件中输出数据
+				int len;
+				while ((len = in.read(buf)) > 0) {
+					zipOut.write(buf, 0, len);
+				}
+				zipOut.closeEntry();
+				in.close();
+			}
+			zipOut.close();
+			// 压缩完毕,file中已存在有zip
+
+			// 以流的形式下载文件。
+			InputStream fis = new BufferedInputStream(new FileInputStream(file.getPath()));
+			byte[] buffer = new byte[fis.available()];
+			fis.read(buffer);
+			fis.close();
+			// 清空response
+			response.reset();
+			OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+			response.setContentType("application/octet-stream");
+			// 如果输出的是中文名的文件，在此处就要用URLEncoder.encode方法进行处理
+			response.setHeader("Content-Disposition",
+					"attachment;filename=" + URLEncoder.encode(file.getName(), "UTF-8"));
+			toClient.write(buffer);
+			toClient.flush();
+			toClient.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				File f = new File(file.getPath());
+				f.delete();
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -236,6 +325,22 @@ public class TeacherAction extends ActionSupport {
 
 	public void setDataState(String dataState) {
 		this.dataState = dataState;
+	}
+
+	public void setFile1(List<File> file1) {
+		this.file1 = file1;
+	}
+
+	public void setFile1FileName(List<String> file1FileName) {
+		this.file1FileName = file1FileName;
+	}
+
+	public void setDownloadInfoId(String downloadInfoId) {
+		this.downloadInfoId = downloadInfoId;
+	}
+
+	public void setFile1ContentType(List<String> file1ContentType) {
+		this.file1ContentType = file1ContentType;
 	}
 
 	public TeacherAward getTeacherAward() {
