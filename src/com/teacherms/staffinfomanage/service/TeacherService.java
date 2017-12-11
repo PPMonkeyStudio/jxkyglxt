@@ -93,7 +93,7 @@ public interface TeacherService {
 	String completeBasicInformation(TeacherInfo teacherInfo, String userId, String username);
 
 	/**
-	 * ---用户附件上传
+	 * /** ---用户附件上传
 	 * 
 	 * @param file1
 	 *            附件
@@ -105,10 +105,12 @@ public interface TeacherService {
 	 *            用户名称
 	 * @param tableName
 	 *            信息名称
-	 * @return
+	 * @param tableId
+	 *            信息ID
+	 * @return success：成功，error：失败
 	 */
 	String userAttachmentUpload(List<File> file1, List<String> file1FileName, List<String> file1ContentType,
-			String userName, String tableName);
+			String userName, String tableName, String tableId);
 
 	/**
 	 * ---用户下载附件
@@ -117,8 +119,8 @@ public interface TeacherService {
 	 *            附件所属信息的名字
 	 * @param downloadInfoId
 	 *            附件的所属id
-	 * @return 文件集合
+	 * @return ZIP文件
 	 */
-	List<File> downloadAttachment(String username, String tableName, String downloadInfoId);
+	File downloadAttachment(String username, String tableName, String downloadInfoId);
 
 }

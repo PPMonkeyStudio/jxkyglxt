@@ -114,6 +114,7 @@ public class JunitTest {
 				file1ContentType.add(path.substring(path.indexOf("."), path.length()));
 			}
 		}
-		teacherService.userAttachmentUpload(file1, file1FileName, file1ContentType, "何毅", "TeacherAward");
+		teacherService.userAttachmentUpload(file1, file1FileName, file1ContentType, "何毅", "TeacherAward",
+				"f2046bac-f4b9-4629-b35b-78f94010cb8d");
 	}
 }

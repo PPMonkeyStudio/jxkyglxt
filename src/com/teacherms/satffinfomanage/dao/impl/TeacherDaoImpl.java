@@ -78,6 +78,14 @@ public class TeacherDaoImpl implements TeacherDao {
 	}
 
 	@Override
+	public String getTableInfoName(String tableName, String tableInfoName, String tableInfoIdName, String infoId) {
+		// TODO Auto-generated method stub
+		String hql = "select t." + tableInfoName + " from " + tableName + " t where t." + tableInfoIdName + "='"
+				+ infoId + "'";
+		return (String) getSession().createQuery(hql).uniqueResult();
+	}
+
+	@Override
 	public String addTableInfo(Object obj) {
 		try {
 			getSession().saveOrUpdate(obj);

@@ -68,4 +68,19 @@ public interface TeacherDao {
 	 */
 	List<Object> export_getAInfomationByTableId(String tableName, String tableInfoIdName, String replaceAll);
 
+	/**
+	 * ---信息名称
+	 * 
+	 * @param tableName
+	 *            信息表名字
+	 * @param tableInfoName
+	 *            所需要得到的信息名称
+	 * @param tableInfoIdName
+	 *            信息的ID属性名称
+	 * @param infoId
+	 *            信息ID
+	 * @return 信息名称
+	 */
+	String getTableInfoName(String tableName, String tableInfoName, String tableInfoIdName, String infoId);
+
 }

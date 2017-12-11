@@ -10,8 +10,12 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -239,18 +243,19 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Override
 	public String userAttachmentUpload(List<File> file1, List<String> file1FileName, List<String> file1ContentType,
-			String userName, String tableName) {
+			String userName, String tableName, String tableId) {
 		String rusult = "success";
-		System.out.println(file1.size());
 		String path = "E:/Attachment/" + userName + "/" + tableName;
 		File file = new File(path);
 		try {
+			// 如果文件夹不存在则创建文件夹
 			if (!file.exists()) {
 				System.out.println("创建新文件夹");
 				file.mkdirs();
 			}
 			for (int i = 0; i < file1.size(); i++) {
-				FileOutputStream out = new FileOutputStream(path + "/" + file1FileName.get(i));
+				FileOutputStream out = new FileOutputStream(
+						path + "/" + tableId + "_" + (i + 1) + file1ContentType.get(i));
 				InputStream in = new FileInputStream(file1.get(i));
 				byte[] buf = new byte[1024];
 				int length = 0;
@@ -271,24 +276,62 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public List<File> downloadAttachment(String username, String tableName, String downloadInfoId) {
-		// Attachmentpath:E:/Attachment/
+	public File downloadAttachment(String username, String tableName, String downloadInfoId) {
+		// Attachmentpath: E:/Attachment/
 		// 附件路径
 		String path = Attachment.getAttachmentpath() + username + "/" + tableName;
 		// 选取的附件集合、
 		List<File> List_attachment = new ArrayList<File>();
+		Map<String, String> id_name_Map = new HashMap<String, String>();
 		System.out.println(path);
+		// 获取文件夹下所有文件
 		File[] fs = new File(path).listFiles();
-		System.out.println(fs.length);
+		// 分割所要查询的信息ID
 		String[] downloadInfoId_arr = downloadInfoId.split(",");
 		for (String infoId : downloadInfoId_arr) {
+			// 获取信息名字.对应信息id
+			id_name_Map.put(infoId, teacherDao.getTableInfoName(tableName, getTableInfoName(tableName),
+					getTableInfoIdName(tableName), infoId));
 			for (File f1 : fs) {
 				if (f1.getName().indexOf(infoId) > -1) {
 					List_attachment.add(f1);
 				}
 			}
 		}
-		return List_attachment;
+		/**
+		 * 创建一个临时压缩文件,把文件流全部注入到这个文件中 这里的文件你可以自定义是.rar还是.zip
+		 */
+		File file = new File("E:/Attachment/zip/zi.zip");
+		byte[] buf = new byte[1024];
+		try {
+			// 创建压缩包文件
+			file.createNewFile();
+
+			ZipOutputStream zipOut = new ZipOutputStream(new FileOutputStream(file));
+			for (File f : List_attachment) {
+				// new the BuuferedInputStream
+				FileInputStream in = new FileInputStream(f);
+				// the file entry ,set the file name in the zip
+				// file
+				String f_ID = f.getName().split("_")[0];
+				String zipEntry_name = f.getName().replaceAll(f_ID, id_name_Map.get(f_ID));
+				System.out.println(zipEntry_name);
+				zipOut.putNextEntry(new ZipEntry(zipEntry_name));
+				// 向压缩文件中输出数据
+				int len;
+				while ((len = in.read(buf)) > 0) {
+					zipOut.write(buf, 0, len);
+				}
+				zipOut.closeEntry();
+				in.close();
+			}
+			zipOut.close();
+			// 压缩完毕,file中已存在有zip
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return file;
 	}
 
 	/**
@@ -319,6 +362,23 @@ public class TeacherServiceImpl implements TeacherService {
 			cla = TeacherWorks.class;
 		}
 		return cla.getDeclaredFields()[0].getName();
+	}
+
+	/**
+	 * 获取信息的名称
+	 * 
+	 * @return 名称
+	 */
+	private String getTableInfoName(String tableName) {
+		String str = tableName.replaceAll("Teacher", "").toLowerCase() + "Name";
+		/*
+		 * switch (tableName) { case "TeacherAward": str = "awardName"; break;
+		 * case "TeacherInfo": str = ""; break; case "TeacherPaper": str =
+		 * "paperName"; break; case "TeacherPatent": str = "patentName"; break;
+		 * case "TeacherProject": str = "projectName"; break; case
+		 * "TeacherWorks": str = "worksName"; break; default: break; }
+		 */
+		return str;
 	}
 
 	/**

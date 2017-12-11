@@ -202,7 +202,7 @@ public class TeacherAction extends ActionSupport {
 	public void userAttachmentUpload() {
 		try {
 			String result = teacherService.userAttachmentUpload(file1, file1FileName, file1ContentType,
-					sessionuser.getUserName(), tableName);
+					sessionuser.getUserName(), tableName, tableId);
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write(result);
 		} catch (IOException e) {
@@ -213,33 +213,8 @@ public class TeacherAction extends ActionSupport {
 	// 图片打包下载
 	public void downloadAttachment() {
 		HttpServletResponse response = ServletActionContext.getResponse();
-		List<File> attachments = teacherService.downloadAttachment("张三", tableName, downloadInfoId);
-		/**
-		 * 创建一个临时压缩文件,把文件流全部注入到这个文件中 这里的文件你可以自定义是.rar还是.zip
-		 */
-		File file = new File("E:/Attachment/zip/zi.zip");
-		byte[] buf = new byte[1024];
+		File file = teacherService.downloadAttachment("张三", tableName, downloadInfoId);
 		try {
-			file.createNewFile();
-
-			ZipOutputStream zipOut = new ZipOutputStream(new FileOutputStream(file));
-			for (File f : attachments) {
-				// new the BuuferedInputStream
-				FileInputStream in = new FileInputStream(f);
-				// the file entry ,set the file name in the zip
-				// file
-				zipOut.putNextEntry(new ZipEntry(f.getName()));
-				// 向压缩文件中输出数据
-				int len;
-				while ((len = in.read(buf)) > 0) {
-					zipOut.write(buf, 0, len);
-				}
-				zipOut.closeEntry();
-				in.close();
-			}
-			zipOut.close();
-			// 压缩完毕,file中已存在有zip
-
 			// 以流的形式下载文件。
 			InputStream fis = new BufferedInputStream(new FileInputStream(file.getPath()));
 			byte[] buffer = new byte[fis.available()];
