@@ -124,4 +124,16 @@ public interface TeacherService {
 	 */
 	File downloadAttachment(String username, String tableName, String downloadInfoId);
 
+	/**
+	 * ---获取图片附件的base64编码
+	 * 
+	 * @param name
+	 *            用户名称
+	 * @param tableName
+	 *            信息表名
+	 * @param downloadInfoId
+	 *            信息表ID
+	 */
+	List<String> getBase64Image(String name, String tableName, String downloadInfoId);
+
 }

@@ -113,7 +113,7 @@ public class TeacherAction extends ActionSupport {
 
 	}
 
-	// 用户修改添加信息
+	// 用户修改,添加信息
 	public void userSetTableInfo() {
 		try {
 			Object obj = null;
@@ -207,6 +207,18 @@ public class TeacherAction extends ActionSupport {
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write(result);
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 图片附件转为base64编码
+	public void getBase64Image() {
+		try {
+			List<String> list = teacherService.getBase64Image(sessionuser.getUserName(), tableName, downloadInfoId);
+			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
+			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(list));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

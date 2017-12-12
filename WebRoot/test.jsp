@@ -23,15 +23,21 @@
 	-->
 
 </head>
-
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 <body>
 	<s:action name="page_nav" namespace="/Page" executeResult="true" />
 	This is my JSP page.
 	<br>
-	<input type="button" class="form-control" onclick="DownloadTest()" value="查看">
+	<input type="button" class="form-control" onclick="getImg()" value="查看">
 	<script type="text/javascript">
 		function DownloadTest() {
 			location.href = "/teacherms/Teacher/teacher_downloadAttachment?username=张三&tableName=TeacherAward&downloadInfoId=0c52c25a-b844-4e6d-9b33-576e8938c611,c40f4a5d-7d83-4729-bb1a-012c8ec796c1";
+		}
+		function getImg() {
+			$.post('/teacherms/Teacher/teacher_getBase64Image', {
+				tableName : "TeacherAward",
+				downloadInfoId : "0c52c25a-b844-4e6d-9b33-576e8938c611"
+			},"json");
 		}
 	</script>
 </body>
