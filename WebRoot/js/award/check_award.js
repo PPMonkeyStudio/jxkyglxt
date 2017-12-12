@@ -39,6 +39,7 @@ function checkAward(){
 		$('#award_modal').modal({
 			keyboard : true
 		});
+		
 		$.post("/teacherms/Admin/admin_getTeacherTableInfoById",
 				{tableId:$(this).siblings().val(),tableName:"TeacherAward"},function(xhr){
 

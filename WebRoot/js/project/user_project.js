@@ -11,6 +11,7 @@ function userProject(){
 			var xhr=xhr_data.ObjDatas;
 			var str="";
 			for(i=0;i<xhr.length;i++){
+				var dataStatus=xhr[i].dataStatus;
 				str+="<tr>";
 			    str+="<td>"+(i+1)+"</td>";
 			    str+="<td>"+xhr[i].projectName+"</td>";
@@ -18,14 +19,14 @@ function userProject(){
 			    str+="<td>"+xhr[i].projectSource+"</td>";
 			    str+="<td>"+xhr[i].level+"</td>";
 			    str+="<td>"+xhr[i].projectNo+"</td>";
-			    if(data.dataState=="10"){
-				    str += '<td><input type="hidden" value="' + xhr[i].awardId  + '" ><button class="btn btn-default btn-xs relieveButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button><button class="btn btn-default btn-xs viewButton" title="提交审核"><i class="fa fa-search-plus fa-lg"  aria-hidden="true"></i></button></td>';		
+			    if(dataStatus=="10"){
+				    str += '<td><input type="hidden" value="' + xhr[i].projectId  + '" ><button class="btn btn-default btn-xs relieveButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button><button class="btn btn-default btn-xs viewButton" title="提交审核"><i class="fa fa-search-plus fa-lg"  aria-hidden="true"></i></button></td>';		
 			    }
-			    if(data.dataState=="20"||data.dataState=="30"){
-				    str += '<td><input type="hidden" value="' + xhr[i].awardId  + '" ><button class="btn btn-default btn-xs viewButton" title="查看"><i class="fa fa-search-plus fa-lg"  aria-hidden="true"></i></button></td>';		
+			    if(dataStatus=="20"||data.dataState=="30"){
+				    str += '<td><input type="hidden" value="' + xhr[i].projectId  + '" ><button class="btn btn-default btn-xs viewButton" title="查看"><i class="fa fa-search-plus fa-lg"  aria-hidden="true"></i></button></td>';		
 			    }
-			    if(data.dataState=="40"){
-				    str += '<td><input type="hidden" value="' + xhr[i][0].awardId  + '" ><button class="btn btn-default btn-xs relieveButton" title="解除固化"><i class="fa fa-chain-broken fa-lg"></i></button><button class="btn btn-default btn-xs viewButton" title="查看"><i class="fa fa-search-plus fa-lg"  aria-hidden="true"></i></button></td>';		
+			    if(dataStatus=="40"){
+				    str += '<td><input type="hidden" value="' + xhr[i][0].projectId  + '" ><button class="btn btn-default btn-xs relieveButton" title="解除固化"><i class="fa fa-chain-broken fa-lg"></i></button><button class="btn btn-default btn-xs viewButton" title="查看"><i class="fa fa-search-plus fa-lg"  aria-hidden="true"></i></button></td>';		
 			    }
 			    str+="</tr>";   
 			}
@@ -72,4 +73,26 @@ function userProject(){
 			$('.end-button').unbind().remove();
 		});
 	});
+	$('.viewButton').unbind().click(function(){
+		$('#project_modal').modal({
+			keyboard : true
+		});
+		imgUpload();
+		$.post("/teacherms/Teacher/teacher_userGetTableInfoByTableId",
+				{tableId:$(this).siblings().val(),tableName:"TeacherProject"},function(xhr){
+					var inf = $('.table_infomation');
+				  $("#project_modal input,select").each(function(){
+					 var na= $(this).attr("name").split(".")[1];
+				 if(na=="userId"){
+						 $(this).val(xhr.user.userId);
+					 }
+				 else if(na=="userName"){
+						 $(this).val(xhr.user.userName);
+					 }
+				 else $(this).val(xhr.object[na]);
+				  })
+				  
+				},"json");
+		$(".review-info").remove();
+	})
 }

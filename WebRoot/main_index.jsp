@@ -26,14 +26,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="/css/bootstrap.min.css" />
 
   </head>
-  
+  <script type="text/javascript" src="js/jquery-3.1.1.min.js" ></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
  <body>
  
 		<s:action name="page_nav" namespace="/Page" executeResult="true" />
 
 		
-			<script type="text/javascript" src="js/jquery-3.1.1.min.js" ></script>
-			<script type="text/javascript" src="js/bootstrap.min.js"></script>
+			
 			  <script type="text/javascript" src="js/com/check_com.js" ></script>
 		    <script type="text/javascript" src="js/main_index.js" ></script> 
 		   

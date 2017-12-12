@@ -36,6 +36,7 @@ function checkPatent(){
 		$('#patent_modal').modal({
 			keyboard : true
 		})
+		imgUpload();
 		$.post("/teacherms/Admin/admin_getTeacherTableInfoById",
 				{tableId:$(this).siblings().val(),tableName:"TeacherPatent"},function(xhr){
 				var inf = $('.table_infomation');

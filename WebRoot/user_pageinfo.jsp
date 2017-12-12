@@ -64,7 +64,7 @@
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-plus"></i>添加</button>
+					<button class="btn btn-default btn-addon btn-sm add-btn"><i class="fa fa-plus"></i>添加</button>
 					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>导出</button>
 					<!--按条件筛选-->
 					<div id="search">
@@ -417,7 +417,7 @@
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-plus"></i>添加</button>
+					<button class="btn btn-default btn-addon btn-sm add-btn"><i class="fa fa-plus"></i>添加</button>
 					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>导出</button>
 					<div id="search">
 						<label>按条件搜索：</label>
@@ -491,7 +491,7 @@
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-plus"></i>添加</button>
+					<button class="btn btn-default btn-addon btn-sm add-btn"><i class="fa fa-plus"></i>添加</button>
 					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>导出</button>
 					<div id="search">
 						<label>按条件搜索：</label>
@@ -562,7 +562,7 @@
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-plus"></i>添加</button>
+					<button class="btn btn-default btn-addon btn-sm add-btn"><i class="fa fa-plus"></i>添加</button>
 					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>导出</button>
 					<div id="search">
 						<label>按条件搜索：</label>
@@ -636,7 +636,7 @@
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-plus"></i>添加</button>
+					<button class="btn btn-default btn-addon btn-sm add-btn"><i class="fa fa-plus"></i>添加</button>
 					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>导出</button>
 					<div id="search">
 						<label>按条件搜索：</label>
@@ -704,7 +704,7 @@
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-plus"></i>添加</button>
+					<button class="btn btn-default btn-addon btn-sm add-btn"><i class="fa fa-plus"></i>添加</button>
 					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>导出</button>
 					<div id="search">
 						<label>按条件搜索：</label>
