@@ -134,7 +134,6 @@ $(function() {
 							if (xhr.readyState == 4) {
 								if (xhr.status == 200) {
 									data.tableName = "TeacherInfo";
-									data.dataState = "40";
 									userInfo();
 								}
 							}
@@ -145,21 +144,18 @@ $(function() {
 					case '#award':
 						$('#award').load('user_pageinfo.jsp #user_award_table_audit', function() {
 							data.tableName = "TeacherAward";
-							data.dataState = "20";
 							userAward();
 						});
 						break;
 					case '#works':
 						$('#works').load('user_pageinfo.jsp #user_works_table_audit', function() {
 							data.tableName = "TeacherWorks";
-							data.dataState = "20";
 							userWorks();
 						});
 						break;
 					case '#paper':
 						$('#paper').load('user_pageinfo.jsp #user_paper_table_audit', function() {
 							data.tableName = "TeacherPaper";
-							data.dataState = "20";
 							userPaper();
 						});
 						break;
@@ -172,7 +168,6 @@ $(function() {
 					case '#project':
 						$('#project').load('user_pageinfo.jsp #user_project_table_audit', function() {
 							data.tableName = "TeacherProject";
-							data.dataState = "20";
 							userProject();
 						});
 						break;

@@ -78,18 +78,34 @@ tbody {
 	font-size: 18px;
 	color: #42A5F5;
 }
-
-.tab {
+.user-table{
 	width: 100% !important;
-	table-layout: fixed !important;
+	table-layout:fixed !important;
 }
+.com-table {
+	margin:0 auto;
+	width: 600px !important;
+}
+
+.com-table input {
+	width:250px;
+	margin-left:-40%;
+}
+.com-table select {
+	width:250px;
+	margin-left:-40%;
+} 
+.com-table tr:nth-child(odd) td {
+	width:100px;
+} 
 
 .tab tr {
-	height: 35px !important;
+	height: 40px !important;
+	
 }
-#info_modal .modal-lg{
+#info_modal .modal-lg{ 
 	background:white;
-	width:800px;
+	width:600px;
 }
 #page a:hover {
 	cursor: pointer;
@@ -145,8 +161,6 @@ tbody {
 	background-color: white;
 	webkit-transition: box-shadow .3s ease-in,-webkit-transform .2s ease-in;
 	transition:box-shadow .3s ease-in,transform .2s ease-in;
-	
-	
 }
 .innner_ul li:hover{
 	 box-shadow: 0 .4rem .5rem rgba(0,0,0,.06);	 

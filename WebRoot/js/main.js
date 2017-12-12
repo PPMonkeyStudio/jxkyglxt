@@ -160,8 +160,6 @@ $(function(){
 							if(reg.test(card_num) === false){
 								$(this).val("");
 							}else{
-								
-							
 							if(parseInt(card_num.substr(16, 1)) % 2 == 1) {
 								$(".sele").find("option[value='男']").attr("selected", "selected");
 								//是男则执行代码 ...
@@ -211,13 +209,66 @@ function time(){
 		laydate(start);
 		laydate(end);
 }
-/*$(function(){
-	$('#last_ul li').hover(function(){
-		$('#addImg').src = "img/add(1).png";
-	},function(){
-		$('#addImg').src = "img/add(2).png";
+
+/*附件图片上传js*/
+function imgUpload(){
+	$('.addInfo').unbind().click(function(){
+		$(this).before('<div class="img-default">'+'<div class="img">'
+				+'<img src="img/index.png" alt="img" class="img-show">'
+				+'</div>'
+				+'<div class="info">'
+				+'<div class="img-control-btn modify-btn" title="编辑">'
+				+'<img src="img/modi(5).png" />'
+				+'</div>'
+				+'<div class="img-control-btn delete-btn" title="删除">'
+				+'<img src="img/delete(2).png" />'
+				+'</div>'
+				+'</div>'
+				+'<input type="file" multiple onchange="previewFile(this)" accept="image/gif, image/pdf, image/png, image/jpeg" style="display:none" >'
+				+'</div>')
+	$('.delete-btn').unbind().click(function(){
+	$(this).parent().parent().remove();
+})
+$('.modify-btn').unbind().click(function(){
+		$(this).parent().siblings('input').click();
+		$(this).parent().parent().remove();
 	})
-})*/
+		})
+}
+function previewFile(input_obj) {
+	//console.log($(input_obj).prop('files'));
+	var files = $(input_obj).prop('files');
+    for(var i in files){
+	   console.log(files[i]);
+	   var reader = new FileReader();
+	   reader.onloadend = function () {  
+	        //(this.result); 
+		   $('.addInfo').before('<div class="img-default">'+'<div class="img">'
+					+'<img src="'+this.result+'" alt="img" class="img-show">'
+					+'</div>'
+					+'<div class="info">'
+					+'<div class="img-control-btn modify-btn" title="编辑">'
+					+'<img src="img/modi(5).png" />'
+					+'</div>'
+					+'<div class="img-control-btn delete-btn" title="删除">'
+					+'<img src="img/delete(2).png" />'
+					+'</div>'
+					+'</div>'
+					+'<input type="file" value="'+files[i]+'" onchange="previewFile(this)" accept="image/gif, image/pdf, image/png, image/jpeg" style="display:none" >'
+					+'</div>')
+			$('.delete-btn').unbind().click(function(){
+				$(this).parent().parent().remove();
+			});
+			$('.modify-btn').unbind().click(function(){
+				$(this).parent().siblings('input').click();
+	});
+	    }  
+	   reader.readAsDataURL(files[i]);
+   }
+	}
 
-
+function modifyFiles(){
+	var files = $(input_obj).prop('files');
+	
+}
 

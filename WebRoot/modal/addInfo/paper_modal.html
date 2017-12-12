@@ -14,7 +14,7 @@
 					</div>
 					<div class="modal-body">
 						<div id="main_body">
-							<table class="tab">
+							<table class="tab com-table">
 								<tbody class="basic">
 									<tr>
 										<td>工号：</td>
@@ -125,21 +125,17 @@
 									<td><input name="teacherPaper.attachmentPath"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
-								<tr>
-									<td>数据状态：：</td>
-									<td><select name="teacherPaper.dataStatus" id="dataStatus"
-										class="form-control table_infomation">
-											<option value="10">个人可添加、修改</option>
-											<option value="20">院系管理员可添加、修改、删除、审核</option>
-											<option value="30">科研处管理员修改、审核</option>
-											<option value="40">固化</option>
-									</select></td>
+								<tr class="img-control">
+								<td>附件上传：</td>
+									<td class="img-upload">
+						<div class="addInfo">
+						  <div class="img-control-btn add-btn" >
+						   <img src="img/add.png" />
+						  </div>
+						</div>
+									</td>
 								</tr>
-								<tr>
-									<td>创建时间：</td>
-									<td><input name="teacherPaper.createTime"
-										class="form-control  table_infomation" type="text"></td>
-								</tr>
+								
 							</table>
 
 						</div>
