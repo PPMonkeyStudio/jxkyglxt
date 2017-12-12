@@ -35,6 +35,7 @@ import com.teacherms.all.domain.TeacherPatent;
 import com.teacherms.all.domain.TeacherProject;
 import com.teacherms.all.domain.TeacherWorks;
 import com.teacherms.all.domain.User;
+import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 import com.teacherms.staffinfomanage.service.TeacherService;
 
 import util.*;
@@ -92,9 +93,9 @@ public class TeacherAction extends ActionSupport {
 	// 用户通过信息表ID获取单条信息
 	public void userGetTableInfoByTableId() {
 		try {
-			List<Object> list = teacherService.userGetTableInfoByTableId(tableName, tableId);
+			TableInfoAndUserVo obj = teacherService.userGetTableInfoByTableId(tableName, tableId);
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
-			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(list));
+			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(obj));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

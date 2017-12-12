@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.teacherms.all.domain.TeacherInfo;
 import com.teacherms.all.domain.User;
+import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 
 public interface TeacherDao {
 
@@ -12,7 +13,7 @@ public interface TeacherDao {
 
 	Long getCountInOnetable(String userid, String tableUserIds, String tableName);
 
-	List<Object> getTableInfoByTableId(String tableName, String tableInfoIdName, String tableId);
+	TableInfoAndUserVo getTableInfoByTableId(String tableName, String tableInfoIdName, String tableId);
 
 	String addTableInfo(Object obj);
 

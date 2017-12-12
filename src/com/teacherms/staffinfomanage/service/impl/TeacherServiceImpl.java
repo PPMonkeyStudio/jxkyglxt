@@ -28,6 +28,7 @@ import com.teacherms.all.domain.TeacherProject;
 import com.teacherms.all.domain.TeacherWorks;
 import com.teacherms.all.domain.User;
 import com.teacherms.satffinfomanage.dao.TeacherDao;
+import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 import com.teacherms.staffinfomanage.service.TeacherService;
 
 import util.Attachment;
@@ -130,9 +131,9 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public List<Object> userGetTableInfoByTableId(String tableName, String tableId) {
+	public TableInfoAndUserVo userGetTableInfoByTableId(String tableName, String tableId) {
 		// list内部的元素为Object(字符串)+Object(字符串)+Object(对象)
-		List<Object> list = teacherDao.getTableInfoByTableId(tableName, getTableInfoIdName(tableName), tableId);
+		TableInfoAndUserVo list = teacherDao.getTableInfoByTableId(tableName, getTableInfoIdName(tableName), tableId);
 		/*
 		 * // 将最后的对象转化为数组 Class cla = list.get(0)[2].getClass(); try { //
 		 * 创建与对象属性值等长的数组 Object[] oo = new
