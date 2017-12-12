@@ -31,9 +31,11 @@ import com.teacherms.satffinfomanage.dao.TeacherDao;
 import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 import com.teacherms.staffinfomanage.service.TeacherService;
 
+import sun.misc.BASE64Encoder;
 import util.Attachment;
 import util.ExcelHead;
 import util.ExportExcelCollection;
+import util.GudgmentImage;
 import util.MapUtil;
 import util.PageVO;
 import util.uuid;
@@ -152,7 +154,6 @@ public class TeacherServiceImpl implements TeacherService {
 	public String completeBasicInformation(TeacherInfo teacherInfo, String userId, String username) {
 		/**
 		 * 两个对象的数据转换：list中对象数据转到teacherInfo中，
-		 * 
 		 */
 		String rusult = "error";
 		try {
@@ -207,9 +208,7 @@ public class TeacherServiceImpl implements TeacherService {
 			Field dataStatus = cla.getDeclaredField("dataStatus");
 			dataStatus.setAccessible(true);
 			dataStatus.set(obj, "10");
-
 			result = teacherDao.addTableInfo(obj);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -274,6 +273,47 @@ public class TeacherServiceImpl implements TeacherService {
 			e.printStackTrace();
 		}
 		return rusult;
+	}
+
+	@Override
+	public List<String> getBase64Image(String name, String tableName, String downloadInfoId) {
+		// Attachmentpath: E:/Attachment/
+		// 附件路径
+		String path = Attachment.getAttachmentpath() + name + "/" + tableName;
+		// 获取文件夹下所有文件
+		File[] fs = new File(path).listFiles();
+		// base64集合
+		List<String> info = new ArrayList<String>();
+		// 分割所要查询的信息ID
+		String[] downloadInfoId_arr = downloadInfoId.split(",");
+		// 创建一个输入流
+		FileInputStream fis = null;
+		try {
+			for (String infoId : downloadInfoId_arr) {
+				for (File f1 : fs) {
+					if (f1.getName().indexOf(infoId) > -1) {
+						fis = new FileInputStream(f1);
+						if (!"unknown".equals(GudgmentImage.getPicType(fis))) {
+							InputStream inputStream = new FileInputStream(f1);
+							byte[] data = new byte[inputStream.available()];
+							inputStream.read(data);
+							inputStream.close();
+							BASE64Encoder encoder = new BASE64Encoder();
+							info.add(encoder.encode(data));
+						} else {
+							info.add("file");
+						}
+					}
+				}
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return info;
 	}
 
 	@Override
