@@ -7,6 +7,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.teacherms.all.domain.TeacherInfo;
+import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 
 import util.PageVO;
 
@@ -36,7 +37,7 @@ public interface TeacherService {
 	 * @param userid
 	 * @return 信息对象
 	 */
-	List<Object> userGetTableInfoByTableId(String tableName, String tableId);
+	TableInfoAndUserVo userGetTableInfoByTableId(String tableName, String tableId);
 
 	/**
 	 * ---用户添加用户的信息
