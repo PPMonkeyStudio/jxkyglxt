@@ -81,4 +81,14 @@ public interface AdminDao {
 	 */
 	Department getDepartmentById(String departmentId);
 
+	/**
+	 * ---导出专用查询
+	 * 
+	 * @param tableName
+	 * @param tableInfoIdName
+	 * @param query_id
+	 * @return
+	 */
+	List<Object> export_getAInfomationByTableId(String tableName, String tableInfoIdName, String query_id);
+
 }

@@ -1,10 +1,21 @@
 package com.teacherms.staffinfomanage.service.impl;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -19,6 +30,7 @@ import com.teacherms.all.domain.User;
 import com.teacherms.satffinfomanage.dao.TeacherDao;
 import com.teacherms.staffinfomanage.service.TeacherService;
 
+import util.Attachment;
 import util.ExcelHead;
 import util.ExportExcelCollection;
 import util.MapUtil;
@@ -98,14 +110,14 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Override
 	public XSSFWorkbook getExcel(String query_name, String tableName, String query_id) {
-		// 创建List<Object>
-		List<Object> list_all = new ArrayList<Object>();
-		// 分割所要查询的信息表ID
-		String[] id = query_id.substring(0, query_id.length() - 1).split(",");
-		// 循环查询每一个所要查询的信息表，并记录到list_all中
-		for (int i = 0; i < id.length; i++) {
-			list_all.add(teacherDao.getTableInfoByTableId(tableName, getTableInfoIdName(tableName), id[i]));
+		int index = 0;
+		String[] exportid_arr = query_id.split(",");
+		for (String str : exportid_arr) {
+			exportid_arr[index] = "'" + str + "'";
+			index++;
 		}
+		List<Object> list_all = teacherDao.export_getAInfomationByTableId(tableName, getTableInfoIdName(tableName),
+				Arrays.toString(exportid_arr).replaceAll("[\\[\\]]", ""));
 		/**
 		 * 1.query_num：传入所需要查询的字段
 		 * 2.ExcelHead.getExcelHeadArray(tableName)：依据tablename传入表格头信息
@@ -113,32 +125,24 @@ public class TeacherServiceImpl implements TeacherService {
 		 * 返回一个execl表
 		 */
 		XSSFWorkbook workbook = ExportExcelCollection.exportExcel(query_name, ExcelHead.getExcelHeadArray(tableName),
-				MapUtil.java2Map(list_all));
+				MapUtil.java2Map(list_all, query_name));
 		return workbook;
 	}
 
 	@Override
-	public List<Object[]> userGetTableInfoByTableId(String tableName, String tableId) {
+	public List<Object> userGetTableInfoByTableId(String tableName, String tableId) {
 		// list内部的元素为Object(字符串)+Object(字符串)+Object(对象)
-		List<Object[]> list = teacherDao.getTableInfoByTableId(tableName, getTableInfoIdName(tableName), tableId);
-		// 将最后的对象转化为数组
-		Class cla = list.get(0)[2].getClass();
-		try {
-			// 创建与对象属性值等长的数组
-			Object[] oo = new Object[cla.getDeclaredFields().length];
-			// 遍历每一个属性，并且获得属性值，存入数组中
-			for (int i = 0; i < oo.length; i++) {
-				Field f = cla.getDeclaredFields()[i];
-				f.setAccessible(true);
-				oo[i] = f.get(list.get(0)[2]);
-			}
-			// list中对象的位置转存为数组
-			list.get(0)[2] = oo;
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
+		List<Object> list = teacherDao.getTableInfoByTableId(tableName, getTableInfoIdName(tableName), tableId);
+		/*
+		 * // 将最后的对象转化为数组 Class cla = list.get(0)[2].getClass(); try { //
+		 * 创建与对象属性值等长的数组 Object[] oo = new
+		 * Object[cla.getDeclaredFields().length]; // 遍历每一个属性，并且获得属性值，存入数组中 for
+		 * (int i = 0; i < oo.length; i++) { Field f =
+		 * cla.getDeclaredFields()[i]; f.setAccessible(true); oo[i] =
+		 * f.get(list.get(0)[2]); } // list中对象的位置转存为数组 list.get(0)[2] = oo; }
+		 * catch (IllegalArgumentException e) { e.printStackTrace(); } catch
+		 * (IllegalAccessException e) { e.printStackTrace(); }
+		 */
 		// 返回List<Object[]>---list内部的元素为Object(字符串)+Object(字符串)+Object[]数组)
 		return list;
 	}
@@ -151,9 +155,9 @@ public class TeacherServiceImpl implements TeacherService {
 		 */
 		String rusult = "error";
 		try {
-			List<Object[]> list = teacherDao.getTeacherInfoByUserId(userId);
+			TeacherInfo teach = (TeacherInfo) teacherDao.getTeacherInfoByUserId(userId);
 			// 获取TeacherInfo类中全部的属性
-			Class cla = TeacherInfo.class;
+			Class<TeacherInfo> cla = TeacherInfo.class;
 			Field[] f = cla.getDeclaredFields();
 			for (int i = 0; i < f.length; i++) {
 				// 设置可以使用
@@ -162,7 +166,7 @@ public class TeacherServiceImpl implements TeacherService {
 				if (str != null && str != "") {
 					continue;
 				} else {
-					f[i].set(teacherInfo, f[i].get(list.get(0)));
+					f[i].set(teacherInfo, f[i].get(teach));
 				}
 			}
 			// 修改数据状态为管理员审核状态
@@ -185,9 +189,9 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Override
 	public String addTableInfo(String userid, Object obj, String tableName) {
-		String re = null;
+		String result = null;
 		try {
-			Class cla = obj.getClass();
+			Class<? extends Object> cla = obj.getClass();
 			// 获取对象中第一个属性
 			Field f = cla.getDeclaredField(getTableInfoIdName(tableName));
 			// 属性设置可以访问
@@ -203,12 +207,12 @@ public class TeacherServiceImpl implements TeacherService {
 			dataStatus.setAccessible(true);
 			dataStatus.set(obj, "10");
 
-			re = teacherDao.addTableInfo(obj);
+			result = teacherDao.addTableInfo(obj);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return re;
+		return result;
 	}
 
 	@Override
@@ -233,8 +237,101 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public List<Object[]> userGetTeacherInfo(String userId) {
+	public Object userGetTeacherInfo(String userId) {
 		return teacherDao.getTeacherInfoByUserId(userId);
+	}
+
+	@Override
+	public String userAttachmentUpload(List<File> file1, List<String> file1FileName, List<String> file1ContentType,
+			String userName, String tableName, String tableId) {
+		String rusult = "success";
+		String path = "E:/Attachment/" + userName + "/" + tableName;
+		File file = new File(path);
+		try {
+			// 如果文件夹不存在则创建文件夹
+			if (!file.exists()) {
+				System.out.println("创建新文件夹");
+				file.mkdirs();
+			}
+			for (int i = 0; i < file1.size(); i++) {
+				FileOutputStream out = new FileOutputStream(
+						path + "/" + tableId + "_" + (i + 1) + file1ContentType.get(i));
+				InputStream in = new FileInputStream(file1.get(i));
+				byte[] buf = new byte[1024];
+				int length = 0;
+				while (-1 != (length = in.read(buf))) {
+					out.write(buf, 0, length);
+				}
+				in.close();
+				out.close();
+			}
+		} catch (FileNotFoundException e) {
+			rusult = "error";
+			e.printStackTrace();
+		} catch (IOException e) {
+			rusult = "error";
+			e.printStackTrace();
+		}
+		return rusult;
+	}
+
+	@Override
+	public File downloadAttachment(String username, String tableName, String downloadInfoId) {
+		// Attachmentpath: E:/Attachment/
+		// 附件路径
+		String path = Attachment.getAttachmentpath() + username + "/" + tableName;
+		// 选取的附件集合、
+		List<File> List_attachment = new ArrayList<File>();
+		Map<String, String> id_name_Map = new HashMap<String, String>();
+		System.out.println(path);
+		// 获取文件夹下所有文件
+		File[] fs = new File(path).listFiles();
+		// 分割所要查询的信息ID
+		String[] downloadInfoId_arr = downloadInfoId.split(",");
+		for (String infoId : downloadInfoId_arr) {
+			// 获取信息名字.对应信息id
+			id_name_Map.put(infoId, teacherDao.getTableInfoName(tableName, getTableInfoName(tableName),
+					getTableInfoIdName(tableName), infoId));
+			for (File f1 : fs) {
+				if (f1.getName().indexOf(infoId) > -1) {
+					List_attachment.add(f1);
+				}
+			}
+		}
+		/**
+		 * 创建一个临时压缩文件,把文件流全部注入到这个文件中 这里的文件你可以自定义是.rar还是.zip
+		 */
+		File file = new File("E:/Attachment/zip/zi.zip");
+		byte[] buf = new byte[1024];
+		try {
+			// 创建压缩包文件
+			file.createNewFile();
+
+			ZipOutputStream zipOut = new ZipOutputStream(new FileOutputStream(file));
+			for (File f : List_attachment) {
+				// new the BuuferedInputStream
+				FileInputStream in = new FileInputStream(f);
+				// the file entry ,set the file name in the zip
+				// file
+				String f_ID = f.getName().split("_")[0];
+				String zipEntry_name = f.getName().replaceAll(f_ID, id_name_Map.get(f_ID));
+				System.out.println(zipEntry_name);
+				zipOut.putNextEntry(new ZipEntry(zipEntry_name));
+				// 向压缩文件中输出数据
+				int len;
+				while ((len = in.read(buf)) > 0) {
+					zipOut.write(buf, 0, len);
+				}
+				zipOut.closeEntry();
+				in.close();
+			}
+			zipOut.close();
+			// 压缩完毕,file中已存在有zip
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return file;
 	}
 
 	/**
@@ -265,6 +362,23 @@ public class TeacherServiceImpl implements TeacherService {
 			cla = TeacherWorks.class;
 		}
 		return cla.getDeclaredFields()[0].getName();
+	}
+
+	/**
+	 * 获取信息的名称
+	 * 
+	 * @return 名称
+	 */
+	private String getTableInfoName(String tableName) {
+		String str = tableName.replaceAll("Teacher", "").toLowerCase() + "Name";
+		/*
+		 * switch (tableName) { case "TeacherAward": str = "awardName"; break;
+		 * case "TeacherInfo": str = ""; break; case "TeacherPaper": str =
+		 * "paperName"; break; case "TeacherPatent": str = "patentName"; break;
+		 * case "TeacherProject": str = "projectName"; break; case
+		 * "TeacherWorks": str = "worksName"; break; default: break; }
+		 */
+		return str;
 	}
 
 	/**
@@ -315,4 +429,5 @@ public class TeacherServiceImpl implements TeacherService {
 		}
 		return str;
 	}
+
 }

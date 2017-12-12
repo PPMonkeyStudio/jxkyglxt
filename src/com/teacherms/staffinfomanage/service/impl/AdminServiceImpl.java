@@ -113,15 +113,22 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public XSSFWorkbook getExcel(String query_name, String tableName, String query_id) {
-		// 创建List<Object>
-		List<Object> list_all = new ArrayList<Object>();
-		// 分割所要查询的信息表ID
-		String[] id = query_id.substring(0, query_id.length()).split(",");
-		// 循环查询每一个所要查询的信息表，并记录到list_all中
-		for (int i = 0; i < id.length; i++) {
-			list_all.add(adminDao.getAInfomationByTableId(tableName, getTableInfoIdName(tableName), id[i]));
+	public XSSFWorkbook getExcel(String query_num, String tableName, String query_id) {
+		int index = 0;
+		String[] exportid_arr = query_id.split(",");
+		for (String str : exportid_arr) {
+			exportid_arr[index] = "'" + str + "'";
+			index++;
 		}
+		// 创建List<Object>
+		// List<Object> list_all = new ArrayList<Object>();
+		// 分割所要查询的信息表ID
+		// String[] id = query_id.split(",");
+		// 循环查询每一个所要查询的信息表，并记录到list_all中
+		List<Object> list_all = adminDao.export_getAInfomationByTableId(tableName, getTableInfoIdName(tableName),
+				Arrays.toString(exportid_arr).replaceAll("[\\[\\]]", ""));
+		// list_all.add(adminDao.getAInfomationByTableId(tableName,
+		// getTableInfoIdName(tableName), query_id));
 
 		/**
 		 * 1.query_num：传入所需要查询的字段
@@ -129,8 +136,8 @@ public class AdminServiceImpl implements AdminService {
 		 * 3.MapUtil.java2Map(list_all):将list_all中的对象全部用MapUtil封装到List<Map<String,String>>中
 		 * 返回一个execl表
 		 */
-		XSSFWorkbook workbook = ExportExcelCollection.exportExcel(query_name, ExcelHead.getExcelHeadArray(tableName),
-				MapUtil.java2Map(list_all));
+		XSSFWorkbook workbook = ExportExcelCollection.exportExcel(query_num, ExcelHead.getExcelHeadArray(tableName),
+				MapUtil.java2Map(list_all, query_num));
 		return workbook;
 	}
 
@@ -289,26 +296,26 @@ public class AdminServiceImpl implements AdminService {
 	 * @return 第一个参数的Name
 	 */
 	private String getTableInfoIdName(String tableName) {
-		Class cla = null;
+		String idname = null;
 		if (("TeacherAward").equals(tableName)) {
-			cla = TeacherAward.class;
+			idname = "awardId";
 		}
 		if (("TeacherInfo").equals(tableName)) {
-			cla = TeacherInfo.class;
+			idname = "teacherInfoId";
 		}
 		if (("TeacherPaper").equals(tableName)) {
-			cla = TeacherPaper.class;
+			idname = "paperId";
 		}
 		if (("TeacherPatent").equals(tableName)) {
-			cla = TeacherPatent.class;
+			idname = "patentId";
 		}
 		if (("TeacherProject").equals(tableName)) {
-			cla = TeacherProject.class;
+			idname = "projectId";
 		}
 		if (("TeacherWorks").equals(tableName)) {
-			cla = TeacherWorks.class;
+			idname = "worksId";
 		}
-		return cla.getDeclaredFields()[0].getName();
+		return idname;
 	}
 
 	/**

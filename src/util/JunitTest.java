@@ -1,12 +1,15 @@
 package util;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 
 import com.teacherms.all.domain.*;
 
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -56,10 +59,24 @@ public class JunitTest {
 
 	@Test
 	public void test_export() {
-		XSSFWorkbook workbook = adminService.getExcel("1,2,3,4,5,6", "TeacherAward",
+		XSSFWorkbook workbook = adminService.getExcel("1,2,3,6,7,8,9,14,15", "TeacherAward",
 				"86902b8f-6f7f-4c39-9970-b126e2a2ff5b,88e32f69-8508-4648-b98d-acb1c859cd31");
 		try {
 			FileOutputStream out = new FileOutputStream("E:/Attachment/张三/TeacherAward/test.xlsx");
+			workbook.write(out);
+			out.flush();
+			out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void test_teacher_export() {
+		XSSFWorkbook workbook = teacherService.getExcel("1,2,3,6,7,8,9,14,15", "TeacherAward",
+				"86902b8f-6f7f-4c39-9970-b126e2a2ff5b,88e32f69-8508-4648-b98d-acb1c859cd31");
+		try {
+			FileOutputStream out = new FileOutputStream("E:/Attachment/张三/TeacherAward/teacher.xlsx");
 			workbook.write(out);
 			out.flush();
 			out.close();
@@ -74,4 +91,30 @@ public class JunitTest {
 		System.out.println(new Gson().toJson(listAdmin));
 	}
 
+	@Test
+	public void test_teacher_getoneinfo() {
+		List<Object> listAdmin = teacherService.userGetTableInfoByTableId("TeacherAward",
+				"6ca50c5a-f45d-4fd2-82fc-1d9fb34e67df");
+		System.out.println(new Gson().toJson(listAdmin));
+	}
+
+	@Test
+	public void test_teacher_userAttachmentUpload() {
+		List<File> file1 = new ArrayList<File>();
+		List<String> file1FileName = new ArrayList<String>();
+		List<String> file1ContentType = new ArrayList<String>();
+		File fs = new File("E:/Attachment/imgtest");
+		File[] files = fs.listFiles();
+		System.out.println(files.length);
+		for (File file2 : files) {
+			if (!file2.isDirectory()) {
+				file1.add(file2);
+				file1FileName.add(file2.getName());
+				String path = file2.getAbsolutePath();
+				file1ContentType.add(path.substring(path.indexOf("."), path.length()));
+			}
+		}
+		teacherService.userAttachmentUpload(file1, file1FileName, file1ContentType, "何毅", "TeacherAward",
+				"f2046bac-f4b9-4629-b35b-78f94010cb8d");
+	}
 }

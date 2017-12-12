@@ -1,5 +1,6 @@
 package com.teacherms.staffinfomanage.service;
 
+import java.io.File;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -35,7 +36,7 @@ public interface TeacherService {
 	 * @param userid
 	 * @return 信息对象
 	 */
-	List<Object[]> userGetTableInfoByTableId(String tableName, String tableId);
+	List<Object> userGetTableInfoByTableId(String tableName, String tableId);
 
 	/**
 	 * ---用户添加用户的信息
@@ -74,9 +75,9 @@ public interface TeacherService {
 	 * 
 	 * @param userId
 	 *            登录用户id
-	 * @return 数组
+	 * @return 对象
 	 */
-	List<Object[]> userGetTeacherInfo(String userId);
+	Object userGetTeacherInfo(String userId);
 
 	/**
 	 * ---用户补全或重新填写基本信息
@@ -90,5 +91,36 @@ public interface TeacherService {
 	 * @return success为成功，其他为失败
 	 */
 	String completeBasicInformation(TeacherInfo teacherInfo, String userId, String username);
+
+	/**
+	 * /** ---用户附件上传
+	 * 
+	 * @param file1
+	 *            附件
+	 * @param file1FileName
+	 *            附件名字
+	 * @param file1ContentType
+	 *            附件类型
+	 * @param userName
+	 *            用户名称
+	 * @param tableName
+	 *            信息名称
+	 * @param tableId
+	 *            信息ID
+	 * @return success：成功，error：失败
+	 */
+	String userAttachmentUpload(List<File> file1, List<String> file1FileName, List<String> file1ContentType,
+			String userName, String tableName, String tableId);
+
+	/**
+	 * ---用户下载附件
+	 * 
+	 * @param tableName
+	 *            附件所属信息的名字
+	 * @param downloadInfoId
+	 *            附件的所属id
+	 * @return ZIP文件
+	 */
+	File downloadAttachment(String username, String tableName, String downloadInfoId);
 
 }
