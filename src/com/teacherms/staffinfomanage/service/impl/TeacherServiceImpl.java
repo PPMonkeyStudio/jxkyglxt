@@ -286,20 +286,18 @@ public class TeacherServiceImpl implements TeacherService {
 		List<String> info = new ArrayList<String>();
 		// 分割所要查询的信息ID
 		String[] downloadInfoId_arr = downloadInfoId.split(",");
-		// 创建一个输入流
-		FileInputStream fis = null;
 		try {
 			for (String infoId : downloadInfoId_arr) {
 				for (File f1 : fs) {
 					if (f1.getName().indexOf(infoId) > -1) {
-						fis = new FileInputStream(f1);
-						if (!"unknown".equals(GudgmentImage.getPicType(fis))) {
+						System.out.println(GudgmentImage.getPicType(new FileInputStream(f1)));
+						if (!"unknown".equals(GudgmentImage.getPicType(new FileInputStream(f1)))) {
 							InputStream inputStream = new FileInputStream(f1);
 							byte[] data = new byte[inputStream.available()];
 							inputStream.read(data);
-							inputStream.close();
 							BASE64Encoder encoder = new BASE64Encoder();
 							info.add(encoder.encode(data));
+							inputStream.close();
 						} else {
 							info.add("file");
 						}
