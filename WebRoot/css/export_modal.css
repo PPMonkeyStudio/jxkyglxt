@@ -9,20 +9,6 @@
  #check input:checked + label {
 }
 
-#modal-content{
-padding:0;
-}
-/* .modal-lg{
-	width:67%;
-} */
-.modal-dialog{
-	width:800px !important;
-}
-.tab_content{
-	width:100%;
-	max-height: calc(100vh - 15.6rem);
-    overflow: auto;
-}
 .group-list{
 	width:100%;
 	height:60px;

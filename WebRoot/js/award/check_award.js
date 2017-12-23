@@ -42,7 +42,6 @@ function checkAward(){
 		
 		$.post("/teacherms/Admin/admin_getTeacherTableInfoById",
 				{tableId:$(this).siblings().val(),tableName:"TeacherAward"},function(xhr){
-
 					var inf = $('.table_infomation');
 				  $("#award_modal input,select").each(function(){
 					 var na= $(this).attr("name").split(".")[1];

@@ -47,7 +47,7 @@
 			<li>
 				<ul class="innner_ul">
 					<li>
-						<h4>周锦春</h4> <span>信息与计算机工程学院副院长周锦春教授</span>
+						<h4>周锦春</h4> <span>信息与计算机工程学院院长周锦春教授</span>
 					</li>
 				</ul>
 			</li>
@@ -75,13 +75,6 @@
 			<li>
 				<ul class="innner_ul">
 					<li>
-						<h4>危远峰</h4> <span>信息与计算机工程学院办公室主任危远峰老师</span>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<ul class="innner_ul">
-					<li>
 						<h4>何志芬</h4> <span>信息与计算机工程学院教师何志芬博士</span>
 					</li>
 				</ul>
@@ -90,6 +83,13 @@
 				<ul class="innner_ul">
 					<li>
 						<h4>罗晓娟</h4> <span>信息与计算机工程学院教师罗晓娟副教授</span>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<ul class="innner_ul">
+					<li>
+						<h4>梁莉菁</h4> <span>信息与计算机工程学院教师梁莉菁副教授</span>
 					</li>
 				</ul>
 			</li>

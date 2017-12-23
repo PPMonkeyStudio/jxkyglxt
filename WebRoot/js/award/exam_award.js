@@ -15,7 +15,7 @@ function examAward(){
 				str+="<tr>";
 			    str+="<td>"+(i+1)  +"</td>";
 			    str+="<td>"+xhr[i][0].achievementName+"</td>";
-			    str+="<td>"+xhr[i][s0].awardName+"</td>";
+			    str+="<td>"+xhr[i][0].awardName+"</td>";
 			    str+="<td>"+xhr[i][0].awardUserNames+"</td>";
 			    str+="<td>"+xhr[i][0].awardType+"</td>";
 			    str+="<td>"+xhr[i][0].awardClass+"</td>"; 

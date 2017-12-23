@@ -1,19 +1,18 @@
 ﻿
 .laydate-icon {
 	border: 1px solid #B1D2EC;
-	background-image: url(icon.png)
+	background-image: url(icon.png);
 }
 
-.laydate_body .laydate_box, 
+.laydate_body .laydate_box,
 .laydate_body .laydate_ym,
 .laydate_body .laydate_ym .laydate_yms,
- .laydate_body .laydate_table, 
-.laydate_body .laydate_table td,
-.laydate_body .laydate_table tbody,
+.laydate_body .laydate_table,
+/*.laydate_body .laydate_table td,//表格body的边框*/
 .laydate_body .laydate_bottom #laydate_hms,
 .laydate_body .laydate_time,
 .laydate_body .laydate_bottom .laydate_btn a {
-border: 1px solid #B1D2EC;
+border: 1px solid #B1D2EC;//表格边框线
 }
 /*翻页样式*/
 .laydate_body .laydate_y .laydate_yms a,
@@ -51,7 +50,6 @@ border: 1px solid #B1D2EC;
 .laydate_body .laydate_box a,
 .laydate_body .laydate_box a:hover {
 	color: #1F547E;
-	font-size:12px;
 }
 /*今天日期的样式*/
 .laydate_body .laydate_click {
@@ -61,7 +59,6 @@ border: 1px solid #B1D2EC;
 .laydate_body .laydate_top {
 	border-top: 1px solid #B1D2EC;
 }
-
 
 .laydate_body .laydate_ym .laydate_yms {
 	background-color: #fff;
@@ -106,8 +103,9 @@ border: 1px solid #B1D2EC;
 
 .laydate_body .laydate_chnext cite {
 	border-left-style: solid;
-	border-left-color: red;
+	border-left-color: #3081C2;
 }
+
 .laydate_body .laydate_table td {
 	background-color: #fff;
 	color: #1F547E;
@@ -123,7 +121,6 @@ border: 1px solid #B1D2EC;
 
 .laydate_body .laydate_bottom {
 	border-bottom: 1px solid #B1D2EC;
-	
 }
 
 .laydate_body .laydate_bottom #laydate_hms {

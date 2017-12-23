@@ -29,6 +29,7 @@
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 
 <link rel="stylesheet" href="css/top_left.css" />
+<link rel="stylesheet" href="css/jquery-confirm.css" />
 
 <jsp:include page="/modal/addInfo/award_modal.html" flush="true"></jsp:include>
 <jsp:include page="/modal/addInfo/info_modal.html" flush="true"></jsp:include>
@@ -99,7 +100,7 @@
 							class="badge badge-success pull-right">10</span> 更新首页信息
 					</a></li>
 					<li class="divider"></li>
-					<li><a> <i class="fa fa-magnet fa-fw pull-right"
+					<li><a href="javascript:import_to_database()"> <i class="fa fa-magnet fa-fw pull-right"
 							aria-hidden="true"></i> 导入信息
 					</a> <a data-toggle="modal" href="#modal-user-settings"> <i
 							class="fa fa-cog fa-fw pull-right"></i> 修改信息
@@ -182,7 +183,9 @@
 	</div>
 	<!-- ./wrapper -->
 	<!-- Director App -->
+	
 	<script src="js/app.js" type="text/javascript"></script>
 	<script src="js/main_index.js" type="text/javascript"></script>
+	<script src="js/jquery-confirm.js" type="text/javascript"></script>
 </body>
 </html>

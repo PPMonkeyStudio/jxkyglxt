@@ -54,6 +54,7 @@ public class ExcelToBean2 {
 		 * e.printStackTrace(); } }
 		 */
 		try {
+			System.out.println(excleRowLength);
 			for (int i = 0; i < columnName.length; i++) { // 从资源文件中获取
 				// 获取第0行i列的数据
 				String str = row_0.getCell(i).getStringCellValue().trim();
@@ -74,6 +75,7 @@ public class ExcelToBean2 {
 			for (int rowIndex = 1; rowIndex < sheet.getPhysicalNumberOfRows(); rowIndex++) {
 				XSSFRow row = sheet.getRow(rowIndex);
 				Map<String, Object> map = new HashMap<String, Object>();
+				System.out.println(row.getPhysicalNumberOfCells());
 				for (int cellIndex = 0; cellIndex < row.getPhysicalNumberOfCells(); cellIndex++) {
 					// cell
 					XSSFCell cell = row.getCell(cellIndex);
@@ -237,12 +239,14 @@ public class ExcelToBean2 {
 			field.set(object, value + "");
 		} catch (IllegalAccessException e) {
 			System.out.println("不可能抛出的异常");
+		}catch (IllegalArgumentException e1) {
+			System.out.println("this exception");
 			try {
-				field.set(object, "".equals(value) ? 0 : (int) value);
-			} catch (IllegalArgumentException e1) {
-				e1.printStackTrace();
-			} catch (IllegalAccessException e1) {
-				e1.printStackTrace();
+				field.set(object, Integer.parseInt((String) value));
+			} catch (IllegalArgumentException e11) {
+				e11.printStackTrace();
+			} catch (IllegalAccessException e11) {
+				e11.printStackTrace();
 			}
 		}
 	}
