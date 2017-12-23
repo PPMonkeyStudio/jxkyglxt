@@ -200,18 +200,28 @@ public class ExcelToBean {
 				field = superClass.getDeclaredField(fieldName);
 			} catch (NoSuchFieldException e) {
 				System.out.println("异常");
+
 			}
 		}
 		if (field == null)
 			throw new IllegalArgumentException("Could not find field [" + fieldName + "] on target [" + object + "]");
-
 		if (!Modifier.isPublic(field.getModifiers())) {
 			field.setAccessible(true);
 		}
 		try {
-			field.set(object, value);
+			field.set(object, value + "");
 		} catch (IllegalAccessException e) {
 			System.out.println("不可能抛出的异常");
+			try {
+				field.set(object, "".equals(value) ? 0 : (int) value);
+			} catch (IllegalArgumentException e1) {
+				System.out.println("this exception");
+				e1.printStackTrace();
+			} catch (IllegalAccessException e1) {
+				e1.printStackTrace();
+			}
+
 		}
 	}
+
 }

@@ -1,6 +1,5 @@
 
 function selectSeacher(){
-	
 	$(document).on("change","#all_options",function(){
 		var pla = '';
 		switch ($(this).val()){
@@ -110,7 +109,7 @@ function selectSeacher(){
 	})
 }
 
-/*导出模态框js*/
+/*导出js*/
 $(function() {
 	$("#export").click(function() {
 		$("input[name='checkbox']:checkbox:checked").each(function() {
@@ -177,9 +176,7 @@ function time(){
 	!function() {
 			laydate.skin('danlan'); //切换皮肤，请查看skins下面皮肤库
 			laydate({
-				elem : '#panel-body .laydate-icon'//如何在ajax内获取
-			}); //绑定元素
-		
+				elem : '#main_body .laydate-icon'}); //绑定元素
 		}();
 		//日期范围限制
 		var start = {
@@ -213,33 +210,14 @@ function time(){
 /*附件图片上传js*/
 function imgUpload(){
 	$('.addInfo').unbind().click(function(){
-		$(this).before('<div class="img-default">'+'<div class="img">'
-				+'<img src="img/index.png" alt="img" class="img-show">'
-				+'</div>'
-				+'<div class="info">'
-				+'<div class="img-control-btn modify-btn" title="编辑">'
-				+'<img src="img/modi(5).png" />'
-				+'</div>'
-				+'<div class="img-control-btn delete-btn" title="删除">'
-				+'<img src="img/delete(2).png" />'
-				+'</div>'
-				+'</div>'
-				+'<input type="file" multiple onchange="previewFile(this)" accept="image/gif, image/pdf, image/png, image/jpeg" style="display:none" >'
-				+'</div>')
-	$('.delete-btn').unbind().click(function(){
-	$(this).parent().parent().remove();
-})
-$('.modify-btn').unbind().click(function(){
-		$(this).parent().siblings('input').click();
-		$(this).parent().parent().remove();
-	})
+		$('.addInfo').siblings('input').click();
 		})
 }
+/*图片预览*/
 function previewFile(input_obj) {
 	//console.log($(input_obj).prop('files'));
 	var files = $(input_obj).prop('files');
     for(var i in files){
-	   console.log(files[i]);
 	   var reader = new FileReader();
 	   reader.onloadend = function () {  
 	        //(this.result); 
@@ -254,7 +232,7 @@ function previewFile(input_obj) {
 					+'<img src="img/delete(2).png" />'
 					+'</div>'
 					+'</div>'
-					+'<input type="file" value="'+files[i]+'" onchange="previewFile(this)" accept="image/gif, image/pdf, image/png, image/jpeg" style="display:none" >'
+					+'<input type="file" value="'+files[i]+'" onchange="modiFiles(this)" accept="image/gif, image/pdf, image/png, image/jpeg" style="display:none" >'
 					+'</div>')
 			$('.delete-btn').unbind().click(function(){
 				$(this).parent().parent().remove();
@@ -266,9 +244,73 @@ function previewFile(input_obj) {
 	   reader.readAsDataURL(files[i]);
    }
 	}
-
-function modifyFiles(){
-	var files = $(input_obj).prop('files');
-	
+/*修改上传的图片*/
+function modiFiles(this_obj){
+	var files = $(this_obj).prop('files')[0];
+	 var reader = new FileReader();
+	 reader.onloadend = function (){
+		 $(this_obj).siblings().children('img').attr("src",this.result);
+		 console.log(this.result)
+	 }
+	 reader.readAsDataURL(files);
 }
+/* 表单判空验证*/
+function formValidate(){
+	$('.tab input').blur(function(){
+		if($(this).val() == ""){
+	        		 /* $(this).addClass('has-error');
+	        		  $(this).parent().prev('td').css({
+	        			  "color":"red"
+	        		  })*/
+			
+			$(this).after('<span>'+'<img src="img/cuo.png"/>'+不能为空+'</span>');
+	        	  }else{
+	        		  $(this).removeClass('has-error ');
+	        		  $(this).parent().prev('td').css({
+	        			  "color": "#444444"
+	        		  })
+	        	  }
+	})
+}
+
+/*导入信息*/
+function import_to_database() {
+	$.confirm({
+		title : '确定删除?',
+		smoothContent : false,
+		content : '选择导入的数据文件（仅限execl）：<button onclick="javascript:$(\'#importdata\').click()" class="btn btn-sm btn-primary">选择</button><input style="display:none;" type="file" id="importdata">',
+		buttons : {
+			deleteUser : {
+				btnClass : 'btn-danger',
+				text : '确定',
+				action : function() {
+					var formData = new FormData();
+					formData.append("file", $("#importdata").get(0).files[0]);
+					//var formData = new FormData($("#importdata")[0]);
+					if (formData != null) {
+						$.ajax({
+							url : "Admin/admin_importDatabase",
+							type : "post",
+							timeout : 3000,
+							data : formData,
+							contentType : false,
+							processData : false,
+							success : function(data) {
+								$.alert('导入成功!')
+							},
+							error : function() {}
+						});
+					} else {
+						$.alert('选择文件!')
+					}
+				}
+			},
+			cancelAction : {
+				btnClass : 'btn-blue',
+				text : '取消',
+			}
+		}
+	});
+}
+
 

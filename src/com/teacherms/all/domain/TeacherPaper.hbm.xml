@@ -79,7 +79,7 @@
 				<comment>是否是跨学科论文</comment>
 			</column>
 		</property>
-		<property name="wordsNum" type="integer">
+		<property name="wordsNum" type="string">
 			<column name="WORDS_NUM">
 				<comment>成果字数（千字）</comment>
 			</column>

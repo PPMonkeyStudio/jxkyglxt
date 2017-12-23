@@ -23,9 +23,10 @@
 <link rel="stylesheet" type="text/css" href="styles.css">
 
 <link rel="stylesheet" href="css/com.css" />
+<link rel="stylesheet" href="css/toastr.css" />
 <link rel="stylesheet" href="css/export_modal.css" />
 <link rel="stylesheet" href="css/need/laydate.css" />
-<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/bootstrap.min.css" />
 <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 </head>
@@ -36,6 +37,9 @@
 
 	<script type="text/javascript" src="js/com/check_com.js"></script>
 	<script type="text/javascript" src="js/main_index.js"></script>
+	<script type="text/javascript" src="js/toastr.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/laydate.js"></script>
 
 	<script type="text/javascript" src="js/info/exam_info.js"></script>
 	<script type="text/javascript" src="js/award/exam_award.js"></script>
@@ -57,8 +61,7 @@
 	<script type="text/javascript" src="js/patent/user_patent.js"></script>
 	<script type="text/javascript" src="js/project/user_project.js"></script>
 	<script type="text/javascript" src="js/works/user_works.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>
-	<script type="text/javascript" src="js/laydate.js"></script>
+	
 
 </body>
 </html>

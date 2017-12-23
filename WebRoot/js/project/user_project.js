@@ -20,14 +20,12 @@ function userProject(){
 			    str+="<td>"+xhr[i].level+"</td>";
 			    str+="<td>"+xhr[i].projectNo+"</td>";
 			    if(dataStatus=="10"){
-				    str += '<td><input type="hidden" value="' + xhr[i].projectId  + '" ><button class="btn btn-default btn-xs relieveButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button><button class="btn btn-default btn-xs viewButton" title="提交审核"><i class="fa fa-search-plus fa-lg"  aria-hidden="true"></i></button></td>';		
+				    str += '<td><input type="hidden" value="' + xhr[i].projectId  + '" ><button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button><button class="btn btn-default btn-xs commmit-btn" title="提交审核"><i class="fa fa-sign-out fa-lg"  aria-hidden="true"></i></button></td>';		
 			    }
-			    if(dataStatus=="20"||data.dataState=="30"){
-				    str += '<td><input type="hidden" value="' + xhr[i].projectId  + '" ><button class="btn btn-default btn-xs viewButton" title="查看"><i class="fa fa-search-plus fa-lg"  aria-hidden="true"></i></button></td>';		
+			    if(dataStatus=="20"||dataStatus=="30"||dataStatus=="40"){
+				    str += '<td><input type="hidden" value="' + xhr[i].projectId  + '" ><button class="btn btn-default btn-xs viewButton" title="查看"><i class="fa fa-eye fa-lg"  aria-hidden="true"></i></button></td>';		
 			    }
-			    if(dataStatus=="40"){
-				    str += '<td><input type="hidden" value="' + xhr[i][0].projectId  + '" ><button class="btn btn-default btn-xs relieveButton" title="解除固化"><i class="fa fa-chain-broken fa-lg"></i></button><button class="btn btn-default btn-xs viewButton" title="查看"><i class="fa fa-search-plus fa-lg"  aria-hidden="true"></i></button></td>';		
-			    }
+			   
 			    str+="</tr>";   
 			}
 			$('.table').children('tbody').append(str);
@@ -77,7 +75,8 @@ function userProject(){
 		$('#project_modal').modal({
 			keyboard : true
 		});
-		imgUpload();
+		$('#project_modal .btn-danger').remove();
+		
 		$.post("/teacherms/Teacher/teacher_userGetTableInfoByTableId",
 				{tableId:$(this).siblings().val(),tableName:"TeacherProject"},function(xhr){
 					var inf = $('.table_infomation');
@@ -95,4 +94,56 @@ function userProject(){
 				},"json");
 		$(".review-info").remove();
 	})
+	$('.add-btn').unbind().click(function(){
+		$('#project_modal').modal({
+			keyboard : true
+		});
+		$('.btn-danger').remove();
+		imgUpload();
+		$(' #project_modal input').val("");
+		$(' #project_modal .modal-footer .close-btn').before('<button type="button" class="btn btn-danger add-end-btn">添加</button>')
+	formValidate();
+		/*添加信息*/
+		$('.add-end-btn').unbind().click(function(){
+			$('.tab tbody tr td input').each(function(){
+				if($(this).hasClass("has-error")||$(this).val()==""){
+					toastr.error("信息不能为空!");
+					return;
+				}
+				else{
+					var review_data = $("#info_form").serialize() + "&tableName=" + data.tableName;
+					$.post("/teacherms/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
+						if (sxh_data.result == "success") {
+							toastr.success("添加成功!");
+						}
+					}, "json")
+				}
+			})
+			
+		})
+	})
+	/*提交审核*/
+	$('.commmit-btn').unbind().click(function(){
+		$('#project_modal').modal({
+			keyboard : true
+		});
+		$('.btn-danger').remove();
+		$.post("/teacherms/Teacher/teacher_userGetTableInfoByTableId",
+				{tableId:$(this).siblings().val(),tableName:"TeacheProject"},function(xhr){
+					var inf = $('.table_infomation');
+				  $("#project_modal input,select").each(function(){
+					 var na= $(this).attr("name").split(".")[1];
+				 if(na=="userId"){
+						 $(this).val(xhr.user.userId);
+					 }
+				 else if(na=="userName"){
+						 $(this).val(xhr.user.userName);
+					 }
+				 else $(this).val(xhr.object[na]);
+				  })
+				},"json");
+		$(' #project_modal  .close-btn').before('<button type="button" class="btn btn-danger commit-end-btn">提交审核</button>')
+		
+	})
+	
 }

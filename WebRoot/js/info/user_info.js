@@ -14,5 +14,26 @@ function userInfo() {
 		},
 		error : function() {}
 	});
-
+	$('.add-btn').unbind().click(function(){
+		$('#info_modal').modal({
+			keyboard : true
+		});
+		$(' #info_modal input').val("");
+		if($('#info_modal .btn-danger').length>0){
+			return;
+		}else{
+		$(' #info_modal .modal-footer .close-btn').before('<button type="button" class="btn btn-danger add-end-btn">添加</button>')
+		}
+		formValidate();
+		/*添加信息*/
+		$('.add-end-btn').unbind().click(function(){
+			
+			var review_data = $("#info_form").serialize() + "&tableName=" + data.tableName;
+			$.post("/teacherms/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
+				if (sxh_data.result == "success") {
+					alert("添加成功");
+				}
+			}, "json")
+		})
+	})
 }
