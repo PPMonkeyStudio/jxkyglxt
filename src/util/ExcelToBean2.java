@@ -234,9 +234,16 @@ public class ExcelToBean2 {
 			field.setAccessible(true);
 		}
 		try {
-			field.set(object, value);
+			field.set(object, value + "");
 		} catch (IllegalAccessException e) {
 			System.out.println("不可能抛出的异常");
+			try {
+				field.set(object, "".equals(value) ? 0 : (int) value);
+			} catch (IllegalArgumentException e1) {
+				e1.printStackTrace();
+			} catch (IllegalAccessException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 }
