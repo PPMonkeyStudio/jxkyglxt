@@ -134,6 +134,6 @@ public interface TeacherService {
 	 * @param downloadInfoId
 	 *            信息表ID
 	 */
-	List<String> getBase64Image(String name, String tableName, String downloadInfoId);
+	List<File> getBase64Image(String name, String tableName, String downloadInfoId);
 
 }

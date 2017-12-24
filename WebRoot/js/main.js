@@ -276,7 +276,7 @@ function formValidate(){
 /*导入信息*/
 function import_to_database() {
 	$.confirm({
-		title : '确定删除?',
+		title : '确定导入?',
 		smoothContent : false,
 		content : '选择导入的数据文件（仅限execl）：<button onclick="javascript:$(\'#importdata\').click()" class="btn btn-sm btn-primary">选择</button><input style="display:none;" type="file" id="importdata">',
 		buttons : {

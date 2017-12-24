@@ -236,10 +236,10 @@ public class ExcelToBean2 {
 			field.setAccessible(true);
 		}
 		try {
-			field.set(object, value + "");
+			field.set(object, value);
 		} catch (IllegalAccessException e) {
 			System.out.println("不可能抛出的异常");
-		}catch (IllegalArgumentException e1) {
+		} catch (IllegalArgumentException e1) {
 			System.out.println("this exception");
 			try {
 				field.set(object, Integer.parseInt((String) value));
