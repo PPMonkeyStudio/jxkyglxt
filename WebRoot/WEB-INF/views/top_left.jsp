@@ -106,7 +106,7 @@
 							class="fa fa-cog fa-fw pull-right"></i> 修改信息
 					</a></li>
 					<li class="divider"></li>
-					<li><a><i class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li>
+					<li><a  href="javascript:loginout()"><i class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li>
 				</ul></li>
 		</ul>
 	</div>

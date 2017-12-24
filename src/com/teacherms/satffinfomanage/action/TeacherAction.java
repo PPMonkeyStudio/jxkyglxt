@@ -211,12 +211,21 @@ public class TeacherAction extends ActionSupport {
 		}
 	}
 
-	// 图片附件转为base64编码
-	public void getBase64Image() {
+	// 获取图片
+	public void getImage() {
+		HttpServletResponse response = ServletActionContext.getResponse();
 		try {
-			List<String> list = teacherService.getBase64Image(sessionuser.getUserName(), tableName, downloadInfoId);
+			List<File> list = teacherService.getBase64Image(sessionuser.getUserName(), tableName, downloadInfoId);
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
-			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(list));
+			InputStream fis = new BufferedInputStream(new FileInputStream(list.get(0).getPath()));
+			byte[] buffer = new byte[fis.available()];
+			fis.read(buffer);
+			fis.close();
+			response.setContentType("image/jpeg");
+			OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+			toClient.write(buffer);
+			toClient.flush();
+			toClient.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -276,43 +276,40 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public List<String> getBase64Image(String name, String tableName, String downloadInfoId) {
+	public List<File> getBase64Image(String name, String tableName, String downloadInfoId) {
 		// Attachmentpath: E:/Attachment/
 		// 附件路径
 		String path = Attachment.getAttachmentpath() + name + "/" + tableName;
 		// 获取文件夹下所有文件
 		File[] fs = new File(path).listFiles();
 		// base64集合
-		List<String> info = new ArrayList<String>();
+		List<File> info = new ArrayList<File>();
 		// 分割所要查询的信息ID
 		String[] downloadInfoId_arr = downloadInfoId.split(",");
-		// 创建一个输入流
-		FileInputStream fis = null;
+		//InputStream inputStream =null;
 		try {
 			for (String infoId : downloadInfoId_arr) {
 				for (File f1 : fs) {
 					if (f1.getName().indexOf(infoId) > -1) {
-						fis = new FileInputStream(f1);
-						if (!"unknown".equals(GudgmentImage.getPicType(fis))) {
-							InputStream inputStream = new FileInputStream(f1);
+						System.out.println(GudgmentImage.getPicType(new FileInputStream(f1)));
+						info.add(f1);
+						/*if (!"unknown".equals(GudgmentImage.getPicType(new FileInputStream(f1)))) {
+							inputStream = new FileInputStream(f1);
 							byte[] data = new byte[inputStream.available()];
 							inputStream.read(data);
-							inputStream.close();
 							BASE64Encoder encoder = new BASE64Encoder();
 							info.add(encoder.encode(data));
+							inputStream.close();
 						} else {
 							info.add("file");
-						}
+						}*/
 					}
 				}
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} 
 		return info;
 	}
 
