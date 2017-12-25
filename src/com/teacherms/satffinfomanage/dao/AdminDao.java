@@ -91,4 +91,12 @@ public interface AdminDao {
 	 */
 	List<Object> export_getAInfomationByTableId(String tableName, String tableInfoIdName, String query_id);
 
+	/**
+	 * 通过用户名称获取用户ID
+	 * 
+	 * @param name
+	 *            用户名称
+	 */
+	List<String> getUserIdByUserName(String name);
+
 }

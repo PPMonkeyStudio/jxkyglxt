@@ -78,7 +78,7 @@ public interface TeacherService {
 	 *            登录用户id
 	 * @return 对象
 	 */
-	Object userGetTeacherInfo(String userId);
+	TableInfoAndUserVo userGetTeacherInfo(String userId);
 
 	/**
 	 * ---用户补全或重新填写基本信息

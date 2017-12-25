@@ -67,9 +67,10 @@ public class TeacherDaoImpl implements TeacherDao {
 	}
 
 	@Override
-	public Object getTeacherInfoByUserId(String userId) {
-		String hql = "from TeacherInfo where userId = '" + userId + "'";
-		return getSession().createQuery(hql).uniqueResult();
+	public TableInfoAndUserVo getTeacherInfoByUserId(String userId) {
+		String hql = "select com.teacherms.satffinfomanage.vo.TableInfoAndUserVo(t,u) from TeacherInfo t,User u where t.userId=u.userId and userId = '"
+				+ userId + "'";
+		return (TableInfoAndUserVo) getSession().createQuery(hql).uniqueResult();
 	}
 
 	@Override

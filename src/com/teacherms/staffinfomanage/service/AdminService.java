@@ -98,4 +98,13 @@ public interface AdminService {
 	 */
 	String getDepartmentNameByDepartmentId(String departmentId, String what);
 
+	/**
+	 * 管理员获取输入用户名字，获取用户的id排名
+	 * 
+	 * @param userName
+	 *            名字(用逗号隔开)
+	 * @return
+	 */
+	String getUserIdOrderingByUserName(String userName);
+
 }

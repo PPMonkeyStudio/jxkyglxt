@@ -60,7 +60,7 @@ public class JunitTest {
 	@Test
 	public void test_export() {
 		XSSFWorkbook workbook = adminService.getExcel("1,2,3,6,7,8,9,14,15", "TeacherAward",
-				"86902b8f-6f7f-4c39-9970-b126e2a2ff5b,88e32f69-8508-4648-b98d-acb1c859cd31");
+				"0b6577c1-5eb6-44e6-82ff-a8af88db00a9,0c75e84b-c408-4ae7-8e1d-24b599620640");
 		try {
 			FileOutputStream out = new FileOutputStream("E:/Attachment/张三/TeacherAward/test.xlsx");
 			workbook.write(out);
@@ -71,6 +71,12 @@ public class JunitTest {
 		}
 	}
 
+	@Test
+	public void getIdByName() {
+		System.out.println(adminService.getUserIdOrderingByUserName("罗晓娟，测试"));
+	}
+
+	/*---------------------------------------------------------------------------*/
 	@Test
 	public void test_teacher_export() {
 		XSSFWorkbook workbook = teacherService.getExcel("1,2,3,6,7,8,9,14,15", "TeacherAward",
@@ -118,13 +124,11 @@ public class JunitTest {
 				"f2046bac-f4b9-4629-b35b-78f94010cb8d");
 	}
 
-	/*@Test
-	public void getBase64() {
-		List<String> info = teacherService.getImage("张三", "TeacherAward", "0c52c25a-b844-4e6d-9b33-576e8938c611");
-		for (String str : info) {
-			System.out.println(str.length());
-			System.out.println();
-		}
-	}*/
+	/*
+	 * @Test public void getBase64() { List<String> info =
+	 * teacherService.getImage("张三", "TeacherAward",
+	 * "0c52c25a-b844-4e6d-9b33-576e8938c611"); for (String str : info) {
+	 * System.out.println(str.length()); System.out.println(); } }
+	 */
 
 }

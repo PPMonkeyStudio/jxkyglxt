@@ -104,7 +104,7 @@ public class TeacherAction extends ActionSupport {
 	// ---用户获取自己的全部教职工信息
 	public void userGetTeacherInfo() {
 		try {
-			Object teacherInfo = teacherService.userGetTeacherInfo(sessionuser.getUserId());
+			TableInfoAndUserVo teacherInfo = teacherService.userGetTeacherInfo(sessionuser.getUserId());
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(teacherInfo));
 		} catch (Exception e) {

@@ -39,7 +39,7 @@ public interface TeacherDao {
 	 *            用户id
 	 * @return 用户信息对象
 	 */
-	Object getTeacherInfoByUserId(String userId);
+	TableInfoAndUserVo getTeacherInfoByUserId(String userId);
 
 	/**
 	 * 更新对象
