@@ -17,6 +17,7 @@ import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -157,7 +158,7 @@ public class TeacherServiceImpl implements TeacherService {
 		 */
 		String rusult = "error";
 		try {
-			TeacherInfo teach = (TeacherInfo) teacherDao.getTeacherInfoByUserId(userId);
+			TeacherInfo teach = (TeacherInfo) teacherDao.getTeacherInfoByUserId(userId).getObject();
 			// 获取TeacherInfo类中全部的属性
 			Class<TeacherInfo> cla = TeacherInfo.class;
 			Field[] f = cla.getDeclaredFields();
@@ -195,24 +196,51 @@ public class TeacherServiceImpl implements TeacherService {
 		try {
 			Class<? extends Object> cla = obj.getClass();
 			// 获取对象中第一个属性
-			Field f = cla.getDeclaredField(getTableInfoIdName(tableName));
+			Field ID = cla.getDeclaredField(getTableInfoIdName(tableName));
 			// 属性设置可以访问
-			f.setAccessible(true);
+			ID.setAccessible(true);
 			// 获得属性值
-			String id = (String) f.get(obj);
+			String id = (String) ID.get(obj);
 			// ID为空就设置UUID
 			if ("".equals(id) || id == null) {
-				f.set(obj, uuid.getUuid());
+				ID.set(obj, uuid.getUuid());
 			}
 			// 修改数据属性为10，
 			Field dataStatus = cla.getDeclaredField("dataStatus");
 			dataStatus.setAccessible(true);
 			dataStatus.set(obj, "10");
+
 			result = teacherDao.addTableInfo(obj);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	@Override
+	public String getUserIdOrderingByUserName(String userName) {
+		String[] names = userName.split(",|，");
+		String[] UserIdOrdering = new String[names.length];
+		List<String> userId = new ArrayList<String>();
+		for (int i = 0; i < names.length; i++) {
+			// 初始化第I的值，若不先初始化则初始值为null
+			UserIdOrdering[i] = "";
+			userId = teacherDao.getUserIdByUserName(names[i]);
+			// 当一个用户名字对应多个ID时候，添加首位括号以表示区别
+			if (userId.size() > 1) {
+				UserIdOrdering[i] += "(";
+			}
+			for (String id : userId) {
+				UserIdOrdering[i] += "," + id + "_" + (i + 1);
+			}
+			// 除去第一位的逗号
+			UserIdOrdering[i] = UserIdOrdering[i].replaceFirst(",", "");
+			// 当一个用户名字对应多个ID时候，添加末尾括号以表示区别
+			if (userId.size() > 1) {
+				UserIdOrdering[i] += ")";
+			}
+		}
+		return StringUtils.join(UserIdOrdering, ",");
 	}
 
 	@Override
@@ -237,7 +265,7 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public Object userGetTeacherInfo(String userId) {
+	public TableInfoAndUserVo userGetTeacherInfo(String userId) {
 		return teacherDao.getTeacherInfoByUserId(userId);
 	}
 
@@ -286,30 +314,29 @@ public class TeacherServiceImpl implements TeacherService {
 		List<File> info = new ArrayList<File>();
 		// 分割所要查询的信息ID
 		String[] downloadInfoId_arr = downloadInfoId.split(",");
-		//InputStream inputStream =null;
+		// InputStream inputStream =null;
 		try {
 			for (String infoId : downloadInfoId_arr) {
 				for (File f1 : fs) {
 					if (f1.getName().indexOf(infoId) > -1) {
 						System.out.println(GudgmentImage.getPicType(new FileInputStream(f1)));
 						info.add(f1);
-						/*if (!"unknown".equals(GudgmentImage.getPicType(new FileInputStream(f1)))) {
-							inputStream = new FileInputStream(f1);
-							byte[] data = new byte[inputStream.available()];
-							inputStream.read(data);
-							BASE64Encoder encoder = new BASE64Encoder();
-							info.add(encoder.encode(data));
-							inputStream.close();
-						} else {
-							info.add("file");
-						}*/
+						/*
+						 * if (!"unknown".equals(GudgmentImage.getPicType(new
+						 * FileInputStream(f1)))) { inputStream = new
+						 * FileInputStream(f1); byte[] data = new
+						 * byte[inputStream.available()];
+						 * inputStream.read(data); BASE64Encoder encoder = new
+						 * BASE64Encoder(); info.add(encoder.encode(data));
+						 * inputStream.close(); } else { info.add("file"); }
+						 */
 					}
 				}
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 		return info;
 	}
 

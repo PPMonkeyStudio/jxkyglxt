@@ -84,4 +84,10 @@ public class AdminDaoImpl implements AdminDao {
 		return getSession().save(obj).toString();
 	}
 
+	@Override
+	public List<String> getUserIdByUserName(String name) {
+		String hql = "select u.userId from User u where u.userName like '%" + name + "%'";
+		return getSession().createQuery(hql).list();
+	}
+
 }

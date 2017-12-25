@@ -104,13 +104,24 @@ public class TeacherAction extends ActionSupport {
 	// ---用户获取自己的全部教职工信息
 	public void userGetTeacherInfo() {
 		try {
-			Object teacherInfo = teacherService.userGetTeacherInfo(sessionuser.getUserId());
+			TableInfoAndUserVo teacherInfo = teacherService.userGetTeacherInfo(sessionuser.getUserId());
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(teacherInfo));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+	}
+
+	// 管理员获取输入用户名字，获取用户的id排名
+	public void getUserIdOrderingByUserName() {
+		try {
+			String result = teacherService.getUserIdOrderingByUserName(user.getUserName());
+			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
+			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	// 用户修改,添加信息

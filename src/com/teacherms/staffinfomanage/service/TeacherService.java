@@ -78,7 +78,7 @@ public interface TeacherService {
 	 *            登录用户id
 	 * @return 对象
 	 */
-	Object userGetTeacherInfo(String userId);
+	TableInfoAndUserVo userGetTeacherInfo(String userId);
 
 	/**
 	 * ---用户补全或重新填写基本信息
@@ -135,5 +135,14 @@ public interface TeacherService {
 	 *            信息表ID
 	 */
 	List<File> getBase64Image(String name, String tableName, String downloadInfoId);
+
+	/**
+	 * 管理员获取输入用户名字，获取用户的id排名
+	 * 
+	 * @param userName
+	 *            名字(用逗号隔开)
+	 * @return
+	 */
+	String getUserIdOrderingByUserName(String userName);
 
 }

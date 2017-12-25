@@ -37,7 +37,7 @@ import util.PageVO;
 public class AdminAction extends ActionSupport {
 	private AdminService adminService;
 
-	// 导出 
+	// 导出
 	private String export_name;// 导出execl表的属性条件,逗号隔开
 	private String export_id;// 导出execl表的ID字段条件,逗号隔开
 
@@ -139,6 +139,17 @@ public class AdminAction extends ActionSupport {
 	public void LiftCuring() {
 		try {
 			String result = adminService.adminLiftCuring(tableName, tableId, dataState);
+			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
+			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 管理员获取输入用户名字，获取用户的id排名
+	public void getUserIdOrderingByUserName() {
+		try {
+			String result = adminService.getUserIdOrderingByUserName(user.getUserName());
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
 		} catch (Exception e) {
