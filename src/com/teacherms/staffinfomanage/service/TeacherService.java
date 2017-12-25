@@ -136,4 +136,13 @@ public interface TeacherService {
 	 */
 	List<File> getBase64Image(String name, String tableName, String downloadInfoId);
 
+	/**
+	 * 管理员获取输入用户名字，获取用户的id排名
+	 * 
+	 * @param userName
+	 *            名字(用逗号隔开)
+	 * @return
+	 */
+	String getUserIdOrderingByUserName(String userName);
+
 }

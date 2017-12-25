@@ -73,7 +73,7 @@ public class JunitTest {
 
 	@Test
 	public void getIdByName() {
-		System.out.println(adminService.getUserIdOrderingByUserName("罗晓娟，测试"));
+		System.out.println(adminService.getUserIdOrderingByUserName("罗晓娟,lu"));
 	}
 
 	/*---------------------------------------------------------------------------*/

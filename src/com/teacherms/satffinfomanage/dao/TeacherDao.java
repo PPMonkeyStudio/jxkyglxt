@@ -84,4 +84,12 @@ public interface TeacherDao {
 	 */
 	String getTableInfoName(String tableName, String tableInfoName, String tableInfoIdName, String infoId);
 
+	/**
+	 * 通过用户名称获取用户ID
+	 * 
+	 * @param name
+	 *            用户名称
+	 */
+	List<String> getUserIdByUserName(String name);
+
 }

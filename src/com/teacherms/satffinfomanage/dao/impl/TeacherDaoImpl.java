@@ -11,6 +11,7 @@ import com.teacherms.all.domain.User;
 import com.teacherms.satffinfomanage.dao.TeacherDao;
 import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 
+@SuppressWarnings("unchecked")
 public class TeacherDaoImpl implements TeacherDao {
 	private SessionFactory sessionFactory;
 
@@ -113,4 +114,9 @@ public class TeacherDaoImpl implements TeacherDao {
 		return "success";
 	}
 
+	@Override
+	public List<String> getUserIdByUserName(String name) {
+		String hql = "select u.userId from User u where u.userName like '%" + name + "%'";
+		return getSession().createQuery(hql).list();
+	}
 }

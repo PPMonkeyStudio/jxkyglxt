@@ -17,6 +17,7 @@ import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -214,6 +215,32 @@ public class TeacherServiceImpl implements TeacherService {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	@Override
+	public String getUserIdOrderingByUserName(String userName) {
+		String[] names = userName.split(",|，");
+		String[] UserIdOrdering = new String[names.length];
+		List<String> userId = new ArrayList<String>();
+		for (int i = 0; i < names.length; i++) {
+			// 初始化第I的值，若不先初始化则初始值为null
+			UserIdOrdering[i] = "";
+			userId = teacherDao.getUserIdByUserName(names[i]);
+			// 当一个用户名字对应多个ID时候，添加首位括号以表示区别
+			if (userId.size() > 1) {
+				UserIdOrdering[i] += "(";
+			}
+			for (String id : userId) {
+				UserIdOrdering[i] += "," + id + "_" + (i + 1);
+			}
+			// 除去第一位的逗号
+			UserIdOrdering[i] = UserIdOrdering[i].replaceFirst(",", "");
+			// 当一个用户名字对应多个ID时候，添加末尾括号以表示区别
+			if (userId.size() > 1) {
+				UserIdOrdering[i] += ")";
+			}
+		}
+		return StringUtils.join(UserIdOrdering, ",");
 	}
 
 	@Override
