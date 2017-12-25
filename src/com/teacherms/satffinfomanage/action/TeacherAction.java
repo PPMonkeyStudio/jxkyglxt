@@ -46,8 +46,8 @@ public class TeacherAction extends ActionSupport {
 	private User sessionuser;
 
 	// 导出
-	private String query_name;// 导出execl表的属性条件,逗号隔开
-	private String query_id;// 导出execl表的ID字段条件,逗号隔开
+	private String export_name;// 导出execl表的属性条件,逗号隔开
+	private String export_id;// 导出execl表的ID字段条件,逗号隔开
 	private String time_interval;// 时间区间
 
 	// 附件
@@ -174,7 +174,7 @@ public class TeacherAction extends ActionSupport {
 
 	// 导出信息excel表 用MAP集合
 	public void userExportExcelCollection() {
-		XSSFWorkbook workbook = teacherService.getExcel(query_name, tableName, query_id);
+		XSSFWorkbook workbook = teacherService.getExcel(export_name, tableName, export_id);
 		OutputStream out = null;
 		try {
 			HttpServletResponse response = ServletActionContext.getResponse();
@@ -304,12 +304,12 @@ public class TeacherAction extends ActionSupport {
 		this.tableId = tableId;
 	}
 
-	public void setQuery_name(String query_name) {
-		this.query_name = query_name;
+	public void setExport_name(String export_name) {
+		this.export_name = export_name;
 	}
 
-	public void setQuery_id(String query_id) {
-		this.query_id = query_id;
+	public void setExport_id(String export_id) {
+		this.export_id = export_id;
 	}
 
 	public User getUser() {
