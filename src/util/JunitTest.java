@@ -92,6 +92,11 @@ public class JunitTest {
 	}
 
 	@Test
+	public void test_userGetTeacherInfo() {
+		System.out.println(teacherService.userGetTeacherInfo("23010003"));
+	}
+
+	@Test
 	public void test_teacher_getallinfo() {
 		PageVO<Object> listAdmin = teacherService.getTableInfoInPaging("1001", "TeacherAward", "1", "");
 		System.out.println(new Gson().toJson(listAdmin));
