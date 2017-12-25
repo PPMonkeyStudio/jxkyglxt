@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.teacherms.all.domain.TeacherInfo;
 import com.teacherms.all.domain.User;
 import com.teacherms.satffinfomanage.dao.TeacherDao;
+import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 
 public class TeacherDaoImpl implements TeacherDao {
 	private SessionFactory sessionFactory;
@@ -31,10 +32,9 @@ public class TeacherDaoImpl implements TeacherDao {
 	}
 
 	@Override
-	public List<Object[]> getAllStatusInfo(String selectinfo, String table, String time, String status) {
-		String hql = "select " + selectinfo + " from " + table
-				+ " t,User u where u.userId=t.userId and t.dataStatus = '" + status + "'" + time
-				+ " order by t.createTime asc";
+	public List<Object> getAllStatusInfo(String table, String time, String status) {
+		String hql = "select t from " + table + " t,User u where u.userId=t.userId and t.dataStatus = '" + status + "'"
+				+ time + " order by t.createTime asc";
 		return getSession().createQuery(hql).list();
 	}
 
@@ -46,11 +46,17 @@ public class TeacherDaoImpl implements TeacherDao {
 	}
 
 	@Override
-	public List<Object[]> getTableInfoByTableId(String tableName, String tableInfoIdName, String tableId) {
-		String hql = "select u.userId,u.userName,t from " + tableName + " t,User u where t.userId=u.userId and t."
-				+ tableInfoIdName + " = '" + tableId + "'";
+	public TableInfoAndUserVo getTableInfoByTableId(String tableName, String tableInfoIdName, String tableId) {
+		String hql = "select new com.teacherms.satffinfomanage.vo.TableInfoAndUserVo(t,u) from " + tableName
+				+ " t,User u where t.userId=u.userId and t." + tableInfoIdName + " = '" + tableId + "'";
 		// String hql = " from " + tableName + "where " + tableInfoIdName + " =
 		// '" + tableId + "'";
+		return (TableInfoAndUserVo) getSession().createQuery(hql).uniqueResult();
+	}
+
+	@Override
+	public List<Object> export_getAInfomationByTableId(String tableName, String tableInfoIdName, String query_id) {
+		String hql = "from " + tableName + " where " + tableInfoIdName + " in (" + query_id + ")";
 		return getSession().createQuery(hql).list();
 	}
 
@@ -61,9 +67,9 @@ public class TeacherDaoImpl implements TeacherDao {
 	}
 
 	@Override
-	public List<Object[]> getTeacherInfoByUserId(String userId) {
+	public Object getTeacherInfoByUserId(String userId) {
 		String hql = "from TeacherInfo where userId = '" + userId + "'";
-		return getSession().createQuery(hql).list();
+		return getSession().createQuery(hql).uniqueResult();
 	}
 
 	@Override
@@ -73,7 +79,14 @@ public class TeacherDaoImpl implements TeacherDao {
 	}
 
 	@Override
-	@Transactional
+	public String getTableInfoName(String tableName, String tableInfoName, String tableInfoIdName, String infoId) {
+		// TODO Auto-generated method stub
+		String hql = "select t." + tableInfoName + " from " + tableName + " t where t." + tableInfoIdName + "='"
+				+ infoId + "'";
+		return (String) getSession().createQuery(hql).uniqueResult();
+	}
+
+	@Override
 	public String addTableInfo(Object obj) {
 		try {
 			getSession().saveOrUpdate(obj);

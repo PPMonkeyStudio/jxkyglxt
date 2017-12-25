@@ -62,6 +62,7 @@ tbody {
 	height:25px;
 	margin-left:5px;
 }
+
 .title {
 	height: 1px;
 	border-top: 1px solid #CDCDCD;
@@ -78,18 +79,42 @@ tbody {
 	font-size: 18px;
 	color: #42A5F5;
 }
-
-.tab {
+.user-table{
 	width: 100% !important;
-	table-layout: fixed !important;
+	table-layout:fixed !important;
 }
+.com-table {
+	margin:0 auto;
+	width: 600px !important;
+}
+
+.com-table input {
+	width:250px;
+	margin-left:-40%;
+}
+.com-table select {
+	width:250px;
+	margin-left:-40%;
+} 
+.com-table tr:nth-child(odd) td {
+	width:100px;
+} 
 
 .tab tr {
-	height: 35px !important;
+	height: 40px !important;
 }
-#info_modal .modal-lg{
-	background:white;
-	width:800px;
+
+#modal-content{
+padding:0;
+}
+
+.modal-dialog{
+	width:800px !important;
+}
+.tab_content{
+	width:100%;
+	max-height: calc(100vh - 15.6rem);
+    overflow: auto;
 }
 #page a:hover {
 	cursor: pointer;
@@ -125,7 +150,7 @@ tbody {
 	margin-left:auto;
 	margin-right:auto;
 }
-
+/* 首页样式 */
 #info_ul li {
 	width: 25%;
 	height: 180px;
@@ -145,8 +170,6 @@ tbody {
 	background-color: white;
 	webkit-transition: box-shadow .3s ease-in,-webkit-transform .2s ease-in;
 	transition:box-shadow .3s ease-in,transform .2s ease-in;
-	
-	
 }
 .innner_ul li:hover{
 	 box-shadow: 0 .4rem .5rem rgba(0,0,0,.06);	 
@@ -171,4 +194,8 @@ tbody {
 #info_ul span {
 	font-size: 14px;
 	color: #333;
+}
+.has-error{
+	border-color: #f56954 !important;
+    box-shadow: none;
 }

@@ -37,6 +37,7 @@ function checkProject(){
 		$('#project_modal').modal({
 			keyboard : true
 		})
+		imgUpload();
 		$.post("/teacherms/Admin/admin_getTeacherTableInfoById",
 				{tableId:$(this).siblings().val(),tableName:"TeacherProject"},function(xhr){
 				var inf = $('.table_infomation');

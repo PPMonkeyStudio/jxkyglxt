@@ -38,6 +38,7 @@ function checkInfo(){
 		$('#info_modal').modal({
 			keyboard : true
 		});
+		$('#info_modal .basic').show();
 		$.post("/teacherms/Admin/admin_getTeacherTableInfoById",
 				{tableId:$(this).siblings().val(),tableName:"TeacherInfo"},function(xhr){
 				$("#info_modal input,select").each(function(){
@@ -68,7 +69,7 @@ function checkInfo(){
 	});
 
 	
-	
+	/*导出*/
 	$('.export-info').unbind().click(function(){
 		$('.second-panel-heading').append('<button class="btn btn-primary end-button">确认导出</button>');
 		$('#info_table tbody tr').each(function(){
@@ -105,7 +106,20 @@ function checkInfo(){
 			data.export_id="";
 			$('.end-button').unbind().remove();
 		});
-		
 	});
-
+	$('.add_button').unbind().on("click",function(){
+		$('#add_user_modal').modal({
+			keyboard : true
+		});
+		formValidate();
+		$('.review-info').unbind().click(function(){
+			var review_data = $("#info_form").serialize() + "&tableName=" + data.tableName;
+			$.post("/teacherms/Admin/admin_addTeacherInfo", review_data, function(sxh_data) {
+				if (sxh_data.result == "success") {
+					toastr.success("添加成功！")
+				}
+			}, "json")
+		
+		})
+	});
 }

@@ -13,7 +13,7 @@ function examAward(){
 			var str="";
 			for(i=0;i<xhr.length;i++){
 				str+="<tr>";
-			    str+="<td>"+(i+1)+"</td>";
+			    str+="<td>"+(i+1)  +"</td>";
 			    str+="<td>"+xhr[i][0].achievementName+"</td>";
 			    str+="<td>"+xhr[i][0].awardName+"</td>";
 			    str+="<td>"+xhr[i][0].awardUserNames+"</td>";

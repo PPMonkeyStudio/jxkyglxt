@@ -14,20 +14,7 @@
 					</div>
 					<div class="modal-body">
 						<div id="main_body">
-							<table class="tab">
-								<tbody class="basic">
-									<tr>
-										<td>工号：</td>
-										<td><input name="teacherProject.userId"
-											class="form-control table_infomation" type="text"></td>
-									</tr>
-									<tr>
-										<td>姓名：</td>
-										<td><input name="teacherProject.userName"
-										class="form-control table_infomation"
-											type="text"></td>
-									</tr>
-								</tbody>
+							<table class="tab com-table">
 								<tr>
 									<td>项目名称：</td>
 									<td><input name="teacherProject.projectName"
@@ -114,34 +101,26 @@
 											<option>是</option>
 									</select></td>
 								</tr>
-								<tr>
-									<td>附件地址：</td>
-									<td><input name="teacherProject.attachmentPath"
-										class="form-control table_infomation" type="text"></td>
+								
+								<tr class="img-control">
+								<td>附件：</td>
+									<td class="img-upload">
+						<div class="addInfo">
+						  <div class="img-control-btn add-btn" >
+						   <img src="img/add.png" />
+						  </div>
+						</div>
+									</td>
 								</tr>
-								<tr>
-									<td>数据状态：：</td>
-									<td><select name="teacherProject.dataStatus"
-										id="dataStatus" class="form-control table_infomation">
-											<option value="10">个人可添加、修改</option>
-											<option value="20">院系管理员可添加、修改、删除、审核</option>
-											<option value="30">科研处管理员修改、审核</option>
-											<option value="40">固化</option>
-									</select></td>
-								</tr>
-								<tr>
-									<td>创建时间：</td>
-									<td><input name="teacherProject.createTime"
-										class="form-control table_infomation " type="text"></td>
-								</tr>
+								
 							</table>
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-default close-btn" data-dismiss="modal">关闭</button>
 						<input name="teacherProject.projectId" id="tableid" type="hidden" />
-						<button type="button" class="btn btn-danger review-info"
-							data-dismiss="modal">信息未审核</button>
+						<!-- <button type="button" class="btn btn-danger review-info"
+							data-dismiss="modal">信息未审核</button> -->
 					</div>
 				</div>
 			</form>

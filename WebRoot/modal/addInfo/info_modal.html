@@ -13,7 +13,7 @@
 					</div>
 					<div class="modal-body">
 						<div id="main_body">
-							<table class="tab">
+							<table class="tab user-table">
 								<tbody>
 				<tr  class="title"></tr>
 									<tr>
@@ -25,7 +25,7 @@
 								<tbody class="basic">
 									<tr>
 										<!-- name="teacherInfo." -->
-										<td>姓名</td>
+										<td>姓名：</td>
 										<td><input name="teacherInfo.userName"
 											class="form-control table_infomation" type="text"></td>
 									</tr>
@@ -323,25 +323,16 @@
 												<option>其他</option>
 										</select></td>
 									</tr>
-									<tr>
-										<td>数据状态：</td>
-										<td><select name="teacherInfo.dataStatus" id="dataStatus"
-											class="form-control table_infomation">
-												<option value="10">个人可添加、修改</option>
-												<option value="20">院系管理员可添加、修改、删除、审核</option>
-												<option value="30">人事处管理员修改、审核</option>
-												<option value="40">固化</option>
-										</select></td>
-									</tr>
+								
 								</tbody>
 							</table>
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-default close-btn" data-dismiss="modal">关闭</button>
 						<input name="teacherInfo.teacherInfoId" id="tableid" type="hidden" />
-						<button type="button" class="btn btn-danger review-info"
-							data-dismiss="modal">信息未审核</button>
+						<!-- <button type="button" class="btn btn-danger review-info"
+							data-dismiss="modal">信息未审核</button> -->
 					</div>
 				</div>
 			</form>

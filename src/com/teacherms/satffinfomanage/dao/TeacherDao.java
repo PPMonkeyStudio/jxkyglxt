@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.teacherms.all.domain.TeacherInfo;
 import com.teacherms.all.domain.User;
+import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 
 public interface TeacherDao {
 
@@ -12,11 +13,11 @@ public interface TeacherDao {
 
 	Long getCountInOnetable(String userid, String tableUserIds, String tableName);
 
-	List<Object[]> getTableInfoByTableId(String tableName, String tableInfoIdName, String tableId);
+	TableInfoAndUserVo getTableInfoByTableId(String tableName, String tableInfoIdName, String tableId);
 
 	String addTableInfo(Object obj);
 
-	List<Object[]> getAllStatusInfo(String selectinfo, String table, String time, String status);
+	List<Object> getAllStatusInfo(String table, String time, String status);
 
 	/**
 	 * 返回信息查询对象
@@ -36,9 +37,9 @@ public interface TeacherDao {
 	 * 
 	 * @param userId
 	 *            用户id
-	 * @return 数组
+	 * @return 用户信息对象
 	 */
-	List<Object[]> getTeacherInfoByUserId(String userId);
+	Object getTeacherInfoByUserId(String userId);
 
 	/**
 	 * 更新对象
@@ -57,5 +58,30 @@ public interface TeacherDao {
 	 * @return 用户对像
 	 */
 	User getUserByUserId(String userId);
+
+	/**
+	 * ---导出专用
+	 * 
+	 * @param tableName
+	 * @param tableInfoIdName
+	 * @param replaceAll
+	 * @return
+	 */
+	List<Object> export_getAInfomationByTableId(String tableName, String tableInfoIdName, String replaceAll);
+
+	/**
+	 * ---信息名称
+	 * 
+	 * @param tableName
+	 *            信息表名字
+	 * @param tableInfoName
+	 *            所需要得到的信息名称
+	 * @param tableInfoIdName
+	 *            信息的ID属性名称
+	 * @param infoId
+	 *            信息ID
+	 * @return 信息名称
+	 */
+	String getTableInfoName(String tableName, String tableInfoName, String tableInfoIdName, String infoId);
 
 }

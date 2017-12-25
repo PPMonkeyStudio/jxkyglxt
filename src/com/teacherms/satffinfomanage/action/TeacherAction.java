@@ -1,10 +1,21 @@
 package com.teacherms.satffinfomanage.action;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,6 +35,7 @@ import com.teacherms.all.domain.TeacherPatent;
 import com.teacherms.all.domain.TeacherProject;
 import com.teacherms.all.domain.TeacherWorks;
 import com.teacherms.all.domain.User;
+import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 import com.teacherms.staffinfomanage.service.TeacherService;
 
 import util.*;
@@ -34,15 +46,23 @@ public class TeacherAction extends ActionSupport {
 	private User sessionuser;
 
 	// 导出
-	private String query_name;// 导出execl表的属性条件,逗号隔开
-	private String query_id;// 导出execl表的ID字段条件,逗号隔开
+	private String export_name;// 导出execl表的属性条件,逗号隔开
+	private String export_id;// 导出execl表的ID字段条件,逗号隔开
 	private String time_interval;// 时间区间
+
+	// 附件
+	private List<File> file1; // execl,图片文件
+	private List<String> file1FileName; // file+FileName为固定写法
+	private List<String> file1ContentType; // file+ContentType为固定写法
+	private String downloadInfoId; // 图片下载的信息表的id
+
 	// 查询条件
 	private String page; // 分页
 	private String tableName;// 查询的表名
 	private String tableId; // 查询表的ID
 	private String dataState; // 数据状态
 
+	// 用户名字
 	private String username;
 
 	// 信息表
@@ -73,9 +93,9 @@ public class TeacherAction extends ActionSupport {
 	// 用户通过信息表ID获取单条信息
 	public void userGetTableInfoByTableId() {
 		try {
-			List<Object[]> list = teacherService.userGetTableInfoByTableId(tableName, tableId);
+			TableInfoAndUserVo obj = teacherService.userGetTableInfoByTableId(tableName, tableId);
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
-			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(list));
+			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(obj));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -84,7 +104,7 @@ public class TeacherAction extends ActionSupport {
 	// ---用户获取自己的全部教职工信息
 	public void userGetTeacherInfo() {
 		try {
-			List<Object[]> teacherInfo = teacherService.userGetTeacherInfo(sessionuser.getUserId());
+			Object teacherInfo = teacherService.userGetTeacherInfo(sessionuser.getUserId());
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(teacherInfo));
 		} catch (Exception e) {
@@ -93,7 +113,7 @@ public class TeacherAction extends ActionSupport {
 
 	}
 
-	// 用户修改添加信息
+	// 用户修改,添加信息
 	public void userSetTableInfo() {
 		try {
 			Object obj = null;
@@ -142,6 +162,7 @@ public class TeacherAction extends ActionSupport {
 		}
 	}
 
+	// 获取用户名字信息
 	public void userGetUserName() {
 		try {
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
@@ -153,7 +174,7 @@ public class TeacherAction extends ActionSupport {
 
 	// 导出信息excel表 用MAP集合
 	public void userExportExcelCollection() {
-		XSSFWorkbook workbook = teacherService.getExcel(query_name, tableName, query_id);
+		XSSFWorkbook workbook = teacherService.getExcel(export_name, tableName, export_id);
 		OutputStream out = null;
 		try {
 			HttpServletResponse response = ServletActionContext.getResponse();
@@ -173,6 +194,71 @@ public class TeacherAction extends ActionSupport {
 					out.close();
 				}
 			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	// 用户附件上传
+	public void userAttachmentUpload() {
+		try {
+			String result = teacherService.userAttachmentUpload(file1, file1FileName, file1ContentType,
+					sessionuser.getUserName(), tableName, tableId);
+			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
+			ServletActionContext.getResponse().getWriter().write(result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 获取图片
+	public void getImage() {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		try {
+			List<File> list = teacherService.getBase64Image(sessionuser.getUserName(), tableName, downloadInfoId);
+			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
+			InputStream fis = new BufferedInputStream(new FileInputStream(list.get(0).getPath()));
+			byte[] buffer = new byte[fis.available()];
+			fis.read(buffer);
+			fis.close();
+			response.setContentType("image/jpeg");
+			OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+			toClient.write(buffer);
+			toClient.flush();
+			toClient.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	// 图片打包下载
+	public void downloadAttachment() {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		File file = teacherService.downloadAttachment("张三", tableName, downloadInfoId);
+		try {
+			// 以流的形式下载文件。
+			InputStream fis = new BufferedInputStream(new FileInputStream(file.getPath()));
+			byte[] buffer = new byte[fis.available()];
+			fis.read(buffer);
+			fis.close();
+			// 清空response
+			response.reset();
+			OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+			response.setContentType("application/octet-stream");
+			// 如果输出的是中文名的文件，在此处就要用URLEncoder.encode方法进行处理
+			response.setHeader("Content-Disposition",
+					"attachment;filename=" + URLEncoder.encode(file.getName(), "UTF-8"));
+			toClient.write(buffer);
+			toClient.flush();
+			toClient.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				File f = new File(file.getPath());
+				f.delete();
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -218,12 +304,12 @@ public class TeacherAction extends ActionSupport {
 		this.tableId = tableId;
 	}
 
-	public void setQuery_name(String query_name) {
-		this.query_name = query_name;
+	public void setExport_name(String export_name) {
+		this.export_name = export_name;
 	}
 
-	public void setQuery_id(String query_id) {
-		this.query_id = query_id;
+	public void setExport_id(String export_id) {
+		this.export_id = export_id;
 	}
 
 	public User getUser() {
@@ -236,6 +322,22 @@ public class TeacherAction extends ActionSupport {
 
 	public void setDataState(String dataState) {
 		this.dataState = dataState;
+	}
+
+	public void setFile1(List<File> file1) {
+		this.file1 = file1;
+	}
+
+	public void setFile1FileName(List<String> file1FileName) {
+		this.file1FileName = file1FileName;
+	}
+
+	public void setDownloadInfoId(String downloadInfoId) {
+		this.downloadInfoId = downloadInfoId;
+	}
+
+	public void setFile1ContentType(List<String> file1ContentType) {
+		this.file1ContentType = file1ContentType;
 	}
 
 	public TeacherAward getTeacherAward() {

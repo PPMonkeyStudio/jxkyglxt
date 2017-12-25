@@ -23,7 +23,7 @@ public class TeacherPaper implements java.io.Serializable {
 	private String sfydflhfb;
 	private String sfygjlhfb;
 	private String sfskxklw;
-	private Integer wordsNum;
+	private String wordsNum;
 	private String attachmentPath;
 	private String dataStatus;
 	private String createTime;
@@ -43,7 +43,7 @@ public class TeacherPaper implements java.io.Serializable {
 	public TeacherPaper(String paperId, String userId, String paperName, String authorUserNames, String authorUserIds,
 			String paperType, String periodical, String periodicalNo, String publishTime, String includedSituation,
 			Integer totalCitations, String sfyhylhfb, String sfydflhfb, String sfygjlhfb, String sfskxklw,
-			Integer wordsNum, String attachmentPath, String dataStatus, String createTime) {
+			String wordsNum, String attachmentPath, String dataStatus, String createTime) {
 		this.paperId = paperId;
 		this.userId = userId;
 		this.paperName = paperName;
@@ -187,11 +187,11 @@ public class TeacherPaper implements java.io.Serializable {
 		this.sfskxklw = sfskxklw;
 	}
 
-	public Integer getWordsNum() {
+	public String getWordsNum() {
 		return this.wordsNum;
 	}
 
-	public void setWordsNum(Integer wordsNum) {
+	public void setWordsNum(String wordsNum) {
 		this.wordsNum = wordsNum;
 	}
 
