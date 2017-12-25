@@ -118,13 +118,13 @@ public class JunitTest {
 				"f2046bac-f4b9-4629-b35b-78f94010cb8d");
 	}
 
-	@Test
+	/*@Test
 	public void getBase64() {
-		List<String> info = teacherService.getBase64Image("张三", "TeacherAward", "0c52c25a-b844-4e6d-9b33-576e8938c611");
+		List<String> info = teacherService.getImage("张三", "TeacherAward", "0c52c25a-b844-4e6d-9b33-576e8938c611");
 		for (String str : info) {
 			System.out.println(str.length());
 			System.out.println();
 		}
-	}
+	}*/
 
 }
