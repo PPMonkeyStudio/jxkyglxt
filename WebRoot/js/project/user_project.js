@@ -17,7 +17,6 @@ function userProject(){
 			    str+="<td>"+xhr[i].projectName+"</td>";
 			    str+="<td>"+xhr[i].projectUserNames+"</td>";
 			    str+="<td>"+xhr[i].projectSource+"</td>";
-			    str+="<td>"+xhr[i].level+"</td>";
 			    str+="<td>"+xhr[i].projectNo+"</td>";
 			    if(dataStatus=="10"){
 				    str += '<td><input type="hidden" value="' + xhr[i].projectId  + '" ><button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button><button class="btn btn-default btn-xs commmit-btn" title="提交审核"><i class="fa fa-sign-out fa-lg"  aria-hidden="true"></i></button></td>';		
@@ -57,13 +56,13 @@ function userProject(){
 				data.export_id+=$(this).find('input[type="hidden"]').val()+',';
 				}
 			})
-			$('#export_award .group-list li input[name="checkbox"]').each(function(){
+			$('#export_project .group-list li input[name="checkbox"]').each(function(){
 				if(($(this).is(':checked'))==true){
 					data.export_name+=$(this).val()+',';
 				}
 			})
 			if (data.export_id != "" && data.export_name != "") {
-				location.href = "/teacherms/Teacher/teacher_userExportExcelCollection?tableName=TeacherWorks&export_id=" + (data.export_id).substring(0,data.export_id.length-1) + "&export_name=" + (data.export_name).substring(0,data.export_name.length-1);
+				location.href = "/teacherms/Teacher/teacher_userExportExcelCollection?tableName=TeacherProject&export_id=" + (data.export_id).substring(0,data.export_id.length-1) + "&export_name=" + (data.export_name).substring(0,data.export_name.length-1);
 			} else {
 				alert("请选择数据");
 			}
@@ -94,12 +93,24 @@ function userProject(){
 				},"json");
 		$(".review-info").remove();
 	})
+	function getIdByName(){
+		$('input[name="teacherProject.projectUserNames"]').keyup(function(){
+			if($(this).val()==""){
+				return;
+			}
+			$.post('/teacherms/Teacher/teacher_getUserIdOrderingByUserName',{"user.userName":$(this).val()},function(xhr){
+			   $('input[name="teacherProject.projectUseIds"]').val(xhr.result);
+			},'json')
+		})
+	}
+	
 	$('.add-btn').unbind().click(function(){
 		$('#project_modal').modal({
 			keyboard : true
 		});
 		$('.btn-danger').remove();
 		imgUpload();
+		getIdByName();
 		$(' #project_modal input').val("");
 		$(' #project_modal .modal-footer .close-btn').before('<button type="button" class="btn btn-danger add-end-btn">添加</button>')
 	formValidate();
@@ -145,5 +156,4 @@ function userProject(){
 		$(' #project_modal  .close-btn').before('<button type="button" class="btn btn-danger commit-end-btn">提交审核</button>')
 		
 	})
-	
 }

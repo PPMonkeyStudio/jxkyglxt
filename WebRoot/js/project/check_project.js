@@ -17,7 +17,6 @@ function checkProject(){
 			    str+="<td>"+xhr[i][0].projectName+"</td>";
 			    str+="<td>"+xhr[i][0].projectUserNames+"</td>";
 			    str+="<td>"+xhr[i][0].projectSource+"</td>";
-			    str+="<td>"+xhr[i][0].level+"</td>";
 			    str+="<td>"+xhr[i][0].projectNo+"</td>";
 			    str += '<td><input type="hidden" value="' + xhr[i][0].projectId  + '" ><button class="btn btn-default btn-xs relieveButton" title="解除固化"><i class="fa fa-chain-broken fa-lg"></i></button><button class="btn btn-default btn-xs viewButton" title="查看"><i class="fa fa-search-plus fa-lg"  aria-hidden="true"></i></button></td>';
 			    str+="</tr>";   

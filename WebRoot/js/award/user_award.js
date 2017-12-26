@@ -1,4 +1,4 @@
-function userAward(){
+function selectAllAward(){
 	$('.table tbody').empty();
 	$.ajax({
 		url : "/teacherms/Teacher/teacher_userGetTableInfoInPaging",
@@ -13,14 +13,12 @@ function userAward(){
 			for(i=0;i<xhr.length;i++){
 				var dataStatus=xhr[i].dataStatus;
 				str+="<tr>";
-			    str+="<td>"+(i+1)+"</td>";
-			    str+="<td>"+xhr[i].achievementName+"</td>";
+				str+="<td>"+(i+1)+"</td>";
 			    str+="<td>"+xhr[i].awardName+"</td>";
 			    str+="<td>"+xhr[i].awardUserNames+"</td>";
-			    str+="<td>"+xhr[i].awardType+"</td>";
-			    str+="<td>"+xhr[i].awardClass+"</td>"; 
-			    str+="<td>"+xhr[i].awardGrade+"</td>";
 			    str+="<td>"+xhr[i].awardLevel+"</td>";
+			    str+="<td>"+xhr[i].awardDate+"</td>";
+			    str+="<td>"+xhr[i].grantUnit+"</td>"; 
 			    if(dataStatus=="10"){
 				    str += '<td><input type="hidden" value="' + xhr[i].awardId  + '" ><button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button><button class="btn btn-default btn-xs commmit-btn" title="提交审核"><i class="fa fa-sign-out fa-lg"  aria-hidden="true"></i></button></td>';		
 			    }
@@ -34,6 +32,11 @@ function userAward(){
 		},
 		error : function() {}
 	});
+	
+}
+function userAward(){
+	selectAllAward();
+	/*导出*/
 	$('.export_button').unbind().on('click',function(){
 		$('#export_award').modal({
 			keyboard : true
@@ -80,7 +83,6 @@ function userAward(){
 			keyboard : true
 		});
 		$('#award_modal .btn-danger').remove();
-		
 		$.post("/teacherms/Teacher/teacher_userGetTableInfoByTableId",
 				{tableId:$(this).siblings().val(),tableName:"TeacherAward"},function(xhr){
 					var inf = $('.table_infomation');
@@ -94,28 +96,45 @@ function userAward(){
 					 }
 				 else $(this).val(xhr.object[na]);
 				  })
-				  
 				},"json");
 		$(".review-info").remove();
 	})
+	
+	
+	function getIdByName(){
+		
+		$('input[name="teacherAward.awardUserNames"]').keyup(function(){
+			if($(this).val()==""){
+				return;
+			} 
+			$.post('/teacherms/Teacher/teacher_getUserIdOrderingByUserName',{"user.userName":$(this).val()},function(xhr){
+			   $('input[name="teacherAward.awardUserIds"]').val(xhr.result);
+			},'json')
+			
+		})
+	}
+	
+	
 	/*添加*/
 	$('.add-btn').unbind().click(function(){
 		$('#award_modal').modal({
 			keyboard : true
 		});
-		$(' #award_modal input').val("");
 		$('.btn-danger').remove();
 		time();
 		imgUpload();
+		getIdByName();
 		$(' #award_modal .close-btn').before('<button type="button" class="btn btn-danger add-end-btn">添加</button>')
 		formValidate();
+		
+		
 		/*添加信息*/
 		$('.add-end-btn').unbind().click(function(){
-
 			var review_data = $("#info_form").serialize() + "&tableName=" + data.tableName;
 			$.post("/teacherms/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
 				if (sxh_data.result == "success") {
 					toastr.success("添加成功!");
+					selectAllAward();
 				}
 			}, "json")
 		
@@ -161,3 +180,4 @@ function userAward(){
 		$(' #award_modal  .close-btn').before('<button type="button" class="btn btn-danger commit-end-btn">提交审核</button>')
 	})
 }
+

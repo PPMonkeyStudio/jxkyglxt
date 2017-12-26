@@ -16,8 +16,8 @@ function checkPaper(){
 			    str+="<td>"+(i+1)+"</td>";
 			    str+="<td>"+xhr[i][0].paperName+"</td>";
 			    str+="<td>"+xhr[i][0].authorUserNames+"</td>";
-			    str+="<td>"+xhr[i][0].paperType+"</td>";
-			    str+="<td>"+xhr[i][0].includedSituation+"</td>";
+			    str+="<td>"+xhr[i][0].periodical+"</td>";
+			    str+="<td>"+xhr[i][0].periodicalNo+"</td>";
 			    str+="<td>"+xhr[i][0].publishTime+"</td>"; 
 			    str += '<td><input type="hidden" value="' + xhr[i][0].paperId  + '" ><button class="btn btn-default btn-xs relieveButton" title="解除固化"><i class="fa fa-chain-broken fa-lg"></i></button><button class="btn btn-default btn-xs viewButton" title="查看"><i class="fa fa-search-plus fa-lg"  aria-hidden="true"></i></button></td>';
 			    str+="</tr>";   

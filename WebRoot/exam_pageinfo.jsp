@@ -121,11 +121,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<table class="table table-hover ">
 						<thead>
 							<tr>
-								<th>#</th>
+								<th>序号</th>
 								<th>工号</th>
 								<th>姓名</th>
-								<th>职称级别</th>
 								<th>职工类型</th>
+								<th>职工状态</th>
 								<th>授课类型</th>
 								<th>授课状态</th>
 								<th>操作</th>
@@ -181,14 +181,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th>#</th>
-								<th>奖励作品名称</th>
+								<th>序号</th>
 								<th>奖励名称</th>
 								<th>获奖者姓名</th>
-								<th>奖励类型</th>
-								<th>获奖类别</th>
-								<th>获奖等级</th>
 								<th>获奖级别</th>
+								<th>获奖时间</th>
+								<th>授予单位</th>
 								<th>操作</th>
 							</tr>
 						</thead>
@@ -243,11 +241,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th>#</th>
+							<th>序号</th>
 								<th>著作名称</th>
 								<th>主编</th>
-								<th>著作类别</th>
-								<th>入选情况</th>
+								<th>ISBN</th>
+								<th>出版时间</th>
 								<th>出版社</th>
 								<th>操作</th>
 							</tr>
@@ -305,11 +303,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th>#</th>
+									<th>序号</th>
 								<th>论文名称</th>
 								<th>作者</th>
-								<th>论文类别</th>
-								<th>收录情况</th>
+								<th>发表期刊</th>
+								<th>期号</th>
 								<th>发表日期</th>
 								<th>操作</th>
 							</tr>
@@ -420,11 +418,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th>#</th>
+								<th>序号</th>
 								<th>课题(项目)名称</th>
 								<th>成员姓名</th>
 								<th>项目来源</th>
-								<th>级别</th>
 								<th>立项编号或批准文号</th>
 								<th>操作</th>
 							</tr>

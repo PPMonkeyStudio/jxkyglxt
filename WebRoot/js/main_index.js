@@ -7,6 +7,14 @@ var data = {
 	export_name : "",
 	export_id : "",
 }
+var pageDataInformation={
+		pageIndex:"",
+		totalRecords:'',
+		pageSize:'',
+		totalPages:'',
+		HavePrePage:'',
+		HaveNextPage:'',
+}
 $(function() {
 	$('.right-side').load('index_info.jsp #content');
 	$('.sidebar-menu .nav li a').click(function() {
