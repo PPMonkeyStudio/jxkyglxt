@@ -108,9 +108,20 @@ function selectSeacher(){
 	});
 	})
 }
-
+/*模态框清空*/
+$(function(){
+		$('.modal').on('hide.bs.modal', function() {
+					var this_modal = $(this);
+					setTimeout(function() {
+						this_modal.find('table input,select').val('');
+						this_modal.find('table .img-default').remove();
+					//$('#lost .panel-body').empty();
+					}, 200)
+	})
+})
 /*导出js*/
 $(function() {
+	
 	$("#export").click(function() {
 		$("input[name='checkbox']:checkbox:checked").each(function() {
 			data.query_num += $(this).val() + ",";
@@ -312,5 +323,7 @@ function import_to_database() {
 		}
 	});
 }
+
+
 
 

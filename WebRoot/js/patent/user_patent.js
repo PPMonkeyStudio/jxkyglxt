@@ -58,7 +58,7 @@ function userPatent(){
 				data.export_id+=$(this).find('input[type="hidden"]').val()+',';
 				}
 			})
-			$('#export_award .group-list li input[name="checkbox"]').each(function(){
+			$('#export_patent .group-list li input[name="checkbox"]').each(function(){
 				if(($(this).is(':checked'))==true){
 					data.export_name+=$(this).val()+',';
 				}
@@ -96,6 +96,17 @@ function userPatent(){
 				},"json");
 		$(".review-info").remove();
 	})
+	function getIdByName(){
+		$('input[name="teacherPatent.authorUserNames"]').keyup(function(){
+			if($(this).val()==""){
+				return;
+			}
+			$.post('/teacherms/Teacher/teacher_getUserIdOrderingByUserName',{"user.userName":$(this).val()},function(xhr){
+			   $('input[name="teacherPatent.authorUserIds"]').val(xhr.result);
+			},'json')
+		})
+	}
+	
 	/*添加*/
 	$('.add-btn').unbind().click(function(){
 		$('#patent_modal').modal({
@@ -103,6 +114,7 @@ function userPatent(){
 		});
 		$('.btn-danger').remove();
 		imgUpload();
+		getIdByName();
 		$(' #patent_modal input').val("");
 		$(' #patent_modal .modal-footer .close-btn').before('<button type="button" class="btn btn-danger add-end-btn ">添加</button>')
 	formValidate();

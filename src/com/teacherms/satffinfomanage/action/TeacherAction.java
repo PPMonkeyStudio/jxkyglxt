@@ -327,6 +327,10 @@ public class TeacherAction extends ActionSupport {
 		return user;
 	}
 
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public void setTime_interval(String time_interval) {
 		this.time_interval = time_interval;
 	}

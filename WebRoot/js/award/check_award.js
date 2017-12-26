@@ -14,13 +14,11 @@ function checkAward(){
 			for(i=0;i<xhr.length;i++){
 				str+="<tr>";
 			    str+="<td>"+(i+1)+"</td>";
-			    str+="<td>"+xhr[i][0].achievementName+"</td>";
 			    str+="<td>"+xhr[i][0].awardName+"</td>";
 			    str+="<td>"+xhr[i][0].awardUserNames+"</td>";
-			    str+="<td>"+xhr[i][0].awardType+"</td>";
-			    str+="<td>"+xhr[i][0].awardClass+"</td>"; 
-			    str+="<td>"+xhr[i][0].awardGrade+"</td>";
 			    str+="<td>"+xhr[i][0].awardLevel+"</td>";
+			    str+="<td>"+xhr[i][0].awardDate+"</td>";
+			    str+="<td>"+xhr[i][0].grantUnit+"</td>"; 
 			    str += '<td><input type="hidden" value="' + xhr[i][0].awardId  + '" ><button class="btn btn-default btn-xs relieveButton" title="解除固化"><i class="fa fa-chain-broken fa-lg"></i></button><button class="btn btn-default btn-xs viewButton" title="查看"><i class="fa fa-search-plus fa-lg"  aria-hidden="true"></i></button></td>';		
 			    str+="</tr>";   
 			}

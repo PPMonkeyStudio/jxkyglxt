@@ -1,6 +1,4 @@
 function examWorks(){
-	//清楚原来的数据
-	$('.table tbody').empty();
 	$.ajax({
 		url : "/teacherms/Admin/admin_getSpecifiedInformationByPaging",
 		type : "post",
@@ -16,13 +14,14 @@ function examWorks(){
 			    str+="<td>"+(i+1)+"</td>";
 			    str+="<td>"+xhr[i][0].worksName+"</td>";
 			    str+="<td>"+xhr[i][0].editorUserNames+"</td>";
-			    str+="<td>"+xhr[i][0].worksType+"</td>";
-			    str+="<td>"+xhr[i][0].selectedSituation+"</td>";
+			    str+="<td>"+xhr[i][0].isbn+"</td>";
+			    str+="<td>"+xhr[i][0].publishTime+"</td>";
 			    str+="<td>"+xhr[i][0].press+"</td>"; 
 			    str+='<td><input type="hidden" value="' + xhr[i][0].worksId + '" ><button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button><button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button></td>';
 			   str+="</tr>";   
 			}
-			$('.table').children('tbody').append(str);
+			$('.table').children('tbody').html(str);
+			$('.solidButton').click(solidInfo);	
 		},
 		error : function() {}
 	});
@@ -46,11 +45,25 @@ function examWorks(){
 				  })
 				},"json");
 	})
-		$(".solidButton").on("click",function(){
+		$(".solidButton").unbind().on("click",function(){
 		var id = $(this).siblings().val();
 		data.dataState="40"
 			$(this).siblings().remove();
 			$(this).children().remove();
 		$(this).append("<img  src='img/ok1.png' />")
 	})
+}
+/*信息固化*/
+var solidInfo=function(){
+   var infoid=$(this).siblings('input').val();
+   $.post('/teacherms/Admin/admin_LiftCuring',{
+	   tableId:infoid,
+	   tableName:"TeacherWorks",
+	   dataState:"40"},function(xhr){
+		   if(xhr.result=="success"){
+			   toastr.success("信息固化成功");
+		   }else{
+			   toastr.error("信息固化失败");
+		   }
+   },'json')
 }

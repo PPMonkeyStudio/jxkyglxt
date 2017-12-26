@@ -1,16 +1,16 @@
 function userInfo() {
 	$.ajax({
-		url : "/teacherms/Teacher/teacher_userGetTableInfoInPaging",
+		url : "/teacherms/Teacher/teacher_userGetTeacherInfo",
 		type : "post",
 		timeout : 3000,
-		data : data,
+		data : {},
 		dataType : "json",
 		success : function(xhr_data) {
 			$("#user_info_table_audit table").find('select,input').each(function() {
-				console.log($(this).attr("name"));
 				var na = $(this).attr("name").split(".")[1];
-				$(this).val(xhr_data.ObjDatas[0][na]);
+				$(this).val(xhr_data.object[na]);
 			});
+			$('input[name="teacherInfo.userName"]').val(xhr_data.user.userName);
 		},
 		error : function() {}
 	});
@@ -36,4 +36,34 @@ function userInfo() {
 			}, "json")
 		})
 	})
+	
+/*	导出信息*/
+	$('.export_button').unbind().on('click',function(){
+		$('#export_info').modal({
+			keyboard : true
+		});
+		
+	});
+	$('.export-info').unbind().click(function(){
+		$('.second-panel-heading').append('<button class="btn btn-primary end-button">确认导出</button>');
+		$('.end-button').unbind().on("click",function(){
+			$('#info_table tbody tr').each(function(){
+				if(($(this).find(' input[name="check"]').is(':checked'))==true){
+				data.export_id+=$(this).find('input[type="hidden"]').val()+',';
+				}
+			})
+			$('#export_project .group-list li input[name="checkbox"]').each(function(){
+				if(($(this).is(':checked'))==true){
+					data.export_name+=$(this).val()+',';
+				}
+			})
+			if (data.export_id != "" && data.export_name != "") {
+				location.href = "/teacherms/Teacher/teacher_userExportExcelCollection?tableName=TeacherInfo&export_id=" + (data.export_id).substring(0,data.export_id.length-1) + "&export_name=" + (data.export_name).substring(0,data.export_name.length-1);
+			} else {
+				alert("请选择数据");
+			}
+			data.export_id="";
+			$('.end-button').unbind().remove();
+		});
+	});
 }

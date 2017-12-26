@@ -16,8 +16,8 @@ function checkWorks(){
 			    str+="<td>"+(i+1)+"</td>";
 			    str+="<td>"+xhr[i][0].worksName+"</td>";
 			    str+="<td>"+xhr[i][0].editorUserNames+"</td>";
-			    str+="<td>"+xhr[i][0].worksType+"</td>";
-			    str+="<td>"+xhr[i][0].selectedSituation+"</td>";
+			    str+="<td>"+xhr[i][0].isbn+"</td>";
+			    str+="<td>"+xhr[i][0].publishTime+"</td>";
 			    str+="<td>"+xhr[i][0].press+"</td>"; 
 			    str += '<td><input type="hidden" value="' + xhr[i][0].worksId  + '" ><button class="btn btn-default btn-xs relieveButton" title="解除固化"><i class="fa fa-chain-broken fa-lg"></i></button><button class="btn btn-default btn-xs viewButton" title="查看"><i class="fa fa-search-plus fa-lg"  aria-hidden="true"></i></button></td>';
 			   str+="</tr>";   
