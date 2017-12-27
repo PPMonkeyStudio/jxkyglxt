@@ -30,8 +30,11 @@ function selectSeacher() {
 		case 'teachingProfessionName':
 			pla = '请输入任教专业名称';
 			break;
-		case 'teachingDate':
-			pla = '请输入任教时间';
+		case 'professionTeachingDate':
+			pla = '任教';
+			break;
+		case 'workDate':
+			pla = '参加';
 			break;
 		case 'awardType':
 			pla = '请输入获奖类型';
@@ -132,10 +135,19 @@ function selectSeacher() {
 		if ($("#Inputu" + $(this).val()).length > 0 || pla == "") {
 			return;
 		} else {
+			 var con=$(this).val();
+			if(con.indexOf("Date")>=0){
+				$(".all_options").siblings('#search_input').append('<div id="main_body">'+'<div id="Inputu' + $(this).val() + '" class="dateinput_div form-group">' +
+						'<input type="text"  placeholder="'+pla+'搜索起始时间" class="form-control  laydate-icon"  onfocus="time()"/>' +
+						'<input type="text"  placeholder="'+pla+'搜索结束时间" class="form-control  laydate-icon" onfocus="time()"/>'+
+						'<button class="btn btn-primary"><i class="fa fa-times" aria-hidden="true"></i></button></div></div>')
+			}
+			else{
 			$(".all_options").siblings('#search_input').append('<div id="Inputu' + $(this).val() + '" class="input_div form-group">' +
 				'<input type="text"  placeholder="' + pla + '" class="form-control"/>' +
 				'<button class="btn btn-primary"><i class="fa fa-times" aria-hidden="true"></i></button></div>')
-		}
+			}
+			}
 		$('.input_div button').click(function() {
 			$(this).parent().remove();
 		});
