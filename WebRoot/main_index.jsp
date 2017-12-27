@@ -36,7 +36,6 @@
 	<s:action name="page_nav" namespace="/Page" executeResult="true" />
 
 	<script type="text/javascript" src="js/com/check_com.js"></script>
-	<script type="text/javascript" src="js/main_index.js"></script>
 	<script type="text/javascript" src="js/toastr.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript" src="js/laydate.js"></script>
@@ -61,7 +60,7 @@
 	<script type="text/javascript" src="js/patent/user_patent.js"></script>
 	<script type="text/javascript" src="js/project/user_project.js"></script>
 	<script type="text/javascript" src="js/works/user_works.js"></script>
-	
+
 
 </body>
 </html>

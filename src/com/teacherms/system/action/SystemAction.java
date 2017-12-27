@@ -14,6 +14,7 @@ public class SystemAction extends ActionSupport {
 	private SystemService systemService;
 	private String user_id; // 登陆帐号
 	private String password; // 登录密码
+	private User user;// 用户信息
 
 	// 进行登录的判断
 	public void login() {
@@ -33,6 +34,17 @@ public class SystemAction extends ActionSupport {
 			e.printStackTrace();
 		}
 
+	}
+
+	// 获得登录用户的帐号信息
+	public void getAccountInformation() {
+		try {
+			User user = (User) ActionContext.getContext().getSession().get("user");
+			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
+			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(user));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// 获得顶部导航标签
@@ -72,6 +84,20 @@ public class SystemAction extends ActionSupport {
 		return "exit";
 	}
 
+	// 用户修改信息
+	public void modifyUserInfo() {
+		try {
+			User u = systemService.modifyPassword(user, (User) ActionContext.getContext().getSession().get("user"));
+			ActionContext.getContext().getSession().remove("user");
+			ActionContext.getContext().getSession().put("user", u);
+			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
+			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + u.getUserName() + "\"}");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public String getUser_id() {
 		return user_id;
 	}
@@ -94,6 +120,14 @@ public class SystemAction extends ActionSupport {
 
 	public void setSystemService(SystemService systemService) {
 		this.systemService = systemService;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

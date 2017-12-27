@@ -46,8 +46,8 @@ public class JunitTest {
 
 	@Test
 	public void test11() {
-		PageVO<Object> list = adminService.getSpecifiedInformationByPaging("TeacherAward", "1", "", "20", "信息与计算机工程学院");
-		System.out.println(new Gson().toJson(list));
+		//PageVO<Object> list = adminService.getSpecifiedInformationByPaging("TeacherAward", "1", "", "20", "信息与计算机工程学院");
+		//System.out.println(new Gson().toJson(list));
 	}
 
 	@Test

@@ -1,127 +1,172 @@
 
-function selectSeacher(){
-	$(document).on("change","#all_options",function(){
+function selectSeacher() {
+	$(document).on("change", "#all_options", function() {
 		var pla = '';
-		switch ($(this).val()){
-			case 'userName':pla='请输入姓名';
-				break;
-			case 'userId':pla='请输入工号';
+		switch ($(this).val()) {
+		case 'userName':
+			pla = '请输入姓名';
 			break;
-			case 'teacherStatus':pla='请输入任职状态';
+		case 'userId':
+			pla = '请输入工号';
 			break;
-			case 'unitName':pla='请输入单位名称';
+		case 'teacherStatus':
+			pla = '请输入任职状态';
 			break;
-			case 'Education':pla='请输入学历';
+		case 'unitName':
+			pla = '请输入单位名称';
 			break;
-			case 'heigestGegree':pla='请输入最高学位';
+		case 'Education':
+			pla = '请输入学历';
 			break;
-			case 'highestEducation':pla='请输入最高学历';
+		case 'heigestGegree':
+			pla = '请输入最高学位';
 			break;
-			case 'learnEdgeStructure':pla='请输入学缘';
+		case 'highestEducation':
+			pla = '请输入最高学历';
 			break;
-			case 'professionalTitle':pla='请输入专业技术职称';
+		case 'learnEdgeStructure':
+			pla = '请输入学缘';
 			break;
-			case 'subjectCategory':pla='请输入学科类别';
+		case 'professionalTitle':
+			pla = '请输入专业技术职称';
 			break;
-			case 'teachingProfessionName':pla='请输入任教专业名称';
+		case 'subjectCategory':
+			pla = '请输入学科类别';
 			break;
-			case 'teachingDate':pla='请输入任教时间';
+		case 'teachingProfessionName':
+			pla = '请输入任教专业名称';
 			break;
-			case 'workDate':pla='请输入参加工作时间';
+		case 'teachingDate':
+			pla = '请输入任教时间';
 			break;
-			case 'awardType':pla='请输入获奖类型';
+		case 'workDate':
+			pla = '请输入参加工作时间';
 			break;
-			case 'awardName':pla='请输入获奖名称';
+		case 'awardType':
+			pla = '请输入获奖类型';
 			break;
-			case 'awardPeoname':pla='请输入获奖人姓名';
+		case 'awardName':
+			pla = '请输入获奖名称';
 			break;
-			case 'awardGrade':pla='请输入获奖等级';
+		case 'awardPeoname':
+			pla = '请输入获奖人姓名';
 			break;
-			case 'awardLevel':pla='请输入获奖级别';
+		case 'awardGrade':
+			pla = '请输入获奖等级';
 			break;
-			case 'awardTime':pla='请输入获奖时间';
+		case 'awardLevel':
+			pla = '请输入获奖级别';
 			break;
-			case 'worksName':pla='请输入著作（专著）名称';
+		case 'awardTime':
+			pla = '请输入获奖时间';
 			break;
-			case 'worksType':pla='请输入著作类别';
+		case 'worksName':
+			pla = '请输入著作（专著）名称';
 			break;
-			case 'worksPress':pla='请输入出版社';
+		case 'worksType':
+			pla = '请输入著作类别';
 			break;
-			case 'worksISBN':pla='请输入ISBN';
+		case 'worksPress':
+			pla = '请输入出版社';
 			break;
-			case 'workspressTime':pla='请输入出版时间';
+		case 'worksISBN':
+			pla = '请输入ISBN';
 			break;
-			case 'worksResult':pla='请输入入选情况';
+		case 'workspressTime':
+			pla = '请输入出版时间';
 			break;
-			case 'worksDate':pla='请输入入选时间';
+		case 'worksResult':
+			pla = '请输入入选情况';
 			break;
-			case 'worksAuthority':pla='请输入主编（作者）';
+		case 'worksDate':
+			pla = '请输入入选时间';
 			break;
-			case 'paperName':pla='请输入论文名称';
+		case 'worksAuthority':
+			pla = '请输入主编（作者）';
 			break;
-			case 'paperType':pla='请输入论文类别';
+		case 'paperName':
+			pla = '请输入论文名称';
 			break;
-			case 'paperJoural':pla='请输入发表期刊';
+		case 'paperType':
+			pla = '请输入论文类别';
 			break;
-			case 'paperIssue':pla='请输入期号';
+		case 'paperJoural':
+			pla = '请输入发表期刊';
 			break;
-			case 'papaerIncludedSituation':pla='请输入收录情况';
+		case 'paperIssue':
+			pla = '请输入期号';
 			break;
-			case 'paperRefenceNum':pla='请输入他引次数';
+		case 'papaerIncludedSituation':
+			pla = '请输入收录情况';
 			break;
-			case 'paperWordsNum':pla='请输入成果字数';
+		case 'paperRefenceNum':
+			pla = '请输入他引次数';
 			break;
-			case 'paperTime':pla='请输入发表时间';
+		case 'paperWordsNum':
+			pla = '请输入成果字数';
 			break;
-			case 'patentName':pla='请输入专利名称';
+		case 'paperTime':
+			pla = '请输入发表时间';
 			break;
-			case 'patentType':pla='请输入专利类型';
+		case 'patentName':
+			pla = '请输入专利名称';
 			break;
-			case 'paperlisenceNum':pla='请输入授权号';
+		case 'patentType':
+			pla = '请输入专利类型';
 			break;
-			case 'patentTime':pla='请输入获奖时间';
+		case 'paperlisenceNum':
+			pla = '请输入授权号';
 			break;
-			case 'projectName':pla='请输入项目名称';
+		case 'patentTime':
+			pla = '请输入获奖时间';
 			break;
-			case 'projectType':pla='请输入项目类型';
+		case 'projectName':
+			pla = '请输入项目名称';
 			break;
-			case 'projectOrigin':pla='请输入项目来源';
+		case 'projectType':
+			pla = '请输入项目类型';
 			break;
-			case 'projectMenbers':pla='请输入成员';
+		case 'projectOrigin':
+			pla = '请输入项目来源';
 			break;
-			case 'projectTime':pla='请输入立项时间';
+		case 'projectMenbers':
+			pla = '请输入成员';
 			break;
-			case 'projectcheckTime':pla='请输入结题验收时间';
+		case 'projectTime':
+			pla = '请输入立项时间';
 			break;
-			default:
-				break;
+		case 'projectcheckTime':
+			pla = '请输入结题验收时间';
+			break;
+		default:
+			break;
 		}
-		if($("#Inputu"+$(this).val()).length>0){
+		if ($("#Inputu" + $(this).val()).length > 0) {
 			return;
-		}else{
-			$(".all_options").after('<div id="Inputu'+$(this).val()+'" class="input_div  form-group">'+
-					'<input type="text"  placeholder="'+pla+'" class="form-control"/>'+
-					'<button class="btn btn-primary cancel">取消</button></div>')
+		} else {
+			$(".all_options").after('<div id="Inputu' + $(this).val() + '" class="input_div  form-group">' +
+				'<input type="text"  placeholder="' + pla + '" class="form-control"/>' +
+				'<button class="btn btn-primary cancel">取消</button></div>')
 		}
-	$('.input_div button').click(function(){
-		$(this).parent().remove();
-	});
+		$('.input_div button').click(function() {
+			$(this).parent().remove();
+		});
 	})
 }
 /*模态框清空*/
-$(function(){
-		$('.modal').on('hide.bs.modal', function() {
-					var this_modal = $(this);
-					setTimeout(function() {
-						this_modal.find('table input,select').val('');
-						this_modal.find('table .img-default').remove();
-					//$('#lost .panel-body').empty();
-					}, 200)
+$(function() {
+	$('.modal').on('hide.bs.modal', function() {
+		var this_modal = $(this);
+		setTimeout(function() {
+			this_modal.find('table input,select').val('');
+			this_modal.find('table .img-default').remove();
+		//$('#lost .panel-body').empty();
+		}, 200)
 	})
 })
 /*导出js*/
 $(function() {
-	
+
 	$("#export").click(function() {
 		$("input[name='checkbox']:checkbox:checked").each(function() {
 			data.query_num += $(this).val() + ",";
@@ -145,142 +190,143 @@ $(function() {
 });
 
 /*  输入身份证号自动填入性别，出生日期     */
-$(function(){
-		$(document).on("blur",".card_num",function(){
-			var reg=/^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/; 
-						var card_num = $(".card_num").val();
-						if(reg.test(card_num) === false){
-							$(this).addClass('error_form ').val("");
-						}else{
-						if(parseInt(card_num.substr(16, 1)) % 2 == 1) {
-							$(".sele").find("option[value='男']").attr("selected", "selected");
-							//是男则执行代码 ...
-						} else {
-							$(".sele").find("option[value='女']").attr("selected", "selected");
-							//是女则执行代码 ...
-						}
-						$(".bir").val(card_num.substring(6, 10) + "-" + card_num.substring(10, 12) + "-" + card_num.substring(12, 14));
-						}
-		});
-		
-		$(document).on("keyup",".card_num",function(event){
-				if(event.keyCode == 13) {
-							var reg=/^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/;
-							var card_num = $(".card_num").val();
-							if(reg.test(card_num) === false){
-								$(this).val("");
-							}else{
-							if(parseInt(card_num.substr(16, 1)) % 2 == 1) {
-								$(".sele").find("option[value='男']").attr("selected", "selected");
-								//是男则执行代码 ...
-							} else {
-								$(".sele").find("option[value='女']").attr("selected", "selected");
-								//是女则执行代码 ...
-							}
-							$(".bir").val(card_num.substring(6, 10) + "-" + card_num.substring(10, 12) + "-" + card_num.substring(12, 14));
-							}
-							}
-					})	
-		})
-	 
-function time(){
+$(function() {
+	$(document).on("blur", ".card_num", function() {
+		var reg = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/;
+		var card_num = $(".card_num").val();
+		if (reg.test(card_num) === false) {
+			$(this).addClass('error_form ').val("");
+		} else {
+			if (parseInt(card_num.substr(16, 1)) % 2 == 1) {
+				$(".sele").find("option[value='男']").attr("selected", "selected");
+			//是男则执行代码 ...
+			} else {
+				$(".sele").find("option[value='女']").attr("selected", "selected");
+			//是女则执行代码 ...
+			}
+			$(".bir").val(card_num.substring(6, 10) + "-" + card_num.substring(10, 12) + "-" + card_num.substring(12, 14));
+		}
+	});
+
+	$(document).on("keyup", ".card_num", function(event) {
+		if (event.keyCode == 13) {
+			var reg = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/;
+			var card_num = $(".card_num").val();
+			if (reg.test(card_num) === false) {
+				$(this).val("");
+			} else {
+				if (parseInt(card_num.substr(16, 1)) % 2 == 1) {
+					$(".sele").find("option[value='男']").attr("selected", "selected");
+				//是男则执行代码 ...
+				} else {
+					$(".sele").find("option[value='女']").attr("selected", "selected");
+				//是女则执行代码 ...
+				}
+				$(".bir").val(card_num.substring(6, 10) + "-" + card_num.substring(10, 12) + "-" + card_num.substring(12, 14));
+			}
+		}
+	})
+})
+
+function time() {
 	!function() {
-			laydate.skin('danlan'); //切换皮肤，请查看skins下面皮肤库
-			laydate({
-				elem : '#main_body .laydate-icon'}); //绑定元素
-		}();
-		//日期范围限制
-		var start = {
-			elem : '#start',
-			format : 'YYYY-MM-DD',
-			min : laydate.now(), //设定最小日期为当前日期
-			max : '2099-06-16', //最大日期
-			istime : true,
-			istoday : false,
-			choose : function(datas) {
-				end.min = datas; //开始日选好后，重置结束日的最小日期
-				end.start = datas //将结束日的初始值设定为开始日
-			}
-		};
-	
-		var end = {
-			elem : '#end',
-			format : 'YYYY-MM-DD',
-			min : laydate.now(),
-			max : '2099-06-16',
-			istime : true,
-			istoday : false,
-			choose : function(datas) {
-				start.max = datas; //结束日选好后，充值开始日的最大日期
-			}
-		};
-		laydate(start);
-		laydate(end);
+		laydate.skin('danlan'); //切换皮肤，请查看skins下面皮肤库
+		laydate({
+			elem : '#main_body .laydate-icon'
+		}); //绑定元素
+	}();
+	//日期范围限制
+	var start = {
+		elem : '#start',
+		format : 'YYYY-MM-DD',
+		min : laydate.now(), //设定最小日期为当前日期
+		max : '2099-06-16', //最大日期
+		istime : true,
+		istoday : false,
+		choose : function(datas) {
+			end.min = datas; //开始日选好后，重置结束日的最小日期
+			end.start = datas //将结束日的初始值设定为开始日
+		}
+	};
+
+	var end = {
+		elem : '#end',
+		format : 'YYYY-MM-DD',
+		min : laydate.now(),
+		max : '2099-06-16',
+		istime : true,
+		istoday : false,
+		choose : function(datas) {
+			start.max = datas; //结束日选好后，充值开始日的最大日期
+		}
+	};
+	laydate(start);
+	laydate(end);
 }
 
 /*附件图片上传js*/
-function imgUpload(){
-	$('.addInfo').unbind().click(function(){
+function imgUpload() {
+	$('.addInfo').unbind().click(function() {
 		$('.addInfo').siblings('input').click();
-		})
+	})
 }
 /*图片预览*/
 function previewFile(input_obj) {
 	//console.log($(input_obj).prop('files'));
 	var files = $(input_obj).prop('files');
-    for(var i in files){
-	   var reader = new FileReader();
-	   reader.onloadend = function () {  
-	        //(this.result); 
-		   $('.addInfo').before('<div class="img-default">'+'<div class="img">'
-					+'<img src="'+this.result+'" alt="img" class="img-show">'
-					+'</div>'
-					+'<div class="info">'
-					+'<div class="img-control-btn modify-btn" title="编辑">'
-					+'<img src="img/modi(5).png" />'
-					+'</div>'
-					+'<div class="img-control-btn delete-btn" title="删除">'
-					+'<img src="img/delete(2).png" />'
-					+'</div>'
-					+'</div>'
-					+'<input type="file" value="'+files[i]+'" onchange="modiFiles(this)" accept="image/gif, image/pdf, image/png, image/jpeg" style="display:none" >'
-					+'</div>')
-			$('.delete-btn').unbind().click(function(){
+	for (var i in files) {
+		var reader = new FileReader();
+		reader.onloadend = function() {
+			//(this.result); 
+			$('.addInfo').before('<div class="img-default">' + '<div class="img">'
+				+ '<img src="' + this.result + '" alt="img" class="img-show">'
+				+ '</div>'
+				+ '<div class="info">'
+				+ '<div class="img-control-btn modify-btn" title="编辑">'
+				+ '<img src="img/modi(5).png" />'
+				+ '</div>'
+				+ '<div class="img-control-btn delete-btn" title="删除">'
+				+ '<img src="img/delete(2).png" />'
+				+ '</div>'
+				+ '</div>'
+				+ '<input type="file" value="' + files[i] + '" onchange="modiFiles(this)" accept="image/gif, image/pdf, image/png, image/jpeg" style="display:none" >'
+				+ '</div>')
+			$('.delete-btn').unbind().click(function() {
 				$(this).parent().parent().remove();
 			});
-			$('.modify-btn').unbind().click(function(){
+			$('.modify-btn').unbind().click(function() {
 				$(this).parent().siblings('input').click();
-	});
-	    }  
-	   reader.readAsDataURL(files[i]);
-   }
+			});
+		}
+		reader.readAsDataURL(files[i]);
 	}
+}
 /*修改上传的图片*/
-function modiFiles(this_obj){
+function modiFiles(this_obj) {
 	var files = $(this_obj).prop('files')[0];
-	 var reader = new FileReader();
-	 reader.onloadend = function (){
-		 $(this_obj).siblings().children('img').attr("src",this.result);
-		 console.log(this.result)
-	 }
-	 reader.readAsDataURL(files);
+	var reader = new FileReader();
+	reader.onloadend = function() {
+		$(this_obj).siblings().children('img').attr("src", this.result);
+		console.log(this.result)
+	}
+	reader.readAsDataURL(files);
 }
 /* 表单判空验证*/
-function formValidate(){
-	$('.tab input').blur(function(){
-		if($(this).val() == ""){
-	        		 /* $(this).addClass('has-error');
-	        		  $(this).parent().prev('td').css({
+function formValidate() {
+	$('.tab input').blur(function() {
+		if ($(this).val() == "") {
+			/* $(this).addClass('has-error');
+			 $(this).parent().prev('td').css({
 	        			  "color":"red"
-	        		  })*/
-			
-			$(this).after('<span>'+'<img src="img/cuo.png"/>'+不能为空+'</span>');
-	        	  }else{
-	        		  $(this).removeClass('has-error ');
-	        		  $(this).parent().prev('td').css({
-	        			  "color": "#444444"
-	        		  })
-	        	  }
+			 })*/
+
+			$(this).after('<span>' + '<img src="img/cuo.png"/>' + 不能为空 + '</span>');
+		} else {
+			$(this).removeClass('has-error ');
+			$(this).parent().prev('td').css({
+				"color" : "#444444"
+			})
+		}
 	})
 }
 
@@ -324,6 +370,18 @@ function import_to_database() {
 	});
 }
 
-
-
-
+var search = function() {
+	var formData = new FormData();
+	var name = '';
+	var value = '';
+	$(this).siblings('div').each(function() {
+		name = data.tableName.replace("Teacher", "teacher") + '.' + $(this).attr('id').replace("Inputu", "");
+		value = $(this).find('input').val();
+		formData.append(name, value);
+		//将搜索的内容放入js的数据中
+		data[name] = value;
+	});
+	console.log(data);
+	examAward();
+	return;
+}

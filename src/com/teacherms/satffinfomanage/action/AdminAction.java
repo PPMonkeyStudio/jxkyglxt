@@ -61,6 +61,7 @@ public class AdminAction extends ActionSupport {
 	private TeacherProject teacherProject;
 	private TeacherWorks teacherWorks;
 	private User user;
+	private Object obj = null;
 
 	public String test() {
 		System.out.println("yes");
@@ -74,8 +75,10 @@ public class AdminAction extends ActionSupport {
 	// 分页查询获取指定---未审核or固化---信息（给指定参数）并进行时间排序（属于自己学院的信息）
 	public void getSpecifiedInformationByPaging() {
 		try {
+			// 给Object对象赋值
+			getObjectByTableName(tableName);
 			PageVO<Object> list = adminService.getSpecifiedInformationByPaging(tableName, page == null ? "1" : page,
-					time_interval, dataState, getSecondaryCollegeInfo("name"));
+					time_interval, dataState, getSecondaryCollegeInfo("name"), obj);
 			System.out.println(new Gson().toJson(list));
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(list));
@@ -110,23 +113,9 @@ public class AdminAction extends ActionSupport {
 	// 管理员修改信息状态+修改信息内容
 	public void modifiedInfomation() {
 		try {
-			Object obj = null;
-			if (("TeacherAward").equals(tableName)) {
-				obj = teacherAward;
-			} else if (("TeacherInfo").equals(tableName)) {
-				obj = teacherInfo;
-			} else if (("TeacherPaper").equals(tableName)) {
-				obj = teacherPaper;
-			} else if (("TeacherPatent").equals(tableName)) {
-				obj = teacherPatent;
-			} else if (("TeacherProject").equals(tableName)) {
-				obj = teacherProject;
-			} else if (("TeacherWorks").equals(tableName)) {
-				obj = teacherWorks;
-			} else {
-				return;
-			}
-			System.out.println(obj.toString());
+			// 给Object对象赋值
+			getObjectByTableName(tableName);
+
 			String result = adminService.curingInfomation(obj);
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
@@ -229,6 +218,25 @@ public class AdminAction extends ActionSupport {
 		User user = (User) ActionContext.getContext().getSession().get("user");
 		return adminService.getDepartmentNameByDepartmentId(user.getDepartmentId(), what);
 
+	}
+
+	// 通过tablename来判断给信息对象赋值
+	private void getObjectByTableName(String tableName) {
+		if (("TeacherAward").equals(tableName)) {
+			obj = teacherAward;
+		} else if (("TeacherInfo").equals(tableName)) {
+			obj = teacherInfo;
+		} else if (("TeacherPaper").equals(tableName)) {
+			obj = teacherPaper;
+		} else if (("TeacherPatent").equals(tableName)) {
+			obj = teacherPatent;
+		} else if (("TeacherProject").equals(tableName)) {
+			obj = teacherProject;
+		} else if (("TeacherWorks").equals(tableName)) {
+			obj = teacherWorks;
+		} else {
+			return;
+		}
 	}
 
 	/*
@@ -383,5 +391,4 @@ public class AdminAction extends ActionSupport {
 	public void setExport_id(String export_id) {
 		this.export_id = export_id;
 	}
-
 }

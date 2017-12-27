@@ -32,4 +32,15 @@ public class SystemServiceImpl implements SystemService {
 		return role.getRoleName();
 	}
 
+	@Override
+	public User modifyPassword(User modify_userInfo, User loging_user) {
+		// 修改的工号
+		loging_user.setUserId(modify_userInfo.getUserId());
+		// 修改的名称
+		loging_user.setUserName(modify_userInfo.getUserName());
+		// 修改的密码
+		loging_user.setPassword(md5.GetMD5Code(modify_userInfo.getPassword()));
+		return systemDao.updateUser(loging_user);
+	}
+
 }
