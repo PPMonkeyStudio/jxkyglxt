@@ -1,5 +1,4 @@
-
-function examInfo(){
+function exam_selectAllInfo(){
 	$.ajax({
 		url : "/teacherms/Admin/admin_getSpecifiedInformationByPaging",
 		type : "post",
@@ -27,6 +26,9 @@ function examInfo(){
 		},
 		error : function() {}
 	});
+}
+function examInfo(){
+	exam_selectAllInfo();
 	$(".modiButton").unbind().on("click",function(){
 		//显示出模态框
 		$('#info_modal').modal({
@@ -46,19 +48,14 @@ function examInfo(){
 					  })
 				},"json");
 	})
-	$(".solidButton").unbind().on("click",function(){
-		var id = $(this).siblings().val();
-		data.dataState="40"
-			$(this).siblings().remove();
-			$(this).children().remove();
-		$(this).append("<img  src='img/ok1.png' />")
-		$(this).attr("title","已固化");
-	})
-	
 }
 /*信息固化*/
 var UsersolidInfo=function(){
    var infoid=$(this).siblings('input').val();
+   $(this).siblings().remove();
+   $(this).children().remove();
+   $(this).append("<img  src='img/ok1.png' />")
+   $(this).attr("title","已固化");
    $.post('/teacherms/Admin/admin_LiftCuring',{
 	   tableId:infoid,
 	   tableName:"TeacherInfo",
@@ -66,7 +63,7 @@ var UsersolidInfo=function(){
 		   if(xhr.result=="success"){
 			   toastr.success("信息固化成功");
 		   }else{
-			   toastr.error("信息固化失败");
+			 return;
 		   }
    },'json')
    

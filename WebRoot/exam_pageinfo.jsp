@@ -89,7 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<!--筛选&查询&添加按钮位置-->
 					<!--按条件筛选-->
 					<div id="search">
-					<form name="search_group">
+					<form >
 						<label>按条件搜索：</label>
 	        <select id="all_options" class="all_options form-control ">
 			<option value="">请选择</option>
@@ -107,8 +107,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="teachingDate">任教时间</option>
 			<option value="workDate">参加工作时间</option>
 		</select>
-			<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
 		</form>
+			<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
+		
 		</div>
 				</div>
 			</div>
@@ -154,7 +155,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
 					<div id="search">
-					<form name="search_group">
+					<form >
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
 			<option value="">请选择</option>
@@ -165,8 +166,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="awardLevel">获奖级别</option>
 			<option value="awardTime">获奖时间</option>
 		</select>
-						<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
 		</form>
+						<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
+		
 		</div>
 		
 					<!--<input type="text" class="form-control" />-->
@@ -213,7 +215,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
 					<div id="search">
-					<form name="search_group">
+					<form>
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
 			<option value="">请选择</option>
@@ -226,8 +228,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="worksDate">入选时间</option>
 			<option value="worksAuthority">主编（作者）</option>
 		</select>
-			<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
 		</form>
+			<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
+		
 		</div>
 					<!--<input type="text" class="form-control" />-->
 				</div>
@@ -273,7 +276,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
 					<div id="search">
-					<form name="search_group">
+					<form >
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
 			<option value="">请选择</option>
@@ -288,8 +291,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="paperWordsNum">成果字数</option>
 			<option value="paperTime">发表时间</option>
 		</select>
-			<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
 		</form>
+			<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
+		
 		</div>
 					<!--<input type="text" class="form-control" />-->
 				</div>
@@ -335,7 +339,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
 					<div id="search">
-					<form name="search_group">
+					<form >
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
 			<option value="">请选择</option>
@@ -346,8 +350,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="paperlisenceNum">授权号</option>
 			<option value="patentTime">获奖时间</option>
 		</select>
+			</form>
 			<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
-		</form>
+	
 		</div>
 					<!--<input type="text" class="form-control" />-->
 				</div>
@@ -392,7 +397,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
 					<div id="search">
-					<form name="search_group">
+					<form >
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
 			<option value="">请选择</option>
@@ -403,8 +408,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="projectTime">立项时间</option>
 			<option value="projectcheckTime">结题验收时间</option>
 		</select>
-			<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
 		</form>
+			<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
+		
 		</div>
 					<!--<input type="text" class="form-control" />-->
 				</div>

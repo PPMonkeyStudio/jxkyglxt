@@ -23,14 +23,9 @@ function checkPaper(){
 			    str+="</tr>";   
 			}
 			$('.table').children('tbody').append(str);
+			$('.relieveButton').click(PaperrelieveInfo);
 		},
 		error : function() {}
-	});
-	$(document).on("click",".relieveButton",function(){
-		data.dataState="20"
-		$(this).children().remove();
-		$(this).append("<img  src='img/ok1.png' />");
-		$(this).attr("title","已解除固化");
 	});
 	$(".viewButton").unbind().on("click",function(){
 		//显示出模态框
@@ -84,5 +79,23 @@ function checkPaper(){
 		data.export_id="";
 		$('.end-button').unbind().remove();
 	});
+}
 
+
+/*解除固化*/
+var PaperrelieveInfo=function(){
+	   var infoid=$(this).siblings('input').val();
+	   $(this).children().remove();
+		$(this).append("<img  src='img/ok1.png' />");
+		$(this).attr("title","已解除固化");
+	   $.post('/teacherms/Admin/admin_LiftCuring',{
+		   tableId:infoid,
+		   tableName:"TeacherPaper",
+		   dataState:"10"},function(xhr){
+			   if(xhr.result=="success"){
+				   toastr.success("信息解除固化成功");
+			   }else{
+				  return;
+			   }
+	   },'json')
 }
