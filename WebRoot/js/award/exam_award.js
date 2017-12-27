@@ -1,4 +1,4 @@
-function examAward() {
+function exam_selectAllAward(){
 	$.ajax({
 		url : "/teacherms/Admin/admin_getSpecifiedInformationByPaging",
 		type : "post",
@@ -21,11 +21,16 @@ function examAward() {
 				str += "</tr>";
 			}
 			$('.table').children('tbody').html(str);
-			$('.solidButton').click(AwardsolidInfo);
+
+            $('.solidButton').click(AwardsolidInfo)
 		},
 		error : function() {}
 	});
-	$(".modiButton").unbind().on("click", function() {
+}
+function examAward(){
+	exam_selectAllAward();
+	$(".modiButton").unbind().on("click",function(){
+
 		//显示出模态框
 		$('#award_modal').modal({
 			keyboard : true
@@ -46,31 +51,23 @@ function examAward() {
 				})
 			}, "json");
 	})
-	$(".solidButton").unbind().on("click", function() {
-		var id = $(this).siblings().val();
-		data.dataState = "40"
-		$(this).siblings().remove();
-		$(this).children().remove();
-		$(this).append("<img  src='img/ok1.png' />")
-	})
-
-	//$('.btn-addon').unbind().click(search);
-
-
+	
 }
 /*信息固化*/
-var AwardsolidInfo = function() {
-	var infoid = $(this).siblings('input').val();
-	$.post('/teacherms/Admin/admin_LiftCuring', {
-		tableId : infoid,
-		tableName : "TeacherAward",
-		dataState : "40"
-	}, function(xhr) {
-		if (xhr.result == "success") {
-			toastr.success("信息固化成功");
-		} else {
-			toastr.error("信息固化失败");
-		}
-	}, 'json')
-
+var AwardsolidInfo=function(){
+    var infoid=$(this).siblings('input').val();
+	$(this).siblings().remove();
+    $(this).children().remove();
+    $(this).append("<img  src='img/ok1.png' />")
+    $.post('/teacherms/Admin/admin_LiftCuring',{
+	   tableId:infoid,
+	   tableName:"TeacherAward",
+	   dataState:"40"},function(xhr){
+		   if(xhr.result=="success"){
+			   toastr.success("信息固化成功");
+		   }else{
+			   return;
+		   }
+   },'json')
+   
 }

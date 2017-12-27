@@ -43,25 +43,22 @@ function examProject(){
 					  })
 				},"json");
 	})
-		$(".solidButton").unbind().on("click",function(){
-		var id = $(this).siblings().val();
-		data.dataState="40"
-			$(this).siblings().remove();
-			$(this).children().remove();
-		$(this).append("<img  src='img/ok1.png' />")
-	})
+		
 }
 /*信息固化*/
 var ProjectsolidInfo=function(){
    var infoid=$(this).siblings('input').val();
-   $.post('/teacherms/Admin/admin_LiftCuring',{
+   $(this).siblings().remove();
+   $(this).children().remove();
+   $(this).append("<img  src='img/ok1.png' />")
+     $.post('/teacherms/Admin/admin_LiftCuring',{
 	   tableId:infoid,
 	   tableName:"TeacherProject",
 	   dataState:"40"},function(xhr){
 		   if(xhr.result=="success"){
 			   toastr.success("信息固化成功");
 		   }else{
-			   toastr.error("信息固化失败");
+			  return;
 		   }
    },'json')
 }

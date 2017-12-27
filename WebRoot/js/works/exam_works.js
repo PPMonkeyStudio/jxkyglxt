@@ -45,17 +45,14 @@ function examWorks(){
 				  })
 				},"json");
 	})
-		$(".solidButton").unbind().on("click",function(){
-		var id = $(this).siblings().val();
-		data.dataState="40"
-			$(this).siblings().remove();
-			$(this).children().remove();
-		$(this).append("<img  src='img/ok1.png' />")
-	})
+		
 }
 /*信息固化*/
 var solidInfo=function(){
    var infoid=$(this).siblings('input').val();
+	$(this).siblings().remove();
+	$(this).children().remove();
+$(this).append("<img  src='img/ok1.png' />")
    $.post('/teacherms/Admin/admin_LiftCuring',{
 	   tableId:infoid,
 	   tableName:"TeacherWorks",
@@ -63,7 +60,7 @@ var solidInfo=function(){
 		   if(xhr.result=="success"){
 			   toastr.success("信息固化成功");
 		   }else{
-			   toastr.error("信息固化失败");
+			  return;
 		   }
    },'json')
 }

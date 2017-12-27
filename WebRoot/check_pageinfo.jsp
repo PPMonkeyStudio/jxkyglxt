@@ -90,7 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div id="search">
 					<form style="float: left;">
 						<label>按条件搜索：</label>
-	<select id="all_options" class="all_options form-control ">
+	      <select id="all_options" class="all_options form-control ">
 			<option value="">请选择</option>
 			<option value="userName">姓名</option>
 			<option value="userId">工号</option>

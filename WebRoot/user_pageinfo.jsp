@@ -68,6 +68,7 @@
 					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>导出</button>
 					<!--按条件筛选-->
 					<div id="search">
+					<form >
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control ">
 			<option value="">请选择</option>
@@ -85,9 +86,7 @@
 			<option value="teachingDate">任教时间</option>
 			<option value="workDate">参加工作时间</option>
 		</select>
-		 
 			<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
-		
 		</div>
 				</div>
 			</div>
@@ -421,6 +420,7 @@
 					<button class="btn btn-default btn-addon btn-sm add-btn"><i class="fa fa-plus"></i>添加</button>
 					<button class="btn btn-default btn-addon btn-sm export_button"><i class="fa fa-share-square"></i>导出</button>
 					<div id="search">
+					<form >
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
 			<option value="">请选择</option>
@@ -431,6 +431,7 @@
 			<option value="awardLevel">获奖级别</option>
 			<option value="awardTime">获奖时间</option>
 		</select>
+		</form>
 							<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
 		
 		</div>

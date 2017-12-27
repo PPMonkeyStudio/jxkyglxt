@@ -1,4 +1,4 @@
-function selectAllAward(){
+function user_selectAllAward(){
 	$('.table tbody').empty();
 	$.ajax({
 		url : "/teacherms/Teacher/teacher_userGetTableInfoInPaging",
@@ -35,7 +35,7 @@ function selectAllAward(){
 	
 }
 function userAward(){
-	selectAllAward();
+	user_selectAllAward();
 	/*导出*/
 	$('.export_button').unbind().on('click',function(){
 		$('#export_award').modal({
@@ -46,7 +46,7 @@ function userAward(){
 		$('.second-panel-heading').append('<button class="btn btn-primary end-button">确认导出</button>');
 		$('#info_table tbody tr').each(function(){
 			 $(this).find("td:first").empty().append('<input name="check" type="checkbox">');
-			 $(this).on("click",function(){
+			 $(this).unbind().on("click",function(){
 				var check_attr= $(this).find('td input[name="check"]').is(":checked");
 				if(check_attr==false){
 					$(this).find('td input[name="check"]').attr("checked","true");

@@ -1,4 +1,4 @@
-function userInfo() {
+function user_selectAllInfo(){
 	$.ajax({
 		url : "/teacherms/Teacher/teacher_userGetTeacherInfo",
 		type : "post",
@@ -14,6 +14,9 @@ function userInfo() {
 		},
 		error : function() {}
 	});
+}
+function userInfo() {
+	user_selectAllInfo();
 	$('.add-btn').unbind().click(function(){
 		$('#info_modal').modal({
 			keyboard : true
@@ -42,7 +45,6 @@ function userInfo() {
 		$('#export_info').modal({
 			keyboard : true
 		});
-		
 	});
 	$('.export-info').unbind().click(function(){
 		$('.second-panel-heading').append('<button class="btn btn-primary end-button">确认导出</button>');
@@ -57,11 +59,7 @@ function userInfo() {
 					data.export_name+=$(this).val()+',';
 				}
 			})
-			if (data.export_id != "" && data.export_name != "") {
 				location.href = "/teacherms/Teacher/teacher_userExportExcelCollection?tableName=TeacherInfo&export_id=" + (data.export_id).substring(0,data.export_id.length-1) + "&export_name=" + (data.export_name).substring(0,data.export_name.length-1);
-			} else {
-				alert("请选择数据");
-			}
 			data.export_id="";
 			$('.end-button').unbind().remove();
 		});
