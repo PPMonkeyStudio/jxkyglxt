@@ -52,7 +52,8 @@ public class AdminAction extends ActionSupport {
 	private String tableName;// 查询的表名
 	private String tableId; // 查询表的ID
 	private String dataState; // 数据状态
-
+	private String fuzzy_query;// 模糊查询字段
+	
 	// 信息表
 	private TeacherAward teacherAward;
 	private TeacherInfo teacherInfo;
@@ -61,7 +62,7 @@ public class AdminAction extends ActionSupport {
 	private TeacherProject teacherProject;
 	private TeacherWorks teacherWorks;
 	private User user;
-	private Object obj = null;
+	private Object obj;
 
 	public String test() {
 		System.out.println("yes");
@@ -77,8 +78,9 @@ public class AdminAction extends ActionSupport {
 		try {
 			// 给Object对象赋值
 			getObjectByTableName(tableName);
+			System.out.println("" + obj.toString());
 			PageVO<Object> list = adminService.getSpecifiedInformationByPaging(tableName, page == null ? "1" : page,
-					time_interval, dataState, getSecondaryCollegeInfo("name"), obj);
+					time_interval, dataState, getSecondaryCollegeInfo("name"), obj,fuzzy_query);
 			System.out.println(new Gson().toJson(list));
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(list));
@@ -391,4 +393,9 @@ public class AdminAction extends ActionSupport {
 	public void setExport_id(String export_id) {
 		this.export_id = export_id;
 	}
+
+	public void setFuzzy_query(String fuzzy_query) {
+		this.fuzzy_query = fuzzy_query;
+	}
+	
 }

@@ -129,12 +129,12 @@ function selectSeacher() {
 		default:
 			break;
 		}
-		if ($("#Inputu" + $(this).val()).length > 0) {
+		if ($("#Inputu" + $(this).val()).length > 0 || pla == "") {
 			return;
 		} else {
-			$(".all_options").after('<div id="Inputu' + $(this).val() + '" class="input_div  form-group">' +
+			$(".all_options").siblings('#search_input').append('<div id="Inputu' + $(this).val() + '" class="input_div form-group">' +
 				'<input type="text"  placeholder="' + pla + '" class="form-control"/>' +
-				'<button class="btn btn-primary cancel">取消</button></div>')
+				'<button class="btn btn-primary"><i class="fa fa-times" aria-hidden="true"></i></button></div>')
 		}
 		$('.input_div button').click(function() {
 			$(this).parent().remove();
@@ -357,17 +357,86 @@ function import_to_database() {
 	});
 }
 
-var search = function() {
-	var formData = new FormData();
-	var name = '';
-	var value = '';
-	$(this).siblings('form').find('div').each(function() {
-		name = data.tableName.replace("Teacher", "teacher") + '.' + $(this).attr('id').replace("Inputu", "");
-		value = $(this).find('input').val();
-		formData.append(name, value);
-		//将搜索的内容放入js的数据中
-		data[name] = value;
-	});
-	console.log(data);
-	examAward();
+//搜索信息事件
+var search_info = function() {
+	var this_object = $(this);
+	if (this_object.text().trim() == "确认搜索") {
+		var name = '';
+		var value = '';
+		this_object.siblings('#search_input').find('div').each(function() {
+			name = data.tableName.replace("Teacher", "teacher") + '.' + $(this).attr('id').replace("Inputu", "");
+			value = $(this).find('input').val();
+			//将搜索的内容放入js的数据中
+			data[name] = value;
+		});
+		switch (data.tableName) {
+		case "TeacherInfo":			examInfo();
+			break;
+		case "TeacherAward":			examAward();
+			break;
+		case "TeacherWorks":			examWorks();
+			break;
+		case "TeacherPaper":			examPaper();
+			break;
+		case "TeacherPatent":			examPatent();
+			break;
+		case "TeacherProject":			examProject();
+			break;
+		default:
+			break;
+		}
+	} else if (this_object.text().trim() == "清空搜索") {
+		$.confirm({
+			title : '确定清空?',
+			smoothContent : false,
+			content : false,
+			autoClose : 'cancelAction|10000',
+			buttons : {
+				deleteUser : {
+					btnClass : 'btn-danger',
+					text : '确定',
+					action : function() {
+						this_object.siblings('#search_input').empty();
+						$.each(data, function(k, v) {
+							if (k.indexOf('teacher') > -1) {
+								data[k] = "";
+							}
+						})
+					}
+				},
+				cancelAction : {
+					btnClass : 'btn-blue',
+					text : '取消',
+				}
+			}
+		});
+	}
+}
+
+//模糊查询
+var fuzzy_query = function() {
+	var value = $(this).parent().prev().val();
+	data.fuzzy_query = value;
+	switch (data.tableName) {
+	case "TeacherInfo":
+		examInfo();
+		break;
+	case "TeacherAward":
+		examAward();
+		break;
+	case "TeacherWorks":
+		examWorks();
+		break;
+	case "TeacherPaper":
+		examPaper();
+		break;
+	case "TeacherPatent":
+		examPatent();
+		break;
+	case "TeacherProject":
+		examProject();
+		break;
+	default:
+		break;
+	}
 }

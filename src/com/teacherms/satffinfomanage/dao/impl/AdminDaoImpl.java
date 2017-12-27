@@ -27,10 +27,10 @@ public class AdminDaoImpl implements AdminDao {
 
 	@Override
 	public List<Object> getAllStatusInfo(String table, String time, String status, String collegeName,
-			String multi_condition) {
+			String multi_condition, String fuzzy) {
 		String hql = "select t,u from " + table
 				+ " t,User u,Department d where u.userId=t.userId and u.departmentId=d.departmentId and d.departmentName='"
-				+ collegeName + "' and t.dataStatus = '" + status + "'" + time + multi_condition;
+				+ collegeName + "' and t.dataStatus = '" + status + "'" + time + multi_condition + fuzzy;
 		System.out.println(hql);
 		return getSession().createQuery(hql).list();
 	}

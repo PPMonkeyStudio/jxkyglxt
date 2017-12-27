@@ -46,8 +46,10 @@ public class JunitTest {
 
 	@Test
 	public void test11() {
-		//PageVO<Object> list = adminService.getSpecifiedInformationByPaging("TeacherAward", "1", "", "20", "信息与计算机工程学院");
-		//System.out.println(new Gson().toJson(list));
+		// PageVO<Object> list =
+		// adminService.getSpecifiedInformationByPaging("TeacherAward", "1", "",
+		// "20", "信息与计算机工程学院");
+		// System.out.println(new Gson().toJson(list));
 	}
 
 	@Test
@@ -74,6 +76,15 @@ public class JunitTest {
 	@Test
 	public void getIdByName() {
 		System.out.println(adminService.getUserIdOrderingByUserName("罗晓娟,lu"));
+	}
+
+	@Test
+	public void getQueryInfo() {
+		PageVO<Object> pageVO = adminService.getSpecifiedInformationByPaging("TeacherInfo", "1", "", "40", "信息与计算机工程学院",
+				new TeacherInfo(null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+						null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+						null, null, null, null, null, null, null, null, null, null, null, null, null),"");
+		System.out.println(pageVO.toString());
 	}
 
 	/*---------------------------------------------------------------------------*/

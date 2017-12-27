@@ -14,7 +14,8 @@ public interface AdminDao {
 	 *            指定的状态
 	 * @return 对象list集合
 	 */
-	List<Object> getAllStatusInfo(String table, String time, String status, String collegeName, String multi_condition);
+	List<Object> getAllStatusInfo(String table, String time, String status, String collegeName, String multi_condition,
+			String fuzzy);
 
 	/**
 	 * ---通过ID获取用户信息

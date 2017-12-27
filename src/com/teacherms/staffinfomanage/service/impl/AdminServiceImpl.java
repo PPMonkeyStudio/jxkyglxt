@@ -51,7 +51,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public PageVO<Object> getSpecifiedInformationByPaging(String tableName, String page, String time_interval,
-			String dataState, String collegeName, Object obj) {
+			String dataState, String collegeName, Object obj, String fuzzy_query) {
 		// 每页记录数
 		int pageSize = 10;
 		// 页数
@@ -65,43 +65,51 @@ public class AdminServiceImpl implements AdminService {
 			time_interval = "and t.createTime between '" + time_interval.split(",")[0] + "' and '"
 					+ time_interval.split(",")[1] + "'";
 		}
-		StringBuffer Multi_condition = new StringBuffer();
-		String query_str = "";
+		// 条件查询块----------------
+		boolean haveMulti_condition = false;// 是否包含指定查询的内容,用来判断是否执行模糊查询
+		StringBuffer Multi_condition = new StringBuffer();// 指定查询中的字符串
+		StringBuffer fuzzy = new StringBuffer();// 模糊查询字符串
+		fuzzy.append(" and (");// （模糊查询中or与and混合使用）or使用前先添加and
+		String query_str = "";// 属性中的值
 		// 多条件查询
 		try {
-			Field[] fields = obj.getClass().getFields();
+			Field[] fields = obj.getClass().getDeclaredFields();
 			for (Field field : fields) {
 				field.setAccessible(true);
 				query_str = (String) field.get(obj);
+				// 模糊查询
+				fuzzy.append(" or t." + field.getName() + " like '%" + fuzzy_query + "%'");
+				// 属性值为空则跳过本次循环
 				if ("".equals(query_str) || null == query_str) {
 					continue;
 				}
-				Multi_condition.append(" and t." + field.getName() + "=" + query_str);
+				Multi_condition.append(" and t." + field.getName() + "='" + query_str + "'");
+				if (!haveMulti_condition) {
+					haveMulti_condition = true;
+				}
 			}
+			// 模糊查询用户名称
+			fuzzy.append("or u.userName like '%" + fuzzy_query + "%')");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		// 最后判断如果fuzzy_query为空或是null，则不做模糊查询
+		if (null == fuzzy_query || "".equals(fuzzy_query)) {
+			haveMulti_condition = true;
+		}
+		System.out.println(haveMulti_condition);
 		// 获取所有信息表中未审核的信息
 		if (!"".equals(tableName) && tableName != null) {
-			// 指定条件tableName查询，数据状态"20"
+			// 指定条件tableName查询
+			// haveMulti_condition?"":fuzzy.toString().replaceFirst(" or","")
+			// 三目运算，如果已经含有了指定查询内容，则不查询模糊查询内容，反则如果模糊查询有值，进行模糊查询
+			// 在之前循环过程中，首位添加or，所以第一位or为多余，应当去掉
 			list = adminDao.getAllStatusInfo(tableName, time_interval, dataState, collegeName,
-					Multi_condition.toString());
+					Multi_condition.toString(), haveMulti_condition ? "" : fuzzy.toString().replaceFirst(" or", ""));
 		}
 		System.out.println(list.size());
 		// 总记录数
 		int totalSize = list.size();
-		// 限制page页数，避免过大或者过小
-		if (pageIndex > totalSize / pageSize) {
-			if (totalSize % pageSize > 0) {
-				pageIndex = (totalSize / pageSize) + 1;
-			} else {
-				pageIndex = totalSize / pageSize;
-			}
-		} else if (pageIndex < 1) {
-			pageIndex = 1;
-		}
-
 		// 当所要显示的最大值大于记录数最大值时，每页记录设置为不超过记录数值
 		if (pageIndex * pageSize > totalSize) {
 			toindex = totalSize - (pageIndex - 1) * pageSize;

@@ -78,35 +78,51 @@
 					<i class="fa fa-share-square"></i>用户信息导出
 				</button>
 				<!--按条件筛选-->
-				<button style="float: right;" class="btn btn-default btn-sm"
-					type="button" data-toggle="collapse" data-target="#collapseExample"
+				<button style="" class="btn btn-default btn-sm" type="button"
+					data-toggle="collapse" data-target="#collapseExample"
 					aria-expanded="false" aria-controls="collapseExample">
 					<i class="fa fa-search" aria-hidden="true"></i> 条件筛选
 				</button>
+				<!-- 部分搜索 -->
+				<div style="float: right;">
+					<input name="table_search" class="form-control input-sm"
+						style="width: 150px;" type="text" placeholder="Search">
+					<div style="float: right; height: 30px;">
+						<button class="btn btn-default fuzzy_query" style="height: 100%;">
+							<i class="fa fa-search"></i>
+						</button>
+					</div>
+				</div>
 				<div style="width: 100%; margin-top: 6px;" class="collapse"
 					id="collapseExample">
 					<div class="well">
 						<div id="search">
-							<label>按条件搜索：</label> <select id="all_options"
+							<label>指定条件搜索：</label> <select id="all_options"
 								class="all_options form-control ">
 								<option value="">请选择</option>
-								<option value="userName">姓名</option>
+								<!-- <option value="userName">姓名</option> -->
 								<option value="userId">工号</option>
-								<option value="teacherStatus">任职状态</option>
-								<option value="unitName">单位名称</option>
-								<option value="Education">学历</option>
-								<option value="heigestGegree">最高学位</option>
+								<option value="jobStatue">任职状态</option>
+								<option value="highestDegree">最高学位</option>
 								<option value="highestEducation">最高学历</option>
 								<option value="learnEdgeStructure">学缘</option>
 								<option value="professionalTitle">专业技术职称</option>
 								<option value="subjectCategory">学科类别</option>
 								<option value="teachingProfessionName">任教专业名称</option>
-								<option value="teachingDate">任教时间</option>
+								<option value="professionTeachingDate">专业任教时间</option>
 								<option value="workDate">参加工作时间</option>
 							</select>
-							<button style="float: right;" class="btn btn-info to_query">
+
+							<button style="float: right; margin-left: 6px;"
+								class="btn btn-danger search_info">
+								<i class="fa fa-exclamation-circle" aria-hidden="true"></i>清空搜索
+							</button>
+
+							<button style="float: right;" class="btn btn-info search_info">
 								<i class="fa fa-check-square-o" aria-hidden="true"></i>确认搜索
 							</button>
+
+							<div style="width: 100%; margin-top: 6px;" id="search_input"></div>
 						</div>
 					</div>
 				</div>

@@ -6,6 +6,7 @@ var data = {
 	tableId : "",
 	export_name : "",
 	export_id : "",
+	fuzzy_query : "",
 
 	//奖励
 	"teacherAward.awardType" : "",
@@ -16,7 +17,15 @@ var data = {
 
 	//用户
 	"teacherInfo.userId" : "",
-	"teacherInfo.userId" : "",
+	"teacherInfo.jobStatue" : "",
+	"teacherInfo.highestDegree" : "",
+	"teacherInfo.highestEducation" : "",
+	"teacherInfo.learnEdgeStructure" : "",
+	"teacherInfo.professionalTitle" : "",
+	"teacherInfo.subjectCategory" : "",
+	"teacherInfo.teachingProfessionName" : "",
+	"teacherInfo.professionTeachingDate" : "",
+	"teacherInfo.workDate" : "",
 
 	//论文
 	"teacherPaper.userId" : "",
@@ -127,7 +136,8 @@ $(function() {
 							data.tableName = "TeacherInfo";
 							data.dataState = "40";
 							checkInfo();
-							$('.to_query').click(search);
+							$('.search_info').click(search_info);
+							$('.fuzzy_query').click(fuzzy_query);
 						});
 						break;
 					case '#award':
@@ -180,13 +190,8 @@ $(function() {
 					switch (a_href) {
 					case '#user':
 						$('#user').load('user_pageinfo.jsp  #user_info_table_audit', function(response, status, xhr) {
-							if (xhr.readyState == 4) {
-								if (xhr.status == 200) {
-									data.tableName = "TeacherInfo";
-									userInfo();
-								}
-							}
-
+							data.tableName = "TeacherInfo";
+							userInfo();
 						});
 
 						break;
@@ -225,7 +230,6 @@ $(function() {
 					}
 				})
 			})
-
 		}
 	});
 });
