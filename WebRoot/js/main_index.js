@@ -127,6 +127,7 @@ $(function() {
 							data.tableName = "TeacherInfo";
 							data.dataState = "40";
 							checkInfo();
+							$('.to_query').click(search);
 						});
 						break;
 					case '#award':

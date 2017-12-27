@@ -374,7 +374,7 @@ var search = function() {
 	var formData = new FormData();
 	var name = '';
 	var value = '';
-	$(this).siblings('div').each(function() {
+	$(this).siblings('form').find('div').each(function() {
 		name = data.tableName.replace("Teacher", "teacher") + '.' + $(this).attr('id').replace("Inputu", "");
 		value = $(this).find('input').val();
 		formData.append(name, value);
@@ -383,5 +383,4 @@ var search = function() {
 	});
 	console.log(data);
 	examAward();
-	return;
 }
