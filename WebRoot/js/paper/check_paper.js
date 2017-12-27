@@ -1,3 +1,4 @@
+
 function checkPaper(){
 	//清楚原来的数据
 	$('.table tbody').empty();
