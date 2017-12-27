@@ -1,4 +1,4 @@
-function examWorks(){
+function exam_selectAllWorks(){
 	$.ajax({
 		url : "/teacherms/Admin/admin_getSpecifiedInformationByPaging",
 		type : "post",
@@ -25,6 +25,9 @@ function examWorks(){
 		},
 		error : function() {}
 	});
+}
+function examWorks(){
+	exam_selectAllWorks();
 	$(".modiButton").unbind().on("click",function(){
 		//显示出模态框
 		$('#works_modal').modal({

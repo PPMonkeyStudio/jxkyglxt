@@ -94,16 +94,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="">请选择</option>
 			<option value="userName">姓名</option>
 			<option value="userId">工号</option>
-			<option value="teacherStatus">任职状态</option>
-			<option value="unitName">单位名称</option>
-			<option value="Education">学历</option>
-			<option value="heigestGegree">最高学位</option>
+			<option value="jobStatue">任职状态</option>
+			<option value="highestDegree">最高学位</option>
 			<option value="highestEducation">最高学历</option>
 			<option value="learnEdgeStructure">学缘</option>
 			<option value="professionalTitle">专业技术职称</option>
 			<option value="subjectCategory">学科类别</option>
 			<option value="teachingProfessionName">任教专业名称</option>
-			<option value="teachingDate">任教时间</option>
+			<option value="professionTeachingDate">专业任教时间</option>
 			<option value="workDate">参加工作时间</option>
 		</select>
 		</form>
@@ -161,7 +159,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="">请选择</option>
 			<option value="awardType">获奖类型</option>
 			<option value="awardName">获奖名称</option>
-			<option value="awardPeoname">获奖人姓名</option>
+			<option value="awardUserNames">获奖者姓名</option>
 			<option value="awardGrade">获奖等级</option>
 			<option value="awardLevel">获奖级别</option>
 			<option value="awardTime">获奖时间</option>
@@ -222,12 +220,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="">请选择</option>
 			<option value="worksName">著作（专著）名称</option>
 			<option value="worksType">著作类别</option>
-			<option value="worksPress">出版社</option>
-			<option value="worksISBN">ISBN</option>
-			<option value="workspressTime">出版时间</option>
-			<option value="worksResult">入选情况</option>
-			<option value="worksDate">入选时间</option>
-			<option value="worksAuthority">主编（作者）</option>
+			<option value="press">出版社</option>
+			<option value="isbn">ISBN</option>
+			<option value="publishTime">出版时间</option>
+			<option value="selectedSituation">入选情况</option>
+			<option value="selectedDate">入选时间</option>
+			<option value="editorUserNames">主编（作者）</option>
 		</select>
 		</form>
 							<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
@@ -286,12 +284,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="userId">工号</option>
 			<option value="paperName">论文名称</option>
 			<option value="paperType">论文类别</option>
-			<option value="paperJoural">发表期刊</option>
-			<option value="paperIssue">期号</option>
-			<option value="papaerIncludedSituation">收录情况</option>
-			<option value="paperRefenceNum">他引次数</option>
-			<option value="paperWordsNum">成果字数</option>
-			<option value="paperTime">发表时间</option>
+			<option value="periodical">发表期刊</option>
+			<option value="periodicalNo">期号</option>
+			<option value="includedSituation">收录情况</option>
+			<option value="totalCitations">他引次数</option>
+			<option value="wordsNum">成果字数</option>
 		</select>
 		</form>
 							<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
@@ -351,8 +348,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="userId">工号</option>
 			<option value="patentName">专利名称</option>
 			<option value="patentType">专利类型</option>
-			<option value="paperlisenceNum">授权号</option>
-			<option value="patentTime">获奖时间</option>
+			<option value="authorizationNo">授权号</option>
+			<option value="approvedDate">获批时间</option>
 		</select>
 		</form>
 							<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
@@ -409,10 +406,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="">请选择</option>
 			<option value="projectName">项目名称</option>
 			<option value="projectType">项目类型</option>
-			<option value="projectOrigin">项目来源</option>
-			<option value="projectMenbers">成员</option>
-			<option value="projectTime">立项时间</option>
-			<option value="projectcheckTime">结题验收时间</option>
+			<option value="projectSource">项目来源</option>
+			<option value="projectUserNames">成员姓名</option>
+			<option value="approvalDate">立项时间</option>
+			<option value="endUpDate">结题验收时间</option>
 		</select>
 	</form>
 							<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>

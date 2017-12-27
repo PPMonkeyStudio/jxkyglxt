@@ -1,4 +1,4 @@
-function checkProject(){
+function check_selectAllProject(){
 	$.ajax({
 		url : "/teacherms/Admin/admin_getSpecifiedInformationByPaging",
 		type : "post",
@@ -24,7 +24,9 @@ function checkProject(){
 		},
 		error : function() {}
 	});
-
+}
+function checkProject(){
+	check_selectAllProject();
 	$(".viewButton").unbind().on("click",function(){
 		//显示出模态框
 		$('#project_modal').modal({

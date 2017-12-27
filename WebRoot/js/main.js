@@ -9,16 +9,10 @@ function selectSeacher() {
 		case 'userId':
 			pla = '请输入工号';
 			break;
-		case 'teacherStatus':
+		case 'jobStatue':
 			pla = '请输入任职状态';
 			break;
-		case 'unitName':
-			pla = '请输入单位名称';
-			break;
-		case 'Education':
-			pla = '请输入学历';
-			break;
-		case 'heigestGegree':
+		case 'highestDegree':
 			pla = '请输入最高学位';
 			break;
 		case 'highestEducation':
@@ -39,17 +33,14 @@ function selectSeacher() {
 		case 'teachingDate':
 			pla = '请输入任教时间';
 			break;
-		case 'workDate':
-			pla = '请输入参加工作时间';
-			break;
 		case 'awardType':
 			pla = '请输入获奖类型';
 			break;
 		case 'awardName':
 			pla = '请输入获奖名称';
 			break;
-		case 'awardPeoname':
-			pla = '请输入获奖人姓名';
+		case 'awardUserNames':
+			pla = '请输入获奖者姓名';
 			break;
 		case 'awardGrade':
 			pla = '请输入获奖等级';
@@ -66,22 +57,22 @@ function selectSeacher() {
 		case 'worksType':
 			pla = '请输入著作类别';
 			break;
-		case 'worksPress':
+		case 'Press':
 			pla = '请输入出版社';
 			break;
-		case 'worksISBN':
+		case 'isbn':
 			pla = '请输入ISBN';
 			break;
-		case 'workspressTime':
+		case 'publishTime':
 			pla = '请输入出版时间';
 			break;
-		case 'worksResult':
+		case 'selectedSituation':
 			pla = '请输入入选情况';
 			break;
-		case 'worksDate':
+		case 'selectedDate':
 			pla = '请输入入选时间';
 			break;
-		case 'worksAuthority':
+		case 'editorUserNames':
 			pla = '请输入主编（作者）';
 			break;
 		case 'paperName':
@@ -90,23 +81,20 @@ function selectSeacher() {
 		case 'paperType':
 			pla = '请输入论文类别';
 			break;
-		case 'paperJoural':
+		case 'periodical':
 			pla = '请输入发表期刊';
 			break;
-		case 'paperIssue':
+		case 'periodicalNo':
 			pla = '请输入期号';
 			break;
-		case 'papaerIncludedSituation':
+		case 'includedSituation':
 			pla = '请输入收录情况';
 			break;
-		case 'paperRefenceNum':
+		case 'totalCitations':
 			pla = '请输入他引次数';
 			break;
-		case 'paperWordsNum':
+		case 'wordsNum':
 			pla = '请输入成果字数';
-			break;
-		case 'paperTime':
-			pla = '请输入发表时间';
 			break;
 		case 'patentName':
 			pla = '请输入专利名称';
@@ -114,11 +102,11 @@ function selectSeacher() {
 		case 'patentType':
 			pla = '请输入专利类型';
 			break;
-		case 'paperlisenceNum':
+		case 'authorizationNo':
 			pla = '请输入授权号';
 			break;
-		case 'patentTime':
-			pla = '请输入获奖时间';
+		case 'approvedDate':
+			pla = '请输入获批时间';
 			break;
 		case 'projectName':
 			pla = '请输入项目名称';
@@ -126,16 +114,16 @@ function selectSeacher() {
 		case 'projectType':
 			pla = '请输入项目类型';
 			break;
-		case 'projectOrigin':
+		case 'projectSource':
 			pla = '请输入项目来源';
 			break;
-		case 'projectMenbers':
-			pla = '请输入成员';
+		case 'projectUserNames':
+			pla = '请输入成员姓名';
 			break;
-		case 'projectTime':
+		case 'approvalDate':
 			pla = '请输入立项时间';
 			break;
-		case 'projectcheckTime':
+		case 'endUpDate':
 			pla = '请输入结题验收时间';
 			break;
 		default:
@@ -160,7 +148,6 @@ $(function() {
 		setTimeout(function() {
 			this_modal.find('table input,select').val('');
 			this_modal.find('table .img-default').remove();
-		//$('#lost .panel-body').empty();
 		}, 200)
 	})
 })

@@ -1,5 +1,4 @@
-function userPatent(){
-	$('.table tbody').empty();
+function user_selectAllPatent(){
 	$.ajax({
 		url : "/teacherms/Teacher/teacher_userGetTableInfoInPaging",
 		type : "post",
@@ -27,10 +26,13 @@ function userPatent(){
 			  
 			    str+="</tr>";   
 			}
-			$('.table').children('tbody').append(str);
+			$('.table').children('tbody').html(str);
 		},
 		error : function() {}
 	});
+}
+function userPatent(){
+	user_selectAllPatent();
 	$('.export_button').unbind().on('click',function(){
 		$('#export_patent').modal({
 			keyboard : true
