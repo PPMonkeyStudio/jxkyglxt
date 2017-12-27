@@ -51,7 +51,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public PageVO<Object> getSpecifiedInformationByPaging(String tableName, String page, String time_interval,
-			String dataState, String collegeName) {
+			String dataState, String collegeName, Object obj) {
 		// 每页记录数
 		int pageSize = 10;
 		// 页数
@@ -65,11 +65,28 @@ public class AdminServiceImpl implements AdminService {
 			time_interval = "and t.createTime between '" + time_interval.split(",")[0] + "' and '"
 					+ time_interval.split(",")[1] + "'";
 		}
+		StringBuffer Multi_condition = new StringBuffer();
+		String query_str = "";
+		// 多条件查询
+		try {
+			Field[] fields = obj.getClass().getFields();
+			for (Field field : fields) {
+				field.setAccessible(true);
+				query_str = (String) field.get(obj);
+				if ("".equals(query_str) || null == query_str) {
+					continue;
+				}
+				Multi_condition.append(" and t." + field.getName() + "=" + query_str);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		// 获取所有信息表中未审核的信息
-		System.out.println(time_interval);
 		if (!"".equals(tableName) && tableName != null) {
 			// 指定条件tableName查询，数据状态"20"
-			list = adminDao.getAllStatusInfo(tableName, time_interval, dataState, collegeName);
+			list = adminDao.getAllStatusInfo(tableName, time_interval, dataState, collegeName,
+					Multi_condition.toString());
 		}
 		System.out.println(list.size());
 		// 总记录数

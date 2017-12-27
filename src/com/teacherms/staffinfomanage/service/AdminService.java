@@ -22,7 +22,7 @@ public interface AdminService {
 	 * @return 对象
 	 */
 	PageVO<Object> getSpecifiedInformationByPaging(String tableName, String page, String time_interval,
-			String dataState, String collegeName);
+			String dataState, String collegeName, Object obj);
 
 	/**
 	 * ---通过ID获取单条信息

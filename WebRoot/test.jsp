@@ -27,6 +27,7 @@
 <body>
 	<s:action name="page_nav" namespace="/Page" executeResult="true" />
 	This is my JSP page.
+	
 	<br>
 	<input type="button" class="form-control" onclick="getImg()" value="查看">
 	<div id="img"
