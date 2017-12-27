@@ -1,4 +1,4 @@
-function examPatent(){
+function exam_selectAllPatent(){
 	$.ajax({
 		url : "/teacherms/Admin/admin_getSpecifiedInformationByPaging",
 		type : "post",
@@ -24,6 +24,9 @@ function examPatent(){
 		},
 		error : function() {}
 	});
+}
+function examPatent(){
+	exam_selectAllPatent();
 	$(".modiButton").unbind().on("click",function(){
 		//显示出模态框
 		$('#patent_modal').modal({

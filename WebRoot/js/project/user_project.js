@@ -1,5 +1,4 @@
-function userProject(){
-	$('.table tbody').empty();
+function user_selectAllProject(){
 	$.ajax({
 		url : "/teacherms/Teacher/teacher_userGetTableInfoInPaging",
 		type : "post",
@@ -27,10 +26,13 @@ function userProject(){
 			   
 			    str+="</tr>";   
 			}
-			$('.table').children('tbody').append(str);
+			$('.table').children('tbody').html(str);
 		},
 		error : function() {}
 	});
+}
+function userProject(){
+	user_selectAllProject();
 	$('.export_button').unbind().on('click',function(){
 		$('#export_project').modal({
 			keyboard : true

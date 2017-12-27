@@ -1,4 +1,4 @@
-function examPaper(){
+function exam_selectAllPaper(){
 	$.ajax({
 		url : "/teacherms/Admin/admin_getSpecifiedInformationByPaging",
 		type : "post",
@@ -25,6 +25,9 @@ function examPaper(){
 		},
 		error : function() {}
 	});
+}
+function examPaper(){
+	exam_selectAllPaper();
 	$(".modiButton").unbind().on("click",function(){
 		//显示出模态框
 		$('#paper_modal').modal({

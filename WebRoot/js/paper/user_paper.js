@@ -1,5 +1,4 @@
-function userPaper(){
-	$('.table tbody').empty();
+function user_selectAllPaper(){
 	$.ajax({
 		url : "/teacherms/Teacher/teacher_userGetTableInfoInPaging",
 		type : "post",
@@ -28,10 +27,13 @@ function userPaper(){
 			  
 			    str+="</tr>";   
 			}
-			$('.table').children('tbody').append(str);
+			$('.table').children('tbody').html(str);
 		},
 		error : function() {}
 	});
+}
+function userPaper(){
+	user_selectAllPaper();
 	$('.export_button').unbind().on('click',function(){
 		$('#export_paper').modal({
 			keyboard : true

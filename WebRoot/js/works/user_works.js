@@ -1,5 +1,5 @@
-function userWorks(){
-	$('.table tbody').empty();
+/*获取全部信息*/
+function user_selectAllWorks(){
 	$.ajax({
 		url : "/teacherms/Teacher/teacher_userGetTableInfoInPaging",
 		type : "post",
@@ -28,10 +28,13 @@ function userWorks(){
 			    
 			    str+="</tr>";   
 			}
-			$('.table').children('tbody').append(str);
+			$('.table').children('tbody').html(str);
 		},
 		error : function() {}
 	});
+}
+function userWorks(){
+	user_selectAllWorks();
 	$('.export_button').unbind().on('click',function(){
 		$('#export_works').modal({
 			keyboard : true

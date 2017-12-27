@@ -1,4 +1,4 @@
-function checkWorks(){
+function check_selectAllWorks(){
 	$.ajax({
 		url : "/teacherms/Admin/admin_getSpecifiedInformationByPaging",
 		type : "post",
@@ -25,7 +25,9 @@ function checkWorks(){
 		},
 		error : function() {}
 	});
-	
+}
+function checkWorks(){
+	check_selectAllWorks();
 	$(".viewButton").unbind().on("click",function(){
 		//显示出模态框
 		$('#works_modal').modal({

@@ -1,6 +1,4 @@
-function checkPaper(){
-	//清楚原来的数据
-	$('.table tbody').empty();
+function check_selectAllPaper(){
 	$.ajax({
 		url : "/teacherms/Admin/admin_getSpecifiedInformationByPaging",
 		type : "post",
@@ -22,11 +20,14 @@ function checkPaper(){
 			    str += '<td><input type="hidden" value="' + xhr[i][0].paperId  + '" ><button class="btn btn-default btn-xs relieveButton" title="解除固化"><i class="fa fa-chain-broken fa-lg"></i></button><button class="btn btn-default btn-xs viewButton" title="查看"><i class="fa fa-search-plus fa-lg"  aria-hidden="true"></i></button></td>';
 			    str+="</tr>";   
 			}
-			$('.table').children('tbody').append(str);
+			$('.table').children('tbody').html(str);
 			$('.relieveButton').click(PaperrelieveInfo);
 		},
 		error : function() {}
 	});
+}
+function checkPaper(){
+	check_selectAllPaper();
 	$(".viewButton").unbind().on("click",function(){
 		//显示出模态框
 		$('#paper_modal').modal({
