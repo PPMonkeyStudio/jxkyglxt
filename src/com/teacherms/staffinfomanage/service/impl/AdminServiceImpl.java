@@ -70,20 +70,28 @@ public class AdminServiceImpl implements AdminService {
 		StringBuffer Multi_condition = new StringBuffer();// 指定查询中的字符串
 		StringBuffer fuzzy = new StringBuffer();// 模糊查询字符串
 		fuzzy.append(" and (");// （模糊查询中or与and混合使用）or使用前先添加and
-		String query_str = "";// 属性中的值
+		String field_value = "";// 属性中的值
+		String field_name = "";// 属性名字
 		// 多条件查询
 		try {
 			Field[] fields = obj.getClass().getDeclaredFields();
 			for (Field field : fields) {
 				field.setAccessible(true);
-				query_str = (String) field.get(obj);
+				field_name = field.getName();
+				field_value = (String) field.get(obj);
 				// 模糊查询
-				fuzzy.append(" or t." + field.getName() + " like '%" + fuzzy_query + "%'");
+				fuzzy.append(" or t." + field_name + " like '%" + fuzzy_query + "%'");
 				// 属性值为空则跳过本次循环
-				if ("".equals(query_str) || null == query_str) {
+				if ("".equals(field_value) || null == field_value) {
 					continue;
 				}
-				Multi_condition.append(" and t." + field.getName() + "='" + query_str + "'");
+				// 判断是否为时间区间
+				if (field_name.contains("Date")) {
+					Multi_condition.append(" and t." + field_name + " between " + field_value.split(",")[0] + " and "
+							+ field_value.split(",")[1]);
+				} else {
+					Multi_condition.append(" and t." + field_name + "='" + field_value + "'");
+				}
 				if (!haveMulti_condition) {
 					haveMulti_condition = true;
 				}

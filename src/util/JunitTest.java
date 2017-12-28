@@ -82,8 +82,8 @@ public class JunitTest {
 	public void getQueryInfo() {
 		PageVO<Object> pageVO = adminService.getSpecifiedInformationByPaging("TeacherInfo", "1", "", "40", "信息与计算机工程学院",
 				new TeacherInfo(null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-						null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-						null, null, null, null, null, null, null, null, null, null, null, null, null),"");
+						null, null, null, null, "2000/1,2017/1", null, null, null, null, null, null, null, null, null, null, null,
+						null, null, null, null, null, null, null, null, null, null, null, null, null),null);
 		System.out.println(pageVO.toString());
 	}
 
