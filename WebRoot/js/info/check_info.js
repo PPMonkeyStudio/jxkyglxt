@@ -18,8 +18,11 @@ function check_selectAllInfo() {
 				str += "<td>" + xhr[i][0].employeeType + "</td>";
 				str += "<td>" + xhr[i][0].teachingType + "</td>";
 				str += "<td>" + xhr[i][0].teachingStatus + "</td>";
-				str += '<td><input type="hidden" value="' + xhr[i][0].teacherInfoId + '" ><button class="btn btn-default btn-xs  relieveButton" title="解除固化"><i class="fa fa-chain-broken fa-lg"></i></button><button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg" ></i></button><button class="btn btn-default btn-xs setButton" title="设置"><i class="fa fa-cog fa-lg" ></i></button></td>';
-				str += "</tr>";
+				str += '<td><input type="hidden" value="' + xhr[i][0].teacherInfoId + '" >'
+					+ '<button class="btn btn-default btn-xs  relieveButton" title="解除固化"><i class="fa fa-chain-broken fa-lg"></i></button>'
+					+ '<button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg" ></i></button>'
+					+ '<button class="btn btn-default btn-xs setButton" title="设置"><i class="fa fa-cog fa-lg" ></i></button>'
+					+ '</td></tr>';
 			}
 			$('.table').children('tbody').html(str);
 			$('.relieveButton').click(UserrelieveInfo);
@@ -90,8 +93,8 @@ function checkInfo() {
 					data.export_id += $(this).find('input[type="hidden"]').val() + ',';
 				}
 			})
-			$('#export_info .group-list li input[name="checkbox"]').each(function() {
-				if (($(this).is(':checked')) == true) {
+			$('#export_info .group-list button').each(function() {
+				if (($(this).children('i').hasClass('fa-check')) && $(this).attr('value') != undefined) {
 					data.export_name += $(this).val() + ',';
 				}
 			})
