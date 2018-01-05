@@ -104,12 +104,16 @@
 							class="badge badge-success pull-right">10</span> 更新首页信息
 					</a></li>
 					<li class="divider"></li>
-					<li><a href="javascript:import_to_database()"> <i
-							class="fa fa-magnet fa-fw pull-right" aria-hidden="true"></i>
-							导入信息
-					</a><a href="javascript:user_setting()"> <i
+					<li>
+						<!-- 判断是否为管理员 --> <s:if test="#session.role=='院系管理员'">
+							<a href="javascript:import_to_database()"> <i
+								class="fa fa-magnet fa-fw pull-right" aria-hidden="true"></i>
+								导入信息
+							</a>
+						</s:if> <!-- end --> <a href="javascript:user_setting()"> <i
 							class="fa fa-cog fa-fw pull-right"></i> 修改信息
-					</a></li>
+					</a>
+					</li>
 					<li class="divider"></li>
 					<li><a
 						href="javascript:location.href = '/teacherms/System/system_exit'"><i

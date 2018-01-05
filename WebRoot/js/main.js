@@ -142,6 +142,8 @@ function selectSeacher() {
 					'<input type="text"  placeholder="' + pla + '搜索结束时间" class="form-control  laydate-icon" onfocus="time()"/>' +
 					'<button class="btn btn-primary"><i class="fa fa-times" aria-hidden="true"></i></button></div></div>')
 				$('.dateinput_div button').click(function() {
+					//移除时候清空js中已存的数据
+					data[data.tableName.replace("T", "t") + "." + $(this).parent().val()] = "";
 					$(this).parent().remove();
 				});
 			} else {
@@ -149,6 +151,8 @@ function selectSeacher() {
 					'<input type="text"  placeholder="' + pla + '" class="form-control"/>' +
 					'<button class="btn btn-primary"><i class="fa fa-times" aria-hidden="true"></i></button></div>')
 				$('.input_div button').click(function() {
+					//移除时候清空js中已存的数据
+					data[data.tableName.replace("T", "t") + "." + $(this).parent().val()] = "";
 					$(this).parent().remove();
 				});
 			}
@@ -308,7 +312,6 @@ function modiFiles(this_obj) {
 	var reader = new FileReader();
 	reader.onloadend = function() {
 		$(this_obj).siblings().children('img').attr("src", this.result);
-		console.log(this.result)
 	}
 	reader.readAsDataURL(files);
 }

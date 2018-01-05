@@ -35,7 +35,7 @@ public class ExportExcelCollection {
 				// 判断是否选中
 				if (ArrayUtils.contains(arr_num, i + "")) {
 					XSSFCell cell = row.createCell(cell_num);
-					XSSFRichTextString text = new XSSFRichTextString(headers[i]);
+					XSSFRichTextString text = new XSSFRichTextString(headers[i - 1]);
 					cell.setCellValue(text);
 					cell_num++;
 				}
