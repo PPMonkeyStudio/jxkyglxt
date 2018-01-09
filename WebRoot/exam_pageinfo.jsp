@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
 					<!--按条件筛选-->
-					<div id="search">
+				<!-- 	<div id="search">
 					<form >
 						<label>按条件搜索：</label>
 	        <select id="all_options" class="all_options form-control ">
@@ -108,7 +108,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</form>
 			<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
 		
-		</div>
+		</div> -->
 				</div>
 			</div>
 			<!--查询存放信息的表格-->
@@ -273,7 +273,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<div id="search">
+					<!-- <div id="search">
 					<form >
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
@@ -291,7 +291,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</form>
 			<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
 		
-		</div>
+		</div> -->
 					<!--<input type="text" class="form-control" />-->
 				</div>
 			</div>
@@ -393,7 +393,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="box-tools m-b-15">
 				<div class="input-group">
 					<!--筛选&查询&添加按钮位置-->
-					<div id="search">
+					<!-- <div id="search">
 					<form >
 						<label>按条件搜索：</label>
 	<select id="all_options" class="all_options form-control">
@@ -408,7 +408,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</form>
 			<button class="btn btn-default btn-addon btn-sm"><i class="fa fa-search"></i>搜索</button>
 		
-		</div>
+		</div> -->
 					<!--<input type="text" class="form-control" />-->
 				</div>
 			</div>
