@@ -5,7 +5,6 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -33,31 +32,31 @@
 
 	<s:action name="page_nav" namespace="/Page" executeResult="true" />
 
-	<script type="text/javascript" src="<%=basePath%>js/com/check_com.js"></script>
+<%-- 	<script type="text/javascript" src="<%=basePath%>js/com/check_com.js"></script> --%>
 	<script type="text/javascript" src="<%=basePath%>js/toastr.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/main.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/laydate.js"></script>
 
-	<script type="text/javascript" src="js/info/exam_info.js"></script>
+<%-- 	<script type="text/javascript" src="js/info/exam_info.js"></script>
 	<script type="text/javascript" src="js/award/exam_award.js"></script>
 	<script type="text/javascript" src="js/paper/exam_paper.js"></script>
 	<script type="text/javascript" src="js/works/exam_works.js"></script>
 	<script type="text/javascript" src="js/project/exam_project.js"></script>
-	<script type="text/javascript" src="js/patent/exam_patent.js"></script>
+	<script type="text/javascript" src="js/patent/exam_patent.js"></script> --%>
 
-	<script type="text/javascript" src="js/info/check_info.js"></script>
+<%-- 	<script type="text/javascript" src="js/info/check_info.js"></script>
 	<script type="text/javascript" src="js/award/check_award.js"></script>
 	<script type="text/javascript" src="js/paper/check_paper.js"></script>
 	<script type="text/javascript" src="js/patent/check_patent.js"></script>
 	<script type="text/javascript" src="js/project/check_project.js"></script>
-	<script type="text/javascript" src="js/works/check_works.js"></script>
+	<script type="text/javascript" src="js/works/check_works.js"></script> --%>
 
-	<script type="text/javascript" src="js/info/user_info.js"></script>
+<%-- 	<script type="text/javascript" src="js/info/user_info.js"></script>
 	<script type="text/javascript" src="js/award/user_award.js"></script>
 	<script type="text/javascript" src="js/paper/user_paper.js"></script>
 	<script type="text/javascript" src="js/patent/user_patent.js"></script>
 	<script type="text/javascript" src="js/project/user_project.js"></script>
-	<script type="text/javascript" src="js/works/user_works.js"></script>
+	<script type="text/javascript" src="js/works/user_works.js"></script> --%>
 
 
 </body>

@@ -42,7 +42,7 @@
 <jsp:include page="/modal/addInfo/project_modal.html" flush="true"></jsp:include>
 <jsp:include page="/modal/addInfo/patent_modal.html" flush="true"></jsp:include>
 <jsp:include page="/modal/addInfo/user_info_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/addInfo/user_add.html" flush="true"></jsp:include>
+<jsp:include page="/modal/addInfo/userSetting.html" flush="true"></jsp:include>
 
 <jsp:include page="/modal/exportInfo/info_modal.html" flush="true"></jsp:include>
 <jsp:include page="/modal/exportInfo/award_modal.html" flush="true"></jsp:include>
@@ -184,10 +184,6 @@
 				<!--breadcrumbs start -->
 				<ul class="breadcrumb">
 					<li><a><i class="fa fa-home"></i> 首页</a></li>
-					<!--<li>
-									<a >Dashboard</a>
-								</li>-->
-					<!--<li class="active">信息查看</li>-->
 				</ul>
 				<!--breadcrumbs end -->
 			</div>
