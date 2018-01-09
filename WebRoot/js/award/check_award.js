@@ -30,7 +30,6 @@ function check_selectAllAward(){
 function checkAward(){
 	check_selectAllAward();
 	$(".viewButton").unbind().on("click",function(){
-		//显示出模态框
 		$('#award_modal').modal({
 			keyboard : true
 		});

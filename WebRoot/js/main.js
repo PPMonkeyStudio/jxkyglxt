@@ -382,17 +382,23 @@ var search_info = function() {
 			data[name] = value;
 		});
 		switch (data.tableName) {
-		case "TeacherInfo":			examInfo();
+		case "TeacherInfo":
+			examInfo();
 			break;
-		case "TeacherAward":			examAward();
+		case "TeacherAward":
+			examAward();
 			break;
-		case "TeacherWorks":			examWorks();
+		case "TeacherWorks":
+			examWorks();
 			break;
-		case "TeacherPaper":			examPaper();
+		case "TeacherPaper":
+			examPaper();
 			break;
-		case "TeacherPatent":			examPatent();
+		case "TeacherPatent":
+			examPatent();
 			break;
-		case "TeacherProject":			examProject();
+		case "TeacherProject":
+			examProject();
 			break;
 		default:
 			break;
