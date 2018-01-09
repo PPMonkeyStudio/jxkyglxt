@@ -150,6 +150,7 @@ public class AdminAction extends ActionSupport {
 
 	// 导出信息excel表 用MAP集合
 	public void ExportExcelCollection() {
+		System.out.println(export_name+ tableName+ export_id);
 		XSSFWorkbook workbook = adminService.getExcel(export_name, tableName, export_id);
 		OutputStream out = null;
 		try {

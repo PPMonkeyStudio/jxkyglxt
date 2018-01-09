@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <body>
 	<div class="modal fade" id="award_modal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
@@ -13,7 +14,12 @@
 					</div>
 					<div class="modal-body">
 						<div id="main_body">
-							<table class="tab com-table" >
+							<table class="tab com-table">
+								<tr>
+									<td>获奖作品名称：</td>
+									<td><input name="teacherAward.achievementName"
+										class="form-control table_infomation" type="text"></td>
+								</tr>
 								<tr>
 									<td>奖励名称：</td>
 									<td><input name="teacherAward.awardName"
@@ -87,9 +93,9 @@
 									<td><input name="teacherAward.grantUnit"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
-								
+
 								<tr class="img-control">
-								<td>附件：</td>
+									<!-- <td>附件：</td>
 									<td class="img-upload">
 						<div class="addInfo">
 						  <div class="img-control-btn add-btn" >
@@ -97,19 +103,20 @@
 						  </div>
 						</div>
 						<input type="file" multiple onchange="previewFile(this)" accept="image/gif, image/pdf, image/png, image/jpeg" style="display:none" >
-									</td>
+									</td> -->
 								</tr>
 							</table>
 
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default close-btn" data-dismiss="modal">关闭
-						</button>
+						<button type="button" class="btn btn-default close-btn"
+							data-dismiss="modal">关闭</button>
 						<input name="teacherAward.awardId" id="tableid" type="hidden" />
-<!-- 						<button type="button" class="btn btn-danger review-info"
+						<!-- 						<button type="button" class="btn btn-danger review-info"
 							data-dismiss="modal">信息未审核</button>
- -->					</div>
+ -->
+					</div>
 				</div>
 			</form>
 			<!-- /.modal-content -->

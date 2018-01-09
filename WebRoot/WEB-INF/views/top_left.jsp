@@ -42,7 +42,7 @@
 <jsp:include page="/modal/addInfo/project_modal.html" flush="true"></jsp:include>
 <jsp:include page="/modal/addInfo/patent_modal.html" flush="true"></jsp:include>
 <jsp:include page="/modal/addInfo/user_info_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/addInfo/user_add.html" flush="true"></jsp:include>
+<jsp:include page="/modal/addInfo/userSetting.html" flush="true"></jsp:include>
 
 <jsp:include page="/modal/exportInfo/info_modal.html" flush="true"></jsp:include>
 <jsp:include page="/modal/exportInfo/award_modal.html" flush="true"></jsp:include>
@@ -104,12 +104,16 @@
 							class="badge badge-success pull-right">10</span> 更新首页信息
 					</a></li>
 					<li class="divider"></li>
-					<li><a href="javascript:import_to_database()"> <i
-							class="fa fa-magnet fa-fw pull-right" aria-hidden="true"></i>
-							导入信息
-					</a><a href="javascript:user_setting()"> <i
+					<li>
+						<!-- 判断是否为管理员 --> <s:if test="#session.role=='院系管理员'">
+							<a href="javascript:import_to_database()"> <i
+								class="fa fa-magnet fa-fw pull-right" aria-hidden="true"></i>
+								导入信息
+							</a>
+						</s:if> <!-- end --> <a href="javascript:user_setting()"> <i
 							class="fa fa-cog fa-fw pull-right"></i> 修改信息
-					</a></li>
+					</a>
+					</li>
 					<li class="divider"></li>
 					<li><a
 						href="javascript:location.href = '/teacherms/System/system_exit'"><i
@@ -180,10 +184,6 @@
 				<!--breadcrumbs start -->
 				<ul class="breadcrumb">
 					<li><a><i class="fa fa-home"></i> 首页</a></li>
-					<!--<li>
-									<a >Dashboard</a>
-								</li>-->
-					<!--<li class="active">信息查看</li>-->
 				</ul>
 				<!--breadcrumbs end -->
 			</div>

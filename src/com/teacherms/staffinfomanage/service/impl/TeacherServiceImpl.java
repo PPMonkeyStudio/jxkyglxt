@@ -205,10 +205,18 @@ public class TeacherServiceImpl implements TeacherService {
 			if ("".equals(id) || id == null) {
 				ID.set(obj, uuid.getUuid());
 			}
+
 			// 修改数据属性为10，
 			Field dataStatus = cla.getDeclaredField("dataStatus");
 			dataStatus.setAccessible(true);
 			dataStatus.set(obj, "10");
+
+			// 设置用户ID，
+			Field userId = cla.getDeclaredField("userId");
+			userId.setAccessible(true);
+			if ("".equals(userId.get(obj)) || null == userId.get(obj)) {
+				userId.set(obj, userid);
+			}
 
 			result = teacherDao.addTableInfo(obj);
 		} catch (Exception e) {

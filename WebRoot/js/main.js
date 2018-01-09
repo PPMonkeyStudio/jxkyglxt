@@ -135,22 +135,28 @@ function selectSeacher() {
 		if ($("#Inputu" + $(this).val()).length > 0 || pla == "") {
 			return;
 		} else {
-			 var con=$(this).val();
-			if(con.indexOf("Date")>=0){
-				$(".all_options").siblings('#search_input').append('<div id="main_body">'+'<div id="Inputu' + $(this).val() + '" class="dateinput_div form-group">' +
-						'<input type="text"  placeholder="'+pla+'搜索起始时间" class="form-control  laydate-icon"  onfocus="time()"/>' +
-						'<input type="text"  placeholder="'+pla+'搜索结束时间" class="form-control  laydate-icon" onfocus="time()"/>'+
-						'<button class="btn btn-primary"><i class="fa fa-times" aria-hidden="true"></i></button></div></div>')
+			var con = $(this).val();
+			if (con.indexOf("Date") >= 0) {
+				$(".all_options").siblings('#search_input').append('<div id="main_body">' + '<div id="Inputu' + $(this).val() + '" class="dateinput_div form-group">' +
+					'<input type="text"  placeholder="' + pla + '搜索起始时间" class="form-control  laydate-icon"  onfocus="time()"/>' +
+					'<input type="text"  placeholder="' + pla + '搜索结束时间" class="form-control  laydate-icon" onfocus="time()"/>' +
+					'<button class="btn btn-primary"><i class="fa fa-times" aria-hidden="true"></i></button></div></div>')
+				$('.dateinput_div button').click(function() {
+					//移除时候清空js中已存的数据
+					data[data.tableName.replace("T", "t") + "." + $(this).parent().val()] = "";
+					$(this).parent().remove();
+				});
+			} else {
+				$(".all_options").siblings('#search_input').append('<div id="Inputu' + $(this).val() + '" class="input_div form-group">' +
+					'<input type="text"  placeholder="' + pla + '" class="form-control"/>' +
+					'<button class="btn btn-primary"><i class="fa fa-times" aria-hidden="true"></i></button></div>')
+				$('.input_div button').click(function() {
+					//移除时候清空js中已存的数据
+					data[data.tableName.replace("T", "t") + "." + $(this).parent().val()] = "";
+					$(this).parent().remove();
+				});
 			}
-			else{
-			$(".all_options").siblings('#search_input').append('<div id="Inputu' + $(this).val() + '" class="input_div form-group">' +
-				'<input type="text"  placeholder="' + pla + '" class="form-control"/>' +
-				'<button class="btn btn-primary"><i class="fa fa-times" aria-hidden="true"></i></button></div>')
-			}
-			}
-		$('.input_div button').click(function() {
-			$(this).parent().remove();
-		});
+		}
 	})
 }
 /*模态框清空*/
@@ -306,7 +312,6 @@ function modiFiles(this_obj) {
 	var reader = new FileReader();
 	reader.onloadend = function() {
 		$(this_obj).siblings().children('img').attr("src", this.result);
-		console.log(this.result)
 	}
 	reader.readAsDataURL(files);
 }
@@ -377,9 +382,13 @@ var search_info = function() {
 		var value = '';
 		this_object.siblings('#search_input').find('div').each(function() {
 			name = data.tableName.replace("Teacher", "teacher") + '.' + $(this).attr('id').replace("Inputu", "");
-			value = $(this).find('input').val();
+			var val_arr = [];
+			$(this).find('input').each(function() {
+				val_arr.push($(this).val());
+			});
+			//value = $(this).find('input').val();
 			//将搜索的内容放入js的数据中
-			data[name] = value;
+			data[name] = val_arr.join(",");
 		});
 		switch (data.tableName) {
 		case "TeacherInfo":

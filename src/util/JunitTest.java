@@ -61,8 +61,8 @@ public class JunitTest {
 
 	@Test
 	public void test_export() {
-		XSSFWorkbook workbook = adminService.getExcel("1,2,3,6,7,8,9,14,15", "TeacherAward",
-				"0b6577c1-5eb6-44e6-82ff-a8af88db00a9,0c75e84b-c408-4ae7-8e1d-24b599620640");
+		XSSFWorkbook workbook = adminService.getExcel("1,2,3,6,7,8,9,14,15", "TeacherInfo",
+				"649674ef-66c8-4ec1-9eb6-60761e95a708,6fd38307-40af-4e7c-8042-e6d542e56755");
 		try {
 			FileOutputStream out = new FileOutputStream("E:/Attachment/张三/TeacherAward/test.xlsx");
 			workbook.write(out);
@@ -82,8 +82,9 @@ public class JunitTest {
 	public void getQueryInfo() {
 		PageVO<Object> pageVO = adminService.getSpecifiedInformationByPaging("TeacherInfo", "1", "", "40", "信息与计算机工程学院",
 				new TeacherInfo(null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-						null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-						null, null, null, null, null, null, null, null, null, null, null, null, null),"");
+						null, null, null, null, "2000/1,2017/1", null, null, null, null, null, null, null, null, null,
+						null, null, null, null, null, null, null, null, null, null, null, null, null, null, null),
+				null);
 		System.out.println(pageVO.toString());
 	}
 
