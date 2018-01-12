@@ -72,6 +72,7 @@ $(function() {
 		//管理员
 		if (($(this).text()) == "信息审核") {
 			$('.right-side').load('page/teacher/teacher_information_audit.jsp #content', selectSeacher(), function() {
+				data.dataState = "20";
 				$.getScript("js/teacher/teacher_information_audit.js");
 			});
 		}
@@ -84,53 +85,8 @@ $(function() {
 		}
 		//用户
 		if (($(this).text()) == "信息查看") {
-
-			$('.right-side').load('user_pageinfo.jsp #content', selectSeacher(), function() {
-				$('.nav-tabs li a').unbind().click(function() {
-					if ($(this).parent('li').attr('class') == 'active') return;
-					var a_href = $(this).attr("href");
-					switch (a_href) {
-					case '#user':
-						$('#user').load('user_pageinfo.jsp  #user_info_table_audit', function() {
-							data.tableName = "TeacherInfo";
-							userInfo();
-						});
-
-						break;
-					case '#award':
-						$('#award').load('user_pageinfo.jsp #user_award_table_audit', function() {
-							data.tableName = "TeacherAward";
-							userAward();
-						});
-						break;
-					case '#works':
-						$('#works').load('user_pageinfo.jsp #user_works_table_audit', function() {
-							data.tableName = "TeacherWorks";
-							userWorks();
-						});
-						break;
-					case '#paper':
-						$('#paper').load('user_pageinfo.jsp #user_paper_table_audit', function() {
-							data.tableName = "TeacherPaper";
-							userPaper();
-						});
-						break;
-					case '#patent':
-						$('#patent').load('user_pageinfo.jsp #user_patent_table_audit', function() {
-							data.tableName = "TeacherPatent";
-							userPatent();
-						});
-						break;
-					case '#project':
-						$('#project').load('user_pageinfo.jsp #user_project_table_audit', function() {
-							data.tableName = "TeacherProject";
-							userProject();
-						});
-						break;
-					default:
-						break;
-					}
-				})
+			$('.right-side').load('page/teacher/user_Information_management.jsp #content', selectSeacher(), function() {
+				$.getScript("js/teacher/user_Information_management.js");
 			})
 		}
 	});

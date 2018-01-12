@@ -53,7 +53,7 @@
 			</header>
 			<div class="panel-body">
 				<div class="tab-content">
-					<div id="user" class="tab-pane">
+					<div id="info" class="tab-pane">
 						<!--管理员审核用户信息的表格-->
 						<div id="user_table_audit">
 							<!--表头上按钮组-->
