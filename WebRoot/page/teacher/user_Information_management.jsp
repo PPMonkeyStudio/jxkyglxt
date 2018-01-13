@@ -20,12 +20,12 @@
 			<section class="panel general"> <header
 				class="panel-heading tab-bg-dark-navy-blue">
 			<ul class="nav nav-tabs">
-				<li class=""><a data-toggle="tab" href="#info">教师信息</a></li>
-				<li class=""><a data-toggle="tab" href="#award">奖励</a></li>
-				<li class=""><a data-toggle="tab" href="#works">著作</a></li>
-				<li class=""><a data-toggle="tab" href="#paper">论文</a></li>
-				<li class=""><a data-toggle="tab" href="#patent">专利</a></li>
-				<li class=""><a data-toggle="tab" href="#project">项目(课题)</a></li>
+				<li><a data-toggle="tab" href="#info">教师信息</a></li>
+				<li><a data-toggle="tab" href="#award">奖励</a></li>
+				<li><a data-toggle="tab" href="#works">著作</a></li>
+				<li><a data-toggle="tab" href="#paper">论文</a></li>
+				<li><a data-toggle="tab" href="#patent">专利</a></li>
+				<li><a data-toggle="tab" href="#project">项目(课题)</a></li>
 			</ul>
 			</header>
 			<div class="panel-body">
@@ -386,7 +386,7 @@
 									</div>
 
 									<div style="width: 100%; margin-top: 6px;" class="collapse"
-										id="collapseExample">
+										id="collapse-user-award">
 										<div class="well">
 											<div id="search">
 												<label>指定条件搜索：</label> <select id="all_options"
@@ -444,7 +444,7 @@
 						<div id="user_works_table_audit">
 							<!--表投上按钮组-->
 							<div class="box-tools m-b-15">
-								<div class="input-group">
+							<div style="width: 100%;" class="input-group">
 									<!--筛选&查询&添加按钮位置-->
 									<button class="btn btn-default btn-addon btn-sm add-btn">
 										<i class="fa fa-plus"></i>添加
@@ -452,10 +452,32 @@
 									<button class="btn btn-default btn-addon btn-sm export_button">
 										<i class="fa fa-share-square"></i>导出
 									</button>
-									<div id="search">
-										<label>按条件搜索：</label> <select id="all_options"
-											class="all_options form-control">
-											<option value="">请选择</option>
+
+									<!--按条件筛选-->
+									<button style="" class="btn btn-default btn-sm" type="button"
+										data-toggle="collapse" data-target="#collapseExample"
+										aria-expanded="false" aria-controls="collapseExample">
+										<i class="fa fa-search" aria-hidden="true"></i> 条件筛选
+									</button>
+									<!-- 部分搜索 -->
+									<div style="float: right;">
+										<input name="table_search" class="form-control input-sm"
+											style="width: 150px;" type="text" placeholder="Search">
+										<div style="float: right; height: 30px;">
+											<button class="btn btn-default fuzzy_query"
+												style="height: 100%;">
+												<i class="fa fa-search"></i>
+											</button>
+										</div>
+									</div>
+
+									<div style="width: 100%; margin-top: 6px;" class="collapse"
+										id="collapse-user-works">
+										<div class="well">
+											<div id="search">
+												<label>指定条件搜索：</label> <select id="all_options"
+													class="all_options form-control ">
+													<option value="">请选择</option>
 											<option value="worksName">著作（专著）名称</option>
 											<option value="worksType">著作类别</option>
 											<option value="press">出版社</option>
@@ -464,12 +486,24 @@
 											<option value="selectedSituation">入选情况</option>
 											<option value="selectedDate">入选时间</option>
 											<option value="editorUserNames">主编（作者）</option>
-										</select>
-										<button class="btn btn-default btn-addon btn-sm">
-											<i class="fa fa-search"></i>搜索
-										</button>
+												</select>
+
+												<button style="float: right; margin-left: 6px;"
+													class="btn btn-danger search_info">
+													<i class="fa fa-exclamation-circle" aria-hidden="true"></i>清空搜索
+												</button>
+
+												<button style="float: right;"
+													class="btn btn-info search_info">
+													<i class="fa fa-check-square-o" aria-hidden="true"></i>确认搜索
+												</button>
+
+												<div style="width: 100%; margin-top: 6px;" id="search_input"></div>
+											</div>
+										</div>
 									</div>
 								</div>
+								
 							</div>
 							<!--查询存放信息的表格-->
 							<section class="panel"> <header
@@ -499,7 +533,7 @@
 						<div id="user_paper_table_audit">
 							<!--表投上按钮组-->
 							<div class="box-tools m-b-15">
-								<div class="input-group">
+							<div style="width: 100%;" class="input-group">
 									<!--筛选&查询&添加按钮位置-->
 									<button class="btn btn-default btn-addon btn-sm add-btn">
 										<i class="fa fa-plus"></i>添加
@@ -507,10 +541,32 @@
 									<button class="btn btn-default btn-addon btn-sm export_button">
 										<i class="fa fa-share-square"></i>导出
 									</button>
-									<div id="search">
-										<label>按条件搜索：</label> <select id="all_options"
-											class="all_options form-control">
-											<option value="">请选择</option>
+
+									<!--按条件筛选-->
+									<button style="" class="btn btn-default btn-sm" type="button"
+										data-toggle="collapse" data-target="#collapseExample"
+										aria-expanded="false" aria-controls="collapseExample">
+										<i class="fa fa-search" aria-hidden="true"></i> 条件筛选
+									</button>
+									<!-- 部分搜索 -->
+									<div style="float: right;">
+										<input name="table_search" class="form-control input-sm"
+											style="width: 150px;" type="text" placeholder="Search">
+										<div style="float: right; height: 30px;">
+											<button class="btn btn-default fuzzy_query"
+												style="height: 100%;">
+												<i class="fa fa-search"></i>
+											</button>
+										</div>
+									</div>
+
+									<div style="width: 100%; margin-top: 6px;" class="collapse"
+										id="collapse-user-paper">
+										<div class="well">
+											<div id="search">
+												<label>指定条件搜索：</label> <select id="all_options"
+													class="all_options form-control ">
+													<option value="">请选择</option>
 											<option value="userName">姓名</option>
 											<option value="userId">工号</option>
 											<option value="paperName">论文名称</option>
@@ -520,10 +576,21 @@
 											<option value="includedSituation">收录情况</option>
 											<option value="totalCitations">他引次数</option>
 											<option value="wordsNum">成果字数</option>
-										</select>
-										<button class="btn btn-default btn-addon btn-sm">
-											<i class="fa fa-search"></i>搜索
-										</button>
+												</select>
+
+												<button style="float: right; margin-left: 6px;"
+													class="btn btn-danger search_info">
+													<i class="fa fa-exclamation-circle" aria-hidden="true"></i>清空搜索
+												</button>
+
+												<button style="float: right;"
+													class="btn btn-info search_info">
+													<i class="fa fa-check-square-o" aria-hidden="true"></i>确认搜索
+												</button>
+
+												<div style="width: 100%; margin-top: 6px;" id="search_input"></div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -555,7 +622,7 @@
 						<div id="user_patent_table_audit">
 							<!--表投上按钮组-->
 							<div class="box-tools m-b-15">
-								<div class="input-group">
+							<div style="width: 100%;" class="input-group">
 									<!--筛选&查询&添加按钮位置-->
 									<button class="btn btn-default btn-addon btn-sm add-btn">
 										<i class="fa fa-plus"></i>添加
@@ -563,9 +630,32 @@
 									<button class="btn btn-default btn-addon btn-sm export_button">
 										<i class="fa fa-share-square"></i>导出
 									</button>
-									<div id="search">
-										<label>按条件搜索：</label> <select id="all_options"
-											class="all_options form-control">
+
+									<!--按条件筛选-->
+									<button style="" class="btn btn-default btn-sm" type="button"
+										data-toggle="collapse" data-target="#collapseExample"
+										aria-expanded="false" aria-controls="collapseExample">
+										<i class="fa fa-search" aria-hidden="true"></i> 条件筛选
+									</button>
+									<!-- 部分搜索 -->
+									<div style="float: right;">
+										<input name="table_search" class="form-control input-sm"
+											style="width: 150px;" type="text" placeholder="Search">
+										<div style="float: right; height: 30px;">
+											<button class="btn btn-default fuzzy_query"
+												style="height: 100%;">
+												<i class="fa fa-search"></i>
+											</button>
+										</div>
+									</div>
+
+									<div style="width: 100%; margin-top: 6px;" class="collapse"
+										id="collapse-user-patent">
+										<div class="well">
+											<div id="search">
+												<label>指定条件搜索：</label> <select id="all_options"
+													class="all_options form-control ">
+													<option value="">请选择</option>
 											<option value="">请选择</option>
 											<option value="userName">姓名</option>
 											<option value="userId">工号</option>
@@ -573,10 +663,21 @@
 											<option value="patentType">专利类型</option>
 											<option value="authorizationNo">授权号</option>
 											<option value="approvedDate">获批时间</option>
-										</select>
-										<button class="btn btn-default btn-addon btn-sm">
-											<i class="fa fa-search"></i>搜索
-										</button>
+												</select>
+
+												<button style="float: right; margin-left: 6px;"
+													class="btn btn-danger search_info">
+													<i class="fa fa-exclamation-circle" aria-hidden="true"></i>清空搜索
+												</button>
+
+												<button style="float: right;"
+													class="btn btn-info search_info">
+													<i class="fa fa-check-square-o" aria-hidden="true"></i>确认搜索
+												</button>
+
+												<div style="width: 100%; margin-top: 6px;" id="search_input"></div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -607,7 +708,7 @@
 						<div id="user_project_table_audit">
 							<!--表投上按钮组-->
 							<div class="box-tools m-b-15">
-								<div class="input-group">
+							<div style="width: 100%;" class="input-group">
 									<!--筛选&查询&添加按钮位置-->
 									<button class="btn btn-default btn-addon btn-sm add-btn">
 										<i class="fa fa-plus"></i>添加
@@ -615,20 +716,53 @@
 									<button class="btn btn-default btn-addon btn-sm export_button">
 										<i class="fa fa-share-square"></i>导出
 									</button>
-									<div id="search">
-										<label>按条件搜索：</label> <select id="all_options"
-											class="all_options form-control">
-											<option value="">请选择</option>
+
+									<!--按条件筛选-->
+									<button style="" class="btn btn-default btn-sm" type="button"
+										data-toggle="collapse" data-target="#collapseExample"
+										aria-expanded="false" aria-controls="collapseExample">
+										<i class="fa fa-search" aria-hidden="true"></i> 条件筛选
+									</button>
+									<!-- 部分搜索 -->
+									<div style="float: right;">
+										<input name="table_search" class="form-control input-sm"
+											style="width: 150px;" type="text" placeholder="Search">
+										<div style="float: right; height: 30px;">
+											<button class="btn btn-default fuzzy_query"
+												style="height: 100%;">
+												<i class="fa fa-search"></i>
+											</button>
+										</div>
+									</div>
+
+									<div style="width: 100%; margin-top: 6px;" class="collapse"
+										id="collapse-user-project">
+										<div class="well">
+											<div id="search">
+												<label>指定条件搜索：</label> <select id="all_options"
+													class="all_options form-control ">
+													<option value="">请选择</option>
 											<option value="projectName">项目名称</option>
 											<option value="projectType">项目类型</option>
 											<option value="projectSource">项目来源</option>
 											<option value="projectUserNames">成员姓名</option>
 											<option value="approvalDate">立项时间</option>
 											<option value="endUpDate">结题验收时间</option>
-										</select>
-										<button class="btn btn-default btn-addon btn-sm">
-											<i class="fa fa-search"></i>搜索
-										</button>
+												</select>
+
+												<button style="float: right; margin-left: 6px;"
+													class="btn btn-danger search_info">
+													<i class="fa fa-exclamation-circle" aria-hidden="true"></i>清空搜索
+												</button>
+
+												<button style="float: right;"
+													class="btn btn-info search_info">
+													<i class="fa fa-check-square-o" aria-hidden="true"></i>确认搜索
+												</button>
+
+												<div style="width: 100%; margin-top: 6px;" id="search_input"></div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>

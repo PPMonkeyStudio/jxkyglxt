@@ -17,6 +17,97 @@ $(function(){
 			id : '#export_' + a_href + ' #check'
 		});
 	});
+	
+	//导出按钮点击事件
+	$('.export_button').click(export_info);
+	//确认导出按钮点击事件
+	$('.sure_export').click(sure_export);
+	//指定查询(search_info---指定查询。为全局方法)
+	$('.search_info').click(search_info);
+	//模糊查询
+	$('.fuzzy_query').click(function() {
+		data.fuzzy_query = $(this).parent().prev().val();
+		doQuery();
+	});
+	var export_info = function() {
+		//显示确认导出按钮
+		parent_div.find('.sure_export').show();
+		//给每行的tr给与点击事件，通过点击tr来让checkbox选中
+		var tr = parent_div.find('#info_table tbody tr');
+		tr.each(function() {
+			$(this).find("td:first").empty().append('<input name="check" type="checkbox">');
+		});
+		tr.on("click", function() {
+			var check_attr = $(this).find('td input[name="check"]').is(":checked");
+			if (check_attr == false) {
+				$(this).find('td input[name="check"]').attr("checked", "true");
+			} else {
+				$(this).find('td input[name="check"]').removeAttr("checked");
+			}
+		});
+	}
+	
+	var sure_export = function() {
+		parent_div.find('#info_table tbody tr').each(function() {
+			if (($(this).find(' input[name="check"]').is(':checked')) == true) {
+				data.export_id += $(this).find('input[type="hidden"]').val() + ',';
+			}
+		})
+		//通过a标签的链接属性，判断是哪一个导出模态框内的值
+		$('#export_' + a_href + ' .group-list button').each(function() {
+			if (($(this).children('i').hasClass('fa-check')) && $(this).attr('value') != undefined) {
+				data.export_name += $(this).val() + ',';
+			}
+		})
+		if (data.export_id != "" && data.export_name != "") {
+			//console.log("export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
+			location.href = "/teacherms/Teacher/teacher_userExportExcelCollection?tableName=TeacherInfo&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1);
+		} else {
+			toastr.error("未选择数据");
+		}
+		data.export_id = "";
+		data.export_name = "";
+		//移除点击事件
+		parent_div.find('#info_table tbody tr').unbind();
+		//确认导出按钮隐藏,this为当前被点击的元素
+		$(this).hide();
+		//将tr的第一个td返回显示为数字
+		parent_div.find('#info_table tbody tr').each(function(i, v) {
+			$(this).children('td:first-child').empty().html(i + 1);
+		})
+
+	}
+	//查看信息(不包含用户信息)  
+	var viewInfo = function() {
+		//获取id
+		var id = $(this).siblings('input').val();
+		//查询单条信息
+		$.post("/teacherms/Teacher/teacher_userGetTableInfoByTableId",
+			{
+				tableId : id,
+				tableName : data.tableName
+			}, function(xhr) {
+				//data.tableName中获取当前的表名称，进行判断对具体哪一个模态框进行操作
+				//modal_id_1，除去Teacher前部分，方便后部分操作
+				var modal_id_1 = data.tableName.replace("Teacher", "");
+				//modal_id，最终获取到的模态框id
+				var modal_id = modal_id_1.substring(0, 1).toLowerCase() + modal_id_1.substring(1) + "_modal";
+				$("#" + modal_id + " .modal-body").find("input,select").each(function() {
+					var na = $(this).attr("name").split(".")[1];
+					if (na == "userId") {
+						$(this).val(xhr.user.userId);
+					} else if (na == "userName") {
+						$(this).val(xhr.user.userName);
+					}
+					else $(this).val(xhr.object[na]);
+				})
+				$("#" + modal_id + " .review-info").hide();
+				//显示出模态框
+				$("#" + modal_id).modal({
+					keyboard : true
+				})
+			}, "json");
+	}
 	//查询方法
 	function doQuery() {
 		$.ajax({
@@ -28,8 +119,8 @@ $(function(){
 			dataType : "json",
 			success : function(xhr_data) {
 				$('#' + a_href).find('table tbody').html(getStr(xhr_data.ObjDatas));
-				/*$('.solidButton').click(solidInfo);
-				$('.modiButton').click(modiInfo);*/
+				$('.viewButton').click(viewInfo);
+			/*	$('.modiButton').click(modiInfo);*/
 			},
 			error : function() {
 				toastr.error('服务器错误!');
@@ -41,21 +132,12 @@ $(function(){
 		var str = "";
 		switch (a_href){
 		case 'info':
-			for (i = 0; i < xhr.length; i++) {/*
-				str+="<tr>";
-			    str+="<td>"+(i+1)+"</td>";
-			    str+="<td>"+xhr[i][0].userId+"</td>";
-			    str+="<td>"+xhr[i][1].userName+"</td>";
-			    str+="<td>"+xhr[i][0].professionalGrade+"</td>";
-			    str+="<td>"+xhr[i][0].employeeType+"</td>";
-			    str+="<td>"+xhr[i][0].teachingType+"</td>"; 
-			    str+="<td>"+xhr[i][0].teachingStatus+"</td>";
-				str += '<td><input type="hidden" value="' + xhr[i][0].teacherInfoId + '" >'
-				+ '<button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button>'
-				+ '<button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button>'
-				+ '</td></tr>';
-				str += "</tr>";
-			*/}
+			$("#user_info_table_audit table").find('select,input').each(function() {
+				var na = $(this).attr("name").split(".")[1];
+				$(this).val(xhr.ObjDatas.object[na]);
+			});
+			$('input[name="teacherInfo.userName"]').val(xhr_data.user.userName);
+		
 			break;
 		case 'award':
 			for (i = 0; i < xhr.length; i++) {
@@ -71,7 +153,7 @@ $(function(){
 					str += '<td><input type="hidden" value="' + xhr[i].awardId + '" ><button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button><button class="btn btn-default btn-xs commmit-btn" title="提交审核"><i class="fa fa-sign-out fa-lg"  aria-hidden="true"></i></button></td>';
 				}
 				if (dataStatus == "20" || dataStatus == "30" || dataStatus == "40") {
-					str += '<td><input type="hidden" value="' + xhr[i].awardId + '" ><button class="btn btn-default btn-xs viewButton" title="查看"><i class="fa fa-search"  aria-hidden="true"></i></button></td>';
+					str += '<td><input type="hidden" value="' + xhr[i].awardId + '" ><button class="btn btn-default btn-xs viewButton" title="查看"><i class="fa fa-eye fa-lg"  aria-hidden="true"></i></button></td>';
 				}
 				str += "</tr>";
 			}
