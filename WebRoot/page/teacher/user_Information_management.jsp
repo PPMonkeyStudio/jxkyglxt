@@ -369,7 +369,7 @@
 
 									<!--按条件筛选-->
 									<button style="" class="btn btn-default btn-sm" type="button"
-										data-toggle="collapse" data-target="#collapseExample"
+										data-toggle="collapse" data-target="#collapse-user-award"
 										aria-expanded="false" aria-controls="collapseExample">
 										<i class="fa fa-search" aria-hidden="true"></i> 条件筛选
 									</button>
@@ -455,7 +455,7 @@
 
 									<!--按条件筛选-->
 									<button style="" class="btn btn-default btn-sm" type="button"
-										data-toggle="collapse" data-target="#collapseExample"
+										data-toggle="collapse" data-target="#collapse-user-works"
 										aria-expanded="false" aria-controls="collapseExample">
 										<i class="fa fa-search" aria-hidden="true"></i> 条件筛选
 									</button>
@@ -544,7 +544,7 @@
 
 									<!--按条件筛选-->
 									<button style="" class="btn btn-default btn-sm" type="button"
-										data-toggle="collapse" data-target="#collapseExample"
+										data-toggle="collapse" data-target="#collapse-user-paper"
 										aria-expanded="false" aria-controls="collapseExample">
 										<i class="fa fa-search" aria-hidden="true"></i> 条件筛选
 									</button>
@@ -633,7 +633,7 @@
 
 									<!--按条件筛选-->
 									<button style="" class="btn btn-default btn-sm" type="button"
-										data-toggle="collapse" data-target="#collapseExample"
+										data-toggle="collapse" data-target="#collapse-user-patent"
 										aria-expanded="false" aria-controls="collapseExample">
 										<i class="fa fa-search" aria-hidden="true"></i> 条件筛选
 									</button>
@@ -719,7 +719,7 @@
 
 									<!--按条件筛选-->
 									<button style="" class="btn btn-default btn-sm" type="button"
-										data-toggle="collapse" data-target="#collapseExample"
+										data-toggle="collapse" data-target="#collapse-user-project"
 										aria-expanded="false" aria-controls="collapseExample">
 										<i class="fa fa-search" aria-hidden="true"></i> 条件筛选
 									</button>

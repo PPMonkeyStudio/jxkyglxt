@@ -36,6 +36,10 @@ $(function() {
 				tableId : id,
 				tableName : data.tableName
 			}, function(xhr) {
+				//modal_id_1，除去Teacher前部分，方便后部分操作
+				var modal_id_1 = data.tableName.replace("Teacher", "");
+				//modal_id，最终获取到的模态框id
+				var modal_id = modal_id_1.substring(0, 1).toLowerCase() + modal_id_1.substring(1) + "_modal";
 				$("#info_modal .modal-body").find("input,select").each(function() {
 					var na = $(this).attr('name').split(".")[1];
 					if (na == "userId") {
@@ -47,9 +51,9 @@ $(function() {
 				})
 				//等全部信息加载完毕，再将模态框显示出来，避免模态框出现但是对应的值还未加载情况
 				//显示出模态框
-				$('#info_modal').modal({
+				$("#" + modal_id).modal({
 					keyboard : true
-				});
+				})
 			}, "json");
 	}
 	//固化

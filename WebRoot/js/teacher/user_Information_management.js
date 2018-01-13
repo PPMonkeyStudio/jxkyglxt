@@ -17,7 +17,10 @@ $(function(){
 			id : '#export_' + a_href + ' #check'
 		});
 	});
-	
+	//添加按钮点击事件
+	$('.add-btn').click(add_info);
+	//确认添加按钮点击事件
+	$('.sure_add').click(sure_add);
 	//导出按钮点击事件
 	$('.export_button').click(export_info);
 	//确认导出按钮点击事件
@@ -29,6 +32,68 @@ $(function(){
 		data.fuzzy_query = $(this).parent().prev().val();
 		doQuery();
 	});
+	//信息添加
+	var add_info=function(){
+		//modal_id_1，除去Teacher前部分，方便后部分操作
+		var modal_id_1 = data.tableName.replace("Teacher", "");
+		//modal_id，最终获取到的模态框id
+		var modal_id = modal_id_1.substring(0, 1).toLowerCase() + modal_id_1.substring(1) + "_modal";
+		$("#" + modal_id).modal({
+			keyboard : true
+		})
+		//附件上传
+		/*imgUpload();
+		 * 由Id写入姓名
+		getIdByName();*/
+		$( ".close-btn").before('<button type="button" class="btn btn-danger sure_add">添加</button>')
+	}
+	//确认信息添加
+	var sure_add=function(){
+		var review_data = $("#info_form").serialize() + "&tableName=" + data.tableName;
+		$.post("/teacherms/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
+			if (sxh_data.result == "success") {
+				toastr.success("添加成功!");
+				$('#award_modal').modal('hide');
+				user_selectAllAward();
+			}
+		}, "json")
+
+
+	
+	}
+	//提交审核
+	var commit_info=function(){
+		var id = $(this).siblings('input').val();
+		$.confirm({
+			title : '确认提交？',
+			smoothContent : false,
+			content : false,
+			autoClose : 'cancelAction|10000',
+			buttons : {
+				deleteUser : {
+					btnClass : 'btn-danger',
+					text : '确认',
+					action : function() {
+						$.post('/teacherms/Teacher/teacher_userPuchInfoToadmin', {
+							tableId : id,
+							tableName : data.tableName
+						}, function(xhr_data) {
+							if (xhr_data.result == "success") {
+								toastr.success("提交成功");
+								user_selectAllAward();
+							} else {
+								toastr.error("提交失败");
+							}
+						}, 'json');
+					}
+				},
+				cancelAction : {
+					btnClass : 'btn-default',
+					text : '取消',
+				}
+			}
+		});
+	}
 	var export_info = function() {
 		//显示确认导出按钮
 		parent_div.find('.sure_export').show();
@@ -77,8 +142,41 @@ $(function(){
 		})
 
 	}
+
+	//用户信息修改
+	var modiInfo=function(){
+		//获取id
+		var id = $(this).siblings('input').val();
+		//查询单条信息
+		$.post("/teacherms/Teacher/teacher_userSetTableInfo",
+			{
+				tableId : id,
+				tableName : data.tableName
+			}, function(xhr) {
+				//data.tableName中获取当前的表名称，进行判断对具体哪一个模态框进行操作
+				//modal_id_1，除去Teacher前部分，方便后部分操作
+				var modal_id_1 = data.tableName.replace("Teacher", "");
+				//modal_id，最终获取到的模态框id
+				var modal_id = modal_id_1.substring(0, 1).toLowerCase() + modal_id_1.substring(1) + "_modal";
+				$("#" + modal_id + " .modal-body").find("input,select").each(function() {/*
+					var na = $(this).attr("name").split(".")[1];
+					if (na == "userId") {
+						$(this).val(xhr.user.userId);
+					} else if (na == "userName") {
+						$(this).val(xhr.user.userName);
+					}
+					else $(this).val(xhr.object[na]);
+				*/})
+						 
+
+				$("#" + modal_id).modal({
+					keyboard : true
+				})
+			}, "json");
+	
+		}
 	//查看信息(不包含用户信息)  
-	var viewInfo = function() {
+	var viewInfo = function() { 
 		//获取id
 		var id = $(this).siblings('input').val();
 		//查询单条信息
@@ -120,13 +218,18 @@ $(function(){
 			success : function(xhr_data) {
 				$('#' + a_href).find('table tbody').html(getStr(xhr_data.ObjDatas));
 				$('.viewButton').click(viewInfo);
-			/*	$('.modiButton').click(modiInfo);*/
+				$('.modiButton').click(modiInfo);
+				//提交审核点击事件
+				$('.commmit-btn').click(commit_info);
+				
+				
 			},
 			error : function() {
 				toastr.error('服务器错误!');
 			}
 		});
 	}
+	
 	//通过a标签的href属性，获取查询到的组合成的字符串结果
 	function getStr(xhr){
 		var str = "";
