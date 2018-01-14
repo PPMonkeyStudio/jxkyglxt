@@ -373,31 +373,3 @@ function import_to_database() {
 		}
 	});
 }
-
-//模糊查询
-var fuzzy_query = function() {
-	var value = $(this).parent().prev().val();
-	data.fuzzy_query = value;
-	switch (data.tableName) {
-	case "TeacherInfo":
-		examInfo();
-		break;
-	case "TeacherAward":
-		examAward();
-		break;
-	case "TeacherWorks":
-		examWorks();
-		break;
-	case "TeacherPaper":
-		examPaper();
-		break;
-	case "TeacherPatent":
-		examPatent();
-		break;
-	case "TeacherProject":
-		examProject();
-		break;
-	default:
-		break;
-	}
-}
