@@ -253,7 +253,49 @@ $(function() {
 	//确认导出按钮点击事件
 	$('.sure_export').click(sure_export);
 	//指定查询(search_info---指定查询。为全局方法)
-	$('.search_info').click(search_info);
+	$('.search_info').click(function() {
+		var this_object = $(this);
+		if (this_object.text().trim() == "确认搜索") {
+			var name = '';
+			var value = '';
+			this_object.siblings('#search_input').find('div').each(function() {
+				name = data.tableName.replace("Teacher", "teacher") + '.' + $(this).attr('id').replace("Inputu", "");
+				var val_arr = [];
+				$(this).find('input').each(function() {
+					val_arr.push($(this).val());
+				});
+				//value = $(this).find('input').val();
+				//将搜索的内容放入js的数据中
+				data[name] = val_arr.join(",");
+			});
+			doQuery();
+		} else if (this_object.text().trim() == "清空搜索") {
+			$.confirm({
+				title : '确定清空?',
+				smoothContent : false,
+				content : false,
+				autoClose : 'cancelAction|10000',
+				buttons : {
+					deleteUser : {
+						btnClass : 'btn-danger',
+						text : '确定',
+						action : function() {
+							this_object.siblings('#search_input').empty();
+							$.each(data, function(k, v) {
+								if (k.indexOf('teacher') > -1) {
+									data[k] = "";
+								}
+							})
+						}
+					},
+					cancelAction : {
+						btnClass : 'btn-blue',
+						text : '取消',
+					}
+				}
+			});
+		}
+	});
 	//模糊查询
 	$('.fuzzy_query').click(function() {
 		data.fuzzy_query = $(this).parent().prev().val();
