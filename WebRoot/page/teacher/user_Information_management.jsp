@@ -47,7 +47,7 @@
 								class="panel-heading second-panel-heading"> 用户信息 </header>
 							<div class="panel-body table-responsive" id="panel-body">
 								<form id="info-form">
-									<table class="tab " id="info_table">
+									<table class="tab" id="info_table">
 										<tr></tr>
 										<tr class="title">
 											<td>基本信息</td>

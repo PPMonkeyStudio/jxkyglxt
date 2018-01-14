@@ -5,7 +5,6 @@ var a_href = null;
 //信息导出按钮事件绑定
 var export_info = function() {
 	//显示确认导出按钮
-	console.log(parent_div.find('.sure_export'));
 	parent_div.find('.sure_export').show();
 	//给每行的tr给与点击事件，通过点击tr来让checkbox选中
 	var tr = parent_div.find('#info_table tbody tr');
