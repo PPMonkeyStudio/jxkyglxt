@@ -67,6 +67,8 @@ var pageDataInformation = {
 $(function() {
 	$('.right-side').load('index_info.jsp #content');
 	$('.sidebar-menu .nav li a').click(function() {
+		//重置页码
+		data.page = 1;
 		$(this).addClass("Atfer_li");
 		$(this).parent().siblings().children().removeClass("Atfer_li");
 		//管理员
