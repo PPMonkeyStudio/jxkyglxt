@@ -25,7 +25,9 @@ var modiInfo = function() {
 				}
 				else $(this).val(xhr.object[na]);
 			})
+			$('.other').hide();
 			//等全部信息加载完毕，再将模态框显示出来，避免模态框出现但是对应的值还未加载情况
+			
 			//显示出模态框
 			$("#" + modal_id).modal({
 				keyboard : true

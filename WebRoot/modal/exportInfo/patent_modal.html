@@ -17,15 +17,38 @@
 					<div class="tab_content">
 						<div id="check" class="checkbox">
 							<ul class="group-list">
-								<li><label><input id="btn1" type="checkbox"
+							<li><button id="all" class="btn btn-info btn-sm">
+										<i class="fa fa-times" aria-hidden="true"></i> <span>全选</span>
+									</button></li>
+								<li><button id="inverse" class="btn btn-info btn-sm">
+										<i class="fa fa-times" aria-hidden="true"></i> <span>反选</span>
+									</button></li>
+									
+								<!-- <li><label><input id="btn1" type="checkbox"
 										value="">全选</label></li>
 								<li><label><input id="btn2" type="checkbox"
 										value="">取消全选</label></li>
 								<li><label><input id="btn3" type="checkbox"
-										value="">反选</label></li>
+										value="">反选</label></li> -->
 							</ul>
 							<ul class="group-list">
-								<li><input name="checkbox" type="checkbox" value="">
+							<li><button value="20" class="btn btn-info btn-sm">
+										<i class="fa fa-times" aria-hidden="true"></i> <span>工号</span>
+									</button></li>
+								<li><button value="21" class="btn btn-info btn-sm">
+										<i class="fa fa-times" aria-hidden="true"></i> <span>姓名</span>
+									</button></li>
+								<li><button value="22" class="btn btn-info btn-sm">
+										<i class="fa fa-times" aria-hidden="true"></i> <span>作者工号_排名</span>
+									</button></li>
+								<li><button value="23" class="btn btn-info btn-sm">
+										<i class="fa fa-times" aria-hidden="true"></i> <span>专利类型</span>
+									</button></li>
+									<li><button value="23" class="btn btn-info btn-sm">
+										<i class="fa fa-times" aria-hidden="true"></i> <span>授权号</span>
+									</button></li>
+									
+								<!-- <li><input name="checkbox" type="checkbox" value="">
 									<label>工号</label></li>
 								<li><input name="checkbox" type="checkbox" value="">
 									<label>姓名</label></li>
@@ -34,10 +57,19 @@
 								<li><input name="checkbox" type="checkbox" value="">
 									<label>专利类型</label></li>
 								<li><input name="checkbox" type="checkbox" value="">
-									<label>授权号</label></li>
+									<label>授权号</label></li> -->
 							</ul>
 							<ul class="group-list">
-
+							<li><button value="20" class="btn btn-info btn-sm">
+										<i class="fa fa-times" aria-hidden="true"></i> <span>获批日期</span>
+									</button></li>
+								<li><button value="21" class="btn btn-info btn-sm">
+										<i class="fa fa-times" aria-hidden="true"></i> <span>是否应用</span>
+									</button></li>
+								<li><button value="22" class="btn btn-info btn-sm">
+										<i class="fa fa-times" aria-hidden="true"></i> <span>是否行业联合专利（著作权）</span>
+									</button></li>
+<!-- 
 								<li><input name="checkbox" type="checkbox" value="">
 									<label>获批日期</label></li>
 								<li><input name="checkbox" type="checkbox" value="">
@@ -47,18 +79,18 @@
 								<li><input name="checkbox" type="checkbox" value="">
 									<label>数据状态</label></li>
 								<li><input name="checkbox" type="checkbox" value="">
-									<label>创建时间</label></li>
+									<label>创建时间</label></li> -->
 							</ul>
 						</div>
 					</div>
 				</div>
 
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary export-info"
+					<button type="button" class="btn btn-primary export_button"
 						data-dismiss="modal">导出</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 					</button>
-					<input name="teacherAward.awardId" id="tableid" type="hidden" />
+					<input name="teacherPatent.patentId" id="tableid" type="hidden" />
 
 				</div>
 			</div>
