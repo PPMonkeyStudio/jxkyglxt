@@ -572,10 +572,10 @@
 			<div class="panel-footer">
 				<div id="page">
 					<ul class="pager">
-						<li><a onclick="page()">首页</a></li>
-						<li><a onclick="prepage()">上一页</a></li>
-						<li><a onclick="nextpage()">下一页</a></li>
-						<li><a onclick="page()">尾页</a></li>
+						<li><a>首页</a></li>
+						<li><a>上一页</a></li>
+						<li><a>下一页</a></li>
+						<li><a>尾页</a></li>
 					</ul>
 				</div>
 			</div>

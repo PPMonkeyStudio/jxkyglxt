@@ -41,7 +41,6 @@
 							<!--表头上按钮组-->
 							<div class="box-tools m-b-15">
 								<div style="width: 100%;" class="input-group">
-									
 									<!--按条件筛选-->
 									<button style="" class="btn btn-default btn-sm" type="button"
 										data-toggle="collapse" data-target="#collapse_exam_user"
@@ -93,8 +92,6 @@
 											</div>
 										</div>
 									</div>
-
-									<!--<input type="text" class="form-control" />-->
 								</div>
 							</div>
 							<!--查询存放信息的表格-->
@@ -118,14 +115,6 @@
 
 									</tbody>
 								</table>
-								<div id="page">
-									<ul class="pager">
-										<li><a onclick="page(1)">首页</a></li>
-										<li><a onclick="prepage()">上一页</a></li>
-										<li><a onclick="nextpage()">下一页</a></li>
-										<li><a onclick="page(999)">尾页</a></li>
-									</ul>
-								</div>
 							</div>
 							</section>
 						</div>
@@ -207,14 +196,6 @@
 
 									</tbody>
 								</table>
-								<div id="page">
-									<ul class="pager">
-										<li><a onclick="page(1)">首页</a></li>
-										<li><a onclick="prepage()">上一页</a></li>
-										<li><a onclick="nextpage()">下一页</a></li>
-										<li><a onclick="page(999)">尾页</a></li>
-									</ul>
-								</div>
 							</div>
 							</section>
 						</div>
@@ -295,14 +276,6 @@
 
 									</tbody>
 								</table>
-								<div id="page">
-									<ul class="pager">
-										<li><a onclick="page(1)">首页</a></li>
-										<li><a onclick="prepage()">上一页</a></li>
-										<li><a onclick="nextpage()">下一页</a></li>
-										<li><a onclick="page(999)">尾页</a></li>
-									</ul>
-								</div>
 							</div>
 							</section>
 						</div>
@@ -385,14 +358,6 @@
 
 									</tbody>
 								</table>
-								<div id="page">
-									<ul class="pager">
-										<li><a onclick="page(1)">首页</a></li>
-										<li><a onclick="prepage()">上一页</a></li>
-										<li><a onclick="nextpage()">下一页</a></li>
-										<li><a onclick="page(999)">尾页</a></li>
-									</ul>
-								</div>
 							</div>
 							</section>
 						</div>
@@ -470,14 +435,6 @@
 
 									</tbody>
 								</table>
-								<div id="page">
-									<ul class="pager">
-										<li><a onclick="page(1)">首页</a></li>
-										<li><a onclick="prepage()">上一页</a></li>
-										<li><a onclick="nextpage()">下一页</a></li>
-										<li><a onclick="page(999)">尾页</a></li>
-									</ul>
-								</div>
 							</div>
 							</section>
 						</div>
@@ -552,21 +509,22 @@
 										</tr>
 									</thead>
 									<tbody>
-
 									</tbody>
 								</table>
-								<div id="page">
-									<ul class="pager">
-										<li><a onclick="page(1)">首页</a></li>
-										<li><a onclick="prepage()">上一页</a></li>
-										<li><a onclick="nextpage()">下一页</a></li>
-										<li><a onclick="page(999)">尾页</a></li>
-									</ul>
-								</div>
 							</div>
 							</section>
 						</div>
 					</div>
+				</div>
+			</div>
+			<div class="panel-footer">
+				<div id="page">
+					<ul class="pager">
+						<li><a>首页</a></li>
+						<li><a>上一页</a></li>
+						<li><a>下一页</a></li>
+						<li><a>尾页</a></li>
+					</ul>
 				</div>
 			</div>
 			</section>
