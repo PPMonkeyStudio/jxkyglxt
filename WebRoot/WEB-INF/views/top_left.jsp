@@ -25,31 +25,26 @@
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <!-- font Awesome -->
 <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<!-- 提示框css -->
+<link rel="stylesheet" href="<%=basePath%>css/toastr.css" />
 
-<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="<%=basePath%>css/style.css" />
 
-<link rel="stylesheet" href="css/top_left.css" />
-<link rel="stylesheet" href="css/jquery-confirm.css" />
+<link rel="stylesheet" href="<%=basePath%>css/top_left.css" />
 
-<script src="js/app.js" type="text/javascript"></script>
-<script src="js/main_index.js" type="text/javascript"></script>
-<script src="js/jquery-confirm.js" type="text/javascript"></script>
+<link rel="stylesheet" href="<%=basePath%>css/jquery-confirm.css" />
 
-<jsp:include page="/modal/addInfo/award_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/addInfo/info_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/addInfo/paper_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/addInfo/works_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/addInfo/project_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/addInfo/patent_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/addInfo/user_info_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/addInfo/userSetting.html" flush="true"></jsp:include>
+<link rel="stylesheet" href="<%=basePath%>css/need/laydate.css" />
 
-<jsp:include page="/modal/exportInfo/info_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/exportInfo/award_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/exportInfo/paper_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/exportInfo/patent_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/exportInfo/project_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/exportInfo/works_modal.html" flush="true"></jsp:include>
+<script type="text/javascript" src="<%=basePath%>js/jquery-3.1.1.min.js"></script>
+
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="<%=basePath%>js/app.js"></script>
+
+<script type="text/javascript" src="<%=basePath%>js/jquery-confirm.js"></script>
+
+<script type="text/javascript" src="<%=basePath%>js/laydate.js"></script>
 </head>
 
 <body class="skin-black">
