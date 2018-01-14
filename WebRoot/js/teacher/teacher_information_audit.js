@@ -16,8 +16,9 @@ var modiInfo = function() {
 			var modal_id_1 = data.tableName.replace("Teacher", "");
 			//modal_id，最终获取到的模态框id
 			var modal_id = modal_id_1.substring(0, 1).toLowerCase() + modal_id_1.substring(1) + "_modal";
-			$('#' + modal_id + ' .modal-body').find("input,select").each(function() {
+			$('#' + modal_id + ' form').find("input,select").each(function() {
 				var na = $(this).attr('name').split(".")[1];
+				console.log(na);
 				if (na == "userId") {
 					$(this).val(xhr.user.userId);
 				} else if ($(this).attr('name') == "userName") {
@@ -30,6 +31,16 @@ var modiInfo = function() {
 			$("#" + modal_id).modal({
 				keyboard : true
 			})
+			$("#" + modal_id).find('.sure_mod').unbind().click(function() {
+				var review_data = $("#" + modal_id + " form").serialize() + "&tableName=" + data.tableName;
+				$.post("/teacherms/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
+					if (sxh_data.result == "success") {
+						toastr.success("修改成功!");
+						$("#" + modal_id).modal('hide');
+						doQuery();
+					}
+				}, "json")
+			}).show();
 		}, "json");
 }
 //固化信息
