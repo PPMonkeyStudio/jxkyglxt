@@ -1,71 +1,81 @@
-//全局变量
-var parent_div = null;
-var a_href = null;
-//方法加载，让方法开始加载，以便调用
-//修改信息
-var modiInfo = function() {
-	//获取id、
-	var id = $(this).siblings('input').val();
-	//查询单条用户的信息
-	$.post("/teacherms/Admin/admin_getTeacherTableInfoById",
-		{
-			tableId : id,
-			tableName : data.tableName
-		}, function(xhr) {
-			//modal_id_1，除去Teacher前部分，方便后部分操作
-			var modal_id_1 = data.tableName.replace("Teacher", "");
-			//modal_id，最终获取到的模态框id
-			var modal_id = modal_id_1.substring(0, 1).toLowerCase() + modal_id_1.substring(1) + "_modal";
-			$('#' + modal_id + ' form').find("input,select").each(function() {
-				var na = $(this).attr('name').split(".")[1];
-				console.log(na);
-				if (na == "userId") {
-					$(this).val(xhr.user.userId);
-				} else if ($(this).attr('name') == "userName") {
-					$(this).val(xhr.user.userName);
-				}
-				else $(this).val(xhr.object[na]);
-			})
-			$('.other').hide();
-			//等全部信息加载完毕，再将模态框显示出来，避免模态框出现但是对应的值还未加载情况
-			
-			//显示出模态框
-			$("#" + modal_id).modal({
-				keyboard : true
-			})
-			$("#" + modal_id).find('.sure_mod').unbind().click(function() {
-				var review_data = $("#" + modal_id + " form").serialize() + "&tableName=" + data.tableName;
-				$.post("/teacherms/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
-					if (sxh_data.result == "success") {
-						toastr.success("修改成功!");
-						$("#" + modal_id).modal('hide');
-						doQuery();
-					}
-				}, "json")
-			}).show();
-		}, "json");
-}
-//固化信息
-var solidInfo = function() {
-	var infoid = $(this).siblings('input').val();
-	$(this).parent().empty().append('<img title="已固化"  src="img/ok1.png" />');
-	$.post('/teacherms/Admin/admin_LiftCuring', {
-		tableId : infoid,
-		tableName : data.tableName,
-		dataState : "10"
-	}, function(xhr) {
-		if (xhr.result == "success") {
-			toastr.success("信息固化成功!");
-		} else {
-			toastr.error("信息固化失败");
-		}
-	}, 'json')
-}
 //js默认执行
 $(function() {
+	//全局变量
+	var parent_div = null;
+	var a_href = null;
+	//方法声明------------------------------start
+	//方法加载，让方法开始加载，以便调用
+	//修改信息
+	var modiInfo = function() {
+		//获取id、
+		var id = $(this).siblings('input').val();
+		//查询单条用户的信息
+		$.post("/teacherms/Admin/admin_getTeacherTableInfoById",
+			{
+				tableId : id,
+				tableName : data.tableName
+			}, function(xhr) {
+				//modal_id_1，除去Teacher前部分，方便后部分操作
+				var modal_id_1 = data.tableName.replace("Teacher", "");
+				//modal_id，最终获取到的模态框id
+				var modal_id = modal_id_1.substring(0, 1).toLowerCase() + modal_id_1.substring(1) + "_modal";
+				$('#' + modal_id + ' form').find("input,select").each(function() {
+					var na = $(this).attr('name').split(".")[1];
+					if (na == "userId") {
+						$(this).val(xhr.user.userId);
+					} else if ($(this).attr('name') == "userName") {
+						$(this).val(xhr.user.userName);
+					}
+					else $(this).val(xhr.object[na]);
+				})
+				//等全部信息加载完毕，再将模态框显示出来，避免模态框出现但是对应的值还未加载情况
+				//如果为用户信息，则只显示基础部分（当前为用户审核页面）
+				if (a_href == "info") {
+					$("#" + modal_id).find('.basic').show();
+					$("#" + modal_id).find('.other').hide();
+				}
+				//显示出模态框
+				$("#" + modal_id).modal({
+					keyboard : true
+				})
+				$("#" + modal_id).find('.sure_mod').unbind().click(function() {
+					var review_data = $("#" + modal_id + " form").serialize() + "&tableName=" + data.tableName;
+					$.post("/teacherms/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
+						if (sxh_data.result == "success") {
+							toastr.success("修改成功!");
+							$("#" + modal_id).modal('hide');
+							doQuery();
+						}
+					}, "json")
+				}).show();
+			}, "json");
+	}
+	//固化信息
+	var solidInfo = function() {
+		var infoid = $(this).siblings('input').val();
+		$(this).parent().empty().append('<img title="已固化"  src="img/ok1.png" />');
+		$.post('/teacherms/Admin/admin_LiftCuring', {
+			tableId : infoid,
+			tableName : data.tableName,
+			dataState : "40"
+		}, function(xhr) {
+			if (xhr.result == "success") {
+				toastr.success("信息固化成功!");
+			} else {
+				toastr.error("信息固化失败");
+			}
+		}, 'json')
+	}
+	//页面加载开始，给与元素加载事件-----------------------end
+
+	//页面中只需要绑定一次事件的元素绑定事件区----start
 	$('.nav-tabs li a').click(function() {
 		//如果已经是点击状态，则点击不作为
 		if ($(this).parent('li').attr('class') == 'active') return;
+		//重置页码
+		data.page = 1;
+		//将所有的确认导出按钮隐藏
+		$('.sure_export').hide()
 		//除去链接属性中的#号
 		a_href = $(this).attr("href").substr(1);
 		//获取panel-body内和所点击的类别相对应的div父元素
@@ -80,7 +90,7 @@ $(function() {
 		});
 	});
 
-	//指定查询(search_info---指定查询。为全局方法)
+	//指定查询
 	$('.search_info').click(function() {
 		var this_object = $(this);
 		if (this_object.text().trim() == "确认搜索") {
@@ -170,7 +180,9 @@ $(function() {
 			break;
 		}
 	});
+	//一次事件的元素绑定事件区----end
 
+	//方法声明----start
 	//查询方法
 	function doQuery() {
 		$.ajax({
@@ -182,8 +194,10 @@ $(function() {
 			dataType : "json",
 			success : function(xhr_data) {
 				$('#' + a_href).find('table tbody').html(getStr(xhr_data.ObjDatas));
+				//每次做查询之后，按钮需要重新绑定事件
 				$('.solidButton').click(solidInfo);
 				$('.modiButton').click(modiInfo);
+
 				//记录分页信息
 				setPageInfo(xhr_data);
 			},
@@ -298,37 +312,5 @@ $(function() {
 		}
 		return str;
 	}
-
-	function firstpage() {
-		if (pageDataInformation.pageIndex == 1) {
-			toastr.error("已经是第一页了!");
-			return;
-		}
-		data.page = 1;
-		doQuery();
-	}
-	function prepage() {
-		if (!pageDataInformation.HavePrePage) {
-			toastr.error("已经在首页了!");
-			return;
-		}
-		data.page = pageDataInformation.pageIndex - 1;
-		doQuery();
-	}
-	function nextpage() {
-		if (!pageDataInformation.HaveNextPage) {
-			toastr.error("已经是最后一页了!");
-			return;
-		}
-		data.page = pageDataInformation.pageIndex + 1;
-		doQuery();
-	}
-	function lastpage() {
-		if (pageDataInformation.pageIndex == pageDataInformation.totalPages) {
-			toastr.error("已经在尾页!");
-			return;
-		}
-		data.page = pageDataInformation.totalPages;
-		doQuery();
-	}
+//方法声明----end
 })

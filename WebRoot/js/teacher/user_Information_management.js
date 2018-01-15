@@ -155,7 +155,7 @@ $(function() {
 		//获取id
 		var id = $(this).siblings('input').val();
 		//查询单条信息
-		$.post("/teacherms/Teacher/teacher_userSetTableInfo",
+		$.post("/teacherms/Teacher/teacher_userGetTableInfoByTableId",
 			{
 				tableId : id,
 				tableName : data.tableName
@@ -165,19 +165,26 @@ $(function() {
 				var modal_id_1 = data.tableName.replace("Teacher", "");
 				//modal_id，最终获取到的模态框id
 				var modal_id = modal_id_1.substring(0, 1).toLowerCase() + modal_id_1.substring(1) + "_modal";
-				$("#" + modal_id + " .modal-body").find("input,select").each(function() {
-					/*
-											var na = $(this).attr("name").split(".")[1];
-											if (na == "userId") {
-												$(this).val(xhr.user.userId);
-											} else if (na == "userName") {
-												$(this).val(xhr.user.userName);
-											}
-											else $(this).val(xhr.object[na]);
-										*/
+				$("#" + modal_id + " form").find("input,select").each(function() {
+					var na = $(this).attr("name").split(".")[1];
+					if (na == "userId") {
+						$(this).val(xhr.user.userId);
+					} else if (na == "userName") {
+						$(this).val(xhr.user.userName);
+					}
+					else $(this).val(xhr.object[na]);
 				})
-
-
+				//确定修改按钮显示并添加绑定事件
+				$("#" + modal_id).find('.sure_mod').unbind().click(function() {
+					var review_data = $("#" + modal_id + " form").serialize() + "&tableName=" + data.tableName;
+					$.post("/teacherms/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
+						if (sxh_data.result == "success") {
+							toastr.success("修改成功!");
+							$("#" + modal_id).modal('hide');
+							doQuery();
+						}
+					}, "json")
+				}).show();
 				$("#" + modal_id).modal({
 					keyboard : true
 				})
@@ -216,10 +223,11 @@ $(function() {
 			}, "json");
 	}
 
-
 	$('.nav-tabs li a').click(function() {
 		//如果已经是点击状态，则点击不作为
 		if ($(this).parent('li').attr('class') == 'active') return;
+		//重置页码
+		data.page = 1;
 		//除去链接属性中的#号
 		a_href = $(this).attr("href").substr(1);
 		//获取panel-body内和所点击的类别相对应的div父元素

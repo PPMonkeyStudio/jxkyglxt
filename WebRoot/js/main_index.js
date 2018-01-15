@@ -92,6 +92,16 @@ $(function() {
 			})
 		}
 	});
+	//用户信息模态框
+	$('#info_modal').on('hidden.bs.modal', function() {
+		$(this).find('.basic').hide();
+		$(this).find('.other').show();
+	})
+	$("div[id$='_modal']").on('hidden.bs.modal', function() {
+		$(this).find('.sure_add').unbind().hide();
+		$(this).find('.sure_mod').unbind().hide();
+	})
+
 });
 
 var m_check = {
@@ -154,6 +164,63 @@ function setPageInfo(xhr_data) {
 	pageDataInformation.pageSize = xhr_data.pageSize;
 	pageDataInformation.totalPages = xhr_data.totalPages;
 	pageDataInformation.totalRecords = xhr_data.totalRecords;
+}
+
+function user_setting() {
+	var str = '<form id="user_setting" action="">' +
+		'<table style="width:100%;">' +
+		'<tbody>' +
+		'<tr>' +
+		'<td>工号</td>' +
+		'<td><input type="text"class="form-control" name="user.userId"/></td>' +
+		'</tr>' +
+		'<tr>' +
+		'<td>名字</td>' +
+		'<td><input type="text"class="form-control"name="user.userName"/></td>' +
+		'</tr>' +
+		'<tr>' +
+		'<td>密码</td>' +
+		'<td><input type="text"class="form-control"name="user.password"/></td>' +
+		'</tr>' +
+		'</tbody>' +
+		'</table>' +
+		'</form>'
+	$.confirm({
+		title : '帐号信息设置',
+		smoothContent : false,
+		content : str,
+		onContentReady : function() {
+			$.post('/teacherms/System/system_getAccountInformation', {}, function(xhr_data) {
+				$('#user_setting table input').each(function() {
+					//字符串截取
+					var name = $(this).attr('name').substr(5);
+					if (name != "password") {
+						$('input[name="user.' + name + '"]').val(xhr_data[name]);
+					}
+				});
+			}, 'json');
+		},
+		buttons : {
+			deleteUser : {
+				btnClass : 'btn-blue',
+				text : '修改',
+				action : function() {
+					$.post('/teacherms/System/system_modifyUserInfo', $('#user_setting').serialize(), function(xhr_data) {
+						if (xhr_data.result.length > 1) {
+							$('.userName_info').text(xhr_data.result);
+							toastr.success("修改成功");
+						} else {
+							toastr.error("修改失败");
+						}
+					}, 'json');
+				}
+			},
+			cancelAction : {
+				btnClass : 'btn-default',
+				text : '取消',
+			}
+		}
+	});
 }
 
 /*$(function() {
