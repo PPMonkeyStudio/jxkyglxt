@@ -76,6 +76,47 @@ $(function() {
 			}
 		});
 	}
+	//分页信息
+	$('.panel-footer a').click(function() {
+		var style = $(this).text();
+		switch (style) {
+		case '首页':
+			if (pageDataInformation.pageIndex == 1) {
+				toastr.error("已经是第一页了!");
+				return;
+			}
+			data.page = 1;
+			doQuery();
+			break;
+		case '上一页':
+			if (!pageDataInformation.HavePrePage) {
+				toastr.error("已经在首页了!");
+				return;
+			}
+			data.page = pageDataInformation.pageIndex - 1;
+			doQuery();
+			break;
+		case '下一页':
+			if (!pageDataInformation.HaveNextPage) {
+				toastr.error("已经是最后一页了!");
+				return;
+			}
+			data.page = pageDataInformation.pageIndex + 1;
+			doQuery();
+			break;
+		case '尾页':
+			if (pageDataInformation.pageIndex == pageDataInformation.totalPages) {
+				toastr.error("已经在尾页!");
+				return;
+			}
+			data.page = pageDataInformation.totalPages;
+			doQuery();
+			break;
+		default:
+			toastr.error('服务器错误');
+			break;
+		}
+	});
 
 	//确定导出
 	var sure_export = function() {
