@@ -1,197 +1,207 @@
-//全局属性
-var parent_div = null;
-var a_href = null;
-//方法加载，让方法开始加载，以便调用
-//信息导出按钮事件绑定
-var export_info = function() {
-	//显示确认导出按钮
-	parent_div.find('.sure_export').show();
-	//给每行的tr给与点击事件，通过点击tr来让checkbox选中
-	var tr = parent_div.find('#info_table tbody tr');
-	tr.each(function() {
-		$(this).find("td:first").empty().append('<input name="check" type="checkbox">');
-	});
-	tr.on("click", function() {
-		var check_attr = $(this).find('td input[name="check"]').is(":checked");
-		if (check_attr == false) {
-			$(this).find('td input[name="check"]').attr("checked", "true");
-		} else {
-			$(this).find('td input[name="check"]').removeAttr("checked");
-		}
-	});
-}
-//(用户信息)修改信息
-var modiUserInfo = function() {
-	//获取id、
-	var id = $(this).siblings('input').val();
-	//只显示基本信息
-	$('#info_modal .basic').show();
-	//查询单条用户的信息
-	$.post("/teacherms/Admin/admin_getTeacherTableInfoById",
-		{
-			tableId : id,
-			tableName : data.tableName
-		}, function(xhr) {
-			$("#info_modal .modal-body").find("input,select").each(function() {
-				var na = $(this).attr('name').split(".")[1];
-				if (na == "userId") {
-					$(this).val(xhr.user.userId);
-				} else if ($(this).attr('name') == "userName") {
-					$(this).val(xhr.user.userName);
-				}
-				else $(this).val(xhr.object[na]);
-			})
-			//等全部信息加载完毕，再将模态框显示出来，避免模态框出现但是对应的值还未加载情况
-			//显示出模态框
-			$('#info_modal').modal({
-				keyboard : true
-			});
-		}, "json");
-}
-
-//查看信息(不包含用户信息)
-var viewInfo = function() {
-	//获取id
-	var id = $(this).siblings('input').val();
-	//查询单条信息
-	$.post("/teacherms/Admin/admin_getTeacherTableInfoById",
-		{
-			tableId : id,
-			tableName : data.tableName
-		}, function(xhr) {
-			//data.tableName中获取当前的表名称，进行判断对具体哪一个模态框进行操作
-			//modal_id_1，除去Teacher前部分，方便后部分操作
-			var modal_id_1 = data.tableName.replace("Teacher", "");
-			//modal_id，最终获取到的模态框id
-			var modal_id = modal_id_1.substring(0, 1).toLowerCase() + modal_id_1.substring(1) + "_modal";
-			$("#" + modal_id + " .modal-body").find("input,select").each(function() {
-				var na = $(this).attr("name").split(".")[1];
-				if (na == "userId") {
-					$(this).val(xhr.user.userId);
-				} else if (na == "userName") {
-					$(this).val(xhr.user.userName);
-				}
-				else $(this).val(xhr.object[na]);
-			})
-			$("#" + modal_id + " .review-info").hide();
-			//显示出模态框
-			$("#" + modal_id).modal({
-				keyboard : true
-			})
-		}, "json");
-}
-
-//解除固化
-var relieveInfo = function() {
-	var infoid = $(this).siblings('input').val();
-	$(this).parent().empty().append('<img title="已解除固化"  src="img/ok1.png" />');
-	$.post('/teacherms/Admin/admin_LiftCuring', {
-		tableId : infoid,
-		tableName : data.tableName,
-		dataState : "10"
-	}, function(xhr) {
-		if (xhr.result == "success") {
-			toastr.success("信息解除固化成功!");
-		} else {
-			toastr.error("信息解除固化失败");
-		}
-	}, 'json')
-}
-
-//确定导出
-var sure_export = function() {
-	parent_div.find('#info_table tbody tr').each(function() {
-		if (($(this).find(' input[name="check"]').is(':checked')) == true) {
-			data.export_id += $(this).find('input[type="hidden"]').val() + ',';
-		}
-	})
-	//通过a标签的链接属性，判断是哪一个导出模态框内的值
-	$('#export_' + a_href + ' .group-list button').each(function() {
-		if (($(this).children('i').hasClass('fa-check')) && $(this).attr('value') != undefined) {
-			data.export_name += $(this).val() + ',';
-		}
-	})
-	if (data.export_id != "" && data.export_name != "") {
-		//console.log("export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
-		location.href = "/teacherms/Admin/admin_ExportExcelCollection?tableName=TeacherInfo&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1);
-	} else {
-		toastr.error("未选择数据");
-	}
-	data.export_id = "";
-	data.export_name = "";
-	//移除点击事件
-	parent_div.find('#info_table tbody tr').unbind();
-	//确认导出按钮隐藏,this为当前被点击的元素
-	$(this).hide();
-	//将tr的第一个td返回显示为数字
-	parent_div.find('#info_table tbody tr').each(function(i, v) {
-		$(this).children('td:first-child').empty().html(i + 1);
-	})
-
-}
-
-var user_setting = function() {
-	var str = '<form id="user_setting" action="">' +
-		'<table style="width:100%;">' +
-		'<tbody>' +
-		'<tr>' +
-		'<td>工号</td>' +
-		'<td><input type="text"class="form-control" name="user.userId"/></td>' +
-		'</tr>' +
-		'<tr>' +
-		'<td>名字</td>' +
-		'<td><input type="text"class="form-control"name="user.userName"/></td>' +
-		'</tr>' +
-		'<tr>' +
-		'<td>密码</td>' +
-		'<td><input type="text"class="form-control"name="user.password"/></td>' +
-		'</tr>' +
-		'</tbody>' +
-		'</table>' +
-		'</form>'
-	$.confirm({
-		title : '帐号信息设置',
-		smoothContent : false,
-		content : str,
-		onContentReady : function() {
-			$.post('/teacherms/System/system_getAccountInformation', {}, function(xhr_data) {
-				$('#user_setting table input').each(function() {
-					//字符串截取
-					var name = $(this).attr('name').substr(5);
-					if (name != "password") {
-						$('input[name="user.' + name + '"]').val(xhr_data[name]);
-					}
-				});
-			}, 'json');
-		},
-		buttons : {
-			deleteUser : {
-				btnClass : 'btn-blue',
-				text : '修改',
-				action : function() {
-					$.post('/teacherms/System/system_modifyUserInfo', $('#user_setting').serialize(), function(xhr_data) {
-						if (xhr_data.result.length > 1) {
-							$('.userName_info').text(xhr_data.result);
-							toastr.success("修改成功");
-						} else {
-							toastr.error("修改失败");
-						}
-					}, 'json');
-				}
-			},
-			cancelAction : {
-				btnClass : 'btn-default',
-				text : '取消',
-			}
-		}
-	});
-}
-
 //js默认执行
 $(function() {
+	//全局属性
+	var parent_div = null;
+	var a_href = null;
+	//方法声明------------------------------start
+	//方法加载，让方法开始加载，以便调用
+	//信息导出按钮事件绑定
+	var export_info = function() {
+		//显示确认导出按钮
+		parent_div.find('.sure_export').show();
+		//给每行的tr给与点击事件，通过点击tr来让checkbox选中
+		var tr = parent_div.find('#info_table tbody tr');
+		tr.each(function() {
+			$(this).find("td:first").empty().append('<input name="check" type="checkbox">');
+		});
+		tr.on("click", function() {
+			var check_attr = $(this).find('td input[name="check"]').is(":checked");
+			if (check_attr == false) {
+				$(this).find('td input[name="check"]').attr("checked", "true");
+			} else {
+				$(this).find('td input[name="check"]').removeAttr("checked");
+			}
+		});
+	}
+	//(用户信息)修改信息
+	var modiUserInfo = function() {
+		//获取id、
+		var id = $(this).siblings('input').val();
+		//查询单条用户的信息
+		$.post("/teacherms/Admin/admin_getTeacherTableInfoById",
+			{
+				tableId : id,
+				tableName : data.tableName
+			}, function(xhr) {
+				$("#info_modal .modal-body").find("input,select").each(function() {
+					var na = $(this).attr('name').split(".")[1];
+					if (na == "userId") {
+						$(this).val(xhr.user.userId);
+					} else if ($(this).attr('name') == "userName") {
+						$(this).val(xhr.user.userName);
+					}
+					else $(this).val(xhr.object[na]);
+				})
+				//等全部信息加载完毕，再将模态框显示出来，避免模态框出现但是对应的值还未加载情况
+				//如果为用户信息，则只显示基础部分（当前为用户管理页面）
+				$('#info_modal .basic').show();
+				$('#info_modal .other').show();
+				//显示出模态框
+				$('#info_modal').modal({
+					keyboard : true
+				});
+			}, "json");
+	}
+
+	//查看信息(不包含用户信息)
+	var viewInfo = function() {
+		//获取id
+		var id = $(this).siblings('input').val();
+		//查询单条信息
+		$.post("/teacherms/Admin/admin_getTeacherTableInfoById",
+			{
+				tableId : id,
+				tableName : data.tableName
+			}, function(xhr) {
+				//data.tableName中获取当前的表名称，进行判断对具体哪一个模态框进行操作
+				//modal_id_1，除去Teacher前部分，方便后部分操作
+				var modal_id_1 = data.tableName.replace("Teacher", "");
+				//modal_id，最终获取到的模态框id
+				var modal_id = modal_id_1.substring(0, 1).toLowerCase() + modal_id_1.substring(1) + "_modal";
+				$("#" + modal_id + " .modal-body").find("input,select").each(function() {
+					var na = $(this).attr("name").split(".")[1];
+					if (na == "userId") {
+						$(this).val(xhr.user.userId);
+					} else if (na == "userName") {
+						$(this).val(xhr.user.userName);
+					}
+					else $(this).val(xhr.object[na]);
+				})
+				$("#" + modal_id + " .review-info").hide();
+				//显示出模态框
+				$("#" + modal_id).modal({
+					keyboard : true
+				})
+			}, "json");
+	}
+
+	//解除固化
+	var relieveInfo = function() {
+		var infoid = $(this).siblings('input').val();
+		$(this).parent().empty().append('<img title="已解除固化"  src="img/ok1.png" />');
+		$.post('/teacherms/Admin/admin_LiftCuring', {
+			tableId : infoid,
+			tableName : data.tableName,
+			dataState : "10"
+		}, function(xhr) {
+			if (xhr.result == "success") {
+				toastr.success("信息解除固化成功!");
+			} else {
+				toastr.error("信息解除固化失败");
+			}
+		}, 'json')
+	}
+
+	//确定导出
+	var sure_export = function() {
+		parent_div.find('#info_table tbody tr').each(function() {
+			if (($(this).find(' input[name="check"]').is(':checked')) == true) {
+				data.export_id += $(this).find('input[type="hidden"]').val() + ',';
+			}
+		})
+		//通过a标签的链接属性，判断是哪一个导出模态框内的值
+		$('#export_' + a_href + ' .group-list button').each(function() {
+			if (($(this).children('i').hasClass('fa-check')) && $(this).attr('value') != undefined) {
+				data.export_name += $(this).val() + ',';
+			}
+		})
+		if (data.export_id != "" && data.export_name != "") {
+			//console.log("export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
+			window.open("/teacherms/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1)); 
+			//location.href = "/teacherms/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1);
+		} else {
+			toastr.error("未选择数据");
+		}
+		data.export_id = "";
+		data.export_name = "";
+		//移除点击事件
+		parent_div.find('#info_table tbody tr').unbind();
+		//确认导出按钮隐藏,this为当前被点击的元素
+		$(this).hide();
+		//将tr的第一个td返回显示为数字
+		parent_div.find('#info_table tbody tr').each(function(i, v) {
+			$(this).children('td:first-child').empty().html(i + 1);
+		})
+
+	}
+
+	var user_setting = function() {
+		var str = '<form id="user_setting" action="">' +
+			'<table style="width:100%;">' +
+			'<tbody>' +
+			'<tr>' +
+			'<td>工号</td>' +
+			'<td><input type="text"class="form-control" name="user.userId"/></td>' +
+			'</tr>' +
+			'<tr>' +
+			'<td>名字</td>' +
+			'<td><input type="text"class="form-control"name="user.userName"/></td>' +
+			'</tr>' +
+			'<tr>' +
+			'<td>密码</td>' +
+			'<td><input type="text"class="form-control"name="user.password"/></td>' +
+			'</tr>' +
+			'</tbody>' +
+			'</table>' +
+			'</form>'
+		$.confirm({
+			title : '帐号信息设置',
+			smoothContent : false,
+			content : str,
+			onContentReady : function() {
+				$.post('/teacherms/System/system_getAccountInformation', {}, function(xhr_data) {
+					$('#user_setting table input').each(function() {
+						//字符串截取
+						var name = $(this).attr('name').substr(5);
+						if (name != "password") {
+							$('input[name="user.' + name + '"]').val(xhr_data[name]);
+						}
+					});
+				}, 'json');
+			},
+			buttons : {
+				deleteUser : {
+					btnClass : 'btn-blue',
+					text : '修改',
+					action : function() {
+						$.post('/teacherms/System/system_modifyUserInfo', $('#user_setting').serialize(), function(xhr_data) {
+							if (xhr_data.result.length > 1) {
+								$('.userName_info').text(xhr_data.result);
+								toastr.success("修改成功");
+							} else {
+								toastr.error("修改失败");
+							}
+						}, 'json');
+					}
+				},
+				cancelAction : {
+					btnClass : 'btn-default',
+					text : '取消',
+				}
+			}
+		});
+	}
+
+	//页面加载开始，给与元素加载事件-----------------------end
+
+	//页面中只需要绑定一次事件的元素绑定事件区----start
 	$('.nav-tabs li a').click(function() {
 		//如果已经是点击状态，则点击不作为
 		if ($(this).parent('li').attr('class') == 'active') return;
+		//重置页码
+		data.page = 1;
+		//将所有的确认导出按钮隐藏
+		$('.sure_export').hide()
 		//除去链接属性中的#号
 		a_href = $(this).attr("href").substr(1);
 		//获取panel-body内和所点击的类别相对应的div父元素
@@ -311,7 +321,10 @@ $(function() {
 			}
 		}, "json")
 	});
+	//一次事件的元素绑定事件区----end
 
+
+	//方法声明----start
 	//查询方法
 	function doQuery() {
 		$.ajax({
@@ -323,6 +336,7 @@ $(function() {
 			dataType : "json",
 			success : function(xhr_data) {
 				$('#' + a_href).find('table tbody').html(getStr(xhr_data.ObjDatas));
+				//每次做查询之后，按钮需要重新绑定事件
 				$('.relieveButton').click(relieveInfo);
 				if (a_href == "info") {
 					$('.modiButton').click(modiUserInfo);
@@ -330,6 +344,7 @@ $(function() {
 				} else {
 					$('.viewButton').click(viewInfo);
 				}
+				//----end
 				//记录分页信息
 				setPageInfo(xhr_data);
 			},
@@ -439,4 +454,5 @@ $(function() {
 		}
 		return str;
 	}
+//方法声明----end
 })
