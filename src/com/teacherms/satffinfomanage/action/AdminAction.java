@@ -53,7 +53,7 @@ public class AdminAction extends ActionSupport {
 	private String tableId; // 查询表的ID
 	private String dataState; // 数据状态
 	private String fuzzy_query;// 模糊查询字段
-	
+
 	// 信息表
 	private TeacherAward teacherAward;
 	private TeacherInfo teacherInfo;
@@ -80,7 +80,7 @@ public class AdminAction extends ActionSupport {
 			getObjectByTableName(tableName);
 			System.out.println("" + obj.toString());
 			PageVO<Object> list = adminService.getSpecifiedInformationByPaging(tableName, page == null ? "1" : page,
-					time_interval, dataState, getSecondaryCollegeInfo("name"), obj,fuzzy_query);
+					time_interval, dataState, getSecondaryCollegeInfo("name"), obj, fuzzy_query);
 			System.out.println(new Gson().toJson(list));
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(list));
@@ -150,7 +150,7 @@ public class AdminAction extends ActionSupport {
 
 	// 导出信息excel表 用MAP集合
 	public void ExportExcelCollection() {
-		System.out.println(export_name+ tableName+ export_id);
+		System.out.println(export_name + tableName + export_id);
 		XSSFWorkbook workbook = adminService.getExcel(export_name, tableName, export_id);
 		OutputStream out = null;
 		try {
@@ -198,7 +198,7 @@ public class AdminAction extends ActionSupport {
 				propertiesName = "z_teacher_patent";
 				cla = TeacherPatent.class;
 			} else if (fileFileName.contains("项目")) {
-				propertiesName = "z_teacher_object";
+				propertiesName = "z_teacher_project";
 				cla = TeacherProject.class;
 			} else if (fileFileName.contains("著作")) {
 				propertiesName = "z_teacher_works";
@@ -398,5 +398,5 @@ public class AdminAction extends ActionSupport {
 	public void setFuzzy_query(String fuzzy_query) {
 		this.fuzzy_query = fuzzy_query;
 	}
-	
+
 }

@@ -45,7 +45,10 @@
 							</div>
 							<!--查询存放信息的表格-->
 							<section class="panel"> <header
-								class="panel-heading second-panel-heading"> 用户信息 </header>
+								class="panel-heading second-panel-heading"> 用户信息
+							<button style="display: none;float: right;"
+								class="btn btn-primary sure_export">确认导出</button>
+							</header>
 							<div class="panel-body table-responsive" id="panel-body">
 								<form id="info-form">
 									<table class="tab" id="info_table">
@@ -56,7 +59,9 @@
 										<tr>
 											<!-- name="teacherInfo." -->
 											<td>工号：</td>
-											<td><input name="teacherInfo.userId"
+											<td><input name="teacherInfo.teacherInfoId"
+												type="hidden"> <input
+												name="teacherInfo.userId"
 												class="form-control table_infomation" type="text"></td>
 											<td>姓名:</td>
 											<td><input name="teacherInfo.userName"
@@ -364,9 +369,9 @@
 									<button class="btn btn-default btn-addon btn-sm add-btn">
 										<i class="fa fa-plus"></i>添加
 									</button>
-									<button data-toggle="modal" data-target="#export_info"
+									<button data-toggle="modal" data-target="#export_award"
 										class="btn btn-default btn-addon btn-sm">
-										<i class="fa fa-share-square"></i>用户信息导出
+										<i class="fa fa-share-square"></i>奖励信息导出
 									</button>
 
 									<!--按条件筛选-->
@@ -420,7 +425,10 @@
 							</div>
 							<!--查询存放信息的表格-->
 							<section class="panel"> <header
-								class="panel-heading second-panel-heading"> 奖励信息 </header>
+								class="panel-heading second-panel-heading"> 奖励信息
+							<button style="display: none;float: right;"
+								class="btn btn-primary sure_export">确认导出</button>
+							</header>
 							<div class="panel-body table-responsive">
 								<table class="table table-hover" id="info_table">
 									<thead>
@@ -446,14 +454,14 @@
 						<div id="user_works_table_audit">
 							<!--表投上按钮组-->
 							<div class="box-tools m-b-15">
-							<div style="width: 100%;" class="input-group">
+								<div style="width: 100%;" class="input-group">
 									<!--筛选&查询&添加按钮位置-->
 									<button class="btn btn-default btn-addon btn-sm add-btn">
 										<i class="fa fa-plus"></i>添加
 									</button>
-									<button data-toggle="modal" data-target="#export_info"
+									<button data-toggle="modal" data-target="#export_works"
 										class="btn btn-default btn-addon btn-sm">
-										<i class="fa fa-share-square"></i>用户信息导出
+										<i class="fa fa-share-square"></i>著作信息导出
 									</button>
 									<!--按条件筛选-->
 									<button style="" class="btn btn-default btn-sm" type="button"
@@ -480,14 +488,14 @@
 												<label>指定条件搜索：</label> <select id="all_options"
 													class="all_options form-control ">
 													<option value="">请选择</option>
-											<option value="worksName">著作（专著）名称</option>
-											<option value="worksType">著作类别</option>
-											<option value="press">出版社</option>
-											<option value="isbn">ISBN</option>
-											<option value="publishTime">出版时间</option>
-											<option value="selectedSituation">入选情况</option>
-											<option value="selectedDate">入选时间</option>
-											<option value="editorUserNames">主编（作者）</option>
+													<option value="worksName">著作（专著）名称</option>
+													<option value="worksType">著作类别</option>
+													<option value="press">出版社</option>
+													<option value="isbn">ISBN</option>
+													<option value="publishTime">出版时间</option>
+													<option value="selectedSituation">入选情况</option>
+													<option value="selectedDate">入选时间</option>
+													<option value="editorUserNames">主编（作者）</option>
 												</select>
 
 												<button style="float: right; margin-left: 6px;"
@@ -505,11 +513,14 @@
 										</div>
 									</div>
 								</div>
-								
+
 							</div>
 							<!--查询存放信息的表格-->
 							<section class="panel"> <header
-								class="panel-heading second-panel-heading"> 著作信息 </header>
+								class="panel-heading second-panel-heading"> 著作信息
+							<button style="display: none;float: right;"
+								class="btn btn-primary sure_export">确认导出</button>
+							</header>
 							<div class="panel-body table-responsive">
 								<table class="table table-hover" id="info_table">
 									<thead>
@@ -535,14 +546,14 @@
 						<div id="user_paper_table_audit">
 							<!--表投上按钮组-->
 							<div class="box-tools m-b-15">
-							<div style="width: 100%;" class="input-group">
+								<div style="width: 100%;" class="input-group">
 									<!--筛选&查询&添加按钮位置-->
 									<button class="btn btn-default btn-addon btn-sm add-btn">
 										<i class="fa fa-plus"></i>添加
 									</button>
-									<button data-toggle="modal" data-target="#export_info"
+									<button data-toggle="modal" data-target="#export_paper"
 										class="btn btn-default btn-addon btn-sm">
-										<i class="fa fa-share-square"></i>用户信息导出
+										<i class="fa fa-share-square"></i>论文信息导出
 									</button>
 
 									<!--按条件筛选-->
@@ -570,15 +581,15 @@
 												<label>指定条件搜索：</label> <select id="all_options"
 													class="all_options form-control ">
 													<option value="">请选择</option>
-											<option value="userName">姓名</option>
-											<option value="userId">工号</option>
-											<option value="paperName">论文名称</option>
-											<option value="paperType">论文类别</option>
-											<option value="periodical">发表期刊</option>
-											<option value="periodicalNo">期号</option>
-											<option value="includedSituation">收录情况</option>
-											<option value="totalCitations">他引次数</option>
-											<option value="wordsNum">成果字数</option>
+													<option value="userName">姓名</option>
+													<option value="userId">工号</option>
+													<option value="paperName">论文名称</option>
+													<option value="paperType">论文类别</option>
+													<option value="periodical">发表期刊</option>
+													<option value="periodicalNo">期号</option>
+													<option value="includedSituation">收录情况</option>
+													<option value="totalCitations">他引次数</option>
+													<option value="wordsNum">成果字数</option>
 												</select>
 
 												<button style="float: right; margin-left: 6px;"
@@ -599,7 +610,10 @@
 							</div>
 							<!--查询存放信息的表格-->
 							<section class="panel"> <header
-								class="panel-heading second-panel-heading"> 论文信息 </header>
+								class="panel-heading second-panel-heading"> 论文信息
+							<button style="display: none;float: right;"
+								class="btn btn-primary sure_export">确认导出</button>
+							</header>
 							<div class="panel-body table-responsive">
 								<table class="table table-hover" id="info_table">
 									<thead>
@@ -625,14 +639,14 @@
 						<div id="user_patent_table_audit">
 							<!--表投上按钮组-->
 							<div class="box-tools m-b-15">
-							<div style="width: 100%;" class="input-group">
+								<div style="width: 100%;" class="input-group">
 									<!--筛选&查询&添加按钮位置-->
 									<button class="btn btn-default btn-addon btn-sm add-btn">
 										<i class="fa fa-plus"></i>添加
 									</button>
-									<button data-toggle="modal" data-target="#export_info"
+									<button data-toggle="modal" data-target="#export_patent"
 										class="btn btn-default btn-addon btn-sm">
-										<i class="fa fa-share-square"></i>用户信息导出
+										<i class="fa fa-share-square"></i>专利信息导出
 									</button>
 
 									<!--按条件筛选-->
@@ -660,13 +674,13 @@
 												<label>指定条件搜索：</label> <select id="all_options"
 													class="all_options form-control ">
 													<option value="">请选择</option>
-											<option value="">请选择</option>
-											<option value="userName">姓名</option>
-											<option value="userId">工号</option>
-											<option value="patentName">专利名称</option>
-											<option value="patentType">专利类型</option>
-											<option value="authorizationNo">授权号</option>
-											<option value="approvedDate">获批时间</option>
+													<option value="">请选择</option>
+													<option value="userName">姓名</option>
+													<option value="userId">工号</option>
+													<option value="patentName">专利名称</option>
+													<option value="patentType">专利类型</option>
+													<option value="authorizationNo">授权号</option>
+													<option value="approvedDate">获批时间</option>
 												</select>
 
 												<button style="float: right; margin-left: 6px;"
@@ -687,7 +701,10 @@
 							</div>
 							<!--查询存放信息的表格-->
 							<section class="panel"> <header
-								class="panel-heading second-panel-heading"> 专利信息 </header>
+								class="panel-heading second-panel-heading"> 专利信息
+							<button style="display: none;float: right;"
+								class="btn btn-primary sure_export">确认导出</button>
+							</header>
 							<div class="panel-body table-responsive">
 								<table class="table table-hover" id="info_table">
 									<thead>
@@ -712,14 +729,14 @@
 						<div id="user_project_table_audit">
 							<!--表投上按钮组-->
 							<div class="box-tools m-b-15">
-							<div style="width: 100%;" class="input-group">
+								<div style="width: 100%;" class="input-group">
 									<!--筛选&查询&添加按钮位置-->
 									<button class="btn btn-default btn-addon btn-sm add-btn">
 										<i class="fa fa-plus"></i>添加
 									</button>
-									<button data-toggle="modal" data-target="#export_info"
+									<button data-toggle="modal" data-target="#export_project"
 										class="btn btn-default btn-addon btn-sm">
-										<i class="fa fa-share-square"></i>用户信息导出
+										<i class="fa fa-share-square"></i>课题信息导出
 									</button>
 
 									<!--按条件筛选-->
@@ -747,12 +764,12 @@
 												<label>指定条件搜索：</label> <select id="all_options"
 													class="all_options form-control ">
 													<option value="">请选择</option>
-											<option value="projectName">项目名称</option>
-											<option value="projectType">项目类型</option>
-											<option value="projectSource">项目来源</option>
-											<option value="projectUserNames">成员姓名</option>
-											<option value="approvalDate">立项时间</option>
-											<option value="endUpDate">结题验收时间</option>
+													<option value="projectName">项目名称</option>
+													<option value="projectType">项目类型</option>
+													<option value="projectSource">项目来源</option>
+													<option value="projectUserNames">成员姓名</option>
+													<option value="approvalDate">立项时间</option>
+													<option value="endUpDate">结题验收时间</option>
 												</select>
 
 												<button style="float: right; margin-left: 6px;"
@@ -773,7 +790,10 @@
 							</div>
 							<!--查询存放信息的表格-->
 							<section class="panel"> <header
-								class="panel-heading second-panel-heading"> 课题(项目)信息 </header>
+								class="panel-heading second-panel-heading"> 课题(项目)信息
+							<button style="display: none;float: right;"
+								class="btn btn-primary sure_export">确认导出</button>
+							</header>
 							<div class="panel-body table-responsive">
 								<table class="table table-hover" id="info_table">
 									<thead>

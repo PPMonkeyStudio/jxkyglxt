@@ -23,9 +23,11 @@ public interface TeacherService {
 	 * @param page
 	 *            页码
 	 * @param time_interval
+	 * @param fuzzy_query 模糊查询
+	 * @param obj 指定查询
 	 * @return 查询结果封装到PageVO<Object[]>中
 	 */
-	PageVO<Object> getTableInfoInPaging(String userid, String tableName, String page, String time_interval);
+	PageVO<Object> getTableInfoInPaging(String userid, String tableName, String page, String time_interval, Object obj, String fuzzy_query);
 
 	/**
 	 * ---用户通过信息ID获取单条信息

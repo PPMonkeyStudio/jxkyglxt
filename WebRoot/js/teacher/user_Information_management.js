@@ -45,7 +45,7 @@ $(function() {
 						}, function(xhr_data) {
 							if (xhr_data.result == "success") {
 								toastr.success("提交成功");
-								user_selectAllAward();
+								doQuery();
 							} else {
 								toastr.error("提交失败");
 							}
@@ -62,6 +62,8 @@ $(function() {
 	var export_info = function() {
 		//显示确认导出按钮
 		parent_div.find('.sure_export').show();
+		//如果为用户导出则不执行给tr点击事件
+		if (a_href == "info") return;
 		//给每行的tr给与点击事件，通过点击tr来让checkbox选中
 		var tr = parent_div.find('#info_table tbody tr');
 		tr.each(function() {
@@ -120,20 +122,28 @@ $(function() {
 
 	//确定导出
 	var sure_export = function() {
-		parent_div.find('#info_table tbody tr').each(function() {
-			if (($(this).find(' input[name="check"]').is(':checked')) == true) {
-				data.export_id += $(this).find('input[type="hidden"]').val() + ',';
-			}
-		})
+		/**
+		 * 用户界面的用户信息导出为单条信息导出（只需一条记录的id），和管理员的批量导出有所不同
+		 */
+		if (a_href == "info") {
+			data.export_id = $('input[name="teacherInfo.teacherInfoId"]').val() + ",";
+		} else {
+			parent_div.find('#info_table tbody tr').each(function() {
+				if (($(this).find(' input[name="check"]').is(':checked')) == true) {
+					data.export_id += $(this).find('input[type="hidden"]').val() + ',';
+				}
+			})
+		}
 		//通过a标签的链接属性，判断是哪一个导出模态框内的值
 		$('#export_' + a_href + ' .group-list button').each(function() {
 			if (($(this).children('i').hasClass('fa-check')) && $(this).attr('value') != undefined) {
 				data.export_name += $(this).val() + ',';
 			}
 		})
+
 		if (data.export_id != "" && data.export_name != "") {
-			//console.log("export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
-			location.href = "/teacherms/Teacher/teacher_userExportExcelCollection?tableName=TeacherInfo&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1);
+			console.log("export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
+			location.href = "/teacherms/Teacher/teacher_userExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1);
 		} else {
 			toastr.error("未选择数据");
 		}
@@ -143,6 +153,8 @@ $(function() {
 		parent_div.find('#info_table tbody tr').unbind();
 		//确认导出按钮隐藏,this为当前被点击的元素
 		$(this).hide();
+		//如果为用户导出，则不需要回显为数字
+		if (a_href == "info") return;
 		//将tr的第一个td返回显示为数字
 		parent_div.find('#info_table tbody tr').each(function(i, v) {
 			$(this).children('td:first-child').empty().html(i + 1);
@@ -244,13 +256,55 @@ $(function() {
 	//添加按钮点击事件
 	$('.add-btn').click(add_info);
 	//确认添加按钮点击事件
-	$('.sure_add').click(sure_add);
+	//$('.sure_add').click(sure_add);（通过匿名方法添加）
 	//导出按钮点击事件
 	$('.export_button').click(export_info);
 	//确认导出按钮点击事件
 	$('.sure_export').click(sure_export);
-	//指定查询(search_info---指定查询。为全局方法)
-	$('.search_info').click(search_info);
+	//指定查询
+	$('.search_info').click(function() {
+		var this_object = $(this);
+		if (this_object.text().trim() == "确认搜索") {
+			var name = '';
+			var value = '';
+			this_object.siblings('#search_input').find('div').each(function() {
+				name = data.tableName.replace("Teacher", "teacher") + '.' + $(this).attr('id').replace("Inputu", "");
+				var val_arr = [];
+				$(this).find('input').each(function() {
+					val_arr.push($(this).val());
+				});
+				//value = $(this).find('input').val();
+				//将搜索的内容放入js的数据中
+				data[name] = val_arr.join(",");
+			});
+			doQuery();
+		} else if (this_object.text().trim() == "清空搜索") {
+			$.confirm({
+				title : '确定清空?',
+				smoothContent : false,
+				content : false,
+				autoClose : 'cancelAction|10000',
+				buttons : {
+					deleteUser : {
+						btnClass : 'btn-danger',
+						text : '确定',
+						action : function() {
+							this_object.siblings('#search_input').empty();
+							$.each(data, function(k, v) {
+								if (k.indexOf('teacher') > -1) {
+									data[k] = "";
+								}
+							})
+						}
+					},
+					cancelAction : {
+						btnClass : 'btn-blue',
+						text : '取消',
+					}
+				}
+			});
+		}
+	});
 	//模糊查询
 	$('.fuzzy_query').click(function() {
 		data.fuzzy_query = $(this).parent().prev().val();
@@ -289,7 +343,9 @@ $(function() {
 				var na = $(this).attr("name").split(".")[1];
 				$(this).val(xhr[0][na]);
 			});
-			$('input[name="teacherInfo.userName"]').val();
+			//设置用户名
+			$('input[name="teacherInfo.userName"]').val($('.userName_info').text());
+
 			return;
 			break;
 		case 'award':

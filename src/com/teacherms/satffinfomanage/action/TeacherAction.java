@@ -61,6 +61,7 @@ public class TeacherAction extends ActionSupport {
 	private String tableName;// 查询的表名
 	private String tableId; // 查询表的ID
 	private String dataState; // 数据状态
+	private String fuzzy_query;// 模糊查询字段
 
 	// 用户名字
 	private String username;
@@ -73,6 +74,7 @@ public class TeacherAction extends ActionSupport {
 	private TeacherProject teacherProject;
 	private TeacherWorks teacherWorks;
 	private User user;
+	private Object obj;
 
 	public TeacherAction() {
 		sessionuser = (User) ActionContext.getContext().getSession().get("user");
@@ -81,12 +83,32 @@ public class TeacherAction extends ActionSupport {
 	// 教职工分页获取指定的信息
 	public void userGetTableInfoInPaging() {
 		try {
+			// 给Object对象赋值
+			getObjectByTableName(tableName);
 			PageVO<Object> listAdmin = teacherService.getTableInfoInPaging(sessionuser.getUserId(), tableName,
-					page == null ? "1" : page, time_interval);
+					page == null ? "1" : page, time_interval,obj,fuzzy_query);
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(listAdmin));
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	// 通过tablename来判断给信息对象赋值
+	private void getObjectByTableName(String tableName) {
+		if (("TeacherAward").equals(tableName)) {
+			obj = teacherAward;
+		} else if (("TeacherInfo").equals(tableName)) {
+			obj = teacherInfo;
+		} else if (("TeacherPaper").equals(tableName)) {
+			obj = teacherPaper;
+		} else if (("TeacherPatent").equals(tableName)) {
+			obj = teacherPatent;
+		} else if (("TeacherProject").equals(tableName)) {
+			obj = teacherProject;
+		} else if (("TeacherWorks").equals(tableName)) {
+			obj = teacherWorks;
+		} else {
+			return;
 		}
 	}
 
@@ -385,6 +407,10 @@ public class TeacherAction extends ActionSupport {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public void setFuzzy_query(String fuzzy_query) {
+		this.fuzzy_query = fuzzy_query;
 	}
 
 }

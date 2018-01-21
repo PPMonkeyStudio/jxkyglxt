@@ -261,7 +261,7 @@ $(function() {
 	$('.export_button').click(export_info);
 	//确认导出按钮点击事件
 	$('.sure_export').click(sure_export);
-	//指定查询(search_info---指定查询。为全局方法)
+	//指定查询()
 	$('.search_info').click(function() {
 		var this_object = $(this);
 		if (this_object.text().trim() == "确认搜索") {

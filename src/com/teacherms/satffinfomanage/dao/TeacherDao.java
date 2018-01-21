@@ -1,5 +1,6 @@
 package com.teacherms.satffinfomanage.dao;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.teacherms.all.domain.TeacherInfo;
@@ -9,7 +10,7 @@ import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 public interface TeacherDao {
 
 	List<Object> getTableInfo(String time_interval, String tableName, String tableUserIds, String userid, int i,
-			int toindex);
+			int toindex, String obj_query, String fuzzy_query);
 
 	Long getCountInOnetable(String userid, String tableUserIds, String tableName);
 
