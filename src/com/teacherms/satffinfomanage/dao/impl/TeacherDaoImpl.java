@@ -25,9 +25,9 @@ public class TeacherDaoImpl implements TeacherDao {
 
 	@Override
 	public List<Object> getTableInfo(String time_interval, String tableName, String tableUserIds, String userid,
-			int begin, int toindex) {
+			int begin, int toindex, String multi_condition, String fuzzy) {
 		String hql = "select t from " + tableName + " t,User u where t." + tableUserIds + " like '%" + userid
-				+ "%' and u.userId =" + userid + time_interval + " order by t.createTime asc";
+				+ "%' and u.userId =" + userid + multi_condition + fuzzy + time_interval + " order by t.createTime asc";
 		System.out.println(hql);
 		return getSession().createQuery(hql).setFirstResult(begin).setMaxResults(toindex).list();
 	}
@@ -58,6 +58,7 @@ public class TeacherDaoImpl implements TeacherDao {
 	@Override
 	public List<Object> export_getAInfomationByTableId(String tableName, String tableInfoIdName, String query_id) {
 		String hql = "from " + tableName + " where " + tableInfoIdName + " in (" + query_id + ")";
+		System.out.println(hql);
 		return getSession().createQuery(hql).list();
 	}
 

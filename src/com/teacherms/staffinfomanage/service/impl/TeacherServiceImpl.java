@@ -49,7 +49,8 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public PageVO<Object> getTableInfoInPaging(String userid, String tableName, String page, String time_interval) {
+	public PageVO<Object> getTableInfoInPaging(String userid, String tableName, String page, String time_interval,
+			Object obj, String fuzzy_query) {
 		// 依据不同的tableName获取实体化类不同的UserId进行模糊查询
 		String tableUserIds = null;
 		switch (tableName) {
@@ -87,6 +88,48 @@ public class TeacherServiceImpl implements TeacherService {
 			time_interval = "and t.createTime between '" + time_interval.split(",")[0] + "' and '"
 					+ time_interval.split(",")[1] + "'";
 		}
+
+		// 条件查询块----------------
+		boolean haveMulti_condition = false;// 是否包含指定查询的内容,用来判断是否执行模糊查询
+		StringBuffer Multi_condition = new StringBuffer();// 指定查询中的字符串
+		StringBuffer fuzzy = new StringBuffer();// 模糊查询字符串
+		fuzzy.append(" and (");// （模糊查询中or与and混合使用）or使用前先添加and
+		String field_value = "";// 属性中的值
+		String field_name = "";// 属性名字
+		// 多条件查询
+		try {
+			Field[] fields = obj.getClass().getDeclaredFields();
+			for (Field field : fields) {
+				field.setAccessible(true);
+				field_name = field.getName();
+				field_value = (String) field.get(obj);
+				// 模糊查询
+				fuzzy.append(" or t." + field_name + " like '%" + fuzzy_query + "%'");
+				// 属性值为空则跳过本次循环
+				if ("".equals(field_value) || null == field_value) {
+					continue;
+				}
+				// 判断是否为时间区间
+				if (field_name.contains("Date")) {
+					Multi_condition.append(" and t." + field_name + " between " + field_value.split(",")[0] + " and "
+							+ field_value.split(",")[1]);
+				} else {
+					Multi_condition.append(" and t." + field_name + "='" + field_value + "'");
+				}
+				if (!haveMulti_condition) {
+					haveMulti_condition = true;
+				}
+			}
+			// 模糊查询用户名称
+			fuzzy.append("or u.userName like '%" + fuzzy_query + "%')");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// 最后判断如果fuzzy_query为空或是null，则不做模糊查询
+		if (null == fuzzy_query || "".equals(fuzzy_query)) {
+			haveMulti_condition = true;
+		}
+
 		// 限制page页数，避免过大或者过小
 		if (pageIndex > totalSize / pageSize) {
 			if (totalSize % pageSize > 0) {
@@ -105,7 +148,8 @@ public class TeacherServiceImpl implements TeacherService {
 		List<Object> list = new ArrayList<Object>();
 		// 获取信息表中的信息
 		list.addAll(teacherDao.getTableInfo(time_interval, tableName, tableUserIds, userid, (pageIndex - 1) * pageSize,
-				toindex));
+				toindex, Multi_condition.toString(),
+				haveMulti_condition ? "" : fuzzy.toString().replaceFirst(" or", "")));
 		// 设置VO内参数页码，每页记录数，总记录数
 		PageVO<Object> pageVO = new PageVO<Object>(pageIndex, pageSize, totalSize);
 		pageVO.setObjDatas(list);
@@ -128,6 +172,9 @@ public class TeacherServiceImpl implements TeacherService {
 		 * 3.MapUtil.java2Map(list_all):将list_all中的对象全部用MapUtil封装到List<Map<String,String>>中
 		 * 返回一个execl表
 		 */
+		for (Object l : list_all) {
+			System.out.println(l);
+		}
 		XSSFWorkbook workbook = ExportExcelCollection.exportExcel(query_name, ExcelHead.getExcelHeadArray(tableName),
 				MapUtil.java2Map(list_all, query_name));
 		return workbook;
