@@ -14,7 +14,8 @@ public interface AdminDao {
 	 *            指定的状态
 	 * @return 对象list集合
 	 */
-	List<Object> getAllStatusInfo(String table, String time, String status, String collegeName);
+	List<Object> getAllStatusInfo(String table, String time, String status, String collegeName, String multi_condition,
+			String fuzzy);
 
 	/**
 	 * ---通过ID获取用户信息
@@ -90,5 +91,13 @@ public interface AdminDao {
 	 * @return
 	 */
 	List<Object> export_getAInfomationByTableId(String tableName, String tableInfoIdName, String query_id);
+
+	/**
+	 * 通过用户名称获取用户ID
+	 * 
+	 * @param name
+	 *            用户名称
+	 */
+	List<String> getUserIdByUserName(String name);
 
 }

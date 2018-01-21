@@ -37,7 +37,7 @@ import util.PageVO;
 public class AdminAction extends ActionSupport {
 	private AdminService adminService;
 
-	// 导出 
+	// 导出
 	private String export_name;// 导出execl表的属性条件,逗号隔开
 	private String export_id;// 导出execl表的ID字段条件,逗号隔开
 
@@ -52,7 +52,8 @@ public class AdminAction extends ActionSupport {
 	private String tableName;// 查询的表名
 	private String tableId; // 查询表的ID
 	private String dataState; // 数据状态
-
+	private String fuzzy_query;// 模糊查询字段
+	
 	// 信息表
 	private TeacherAward teacherAward;
 	private TeacherInfo teacherInfo;
@@ -61,6 +62,7 @@ public class AdminAction extends ActionSupport {
 	private TeacherProject teacherProject;
 	private TeacherWorks teacherWorks;
 	private User user;
+	private Object obj;
 
 	public String test() {
 		System.out.println("yes");
@@ -74,8 +76,11 @@ public class AdminAction extends ActionSupport {
 	// 分页查询获取指定---未审核or固化---信息（给指定参数）并进行时间排序（属于自己学院的信息）
 	public void getSpecifiedInformationByPaging() {
 		try {
+			// 给Object对象赋值
+			getObjectByTableName(tableName);
+			System.out.println("" + obj.toString());
 			PageVO<Object> list = adminService.getSpecifiedInformationByPaging(tableName, page == null ? "1" : page,
-					time_interval, dataState, getSecondaryCollegeInfo("name"));
+					time_interval, dataState, getSecondaryCollegeInfo("name"), obj,fuzzy_query);
 			System.out.println(new Gson().toJson(list));
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(list));
@@ -110,23 +115,9 @@ public class AdminAction extends ActionSupport {
 	// 管理员修改信息状态+修改信息内容
 	public void modifiedInfomation() {
 		try {
-			Object obj = null;
-			if (("TeacherAward").equals(tableName)) {
-				obj = teacherAward;
-			} else if (("TeacherInfo").equals(tableName)) {
-				obj = teacherInfo;
-			} else if (("TeacherPaper").equals(tableName)) {
-				obj = teacherPaper;
-			} else if (("TeacherPatent").equals(tableName)) {
-				obj = teacherPatent;
-			} else if (("TeacherProject").equals(tableName)) {
-				obj = teacherProject;
-			} else if (("TeacherWorks").equals(tableName)) {
-				obj = teacherWorks;
-			} else {
-				return;
-			}
-			System.out.println(obj.toString());
+			// 给Object对象赋值
+			getObjectByTableName(tableName);
+
 			String result = adminService.curingInfomation(obj);
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
@@ -146,8 +137,20 @@ public class AdminAction extends ActionSupport {
 		}
 	}
 
+	// 管理员获取输入用户名字，获取用户的id排名
+	public void getUserIdOrderingByUserName() {
+		try {
+			String result = adminService.getUserIdOrderingByUserName(user.getUserName());
+			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
+			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	// 导出信息excel表 用MAP集合
 	public void ExportExcelCollection() {
+		System.out.println(export_name+ tableName+ export_id);
 		XSSFWorkbook workbook = adminService.getExcel(export_name, tableName, export_id);
 		OutputStream out = null;
 		try {
@@ -218,6 +221,25 @@ public class AdminAction extends ActionSupport {
 		User user = (User) ActionContext.getContext().getSession().get("user");
 		return adminService.getDepartmentNameByDepartmentId(user.getDepartmentId(), what);
 
+	}
+
+	// 通过tablename来判断给信息对象赋值
+	private void getObjectByTableName(String tableName) {
+		if (("TeacherAward").equals(tableName)) {
+			obj = teacherAward;
+		} else if (("TeacherInfo").equals(tableName)) {
+			obj = teacherInfo;
+		} else if (("TeacherPaper").equals(tableName)) {
+			obj = teacherPaper;
+		} else if (("TeacherPatent").equals(tableName)) {
+			obj = teacherPatent;
+		} else if (("TeacherProject").equals(tableName)) {
+			obj = teacherProject;
+		} else if (("TeacherWorks").equals(tableName)) {
+			obj = teacherWorks;
+		} else {
+			return;
+		}
 	}
 
 	/*
@@ -373,4 +395,8 @@ public class AdminAction extends ActionSupport {
 		this.export_id = export_id;
 	}
 
+	public void setFuzzy_query(String fuzzy_query) {
+		this.fuzzy_query = fuzzy_query;
+	}
+	
 }

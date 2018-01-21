@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <body>
-	<div class="modal fade" id="add_user_modal" tabindex="-1" role="dialog"
+	<div class="modal fade" id="add_info_modal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class=" modal-dialog modal_lg">
 			<form id="info_form">
@@ -15,14 +16,11 @@
 						<div id="main_body">
 							<table class="tab">
 								<tbody>
-				<tr  class="title"></tr>
 									<tr>
 										<td>工号：</td>
 										<td><input name="teacherInfo.userId"
 											class="form-control table_infomation" type="text"></td>
 									</tr>
-								</tbody>
-								
 								</tbody>
 								<tbody class="other">
 									<tr>
@@ -88,7 +86,6 @@
 												<option>否</option>
 												<option>是</option>
 										</select></td>
-
 									</tr>
 									<tr>
 										<td>行政职务级别：</td>
@@ -162,7 +159,6 @@
 												<option>其他（减少）</option>
 												<option>自然减员</option>
 										</select></td>
-
 									</tr>
 									<tr>
 										<td>高校调入：</td>
@@ -177,7 +173,6 @@
 												<option>否</option>
 												<option>是</option>
 										</select></td>
-
 									</tr>
 									<tr>
 										<td>本校调整：</td>
@@ -195,16 +190,15 @@
 												<option>其他</option>
 										</select></td>
 									</tr>
-									
 								</tbody>
 							</table>
 						</div>
 					</div>
 					<div class="modal-footer">
+						<button type="button" class="btn btn-danger sure_add_info"
+							data-dismiss="modal">确认添加</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 						<input name="teacherInfo.teacherInfoId" id="tableid" type="hidden" />
-						<button type="button" class="btn btn-danger review-info"
-							data-dismiss="modal">确认添加</button>
 					</div>
 				</div>
 			</form>

@@ -25,27 +25,26 @@
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <!-- font Awesome -->
 <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<!-- 提示框css -->
+<link rel="stylesheet" href="<%=basePath%>css/toastr.css" />
 
-<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="<%=basePath%>css/style.css" />
 
-<link rel="stylesheet" href="css/top_left.css" />
-<link rel="stylesheet" href="css/jquery-confirm.css" />
+<link rel="stylesheet" href="<%=basePath%>css/top_left.css" />
 
-<jsp:include page="/modal/addInfo/award_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/addInfo/info_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/addInfo/paper_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/addInfo/works_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/addInfo/project_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/addInfo/patent_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/addInfo/user_info_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/addInfo/user_add.html" flush="true"></jsp:include>
+<link rel="stylesheet" href="<%=basePath%>css/jquery-confirm.css" />
 
-<jsp:include page="/modal/exportInfo/info_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/exportInfo/award_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/exportInfo/paper_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/exportInfo/patent_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/exportInfo/project_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/exportInfo/works_modal.html" flush="true"></jsp:include>
+<link rel="stylesheet" href="<%=basePath%>css/need/laydate.css" />
+
+<script type="text/javascript" src="<%=basePath%>js/jquery-3.1.1.min.js"></script>
+
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="<%=basePath%>js/app.js"></script>
+
+<script type="text/javascript" src="<%=basePath%>js/jquery-confirm.js"></script>
+
+<script type="text/javascript" src="<%=basePath%>js/laydate.js"></script>
 </head>
 
 <body class="skin-black">
@@ -90,9 +89,9 @@
 			<!--用户信息------------------------------>
 			<!-- User Account: style can be found in dropdown.less -->
 			<li class="dropdown user user-menu"><a class="dropdown-toggle"
-				data-toggle="dropdown"> <i class="fa fa-user"></i> <span>Admin
-						<i class="caret"></i>
-				</span>
+				data-toggle="dropdown"> <i class="fa fa-user"></i> <span
+					class="userName_info"><s:property
+							value="#session.user.userName" /> <i class="caret"></i> </span>
 			</a>
 				<ul class="dropdown-menu dropdown-custom dropdown-menu-right">
 					<li class="dropdown-header text-center">Account</li>
@@ -100,13 +99,20 @@
 							class="badge badge-success pull-right">10</span> 更新首页信息
 					</a></li>
 					<li class="divider"></li>
-					<li><a href="javascript:import_to_database()"> <i class="fa fa-magnet fa-fw pull-right"
-							aria-hidden="true"></i> 导入信息
-					</a> <a data-toggle="modal" href="#modal-user-settings"> <i
+					<li>
+						<!-- 判断是否为管理员 --> <s:if test="#session.role=='院系管理员'">
+							<a href="javascript:import_to_database()"> <i
+								class="fa fa-magnet fa-fw pull-right" aria-hidden="true"></i>
+								导入信息
+							</a>
+						</s:if> <!-- end --> <a href="javascript:user_setting()"> <i
 							class="fa fa-cog fa-fw pull-right"></i> 修改信息
-					</a></li>
+					</a>
+					</li>
 					<li class="divider"></li>
-					<li><a  href="javascript:loginout()"><i class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li>
+					<li><a
+						href="javascript:location.href = '/teacherms/System/system_exit'"><i
+							class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li>
 				</ul></li>
 		</ul>
 	</div>
@@ -120,7 +126,10 @@
 				<img src="img/login.jpg" class="img-circle" alt="User Image" />
 			</div>
 			<div class="pull-left info">
-				<p>Hello, Admin</p>
+				<p>
+					Hello,
+					<s:property value="#session.user.userName" />
+				</p>
 
 				<a><i class="fa fa-circle text-success"></i> Online</a>
 			</div>
@@ -170,10 +179,6 @@
 				<!--breadcrumbs start -->
 				<ul class="breadcrumb">
 					<li><a><i class="fa fa-home"></i> 首页</a></li>
-					<!--<li>
-									<a >Dashboard</a>
-								</li>-->
-					<!--<li class="active">信息查看</li>-->
 				</ul>
 				<!--breadcrumbs end -->
 			</div>
@@ -183,9 +188,5 @@
 	</div>
 	<!-- ./wrapper -->
 	<!-- Director App -->
-	
-	<script src="js/app.js" type="text/javascript"></script>
-	<script src="js/main_index.js" type="text/javascript"></script>
-	<script src="js/jquery-confirm.js" type="text/javascript"></script>
 </body>
 </html>

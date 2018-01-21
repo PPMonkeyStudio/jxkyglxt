@@ -1,5 +1,4 @@
-function userPatent(){
-	$('.table tbody').empty();
+function user_selectAllPatent(){
 	$.ajax({
 		url : "/teacherms/Teacher/teacher_userGetTableInfoInPaging",
 		type : "post",
@@ -27,10 +26,13 @@ function userPatent(){
 			  
 			    str+="</tr>";   
 			}
-			$('.table').children('tbody').append(str);
+			$('.table').children('tbody').html(str);
 		},
 		error : function() {}
 	});
+}
+function userPatent(){
+	user_selectAllPatent();
 	$('.export_button').unbind().on('click',function(){
 		$('#export_patent').modal({
 			keyboard : true
@@ -42,7 +44,7 @@ function userPatent(){
 		$('.second-panel-heading').append('<button class="btn btn-primary end-button">确认导出</button>');
 		$('#info_table tbody tr').each(function(){
 			 $(this).find("td:first").empty().append('<input name="check" type="checkbox">');
-			 $(this).on("click",function(){
+			 $(this).unbind().on("click",function(){
 				var check_attr= $(this).find('td input[name="check"]').is(":checked");
 				if(check_attr==false){
 					$(this).find('td input[name="check"]').attr("checked","true");
@@ -58,7 +60,7 @@ function userPatent(){
 				data.export_id+=$(this).find('input[type="hidden"]').val()+',';
 				}
 			})
-			$('#export_award .group-list li input[name="checkbox"]').each(function(){
+			$('#export_patent .group-list li input[name="checkbox"]').each(function(){
 				if(($(this).is(':checked'))==true){
 					data.export_name+=$(this).val()+',';
 				}
@@ -96,6 +98,17 @@ function userPatent(){
 				},"json");
 		$(".review-info").remove();
 	})
+	function getIdByName(){
+		$('input[name="teacherPatent.authorUserNames"]').keyup(function(){
+			if($(this).val()==""){
+				return;
+			}
+			$.post('/teacherms/Teacher/teacher_getUserIdOrderingByUserName',{"user.userName":$(this).val()},function(xhr){
+			   $('input[name="teacherPatent.authorUserIds"]').val(xhr.result);
+			},'json')
+		})
+	}
+	
 	/*添加*/
 	$('.add-btn').unbind().click(function(){
 		$('#patent_modal').modal({
@@ -103,6 +116,7 @@ function userPatent(){
 		});
 		$('.btn-danger').remove();
 		imgUpload();
+		getIdByName();
 		$(' #patent_modal input').val("");
 		$(' #patent_modal .modal-footer .close-btn').before('<button type="button" class="btn btn-danger add-end-btn ">添加</button>')
 	formValidate();

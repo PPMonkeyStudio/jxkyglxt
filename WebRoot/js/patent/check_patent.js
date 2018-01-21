@@ -1,6 +1,4 @@
-function checkPatent(){
-	//清楚原来的数据
-	$('.table tbody').empty();
+function check_selectAllPatent(){
 	$.ajax({
 		url : "/teacherms/Admin/admin_getSpecifiedInformationByPaging",
 		type : "post",
@@ -21,16 +19,14 @@ function checkPatent(){
 			    str += '<td><input type="hidden" value="' + xhr[i][0].patentId  + '" ><button class="btn btn-default btn-xs relieveButton" title="解除固化"><i class="fa fa-chain-broken fa-lg"></i></button><button class="btn btn-default btn-xs viewButton" title="查看"><i class="fa fa-search-plus fa-lg"  aria-hidden="true"></i></button></td>';
 			    str+="</tr>";   
 			}
-			$('.table').children('tbody').append(str);
+			$('.table').children('tbody').html(str);
+			$('.relieveButton').click(PatentrelieveInfo);
 		},
 		error : function() {}
 	});
-	$(document).on("click",".relieveButton",function(){
-		data.dataState="20"
-		$(this).children().remove();
-		$(this).append("<img  src='img/ok1.png' />");
-		$(this).attr("title","已解除固化");
-	});
+}
+function checkPatent(){
+	check_selectAllPatent();
 	$(".viewButton").unbind().on("click",function(){
 		//显示出模态框
 		$('#patent_modal').modal({
@@ -80,3 +76,25 @@ function checkPatent(){
 		$('.end-button').unbind().remove();
 	});
 }
+
+/*解除固化*/
+var PatentrelieveInfo=function(){
+	   var infoid=$(this).siblings('input').val();
+	   $(this).children().remove();
+		$(this).append("<img  src='img/ok1.png' />");
+		$(this).attr("title","已解除固化");
+	   $.post('/teacherms/Admin/admin_LiftCuring',{
+		   tableId:infoid,
+		   tableName:"TeacherPatent",
+		   dataState:"10"},function(xhr){
+			   if(xhr.result=="success"){
+				   toastr.success("信息解除固化成功");
+			   }else{
+				  return;
+			   }
+	   },'json')
+}
+
+
+
+

@@ -3,6 +3,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
+
 public class PageVO<T> {
 
 	// 需要显示的页码
@@ -51,9 +53,9 @@ public class PageVO<T> {
 
 	@Override
 	public String toString() {
-		return "PageVo [pageIndex=" + pageIndex + ", totalPages=" + totalPages + ", pageSize=" + pageSize
-				+ ", totalRecords=" + totalRecords + ", isHavePrePage=" + HavePrePage + ", isHaveNextPage="
-				+ HaveNextPage + "]";
+		return "PageVO [pageIndex=" + pageIndex + ", totalRecords=" + totalRecords + ", pageSize=" + pageSize
+				+ ", totalPages=" + totalPages + ", HavePrePage=" + HavePrePage + ", HaveNextPage=" + HaveNextPage
+				+ ", ObjDatas=" + new Gson().toJson(ObjDatas) + "]";
 	}
 
 	public int getPageIndex() {

@@ -1,5 +1,5 @@
-function userWorks(){
-	$('.table tbody').empty();
+/*获取全部信息*/
+function user_selectAllWorks(){
 	$.ajax({
 		url : "/teacherms/Teacher/teacher_userGetTableInfoInPaging",
 		type : "post",
@@ -16,8 +16,8 @@ function userWorks(){
 			    str+="<td>"+(i+1)+"</td>";
 			    str+="<td>"+xhr[i].worksName+"</td>";
 			    str+="<td>"+xhr[i].editorUserNames+"</td>";
-			    str+="<td>"+xhr[i].worksType+"</td>";
-			    str+="<td>"+xhr[i].selectedSituation+"</td>";
+			    str+="<td>"+xhr[i].isbn+"</td>";
+			    str+="<td>"+xhr[i].publishTime+"</td>";
 			    str+="<td>"+xhr[i].press+"</td>"; 
 			    if(dataStatus=="10"){
 				    str += '<td><input type="hidden" value="' + xhr[i].worksId  + '" ><button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button><button class="btn btn-default btn-xs commmit-btn" title="提交审核"><i class="fa fa-sign-out fa-lg"  aria-hidden="true"></i></button></td>';		
@@ -28,10 +28,13 @@ function userWorks(){
 			    
 			    str+="</tr>";   
 			}
-			$('.table').children('tbody').append(str);
+			$('.table').children('tbody').html(str);
 		},
 		error : function() {}
 	});
+}
+function userWorks(){
+	user_selectAllWorks();
 	$('.export_button').unbind().on('click',function(){
 		$('#export_works').modal({
 			keyboard : true
@@ -41,7 +44,7 @@ function userWorks(){
 		$('.second-panel-heading').append('<button class="btn btn-primary end-button">确认导出</button>');
 		$('#info_table tbody tr').each(function(){
 			 $(this).find("td:first").empty().append('<input name="check" type="checkbox">');
-			 $(this).on("click",function(){
+			 $(this).unbind().on("click",function(){
 				var check_attr= $(this).find('td input[name="check"]').is(":checked");
 				if(check_attr==false){
 					$(this).find('td input[name="check"]').attr("checked","true");
@@ -57,7 +60,7 @@ function userWorks(){
 				data.export_id+=$(this).find('input[type="hidden"]').val()+',';
 				}
 			})
-			$('#export_award .group-list li input[name="checkbox"]').each(function(){
+			$('#export_works .group-list li input[name="checkbox"]').each(function(){
 				if(($(this).is(':checked'))==true){
 					data.export_name+=$(this).val()+',';
 				}
@@ -93,12 +96,29 @@ function userWorks(){
 				},"json");
 		$(".review-info").remove();
 	})
+	function getIdByName(){
+	$('input[name="teacherWorks.editorUserNames"]').keyup(function(){
+		$.post('/teacherms/Teacher/teacher_getUserIdOrderingByUserName',{"user.userName":$(this).val()},function(xhr){
+			$('input[name="teacherWorks.editorUserIds"]').val(xhr.result);
+						},'json')
+			
+		});
+		$('input[name="teacherWorks.subEditorUserNames"]').keyup(function(){
+			$.post('/teacherms/Teacher/teacher_getUserIdOrderingByUserName',{"user.userName":$(this).val()},function(xhr){
+				$('input[name="teacherWorks.subEditorUserIds"]').val(xhr.result);
+							},'json')
+			
+		});
+		
+	}
+	
 	$('.add-btn').unbind().click(function(){
 		$('#works_modal').modal({
 			keyboard : true
 		});
 		$('.btn-danger').remove();
 		imgUpload();
+		getIdByName();
 		$(' #works_modal input').val("");
 		$(' #works_modal .modal-footer .close-btn').before('<button type="button" class="btn btn-danger add-end-btn">添加</button>')
 	formValidate();

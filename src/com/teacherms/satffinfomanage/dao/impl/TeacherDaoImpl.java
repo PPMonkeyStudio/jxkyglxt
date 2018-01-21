@@ -11,6 +11,7 @@ import com.teacherms.all.domain.User;
 import com.teacherms.satffinfomanage.dao.TeacherDao;
 import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 
+@SuppressWarnings("unchecked")
 public class TeacherDaoImpl implements TeacherDao {
 	private SessionFactory sessionFactory;
 
@@ -67,9 +68,11 @@ public class TeacherDaoImpl implements TeacherDao {
 	}
 
 	@Override
-	public Object getTeacherInfoByUserId(String userId) {
-		String hql = "from TeacherInfo where userId = '" + userId + "'";
-		return getSession().createQuery(hql).uniqueResult();
+	public TableInfoAndUserVo getTeacherInfoByUserId(String userId) {
+		String hql = "select new com.teacherms.satffinfomanage.vo.TableInfoAndUserVo(t,u) from TeacherInfo t,User u where t.userId=u.userId and t.userId = '"
+				+ userId + "'";
+		System.out.println(hql);
+		return (TableInfoAndUserVo) getSession().createQuery(hql).uniqueResult();
 	}
 
 	@Override
@@ -112,4 +115,9 @@ public class TeacherDaoImpl implements TeacherDao {
 		return "success";
 	}
 
+	@Override
+	public List<String> getUserIdByUserName(String name) {
+		String hql = "select u.userId from User u where u.userName like '%" + name + "%'";
+		return getSession().createQuery(hql).list();
+	}
 }

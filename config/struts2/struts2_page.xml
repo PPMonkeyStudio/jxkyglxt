@@ -9,26 +9,6 @@
 			<result name="page_index">/WEB-INF/views/index.jsp</result>
 			<result name="page_nav">/WEB-INF/views/top_left.jsp</result>
 
-			<result name="page_teacher_award">/WEB-INF/views/teacher_award.jsp</result>
-			<result name="page_teacher_works">/WEB-INF/views/teacher_works.jsp</result>
-			<result name="page_teacher_patent">/WEB-INF/views/teacher_patent.jsp</result>
-			<result name="page_teacher_info">/WEB-INF/views/teacher_info.jsp</result>
-			<result name="page_teacher_project">/WEB-INF/views/teacher_project.jsp</result>
-			<result name="page_teacher_paper">/WEB-INF/views/teacher_paper.jsp</result>
-
-			<result name="page_exam_award">/WEB-INF/views/exam_award.jsp</result>
-			<result name="page_exam_works">/WEB-INF/views/exam_works.jsp</result>
-			<result name="page_exam_patent">/WEB-INF/views/exam_patent.jsp</result>
-			<result name="page_exam_user">/WEB-INF/views/exam_user.jsp</result>
-			<result name="page_exam_project">/WEB-INF/views/exam_project.jsp</result>
-			<result name="page_exam_paper">/WEB-INF/views/exam_paper.jsp</result>
-
-			<result name="page_user_award">/WEB-INF/views/user/user_award.jsp</result>
-			<result name="page_user_works">/WEB-INF/views/user/user_works.jsp</result>
-			<result name="page_user_patent">/WEB-INF/views/user/user_patent.jsp</result>
-			<result name="page_user_info">/WEB-INF/views/user/user_info.jsp</result>
-			<result name="page_user_project">/WEB-INF/views/user/user_project.jsp</result>
-			<result name="page_user_paper">/WEB-INF/views/user/user_paper.jsp</result>
 		</action>
 	</package>
 </struts>

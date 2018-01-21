@@ -1,7 +1,4 @@
-
-function examInfo(){
-	//清楚原来的数据
-	$('.table tbody').empty();
+function exam_selectAllInfo(){
 	$.ajax({
 		url : "/teacherms/Admin/admin_getSpecifiedInformationByPaging",
 		type : "post",
@@ -24,10 +21,14 @@ function examInfo(){
 			    str+='<td><input type="hidden" value="' + xhr[i][0].teacherInfoId + '" ><button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button><button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button></td>';
 			   str+="</tr>";   
 			}
-			$('.table').children('tbody').append(str);
+			$('.table').children('tbody').html(str);
+			$('.solidButton').click(UsersolidInfo);	
 		},
 		error : function() {}
 	});
+}
+function examInfo(){
+	exam_selectAllInfo();
 	$(".modiButton").unbind().on("click",function(){
 		//显示出模态框
 		$('#info_modal').modal({
@@ -47,15 +48,24 @@ function examInfo(){
 					  })
 				},"json");
 	})
-	$(".solidButton").on("click",function(){
-		var id = $(this).siblings().val();
-		data.dataState="40"
-			$(this).siblings().remove();
-			$(this).children().remove();
-		$(this).append("<img  src='img/ok1.png' />")
-		$(this).attr("title","已固化");
-	})
-	
 }
-
+/*信息固化*/
+var UsersolidInfo=function(){
+   var infoid=$(this).siblings('input').val();
+   $(this).siblings().remove();
+   $(this).children().remove();
+   $(this).append("<img  src='img/ok1.png' />")
+   $(this).attr("title","已固化");
+   $.post('/teacherms/Admin/admin_LiftCuring',{
+	   tableId:infoid,
+	   tableName:"TeacherInfo",
+	   dataState:"40"},function(xhr){
+		   if(xhr.result=="success"){
+			   toastr.success("信息固化成功");
+		   }else{
+			 return;
+		   }
+   },'json')
+   
+}
 

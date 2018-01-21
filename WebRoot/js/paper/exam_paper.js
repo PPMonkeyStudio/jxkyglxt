@@ -1,6 +1,4 @@
-function examPaper(){
-	//清楚原来的数据
-	$('.table tbody').empty();
+function exam_selectAllPaper(){
 	$.ajax({
 		url : "/teacherms/Admin/admin_getSpecifiedInformationByPaging",
 		type : "post",
@@ -16,16 +14,20 @@ function examPaper(){
 			    str+="<td>"+(i+1)+"</td>";
 			    str+="<td>"+xhr[i][0].paperName+"</td>";
 			    str+="<td>"+xhr[i][0].authorUserNames+"</td>";
-			    str+="<td>"+xhr[i][0].paperType+"</td>";
-			    str+="<td>"+xhr[i][0].includedSituation+"</td>";
+			    str+="<td>"+xhr[i][0].periodical+"</td>";
+			    str+="<td>"+xhr[i][0].periodicalNo+"</td>";
 			    str+="<td>"+xhr[i][0].publishTime+"</td>"; 
 			    str+='<td><input type="hidden" value="' + xhr[i][0].paperId + '" ><button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button><button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button></td>';
 			   str+="</tr>";   
 			}
-			$('.table').children('tbody').append(str);
+			$('.table').children('tbody').html(str);
+			$('.solidButton').click(PapersolidInfo);	
 		},
 		error : function() {}
 	});
+}
+function examPaper(){
+	exam_selectAllPaper();
 	$(".modiButton").unbind().on("click",function(){
 		//显示出模态框
 		$('#paper_modal').modal({
@@ -45,17 +47,22 @@ function examPaper(){
 					  })
 				},"json");
 	})
-	$(".solidButton").on("click",function(){
-		var id = $(this).siblings().val();
-		data.dataState="40"
-			$(this).children().remove();
-		$(this).append("<img  src='img/ok1.png' />")
-	})
-		$(".solidButton").on("click",function(){
-		var id = $(this).siblings().val();
-		data.dataState="40"
-			$(this).siblings().remove();
-			$(this).children().remove();
-		$(this).append("<img  src='img/ok1.png' />")
-	})
+}
+/*信息固化*/
+var PapersolidInfo=function(){
+   var infoid=$(this).siblings('input').val();
+   $(this).siblings().remove();
+   $(this).children().remove();
+   $(this).append("<img  src='img/ok1.png' />")
+     $.post('/teacherms/Admin/admin_LiftCuring',{
+	   tableId:infoid,
+	   tableName:"TeacherPaper",
+	   dataState:"40"},function(xhr){
+		   if(xhr.result=="success"){
+			   toastr.success("信息固化成功");
+		   }else{
+			   return;
+		   }
+   },'json')
+   
 }

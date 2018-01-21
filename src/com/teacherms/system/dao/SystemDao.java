@@ -23,4 +23,13 @@ public interface SystemDao {
 	 */
 	Role getUserRoleByRoleId(String roleId);
 
+	/**
+	 * 更新用户信息
+	 * 
+	 * @param loging_user
+	 *            更新后的用户对象
+	 * @return
+	 */
+	User updateUser(User loging_user);
+
 }

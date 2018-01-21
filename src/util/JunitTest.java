@@ -46,8 +46,10 @@ public class JunitTest {
 
 	@Test
 	public void test11() {
-		PageVO<Object> list = adminService.getSpecifiedInformationByPaging("TeacherAward", "1", "", "20", "信息与计算机工程学院");
-		System.out.println(new Gson().toJson(list));
+		// PageVO<Object> list =
+		// adminService.getSpecifiedInformationByPaging("TeacherAward", "1", "",
+		// "20", "信息与计算机工程学院");
+		// System.out.println(new Gson().toJson(list));
 	}
 
 	@Test
@@ -59,8 +61,8 @@ public class JunitTest {
 
 	@Test
 	public void test_export() {
-		XSSFWorkbook workbook = adminService.getExcel("1,2,3,6,7,8,9,14,15", "TeacherAward",
-				"86902b8f-6f7f-4c39-9970-b126e2a2ff5b,88e32f69-8508-4648-b98d-acb1c859cd31");
+		XSSFWorkbook workbook = adminService.getExcel("1,2,3,6,7,8,9,14,15", "TeacherInfo",
+				"649674ef-66c8-4ec1-9eb6-60761e95a708,6fd38307-40af-4e7c-8042-e6d542e56755");
 		try {
 			FileOutputStream out = new FileOutputStream("E:/Attachment/张三/TeacherAward/test.xlsx");
 			workbook.write(out);
@@ -72,9 +74,25 @@ public class JunitTest {
 	}
 
 	@Test
+	public void getIdByName() {
+		System.out.println(adminService.getUserIdOrderingByUserName("罗晓娟,lu"));
+	}
+
+	@Test
+	public void getQueryInfo() {
+		PageVO<Object> pageVO = adminService.getSpecifiedInformationByPaging("TeacherInfo", "1", "", "40", "信息与计算机工程学院",
+				new TeacherInfo(null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+						null, null, null, null, "2000/1,2017/1", null, null, null, null, null, null, null, null, null,
+						null, null, null, null, null, null, null, null, null, null, null, null, null, null, null),
+				null);
+		System.out.println(pageVO.toString());
+	}
+
+	/*---------------------------------------------------------------------------*/
+	@Test
 	public void test_teacher_export() {
 		XSSFWorkbook workbook = teacherService.getExcel("1,2,3,6,7,8,9,14,15", "TeacherAward",
-				"86902b8f-6f7f-4c39-9970-b126e2a2ff5b,88e32f69-8508-4648-b98d-acb1c859cd31");
+				"8aa24038-0f98-49ff-bd91-d74cc18bbc81,8b82b969-b5c9-4741-bb9f-736ed2dfbc50");
 		try {
 			FileOutputStream out = new FileOutputStream("E:/Attachment/张三/TeacherAward/teacher.xlsx");
 			workbook.write(out);
@@ -83,6 +101,11 @@ public class JunitTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Test
+	public void test_userGetTeacherInfo() {
+		System.out.println(teacherService.userGetTeacherInfo("23010003"));
 	}
 
 	@Test
@@ -118,13 +141,11 @@ public class JunitTest {
 				"f2046bac-f4b9-4629-b35b-78f94010cb8d");
 	}
 
-	/*@Test
-	public void getBase64() {
-		List<String> info = teacherService.getImage("张三", "TeacherAward", "0c52c25a-b844-4e6d-9b33-576e8938c611");
-		for (String str : info) {
-			System.out.println(str.length());
-			System.out.println();
-		}
-	}*/
+	/*
+	 * @Test public void getBase64() { List<String> info =
+	 * teacherService.getImage("张三", "TeacherAward",
+	 * "0c52c25a-b844-4e6d-9b33-576e8938c611"); for (String str : info) {
+	 * System.out.println(str.length()); System.out.println(); } }
+	 */
 
 }

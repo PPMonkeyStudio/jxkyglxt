@@ -19,15 +19,22 @@
 
 .input_div {
 	display: inline-block !important;
-	width: 210px;
+	width: 190px;
 	
+}
+.dateinput_div{
+	display: inline-block !important;
+	width: 340px;
 }
 
 .input_div input {
 	width: 150px !important;
 	height: 32px;
 }
-
+.dateinput_div input {
+	width: 150px !important;
+	height: 32px;
+}
 .After_div {
 	display: inline-block !important;
 }
