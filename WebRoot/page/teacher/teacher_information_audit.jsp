@@ -153,7 +153,7 @@
 													<option value="">请选择</option>
 													<option value="awardType">获奖类型</option>
 													<option value="awardName">获奖名称</option>
-													<option value="awardPeoname">获奖人姓名</option>
+													<option value="awardUserNames">获奖人姓名</option>
 													<option value="awardGrade">获奖等级</option>
 													<option value="awardLevel">获奖级别</option>
 													<option value="awardTime">获奖时间</option>
@@ -232,12 +232,12 @@
 													<option value="">请选择</option>
 													<option value="worksName">著作（专著）名称</option>
 													<option value="worksType">著作类别</option>
-													<option value="worksPress">出版社</option>
-													<option value="worksISBN">ISBN</option>
-													<option value="workspressTime">出版时间</option>
-													<option value="worksResult">入选情况</option>
-													<option value="worksDate">入选时间</option>
-													<option value="worksAuthority">主编（作者）</option>
+													<option value="press">出版社</option>
+													<option value="isbn">ISBN</option>
+													<option value="publishTime">出版时间</option>
+													<option value="selectedSituation">入选情况</option>
+													<option value="selectedDate">入选时间</option>
+													<option value="editorUserNames">主编（作者）</option>
 												</select>
 												<button style="float: right; margin-left: 6px;"
 													class="btn btn-danger search_info">
@@ -428,6 +428,7 @@
 											<th>作者</th>
 											<th>专利类型</th>
 											<th>授权号</th>
+											<th>获批日期</th>
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -504,6 +505,7 @@
 											<th>课题(项目)名称</th>
 											<th>成员姓名</th>
 											<th>项目来源</th>
+											<th>项目类别</th>
 											<th>立项编号或批准文号</th>
 											<th>操作</th>
 										</tr>

@@ -45,7 +45,8 @@ $(function() {
 				//等全部信息加载完毕，再将模态框显示出来，避免模态框出现但是对应的值还未加载情况
 				//如果为用户信息，则只显示基础部分（当前为用户管理页面）
 				$('#info_modal .basic').show();
-				$('#info_modal .other').show();
+				$('#info_modal .other').hide();
+				$('.sure_mod').show();
 				//显示出模态框
 				$('#info_modal').modal({
 					keyboard : true
@@ -338,12 +339,8 @@ $(function() {
 				$('#' + a_href).find('table tbody').html(getStr(xhr_data.ObjDatas));
 				//每次做查询之后，按钮需要重新绑定事件
 				$('.relieveButton').click(relieveInfo);
-				if (a_href == "info") {
 					$('.modiButton').click(modiUserInfo);
-					$('.setButton').click(user_setting);
-				} else {
 					$('.viewButton').click(viewInfo);
-				}
 				//----end
 				//记录分页信息
 				setPageInfo(xhr_data);
@@ -371,7 +368,6 @@ $(function() {
 				str += '<td><input type="hidden" value="' + xhr[i][0].teacherInfoId + '" >'
 					+ '<button class="btn btn-default btn-xs  relieveButton" title="解除固化"><i class="fa fa-chain-broken fa-lg"></i></button>'
 					+ '<button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg" ></i></button>'
-					+ '<button class="btn btn-default btn-xs setButton" title="设置"><i class="fa fa-cog fa-lg" ></i></button>'
 					+ '</td></tr>';
 			}
 			break;
@@ -428,6 +424,7 @@ $(function() {
 				str += "<td>" + xhr[i][0].authorUserNames + "</td>";
 				str += "<td>" + xhr[i][0].patentType + "</td>";
 				str += "<td>" + xhr[i][0].authorizationNo + "</td>";
+				str += "<td>" + xhr[i][0].approvedDate + "</td>";
 				str += '<td><input type="hidden" value="' + xhr[i][0].patentId + '" >'
 					+ '<button class="btn btn-default btn-xs relieveButton" title="解除固化"><i class="fa fa-chain-broken fa-lg"></i></button>'
 					+ '<button class="btn btn-default btn-xs viewButton" title="查看"><i class="fa fa-search-plus fa-lg"  aria-hidden="true"></i></button>'
@@ -441,6 +438,7 @@ $(function() {
 				str += "<td>" + xhr[i][0].projectName + "</td>";
 				str += "<td>" + xhr[i][0].projectUserNames + "</td>";
 				str += "<td>" + xhr[i][0].projectSource + "</td>";
+				str += "<td>" + xhr[i][0].projectType + "</td>";
 				str += "<td>" + xhr[i][0].projectNo + "</td>";
 				str += '<td><input type="hidden" value="' + xhr[i][0].projectId + '" >'
 					+ '<button class="btn btn-default btn-xs relieveButton" title="解除固化"><i class="fa fa-chain-broken fa-lg"></i></button>'

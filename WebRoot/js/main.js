@@ -43,7 +43,7 @@ function selectSeacher() {
 			pla = '请输入获奖名称';
 			break;
 		case 'awardUserNames':
-			pla = '请输入获奖者姓名';
+			pla = '请输入获奖人姓名';
 			break;
 		case 'awardGrade':
 			pla = '请输入获奖等级';
@@ -60,7 +60,7 @@ function selectSeacher() {
 		case 'worksType':
 			pla = '请输入著作类别';
 			break;
-		case 'Press':
+		case 'press':
 			pla = '请输入出版社';
 			break;
 		case 'isbn':
@@ -136,7 +136,7 @@ function selectSeacher() {
 			return;
 		} else {
 			var con = $(this).val();
-			if (con.indexOf("Date") >= 0) {
+			if ((con.indexOf("Date")) >= 0||(con.indexOf("Time")) >= 0) {
 				$(".all_options").siblings('#search_input').append('<div id="main_body">' + '<div id="Inputu' + $(this).val() + '" class="dateinput_div form-group">' +
 					'<input type="text"  placeholder="' + pla + '搜索起始时间" class="form-control  laydate-icon"  onfocus="time()"/>' +
 					'<input type="text"  placeholder="' + pla + '搜索结束时间" class="form-control  laydate-icon" onfocus="time()"/>' +
@@ -146,7 +146,8 @@ function selectSeacher() {
 					data[data.tableName.replace("T", "t") + "." + $(this).parent().val()] = "";
 					$(this).parent().remove();
 				});
-			} else {
+			} 
+			else {
 				$(".all_options").siblings('#search_input').append('<div id="Inputu' + $(this).val() + '" class="input_div form-group">' +
 					'<input type="text"  placeholder="' + pla + '" class="form-control"/>' +
 					'<button class="btn btn-primary"><i class="fa fa-times" aria-hidden="true"></i></button></div>')

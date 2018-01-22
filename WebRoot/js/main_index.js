@@ -67,6 +67,8 @@ var pageDataInformation = {
 $(function() {
 	$('.right-side').load('index_info.jsp #content');
 	$('.sidebar-menu .nav li a').click(function() {
+		//条件筛选清空
+		$('#search_input').empty();
 		//重置页码
 		data.page = 1;
 		$(this).addClass("Atfer_li");

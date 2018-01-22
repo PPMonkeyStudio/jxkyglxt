@@ -80,7 +80,7 @@ tbody {
 .title td {
 	position: relative;
 	left: -3%;
-	top: -10px;
+	top: -20px;
 	background: #fff;
 	padding: 0 20px;
 	font-size: 18px;
@@ -161,7 +161,7 @@ padding:0;
 #info_ul li {
 	width: 25%;
 	height: 180px;
-	float: left;
+	float: left; 
 }
 
 #info_ul ul li {

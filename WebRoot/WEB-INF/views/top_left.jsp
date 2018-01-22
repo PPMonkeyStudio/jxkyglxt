@@ -157,8 +157,11 @@
 						<ul class="nav">
 							<li><a class="">信息审核</a></li>
 							<li><a class="">信息管理</a></li>
+							<li ><a onclick="user_setting(user_setting)" class=" setButton" >重置密码</a>
+					</li>
 						</ul>
 					</div></li>
+					
 			</ul>
 		</s:if> <s:if test="#session.role=='教职工'">
 			<ul class="sidebar-menu">

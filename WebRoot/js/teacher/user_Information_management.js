@@ -341,8 +341,21 @@ $(function() {
 		case 'info':
 			parent_div.find('#info_table select,input').each(function() {
 				var na = $(this).attr("name").split(".")[1];
+				var dataStatus = xhr[0].dataStatus;
 				$(this).val(xhr[0][na]);
+				if (dataStatus == "10") {
+					parent_div.find('.commmit-btn').unbind().show();
+				}
+				else if (dataStatus == "20"||dataStatus == "30") {
+					parent_div.find('.commmit-btn').html("信息审核中");
+					parent_div.find('.commmit-btn').unbind().show();
+					parent_div.find('.commmit-btn').attr("disabled","true");
+				}
+				else if (dataStatus == "40") {
+					$(this).attr("disabled","disabled")
+				}
 			});
+			
 			//设置用户名
 			$('input[name="teacherInfo.userName"]').val($('.userName_info').text());
 
@@ -414,6 +427,7 @@ $(function() {
 				str += "<td>" + xhr[i].authorUserNames + "</td>";
 				str += "<td>" + xhr[i].patentType + "</td>";
 				str += "<td>" + xhr[i].authorizationNo + "</td>";
+				str += "<td>" + xhr[i].approvedDate + "</td>";
 				if (dataStatus == "10") {
 					str += '<td><input type="hidden" value="' + xhr[i].patentId + '" ><button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button><button class="btn btn-default btn-xs commmit-btn" title="提交审核"><i class="fa fa-sign-out fa-lg"  aria-hidden="true"></i></button></td>';
 				}
@@ -432,6 +446,7 @@ $(function() {
 				str += "<td>" + xhr[i].projectName + "</td>";
 				str += "<td>" + xhr[i].projectUserNames + "</td>";
 				str += "<td>" + xhr[i].projectSource + "</td>";
+				str += "<td>" + xhr[i].projectType + "</td>";
 				str += "<td>" + xhr[i].projectNo + "</td>";
 				if (dataStatus == "10") {
 					str += '<td><input type="hidden" value="' + xhr[i].projectId + '" ><button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button><button class="btn btn-default btn-xs commmit-btn" title="提交审核"><i class="fa fa-sign-out fa-lg"  aria-hidden="true"></i></button></td>';

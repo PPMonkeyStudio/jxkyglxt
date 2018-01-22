@@ -48,8 +48,10 @@
 								class="panel-heading second-panel-heading"> 用户信息
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
+								<button style="display: none;float: right;"
+								class="btn btn-danger commmit-btn">提交审核</button>
 							</header>
-							<div class="panel-body table-responsive" id="panel-body">
+							<div class="panel-body table-responsive user-info" id="panel-body">
 								<form id="info-form">
 									<table class="tab" id="info_table">
 										<tr></tr>
@@ -714,6 +716,7 @@
 											<th>作者</th>
 											<th>专利类型</th>
 											<th>授权号</th>
+											<th>获批日期</th>
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -802,6 +805,7 @@
 											<th>课题(项目)名称</th>
 											<th>成员姓名</th>
 											<th>项目来源</th>
+											<th>项目类别</th>
 											<th>立项编号或批准文号</th>
 											<th>操作</th>
 										</tr>
