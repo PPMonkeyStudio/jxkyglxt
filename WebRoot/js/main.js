@@ -138,8 +138,8 @@ function selectSeacher() {
 			var con = $(this).val();
 			if ((con.indexOf("Date")) >= 0||(con.indexOf("Time")) >= 0) {
 				$(".all_options").siblings('#search_input').append('<div id="main_body">' + '<div id="Inputu' + $(this).val() + '" class="dateinput_div form-group">' +
-					'<input type="text"  placeholder="' + pla + '搜索起始时间" class="form-control  laydate-icon"  onfocus="time()"/>' +
-					'<input type="text"  placeholder="' + pla + '搜索结束时间" class="form-control  laydate-icon" onfocus="time()"/>' +
+					'<input type="text"  placeholder="' + pla + '搜索起始时间" class="form-control  laydate-icon"  />' +
+					'<input type="text"  placeholder="' + pla + '搜索结束时间" class="form-control  laydate-icon" />' +
 					'<button class="btn btn-primary"><i class="fa fa-times" aria-hidden="true"></i></button></div></div>')
 				$('.dateinput_div button').click(function() {
 					//移除时候清空js中已存的数据
@@ -234,7 +234,7 @@ $(function() {
 	})
 })
 
-function time() {
+function time() {/*
 	!function() {
 		laydate.skin('danlan'); //切换皮肤，请查看skins下面皮肤库
 		laydate({
@@ -268,7 +268,10 @@ function time() {
 	};
 	laydate(start);
 	laydate(end);
-}
+
+		
+	
+*/}
 
 /*附件图片上传js*/
 function imgUpload() {

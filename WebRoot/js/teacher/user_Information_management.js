@@ -234,6 +234,45 @@ $(function() {
 				})
 			}, "json");
 	}
+	var time=function(){
+		!function() {
+			laydate.skin('danlan'); //切换皮肤，请查看skins下面皮肤库
+			laydate({
+				elem : '#main_body .laydate-icon'
+			}); //绑定元素
+		}();
+		//日期范围限制
+		var start = {
+			elem : '#start',
+			format : 'YYYY-MM-DD',
+			min : laydate.now(), //设定最小日期为当前日期
+			max : '2099-06-16', //最大日期
+			istime : true,
+			istoday : false,
+			choose : function(datas) {
+				end.min = datas; //开始日选好后，重置结束日的最小日期
+				end.start = datas //将结束日的初始值设定为开始日
+			}
+		};
+
+		var end = {
+			elem : '#end',
+			format : 'YYYY-MM-DD',
+			min : laydate.now(),
+			max : '2099-06-16',
+			istime : true,
+			istoday : false,
+			choose : function(datas) {
+				start.max = datas; //结束日选好后，充值开始日的最大日期
+			}
+		};
+		laydate(start);
+		laydate(end);
+
+			
+		
+
+	}
 
 	$('.nav-tabs li a').click(function() {
 		//如果已经是点击状态，则点击不作为
@@ -244,6 +283,8 @@ $(function() {
 		a_href = $(this).attr("href").substr(1);
 		//获取panel-body内和所点击的类别相对应的div父元素
 		parent_div = $('#' + a_href);
+		//条件筛选清空
+		parent_div.find('#search_info').empty();
 		//通过点击的a标签的链接属性，来给全局对象data.tableName赋值
 		data.tableName = "Teacher" + a_href.substring(0, 1).toUpperCase() + a_href.substring(1);
 		//执行查询操作
@@ -261,6 +302,8 @@ $(function() {
 	$('.export_button').click(export_info);
 	//确认导出按钮点击事件
 	$('.sure_export').click(sure_export);
+	//日期输入框点击事件
+	parent_div.find('#main_body .laydate-icon').click(time);
 	//指定查询
 	$('.search_info').click(function() {
 		var this_object = $(this);

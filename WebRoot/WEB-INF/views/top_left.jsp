@@ -35,6 +35,7 @@
 <link rel="stylesheet" href="<%=basePath%>css/jquery-confirm.css" />
 
 <link rel="stylesheet" href="<%=basePath%>css/need/laydate.css" />
+<%-- <link rel="stylesheet" href="<%=basePath%>css/calendar.css" /> --%>
 
 <script type="text/javascript" src="<%=basePath%>js/jquery-3.1.1.min.js"></script>
 
@@ -45,6 +46,8 @@
 <script type="text/javascript" src="<%=basePath%>js/jquery-confirm.js"></script>
 
 <script type="text/javascript" src="<%=basePath%>js/laydate.js"></script>
+
+<%-- <script type="text/javascript" src="<%=basePath%>js/calendar.js"></script> --%>
 </head>
 
 <body class="skin-black">
@@ -191,5 +194,17 @@
 	</div>
 	<!-- ./wrapper -->
 	<!-- Director App -->
+	<%-- <script type="text/javascript">
+	$(function(){
+		$('#cal').calendar({
+		    trigger: '.date',
+		    zIndex: 9999,
+			format: 'yyyy-mm-dd',
+		    onSelected: function (view, date, data) {
+		        console.log('event: onSelected')
+		    }
+		});
+	})
+	</script> --%>
 </body>
 </html>
