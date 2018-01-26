@@ -388,6 +388,7 @@ function getinfoByCardId() {
 
 function selectSeacher() {
 	$(document).on("change", "#all_options", function() {
+		var option = $(this).find('option:selected');
 		var pla = '';
 		switch ($(this).val()) {
 		case 'userName':
@@ -519,7 +520,7 @@ function selectSeacher() {
 		default:
 			break;
 		}
-		if ($("#Inputu" + $(this).val()).length >= 1 || pla == "") {
+		if (option.hasClass('true') || pla == "") {
 			console.log($("#Inputu" + $(this).val()))
 			return;
 		} else {
@@ -529,8 +530,9 @@ function selectSeacher() {
 					'<input type="text"  placeholder="' + pla + '搜索起始时间" class="form-control  riliDate"  />' +
 					'<input type="text"  placeholder="' + pla + '搜索结束时间" class="form-control  riliDate" />' +
 					'<button class="btn btn-primary"><i class="fa fa-times" aria-hidden="true"></i></button></div></div>')
-				
+				option.addClass('true');
 				$('.dateinput_div button').click(function() {
+					option.removeClass('true');
 					//移除时候清空js中已存的数据
 					data[data.tableName.replace("T", "t") + "." + $(this).parent().val()] = "";
 					$(this).parent().remove();
@@ -540,8 +542,9 @@ function selectSeacher() {
 				$(".all_options").siblings('#search_input').append('<div id="Inputu' + $(this).val() + '" class="input_div form-group">' +
 					'<input type="text"  placeholder="' + pla + '" class="form-control"/>' +
 					'<button class="btn btn-primary"><i class="fa fa-times" aria-hidden="true"></i></button></div>')
-
+				option.addClass('true');
 				$('.input_div button').click(function() {
+					option.removeClass('true');
 					//移除时候清空js中已存的数据
 					data[data.tableName.replace("T", "t") + "." + $(this).parent().val()] = "";
 					$(this).parent().remove();
