@@ -5,7 +5,7 @@ $(function() {
 	var a_href = null;
 	//方法声明------------------------------start
 	//方法加载，让方法开始加载，以便调用
-	//信息导出按钮事件绑定
+	//信息选择导出按钮事件绑定
 	var export_info = function() {
 		//显示确认导出按钮
 		parent_div.find('.sure_export').show();
@@ -24,6 +24,7 @@ $(function() {
 			}
 		});
 	}
+
 	//(用户信息)修改信息
 	var modiUserInfo = function() {
 		//获取id、
@@ -53,7 +54,7 @@ $(function() {
 					keyboard : true
 				});
 				$('#info_modal').find('.sure_mod').unbind().click(function() {
-					var review_data = $( "#info_modal form").serialize() + "&tableName=" + data.tableName;
+					var review_data = $("#info_modal form").serialize() + "&tableName=" + data.tableName;
 					$.post("/teacherms/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
 						if (sxh_data.result == "success") {
 							toastr.success("修改成功!");
@@ -129,22 +130,51 @@ $(function() {
 		})
 		if (data.export_id != "" && data.export_name != "") {
 			//console.log("export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
-			window.open("/teacherms/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1)); 
-			//location.href = "/teacherms/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1);
+			window.open("/teacherms/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
+		//location.href = "/teacherms/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1);
 		} else {
 			toastr.error("未选择数据");
+			return;
 		}
 		data.export_id = "";
 		data.export_name = "";
 		//移除点击事件
 		parent_div.find('#info_table tbody tr').unbind();
 		//确认导出按钮隐藏,this为当前被点击的元素
-		$(this).hide();
+		parent_div.find('.sure_export').hide();
+		parent_div.find('.all_sure_export').hide();
 		//将tr的第一个td返回显示为数字
 		parent_div.find('#info_table tbody tr').each(function(i, v) {
 			$(this).children('td:first-child').empty().html(i + 1);
 		})
+	}
 
+	//确定导出
+	var all_sure_export = function() {
+		//通过a标签的链接属性，判断是哪一个导出模态框内的值
+		$('#export_' + a_href + ' .group-list button').each(function() {
+			if (($(this).children('i').hasClass('fa-check')) && $(this).attr('value') != undefined) {
+				data.export_name += $(this).val() + ',';
+			}
+		})
+		if (data.export_name != "") {
+			window.open("/teacherms/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
+		//location.href = "/teacherms/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1);
+		} else {
+			toastr.error("未选择数据");
+			return;
+		}
+		data.export_id = "";
+		data.export_name = "";
+		//移除点击事件
+		parent_div.find('#info_table tbody tr').unbind();
+		//确认导出按钮隐藏,this为当前被点击的元素
+		parent_div.find('.sure_export').hide();
+		parent_div.find('.all_sure_export').hide();
+		//将tr的第一个td返回显示为数字
+		parent_div.find('#info_table tbody tr').each(function(i, v) {
+			$(this).children('td:first-child').empty().html(i + 1);
+		})
 	}
 
 	var user_setting = function() {
@@ -213,7 +243,9 @@ $(function() {
 		//重置页码
 		data.page = 1;
 		//将所有的确认导出按钮隐藏
-		$('.sure_export').hide()
+		$('.sure_export').hide();
+		//清空模糊查询内容
+		data.fuzzy_query = '';
 		//除去链接属性中的#号
 		a_href = $(this).attr("href").substr(1);
 		//获取panel-body内和所点击的类别相对应的div父元素
@@ -275,6 +307,8 @@ $(function() {
 	$('.export_button').click(export_info);
 	//确认导出按钮点击事件
 	$('.sure_export').click(sure_export);
+	//确认导出按钮点击事件
+	$('.all_sure_export').click(all_sure_export);
 	//指定查询()
 	$('.search_info').click(function() {
 		var this_object = $(this);
@@ -352,8 +386,8 @@ $(function() {
 				$('#' + a_href).find('table tbody').html(getStr(xhr_data.ObjDatas));
 				//每次做查询之后，按钮需要重新绑定事件
 				$('.relieveButton').click(relieveInfo);
-					$('.modiButton').click(modiUserInfo);
-					$('.viewButton').click(viewInfo);
+				$('.modiButton').click(modiUserInfo);
+				$('.viewButton').click(viewInfo);
 				//----end
 				//记录分页信息
 				setPageInfo(xhr_data);
