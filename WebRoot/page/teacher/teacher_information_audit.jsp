@@ -150,7 +150,6 @@
 												<label>指定条件搜索：</label> <select id="all_options"
 													class="all_options form-control ">
 													<option value="">请选择</option>
-													<option value="">请选择</option>
 													<option value="awardType">获奖类型</option>
 													<option value="awardName">获奖名称</option>
 													<option value="awardUserNames">获奖人姓名</option>

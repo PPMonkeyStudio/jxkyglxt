@@ -37,7 +37,7 @@ $(function() {
 				//显示出模态框
 				$("#" + modal_id).modal({
 					keyboard : true
-				})
+				});
 				$("#" + modal_id).find('.sure_mod').unbind().click(function() {
 					var review_data = $("#" + modal_id + " form").serialize() + "&tableName=" + data.tableName;
 					$.post("/teacherms/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
@@ -82,10 +82,10 @@ $(function() {
 		a_href = $(this).attr("href").substr(1);
 		//获取panel-body内和所点击的类别相对应的div父元素
 		parent_div = $('#' + a_href);
-		//条件筛选清空
-		parent_div.find('#search_info').empty();
 		//通过点击的a标签的链接属性，来给全局对象data.tableName赋值
 		data.tableName = "Teacher" + a_href.substring(0, 1).toUpperCase() + a_href.substring(1);
+		//条件筛选清空
+		parent_div.find("#search_input").empty();
 		//执行查询操作
 		doQuery();
 		//导出模态框初始化

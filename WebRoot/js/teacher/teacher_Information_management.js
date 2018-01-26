@@ -9,6 +9,7 @@ $(function() {
 	var export_info = function() {
 		//显示确认导出按钮
 		parent_div.find('.sure_export').show();
+		parent_div.find('.all_sure_export').show();
 		//给每行的tr给与点击事件，通过点击tr来让checkbox选中
 		var tr = parent_div.find('#info_table tbody tr');
 		tr.each(function() {
@@ -51,6 +52,16 @@ $(function() {
 				$('#info_modal').modal({
 					keyboard : true
 				});
+				$('#info_modal').find('.sure_mod').unbind().click(function() {
+					var review_data = $( "#info_modal form").serialize() + "&tableName=" + data.tableName;
+					$.post("/teacherms/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
+						if (sxh_data.result == "success") {
+							toastr.success("修改成功!");
+							$('#info_modal').modal('hide');
+							doQuery();
+						}
+					}, "json")
+				}).show();
 			}, "json");
 	}
 
@@ -207,6 +218,8 @@ $(function() {
 		a_href = $(this).attr("href").substr(1);
 		//获取panel-body内和所点击的类别相对应的div父元素
 		parent_div = $('#' + a_href);
+		//条件筛选清空
+		parent_div.find("#search_input").empty();
 		//通过点击的a标签的链接属性，来给全局对象data.tableName赋值
 		data.tableName = "Teacher" + a_href.substring(0, 1).toUpperCase() + a_href.substring(1);
 		//执行查询操作

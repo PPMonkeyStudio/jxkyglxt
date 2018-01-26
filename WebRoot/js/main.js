@@ -1,5 +1,6 @@
 
 function selectSeacher() {
+	/*$('#all_options').on("change",function(){})*/
 	$(document).on("change", "#all_options", function() {
 		var pla = '';
 		switch ($(this).val()) {
@@ -132,14 +133,15 @@ function selectSeacher() {
 		default:
 			break;
 		}
-		if ($("#Inputu" + $(this).val()).length > 0 || pla == "") {
+		if ($("#Inputu" + $(this).val()).length >= 1 || pla == "") {
+			console.log($("#Inputu" + $(this).val()))
 			return;
-		} else {
+		} else{
 			var con = $(this).val();
 			if ((con.indexOf("Date")) >= 0||(con.indexOf("Time")) >= 0) {
 				$(".all_options").siblings('#search_input').append('<div id="main_body">' + '<div id="Inputu' + $(this).val() + '" class="dateinput_div form-group">' +
-					'<input type="text"  placeholder="' + pla + '搜索起始时间" class="form-control  laydate-icon"  />' +
-					'<input type="text"  placeholder="' + pla + '搜索结束时间" class="form-control  laydate-icon" />' +
+					'<input type="text"  placeholder="' + pla + '搜索起始时间" class="form-control  riliDate"  />' +
+					'<input type="text"  placeholder="' + pla + '搜索结束时间" class="form-control  riliDate" />' +
 					'<button class="btn btn-primary"><i class="fa fa-times" aria-hidden="true"></i></button></div></div>')
 				$('.dateinput_div button').click(function() {
 					//移除时候清空js中已存的数据
@@ -151,13 +153,19 @@ function selectSeacher() {
 				$(".all_options").siblings('#search_input').append('<div id="Inputu' + $(this).val() + '" class="input_div form-group">' +
 					'<input type="text"  placeholder="' + pla + '" class="form-control"/>' +
 					'<button class="btn btn-primary"><i class="fa fa-times" aria-hidden="true"></i></button></div>')
-				$('.input_div button').click(function() {
+					$('.input_div button').click(function() {
 					//移除时候清空js中已存的数据
 					data[data.tableName.replace("T", "t") + "." + $(this).parent().val()] = "";
+					console.log($(this).parent());
 					$(this).parent().remove();
+					$(this).parent().empty();
+					console.log($(this).parent());
 				});
+				
 			}
 		}
+	
+	
 	})
 }
 /*模态框清空*/
@@ -196,6 +204,7 @@ $(function() {
 });
 
 /*  输入身份证号自动填入性别，出生日期     */
+
 $(function() {
 	$(document).on("blur", ".card_num", function() {
 		var reg = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/;
@@ -232,6 +241,8 @@ $(function() {
 			}
 		}
 	})
+	
+	
 })
 
 function time() {/*
