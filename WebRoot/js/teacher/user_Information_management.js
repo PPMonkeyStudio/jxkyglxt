@@ -1,30 +1,16 @@
 $(function() {
 	var parent_div = null;
 	var a_href = null;
+	var infoType = null;
+	var modal_id = null;
 
 	//信息添加
 	var add_info = function() {
-		//modal_id_1，除去Teacher前部分，方便后部分操作
-		var modal_id_1 = data.tableName.replace("Teacher", "");
-		//modal_id，最终获取到的模态框id
-		var modal_id = modal_id_1.substring(0, 1).toLowerCase() + modal_id_1.substring(1) + "_modal";
+		$("#" + modal_id).find('.sure_add').show();
 		$("#" + modal_id).modal({
 			keyboard : true
 		})
-		//附件上传
-		/*imgUpload();
-		 * 由Id写入姓名
-		getIdByName();*/
-		$("#" + modal_id).find('.sure_add').click(function() {
-			var review_data = $("#" + modal_id + " form").serialize() + "&tableName=" + data.tableName;
-			$.post("/teacherms/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
-				if (sxh_data.result == "success") {
-					toastr.success("添加成功!");
-					$("#" + modal_id).modal('hide');
-					doQuery();
-				}
-			}, "json")
-		}).show();
+
 	}
 	//提交审核
 	var commit_info = function() {
@@ -173,10 +159,7 @@ $(function() {
 				tableName : data.tableName
 			}, function(xhr) {
 				//data.tableName中获取当前的表名称，进行判断对具体哪一个模态框进行操作
-				//modal_id_1，除去Teacher前部分，方便后部分操作
-				var modal_id_1 = data.tableName.replace("Teacher", "");
-				//modal_id，最终获取到的模态框id
-				var modal_id = modal_id_1.substring(0, 1).toLowerCase() + modal_id_1.substring(1) + "_modal";
+				console.log($("#" + modal_id + " form"));
 				$("#" + modal_id + " form").find("input,select").each(function() {
 					var na = $(this).attr("name").split(".")[1];
 					if (na == "userId") {
@@ -186,6 +169,23 @@ $(function() {
 					}
 					else $(this).val(xhr.object[na]);
 				})
+				$.each(xhr.attachmentName, function(i, v) {
+					$.post('', '', '', '');
+					$("#" + modal_id + " .addInfo").before('<div class="img-default">' + '<div class="img">'
+						+ '<img src="/teacherms/System/system_Attachment?attachmentName=' + v + '!' + data.tableName + '" alt="" class="img-show">'
+						+ '</div>'
+						+ '<div class="info" onclick="javascript:$(this).prev().find(\'img\').click()">'
+						+ '<div class="img-control-btn modify-btn" title="编辑">'
+						+ '<img src="img/modi(5).png" />'
+						+ '</div>'
+						+ '<div class="img-control-btn delete-btn" title="删除">'
+						+ '<img src="img/delete(2).png" />'
+						+ '</div>'
+						+ '</div>'
+						+ '<input type="file" name="" onchange="modiFiles(this)" accept="image/gif, image/pdf, image/png, image/jpeg" style="display:none" >'
+						+ '</div>')
+				})
+
 				//确定修改按钮显示并添加绑定事件
 				$("#" + modal_id).find('.sure_mod').unbind().click(function() {
 					var review_data = $("#" + modal_id + " form").serialize() + "&tableName=" + data.tableName;
@@ -214,10 +214,6 @@ $(function() {
 				tableName : data.tableName
 			}, function(xhr) {
 				//data.tableName中获取当前的表名称，进行判断对具体哪一个模态框进行操作
-				//modal_id_1，除去Teacher前部分，方便后部分操作
-				var modal_id_1 = data.tableName.replace("Teacher", "");
-				//modal_id，最终获取到的模态框id
-				var modal_id = modal_id_1.substring(0, 1).toLowerCase() + modal_id_1.substring(1) + "_modal";
 				$("#" + modal_id + " .modal-body").find("input,select").each(function() {
 					var na = $(this).attr("name").split(".")[1];
 					if (na == "userId") {
@@ -227,13 +223,14 @@ $(function() {
 					}
 					else $(this).val(xhr.object[na]);
 				})
-				$("#" + modal_id + " .review-info").hide();
 				//显示出模态框
 				$("#" + modal_id).modal({
 					keyboard : true
 				})
 			}, "json");
 	}
+
+
 
 	$('.nav-tabs li a').click(function() {
 		//如果已经是点击状态，则点击不作为
@@ -248,6 +245,10 @@ $(function() {
 		parent_div.find("#search_input").empty();
 		//通过点击的a标签的链接属性，来给全局对象data.tableName赋值
 		data.tableName = "Teacher" + a_href.substring(0, 1).toUpperCase() + a_href.substring(1);
+		//infoType，除去Teacher前部分
+		infoType = data.tableName.replace("Teacher", "");
+		//modal_id，最终获取到的模态框id
+		modal_id = infoType.substring(0, 1).toLowerCase() + infoType.substring(1) + "_modal";
 		//执行查询操作
 		doQuery();
 		//导出模态框初始化
@@ -258,11 +259,46 @@ $(function() {
 	//添加按钮点击事件
 	$('.add-btn').click(add_info);
 	//确认添加按钮点击事件
-	//$('.sure_add').click(sure_add);（通过匿名方法添加）
+	$('.sure_add').click(function() {
+		var review_data = $("#" + modal_id + " form").serialize() + "&tableName=" + data.tableName;
+		$.post("/teacherms/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
+			if (sxh_data.result == "success") {
+				//如果包含附件
+				if ($("#" + modal_id + " .img-default").length > 0) {
+					var formData = new FormData()
+					$("#" + modal_id + " .img-default").each(function(i, o) {
+						formData.append("_file", convertBase64UrlToBlob($(this).find('.img-show').attr('src')));
+					})
+					formData.append("tableName", data.tableName);
+					formData.append("tableId", sxh_data.id);
+					//附件上传
+					if (AttachmentUpload("/teacherms/Teacher/teacher_userAttachmentUpload", formData)) {
+						toastr.success("上传成功!");
+						$("#" + modal_id).modal('hide');
+						doQuery();
+					}
+				}
+				toastr.success("添加成功！");
+			}
+		}, "json")
+	});
 	//导出按钮点击事件
 	$('.export_button').click(export_info);
 	//确认导出按钮点击事件
 	$('.sure_export').click(sure_export);
+	//所有通过名字来获取ID的input绑定事件
+	$('input[name$="UserNames"]').keyup(function() {
+		if ($(this).val() == "") {
+			return;
+		}
+		var Waiting = $(this).attr('name').replace("UserNames", "UserIds");
+		$.post('/teacherms/Teacher/teacher_getUserIdOrderingByUserName', {
+			"user.userName" : $(this).val()
+		}, function(xhr) {
+			$('input[name="' + Waiting + '"]').val(xhr.result);
+		}, 'json')
+
+	})
 	//日期输入框点击事件
 	//指定查询
 	$('.search_info').click(function() {
@@ -325,6 +361,7 @@ $(function() {
 			dataType : "json",
 			success : function(xhr_data) {
 				$('#' + a_href).find('table tbody').html(getStr(xhr_data.ObjDatas));
+
 				$('.viewButton').click(viewInfo);
 				$('.modiButton').click(modiInfo);
 				//提交审核点击事件
@@ -348,17 +385,15 @@ $(function() {
 				$(this).val(xhr[0][na]);
 				if (dataStatus == "10") {
 					parent_div.find('.commmit-btn').unbind().show();
-				}
-				else if (dataStatus == "20"||dataStatus == "30") {
+				} else if (dataStatus == "20" || dataStatus == "30") {
 					parent_div.find('.commmit-btn').html("信息审核中");
 					parent_div.find('.commmit-btn').unbind().show();
-					parent_div.find('.commmit-btn').attr("disabled","true");
-				}
-				else if (dataStatus == "40") {
-					$(this).attr("disabled","disabled")
+					parent_div.find('.commmit-btn').attr("disabled", "true");
+				} else if (dataStatus == "40") {
+					$(this).attr("disabled", "disabled")
 				}
 			});
-			
+
 			//设置用户名
 			$('input[name="teacherInfo.userName"]').val($('.userName_info').text());
 
@@ -467,49 +502,21 @@ $(function() {
 		}
 		return str;
 	}
-})
-/*$('.nav-tabs li a').unbind().click(function() {
-		if ($(this).parent('li').attr('class') == 'active') return;
-		var a_href = $(this).attr("href");
-		switch (a_href) {
-		case '#user':
-			$('#user').load('user_pageinfo.jsp  #user_info_table_audit', function() {
-				data.tableName = "TeacherInfo";
-				userInfo();
-			});
 
-			break;
-		case '#award':
-			$('#award').load('user_pageinfo.jsp #user_award_table_audit', function() {
-				data.tableName = "TeacherAward";
-				userAward();
-			});
-			break;
-		case '#works':
-			$('#works').load('user_pageinfo.jsp #user_works_table_audit', function() {
-				data.tableName = "TeacherWorks";
-				userWorks();
-			});
-			break;
-		case '#paper':
-			$('#paper').load('user_pageinfo.jsp #user_paper_table_audit', function() {
-				data.tableName = "TeacherPaper";
-				userPaper();
-			});
-			break;
-		case '#patent':
-			$('#patent').load('user_pageinfo.jsp #user_patent_table_audit', function() {
-				data.tableName = "TeacherPatent";
-				userPatent();
-			});
-			break;
-		case '#project':
-			$('#project').load('user_pageinfo.jsp #user_project_table_audit', function() {
-				data.tableName = "TeacherProject";
-				userProject();
-			});
-			break;
-		default:
-			break;
+	/**
+	 * 将以base64的图片url数据转换为Blob
+	 * @param urlData 用url方式表示的base64图片数据
+	 */
+	function convertBase64UrlToBlob(urlData) {
+		var bytes = window.atob(urlData.split(',')[1]); //去掉url的头，并转换为byte
+		//处理异常,将ascii码小于0的转换为大于0
+		var ab = new ArrayBuffer(bytes.length);
+		var ia = new Uint8Array(ab);
+		for (var i = 0; i < bytes.length; i++) {
+			ia[i] = bytes.charCodeAt(i);
 		}
-	})*/
+		return new Blob([ ab ], {
+			type : 'image/png'
+		});
+	}
+})

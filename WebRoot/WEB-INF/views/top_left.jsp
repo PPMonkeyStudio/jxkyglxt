@@ -27,12 +27,14 @@
 <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 <!-- 提示框css -->
 <link rel="stylesheet" href="<%=basePath%>css/toastr.css" />
-
+<!-- 模版自带css -->
 <link rel="stylesheet" href="<%=basePath%>css/style.css" />
-
+<!-- 自定义css -->
 <link rel="stylesheet" href="<%=basePath%>css/top_left.css" />
-
+<!-- 弹出提示框插件css -->
 <link rel="stylesheet" href="<%=basePath%>css/jquery-confirm.css" />
+<!-- 图片查看插件css -->
+<link rel="stylesheet" href="<%=basePath%>css/zoomify.min.css" />
 
 <%-- <link rel="stylesheet" href="<%=basePath%>css/need/laydate.css" /> --%>
 <%-- <link rel="stylesheet" href="<%=basePath%>css/calendar.css" /> --%>
@@ -45,6 +47,8 @@
 <script type="text/javascript" src="<%=basePath%>js/app.js"></script>
 
 <script type="text/javascript" src="<%=basePath%>js/jquery-confirm.js"></script>
+
+<script type="text/javascript" src="<%=basePath%>js/zoomify.min.js"></script>
 
 <%-- <script type="text/javascript" src="<%=basePath%>js/laydate.js"></script> --%>
 <%-- <script type="text/javascript" src="<%=basePath%>js/calendar.js"></script> --%>
@@ -162,11 +166,11 @@
 						<ul class="nav">
 							<li><a class="">信息审核</a></li>
 							<li><a class="">信息管理</a></li>
-							<li ><a onclick="user_setting(user_setting)" class=" setButton" >重置密码</a>
-					</li>
+							<li><a onclick="user_setting(user_setting)"
+								class=" setButton">重置密码</a></li>
 						</ul>
 					</div></li>
-					
+
 			</ul>
 		</s:if> <s:if test="#session.role=='教职工'">
 			<ul class="sidebar-menu">

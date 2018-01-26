@@ -1,6 +1,17 @@
 package com.teacherms.system.action;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ResourceBundle;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts2.ServletActionContext;
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionContext;
@@ -15,6 +26,8 @@ public class SystemAction extends ActionSupport {
 	private String user_id; // 登陆帐号
 	private String password; // 登录密码
 	private User user;// 用户信息
+	private String attachmentName;
+	private final String propertiesPath = ResourceBundle.getBundle("_path").getString("filePath");
 
 	// 进行登录的判断
 	public void login() {
@@ -66,8 +79,8 @@ public class SystemAction extends ActionSupport {
 		}
 	}
 
+	// 通过角色ID获取角色名称
 	public void getNowUserRoleName() {
-		// 通过角色ID获取角色名称
 		try {
 			User user = (User) ActionContext.getContext().getSession().get("user");
 			String rolename = systemService.getUserRoleNameByRoleId(user.getRoleId());
@@ -94,6 +107,33 @@ public class SystemAction extends ActionSupport {
 			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + u.getUserName() + "\"}");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	// 查看图片
+	public void Attachment() {
+		System.out.println("获取图片");
+		HttpServletResponse response = ServletActionContext.getResponse();
+		String[] img_name = attachmentName.split("!");
+		System.out.println(img_name.length);
+		System.out.println(img_name[0]);
+		System.out.println(img_name[1]);
+		try {
+			User u = (User) ActionContext.getContext().getSession().get("user");
+			File file = new File(propertiesPath + u.getUserId() + "/" + img_name[1] + "/" + img_name[0]);
+			InputStream fis = new BufferedInputStream(new FileInputStream(file));
+			byte[] buffer = new byte[fis.available()];
+			fis.read(buffer);
+			fis.close();
+			response.setContentType("image/png");
+			OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+			toClient.write(buffer);
+			toClient.flush();
+			toClient.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -128,6 +168,10 @@ public class SystemAction extends ActionSupport {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public void setAttachmentName(String attachmentName) {
+		this.attachmentName = attachmentName;
 	}
 
 }

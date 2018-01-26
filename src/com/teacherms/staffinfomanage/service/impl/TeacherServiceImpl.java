@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -182,20 +183,32 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Override
 	public TableInfoAndUserVo userGetTableInfoByTableId(String tableName, String tableId) {
-		// list内部的元素为Object(字符串)+Object(字符串)+Object(对象)
-		TableInfoAndUserVo list = teacherDao.getTableInfoByTableId(tableName, getTableInfoIdName(tableName), tableId);
-		/*
-		 * // 将最后的对象转化为数组 Class cla = list.get(0)[2].getClass(); try { //
-		 * 创建与对象属性值等长的数组 Object[] oo = new
-		 * Object[cla.getDeclaredFields().length]; // 遍历每一个属性，并且获得属性值，存入数组中 for
-		 * (int i = 0; i < oo.length; i++) { Field f =
-		 * cla.getDeclaredFields()[i]; f.setAccessible(true); oo[i] =
-		 * f.get(list.get(0)[2]); } // list中对象的位置转存为数组 list.get(0)[2] = oo; }
-		 * catch (IllegalArgumentException e) { e.printStackTrace(); } catch
-		 * (IllegalAccessException e) { e.printStackTrace(); }
-		 */
-		// 返回List<Object[]>---list内部的元素为Object(字符串)+Object(字符串)+Object[]数组)
-		return list;
+		// vo内部的元素为Object(对象)+User(用户)+List<String>附件名字
+		TableInfoAndUserVo vo = teacherDao.getTableInfoByTableId(tableName, getTableInfoIdName(tableName), tableId);
+		try {
+			Field field = vo.getObject().getClass().getDeclaredFields()[0];
+			field.setAccessible(true);
+			String infoId = (String) field.get(vo.getObject());
+			File[] file = new File(propertiesPath + vo.getUser().getUserId() + "/" + tableName).listFiles();
+			List<String> attachmentName = new ArrayList<String>();
+			if (file != null) {
+				for (File f0 : file) {
+					if (f0.getName().indexOf(infoId) > -1) {
+						attachmentName.add(f0.getName());
+					}
+				}
+				vo.setAttachmentName(attachmentName);
+			}
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			System.out.println("转换错误");
+			// e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			System.out.println("转换错误");
+			// e.printStackTrace();
+		}
+		return vo;
 	}
 
 	@Override
@@ -243,7 +256,7 @@ public class TeacherServiceImpl implements TeacherService {
 		try {
 			Class<? extends Object> cla = obj.getClass();
 			// 获取对象中第一个属性
-			Field ID = cla.getDeclaredField(getTableInfoIdName(tableName));
+			Field ID = cla.getDeclaredFields()[0];
 			// 属性设置可以访问
 			ID.setAccessible(true);
 			// 获得属性值
@@ -266,6 +279,12 @@ public class TeacherServiceImpl implements TeacherService {
 			}
 
 			result = teacherDao.addTableInfo(obj);
+
+			if ("success".equals(result)) {
+				result = "{\"result\":\"success\",\"id\":\"" + ID.get(obj) + "\"}";
+			} else {
+				result = "{\"result\":\"error\"}";
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -326,9 +345,9 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Override
 	public String userAttachmentUpload(List<File> file1, List<String> file1FileName, List<String> file1ContentType,
-			String userName, String tableName, String tableId) {
+			String userId, String tableName, String tableId) {
 		String rusult = "success";
-		String path = "E:/Attachment/" + userName + "/" + tableName;
+		String path = propertiesPath + userId + "/" + tableName;
 		File file = new File(path);
 		try {
 			// 如果文件夹不存在则创建文件夹
@@ -338,7 +357,7 @@ public class TeacherServiceImpl implements TeacherService {
 			}
 			for (int i = 0; i < file1.size(); i++) {
 				FileOutputStream out = new FileOutputStream(
-						path + "/" + tableId + "_" + (i + 1) + file1ContentType.get(i));
+						path + "/" + tableId + "_" + (i + 1) + "." + file1ContentType.get(i).substring(6));
 				InputStream in = new FileInputStream(file1.get(i));
 				byte[] buf = new byte[1024];
 				int length = 0;
@@ -360,9 +379,8 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Override
 	public List<File> getBase64Image(String name, String tableName, String downloadInfoId) {
-		// Attachmentpath: E:/Attachment/
 		// 附件路径
-		String path = Attachment.getAttachmentpath() + name + "/" + tableName;
+		String path = propertiesPath + name + "/" + tableName;
 		// 获取文件夹下所有文件
 		File[] fs = new File(path).listFiles();
 		// base64集合
@@ -397,9 +415,8 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Override
 	public File downloadAttachment(String username, String tableName, String downloadInfoId) {
-		// Attachmentpath: E:/Attachment/
 		// 附件路径
-		String path = Attachment.getAttachmentpath() + username + "/" + tableName;
+		String path = propertiesPath + username + "/" + tableName;
 		// 选取的附件集合、
 		List<File> List_attachment = new ArrayList<File>();
 		Map<String, String> id_name_Map = new HashMap<String, String>();

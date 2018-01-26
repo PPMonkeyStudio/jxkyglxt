@@ -138,7 +138,7 @@ function selectSeacher() {
 			return;
 		} else{
 			var con = $(this).val();
-			if ((con.indexOf("Date")) >= 0||(con.indexOf("Time")) >= 0) {
+			if ((con.indexOf("Date")) >= 0 || (con.indexOf("Time")) >= 0) {
 				$(".all_options").siblings('#search_input').append('<div id="main_body">' + '<div id="Inputu' + $(this).val() + '" class="dateinput_div form-group">' +
 					'<input type="text"  placeholder="' + pla + '搜索起始时间" class="form-control  riliDate"  />' +
 					'<input type="text"  placeholder="' + pla + '搜索结束时间" class="form-control  riliDate" />' +
@@ -148,8 +148,7 @@ function selectSeacher() {
 					data[data.tableName.replace("T", "t") + "." + $(this).parent().val()] = "";
 					$(this).parent().remove();
 				});
-			} 
-			else {
+			} else {
 				$(".all_options").siblings('#search_input').append('<div id="Inputu' + $(this).val() + '" class="input_div form-group">' +
 					'<input type="text"  placeholder="' + pla + '" class="form-control"/>' +
 					'<button class="btn btn-primary"><i class="fa fa-times" aria-hidden="true"></i></button></div>')
@@ -170,38 +169,11 @@ function selectSeacher() {
 }
 /*模态框清空*/
 $(function() {
-	$('.modal').on('hide.bs.modal', function() {
-		var this_modal = $(this);
-		setTimeout(function() {
-			this_modal.find('table input,select').val('');
-			this_modal.find('table .img-default').remove();
-		}, 200)
+	$('.modal').on('hidden.bs.modal', function() {
+		$(this).find('table input,select').val('');
+		$(this).find('table .img-default').remove();
 	})
 })
-/*导出js*/
-$(function() {
-
-	$("#export").click(function() {
-		$("input[name='checkbox']:checkbox:checked").each(function() {
-			data.query_num += $(this).val() + ",";
-		});
-	});
-	$("#btn1").click(function() {
-		$("input[name='checkbox']").attr("checked", "true");
-	});
-	$("#btn2").click(function() {
-		$("input[name='checkbox']").removeAttr("checked");
-	});
-	$("#btn3").click(function() {
-		$("input[name='checkbox']").each(function() {
-			if ($(this).attr("checked")) {
-				$(this).removeAttr("checked");
-			} else {
-				$(this).attr("checked", "true");
-			}
-		});
-	});
-});
 
 /*  输入身份证号自动填入性别，出生日期     */
 
@@ -284,24 +256,17 @@ function time() {/*
 	
 */}
 
-/*附件图片上传js*/
-function imgUpload() {
-	$('.addInfo').unbind().click(function() {
-		$('.addInfo').siblings('input').click();
-	})
-}
 /*图片预览*/
 function previewFile(input_obj) {
-	//console.log($(input_obj).prop('files'));
 	var files = $(input_obj).prop('files');
 	for (var i in files) {
 		var reader = new FileReader();
 		reader.onloadend = function() {
 			//(this.result); 
 			$('.addInfo').before('<div class="img-default">' + '<div class="img">'
-				+ '<img src="' + this.result + '" alt="img" class="img-show">'
+				+ '<img src="' + this.result + '" alt="" class="img-show">'
 				+ '</div>'
-				+ '<div class="info">'
+				+ '<div class="info" onclick="javascript:$(this).prev().find(\'img\').click()">'
 				+ '<div class="img-control-btn modify-btn" title="编辑">'
 				+ '<img src="img/modi(5).png" />'
 				+ '</div>'
@@ -309,7 +274,7 @@ function previewFile(input_obj) {
 				+ '<img src="img/delete(2).png" />'
 				+ '</div>'
 				+ '</div>'
-				+ '<input type="file" value="' + files[i] + '" onchange="modiFiles(this)" accept="image/gif, image/pdf, image/png, image/jpeg" style="display:none" >'
+				+ '<input type="file" name="" onchange="modiFiles(this)" accept="image/gif, image/pdf, image/png, image/jpeg" style="display:none" >'
 				+ '</div>')
 			$('.delete-btn').unbind().click(function() {
 				$(this).parent().parent().remove();
@@ -317,10 +282,12 @@ function previewFile(input_obj) {
 			$('.modify-btn').unbind().click(function() {
 				$(this).parent().siblings('input').click();
 			});
+			$('.img-show').zoomify();
 		}
 		reader.readAsDataURL(files[i]);
 	}
 }
+
 /*修改上传的图片*/
 function modiFiles(this_obj) {
 	var files = $(this_obj).prop('files')[0];
@@ -330,6 +297,7 @@ function modiFiles(this_obj) {
 	}
 	reader.readAsDataURL(files);
 }
+
 /* 表单判空验证*/
 function formValidate() {
 	$('.tab input').blur(function() {
@@ -347,6 +315,29 @@ function formValidate() {
 			})
 		}
 	})
+}
+
+
+//附件上传
+function AttachmentUpload(url, formData) {
+	var result = false;
+	$.ajax({
+		url : url,
+		type : "POST",
+		async : false,
+		dataType : "json",
+		data : formData,
+		processData : false,
+		contentType : false,
+		success : function(sxh_data) {
+			result = sxh_data.result == "success" ? true : false;
+		},
+		error : function(data) {
+			console.log("error");
+		//console.log(data.status + " : " + data.statusText + " : " + data.responseText);
+		}
+	});
+	return result;
 }
 
 /*导入信息*/
