@@ -241,6 +241,8 @@ $(function() {
 		a_href = $(this).attr("href").substr(1);
 		//获取panel-body内和所点击的类别相对应的div父元素
 		parent_div = $('#' + a_href);
+		//条件筛选清空
+		parent_div.find("#search_input").empty();
 		//通过点击的a标签的链接属性，来给全局对象data.tableName赋值
 		data.tableName = "Teacher" + a_href.substring(0, 1).toUpperCase() + a_href.substring(1);
 		//infoType，除去Teacher前部分
@@ -297,6 +299,7 @@ $(function() {
 		}, 'json')
 
 	})
+	//日期输入框点击事件
 	//指定查询
 	$('.search_info').click(function() {
 		var this_object = $(this);

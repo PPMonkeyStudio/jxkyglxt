@@ -37,7 +37,7 @@ $(function() {
 				//显示出模态框
 				$("#" + modal_id).modal({
 					keyboard : true
-				})
+				});
 				$("#" + modal_id).find('.sure_mod').unbind().click(function() {
 					var review_data = $("#" + modal_id + " form").serialize() + "&tableName=" + data.tableName;
 					$.post("/teacherms/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
@@ -66,12 +66,14 @@ $(function() {
 			}
 		}, 'json')
 	}
+	
 	//页面加载开始，给与元素加载事件-----------------------end
 
 	//页面中只需要绑定一次事件的元素绑定事件区----start
 	$('.nav-tabs li a').click(function() {
 		//如果已经是点击状态，则点击不作为
 		if ($(this).parent('li').attr('class') == 'active') return;
+		
 		//重置页码
 		data.page = 1;
 		//将所有的确认导出按钮隐藏
@@ -82,6 +84,8 @@ $(function() {
 		parent_div = $('#' + a_href);
 		//通过点击的a标签的链接属性，来给全局对象data.tableName赋值
 		data.tableName = "Teacher" + a_href.substring(0, 1).toUpperCase() + a_href.substring(1);
+		//条件筛选清空
+		parent_div.find("#search_input").empty();
 		//执行查询操作
 		doQuery();
 		//导出模态框初始化

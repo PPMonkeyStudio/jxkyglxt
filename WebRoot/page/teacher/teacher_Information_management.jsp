@@ -108,8 +108,11 @@
 							<!--查询存放信息的表格-->
 							<section class="panel"> <header
 								class="panel-heading second-panel-heading"> 用户信息
+								
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
+								<button style="display: none;float: right;"
+								class="btn btn-danger all_sure_export">导出全部</button>
 							</header>
 							<div class="panel-body table-responsive">
 								<table class="table table-hover" id="info_table">
@@ -197,6 +200,8 @@
 									class="panel-heading second-panel-heading"> 奖励信息
 								<button style="display: none;float: right;"
 									class="btn btn-primary sure_export">确认导出</button>
+									<button style="display: none;float: right;"
+								class="btn btn-danger all_sure_export">导出全部</button>
 								</header>
 								<div class="panel-body table-responsive">
 									<table class="table table-hover" id="info_table">
@@ -286,6 +291,8 @@
 								class="panel-heading second-panel-heading"> 著作信息
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
+								<button style="display: none;float: right;"
+								class="btn btn-danger all_sure_export">导出全部</button>
 							</header>
 							<div class="panel-body table-responsive">
 								<table class="table table-hover" id="info_table">
@@ -376,6 +383,8 @@
 								class="panel-heading second-panel-heading"> 论文信息
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
+								<button style="display: none;float: right;"
+								class="btn btn-danger all_sure_export">导出全部</button>
 							</header>
 							<div class="panel-body table-responsive">
 								<table class="table table-hover" id="info_table">
@@ -462,6 +471,8 @@
 								class="panel-heading second-panel-heading"> 专利信息
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
+								<button style="display: none;float: right;"
+								class="btn btn-danger all_sure_export">导出全部</button>
 							</header>
 							<div class="panel-body table-responsive">
 								<table class="table table-hover" id="info_table">
@@ -548,6 +559,8 @@
 								class="panel-heading second-panel-heading"> 课题(项目)信息
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
+								<button style="display: none;float: right;"
+								class="btn btn-danger all_sure_export">导出全部</button>
 							</header>
 							<div class="panel-body table-responsive">
 								<table class="table table-hover" id="info_table">
