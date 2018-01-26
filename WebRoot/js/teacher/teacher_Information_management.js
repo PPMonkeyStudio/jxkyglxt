@@ -53,7 +53,7 @@ $(function() {
 					keyboard : true
 				});
 				$('#info_modal').find('.sure_mod').unbind().click(function() {
-					var review_data = $( "#info_modal form").serialize() + "&tableName=" + data.tableName;
+					var review_data = $("#info_modal form").serialize() + "&tableName=" + data.tableName;
 					$.post("/teacherms/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
 						if (sxh_data.result == "success") {
 							toastr.success("修改成功!");
@@ -129,8 +129,8 @@ $(function() {
 		})
 		if (data.export_id != "" && data.export_name != "") {
 			//console.log("export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
-			window.open("/teacherms/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1)); 
-			//location.href = "/teacherms/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1);
+			window.open("/teacherms/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
+		//location.href = "/teacherms/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1);
 		} else {
 			toastr.error("未选择数据");
 		}
@@ -213,7 +213,9 @@ $(function() {
 		//重置页码
 		data.page = 1;
 		//将所有的确认导出按钮隐藏
-		$('.sure_export').hide()
+		$('.sure_export').hide();
+		//清空模糊查询内容
+		data.fuzzy_query = '';
 		//除去链接属性中的#号
 		a_href = $(this).attr("href").substr(1);
 		//获取panel-body内和所点击的类别相对应的div父元素
@@ -352,8 +354,8 @@ $(function() {
 				$('#' + a_href).find('table tbody').html(getStr(xhr_data.ObjDatas));
 				//每次做查询之后，按钮需要重新绑定事件
 				$('.relieveButton').click(relieveInfo);
-					$('.modiButton').click(modiUserInfo);
-					$('.viewButton').click(viewInfo);
+				$('.modiButton').click(modiUserInfo);
+				$('.viewButton').click(viewInfo);
 				//----end
 				//记录分页信息
 				setPageInfo(xhr_data);

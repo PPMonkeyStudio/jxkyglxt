@@ -66,18 +66,20 @@ $(function() {
 			}
 		}, 'json')
 	}
-	
+
 	//页面加载开始，给与元素加载事件-----------------------end
 
 	//页面中只需要绑定一次事件的元素绑定事件区----start
 	$('.nav-tabs li a').click(function() {
 		//如果已经是点击状态，则点击不作为
 		if ($(this).parent('li').attr('class') == 'active') return;
-		
+
 		//重置页码
 		data.page = 1;
 		//将所有的确认导出按钮隐藏
-		$('.sure_export').hide()
+		$('.sure_export').hide();
+		//清空模糊查询内容
+		data.fuzzy_query = '';
 		//除去链接属性中的#号
 		a_href = $(this).attr("href").substr(1);
 		//获取panel-body内和所点击的类别相对应的div父元素
