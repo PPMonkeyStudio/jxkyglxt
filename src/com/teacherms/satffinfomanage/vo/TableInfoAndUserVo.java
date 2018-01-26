@@ -1,10 +1,13 @@
 package com.teacherms.satffinfomanage.vo;
 
+import java.util.List;
+
 import com.teacherms.all.domain.User;
 
 public class TableInfoAndUserVo {
 	private Object object;// 信息对象
 	private User user;// 用户对象
+	private List<String> attachmentName;
 
 	public TableInfoAndUserVo() {
 		super();
@@ -30,6 +33,14 @@ public class TableInfoAndUserVo {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public List<String> getAttachmentName() {
+		return attachmentName;
+	}
+
+	public void setAttachmentName(List<String> attachmentName) {
+		this.attachmentName = attachmentName;
 	}
 
 }

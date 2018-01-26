@@ -178,11 +178,8 @@ function userAward() {
 		$('#award_modal').modal({
 			keyboard : true
 		});
-		$('.btn-danger').remove();
-		time();
 		imgUpload();
 		getIdByName();
-		$(' #award_modal .close-btn').before('<button type="button" class="btn btn-danger add-end-btn">添加</button>')
 		formValidate();
 
 
@@ -196,23 +193,6 @@ function userAward() {
 					user_selectAllAward();
 				}
 			}, "json")
-
-			/*$('.tab tbody tr td input').each(function(){
-				if($(this).hasClass("has-error")||$(this).val()==""){
-					toastr.error("信息不能为空!");
-					return;
-				}
-				else{
-					var review_data = $("#info_form").serialize() + "&tableName=" + data.tableName;
-					$.post("/teacherms/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
-						if (sxh_data.result == "success") {
-							toastr.success("添加成功!");
-						}
-					}, "json")
-				}
-			})*/
-
 		})
 	})
-
 }

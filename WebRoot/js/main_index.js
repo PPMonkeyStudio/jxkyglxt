@@ -224,9 +224,3 @@ function user_setting() {
 		}
 	});
 }
-
-/*$(function() {
-	textCount.init({
-		id : '#div'
-	});
-})*/

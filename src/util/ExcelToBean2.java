@@ -35,9 +35,9 @@ public class ExcelToBean2 {
 	 * @param workbook
 	 * @return
 	 */
-	public static <T> List<Map<String, Object>> parseUpdateExcel(Workbook workbook, String user) {
+	public static <T> List<Map<String, Object>> parseUpdateExcel(Workbook workbook, String path) {
 
-		userPropertiesBundle = ResourceBundle.getBundle(user);
+		userPropertiesBundle = ResourceBundle.getBundle(path);
 
 		List<Map<String, Object>> result = new LinkedList<Map<String, Object>>();
 

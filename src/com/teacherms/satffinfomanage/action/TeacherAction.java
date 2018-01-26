@@ -51,9 +51,9 @@ public class TeacherAction extends ActionSupport {
 	private String time_interval;// 时间区间
 
 	// 附件
-	private List<File> file1; // execl,图片文件
-	private List<String> file1FileName; // file+FileName为固定写法
-	private List<String> file1ContentType; // file+ContentType为固定写法
+	private List<File> _file; // execl,图片文件
+	private List<String> _fileFileName; // file+FileName为固定写法
+	private List<String> _fileContentType; // file+ContentType为固定写法
 	private String downloadInfoId; // 图片下载的信息表的id
 
 	// 查询条件
@@ -86,13 +86,14 @@ public class TeacherAction extends ActionSupport {
 			// 给Object对象赋值
 			getObjectByTableName(tableName);
 			PageVO<Object> listAdmin = teacherService.getTableInfoInPaging(sessionuser.getUserId(), tableName,
-					page == null ? "1" : page, time_interval,obj,fuzzy_query);
+					page == null ? "1" : page, time_interval, obj, fuzzy_query);
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(listAdmin));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+
 	// 通过tablename来判断给信息对象赋值
 	private void getObjectByTableName(String tableName) {
 		if (("TeacherAward").equals(tableName)) {
@@ -112,7 +113,7 @@ public class TeacherAction extends ActionSupport {
 		}
 	}
 
-	// 用户通过信息表ID获取单条信息
+	// 用户通过ID获取单条信息
 	public void userGetTableInfoByTableId() {
 		try {
 			TableInfoAndUserVo obj = teacherService.userGetTableInfoByTableId(tableName, tableId);
@@ -167,7 +168,7 @@ public class TeacherAction extends ActionSupport {
 			}
 			String result = teacherService.addTableInfo(sessionuser.getUserId(), obj, tableName);
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
-			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
+			ServletActionContext.getResponse().getWriter().write(result);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -235,32 +236,12 @@ public class TeacherAction extends ActionSupport {
 	// 用户附件上传
 	public void userAttachmentUpload() {
 		try {
-			String result = teacherService.userAttachmentUpload(file1, file1FileName, file1ContentType,
-					sessionuser.getUserName(), tableName, tableId);
+			System.out.println(_file.get(0));
+			String result = teacherService.userAttachmentUpload(_file, _fileFileName, _fileContentType,
+					sessionuser.getUserId(), tableName, tableId);
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
-			ServletActionContext.getResponse().getWriter().write(result);
+			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
 		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	// 获取图片
-	public void getImage() {
-		HttpServletResponse response = ServletActionContext.getResponse();
-		try {
-			List<File> list = teacherService.getBase64Image(sessionuser.getUserName(), tableName, downloadInfoId);
-			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
-			InputStream fis = new BufferedInputStream(new FileInputStream(list.get(0).getPath()));
-			byte[] buffer = new byte[fis.available()];
-			fis.read(buffer);
-			fis.close();
-			response.setContentType("image/jpeg");
-			OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
-			toClient.write(buffer);
-			toClient.flush();
-			toClient.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -361,20 +342,20 @@ public class TeacherAction extends ActionSupport {
 		this.dataState = dataState;
 	}
 
-	public void setFile1(List<File> file1) {
-		this.file1 = file1;
+	public void set_file(List<File> _file) {
+		this._file = _file;
 	}
 
-	public void setFile1FileName(List<String> file1FileName) {
-		this.file1FileName = file1FileName;
+	public void set_fileFileName(List<String> _fileFileName) {
+		this._fileFileName = _fileFileName;
+	}
+
+	public void set_fileContentType(List<String> _fileContentType) {
+		this._fileContentType = _fileContentType;
 	}
 
 	public void setDownloadInfoId(String downloadInfoId) {
 		this.downloadInfoId = downloadInfoId;
-	}
-
-	public void setFile1ContentType(List<String> file1ContentType) {
-		this.file1ContentType = file1ContentType;
 	}
 
 	public TeacherAward getTeacherAward() {
