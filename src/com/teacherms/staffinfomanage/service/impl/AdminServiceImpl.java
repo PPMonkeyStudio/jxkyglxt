@@ -148,21 +148,24 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public XSSFWorkbook getExcel(String query_num, String tableName, String query_id) {
-		int index = 0;
-		String[] exportid_arr = query_id.split(",");
-		for (String str : exportid_arr) {
-			exportid_arr[index] = "'" + str + "'";
-			index++;
+		String queryInfo = " where " + getTableInfoIdName(tableName) + " in (";
+		System.out.println(!"".equals(query_id) || null != query_id);
+		System.out.println(null != query_id);
+		System.out.println(!"".equals(query_id));
+		if ("".equals(query_id) || null != query_id) {
+			int index = 0;
+			// 分割所要查询的信息表ID
+			String[] exportid_arr = query_id.split(",");
+			for (String str : exportid_arr) {
+				exportid_arr[index] = "'" + str + "'";
+				index++;
+			}
+			queryInfo += Arrays.toString(exportid_arr).replaceAll("[\\[\\]]", "") + ")";
+		} else {
+			queryInfo = "";
 		}
-		// 创建List<Object>
-		// List<Object> list_all = new ArrayList<Object>();
-		// 分割所要查询的信息表ID
-		// String[] id = query_id.split(",");
-		// 循环查询每一个所要查询的信息表，并记录到list_all中
-		List<Object> list_all = adminDao.export_getAInfomationByTableId(tableName, getTableInfoIdName(tableName),
-				Arrays.toString(exportid_arr).replaceAll("[\\[\\]]", ""));
-		// list_all.add(adminDao.getAInfomationByTableId(tableName,
-		// getTableInfoIdName(tableName), query_id));
+
+		List<Object> list_all = adminDao.export_getAInfomationByTableId(tableName, null, queryInfo);
 
 		/**
 		 * 1.query_num：传入所需要查询的字段
@@ -178,22 +181,35 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public String curingInfomation(Object obj) {
 		String res = null;
+		Object obj0 = null;
+		Class<? extends Object> cla = obj.getClass();
 		try {
+			// 获取第一个id属性值
 			Field f = obj.getClass().getDeclaredFields()[0];
+			// 设置可用
 			f.setAccessible(true);
+			// 获得id值
 			String id = (String) f.get(obj);
 			if ("".equals(id) || id == null) {
 				f.set(obj, uuid.getUuid());
+				Field createTime = cla.getDeclaredField("createTime");
+				createTime.setAccessible(true);
+				createTime.set(obj, TimeUtil.getStringDay());
+			} else {
+				obj0 = adminDao.getInfoById(cla.getName(), f.getName(), id).getObject();
+				for (Field f0 : cla.getDeclaredFields()) {
+					f0.setAccessible(true);
+					String value_obj = (String) f0.get(obj);
+					String value_obj0 = (String) f0.get(obj0);
+					if (value_obj != null && !"".equals(value_obj) && !value_obj.equals(value_obj0)) {
+						f0.set(obj0, f0.get(obj));
+					}
+				}
 			}
-			adminDao.updateInfo(obj);
-			// 获取对象的数据状态
-			Field dataStatus = obj.getClass().getDeclaredField("dataStatus");
-			dataStatus.setAccessible(true);
-			res = (String) dataStatus.get(obj);
+			res = adminDao.updateInfo(obj0) ? "success" : "error";
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return res;
 	}
 
