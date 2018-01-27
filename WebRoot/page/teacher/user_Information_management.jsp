@@ -596,6 +596,7 @@
 													<option value="includedSituation">收录情况</option>
 													<option value="totalCitations">他引次数</option>
 													<option value="wordsNum">成果字数</option>
+													<option value="publishTime">发表日期</option>
 												</select>
 
 												<button style="float: right; margin-left: 6px;"
@@ -681,7 +682,6 @@
 											<div id="search">
 												<label>指定条件搜索：</label> <select id="all_options"
 													class="all_options form-control ">
-													<option value="">请选择</option>
 													<option value="">请选择</option>
 													<option value="userName">姓名</option>
 													<option value="userId">工号</option>

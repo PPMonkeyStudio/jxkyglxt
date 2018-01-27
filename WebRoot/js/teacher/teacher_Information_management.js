@@ -149,7 +149,7 @@ $(function() {
 		})
 	}
 
-	//确定导出
+	//导出全部
 	var all_sure_export = function() {
 		//通过a标签的链接属性，判断是哪一个导出模态框内的值
 		$('#export_' + a_href + ' .group-list button').each(function() {
@@ -244,6 +244,8 @@ $(function() {
 		data.page = 1;
 		//将所有的确认导出按钮隐藏
 		$('.sure_export').hide();
+		//将所有的导出全部按钮隐藏
+		$('.all_sure_export').hide();
 		//清空模糊查询内容
 		data.fuzzy_query = '';
 		//除去链接属性中的#号
@@ -307,7 +309,7 @@ $(function() {
 	$('.export_button').click(export_info);
 	//确认导出按钮点击事件
 	$('.sure_export').click(sure_export);
-	//确认导出按钮点击事件
+	//确认导出全部按钮点击事件
 	$('.all_sure_export').click(all_sure_export);
 	//指定查询()
 	$('.search_info').click(function() {

@@ -92,7 +92,7 @@ $(function() {
 		}
 		//用户
 		if (($(this).text()) == "信息查看") {
-			$('.right-side').load('page/teacher/user_Information_management.jsp #content', selectSeacher(), function() {
+			$('.right-side').load('page/teacher/user_Information_management.jsp #content', selectSeacher(),getinfoByCardId(), function() {
 				$.getScript("js/teacher/user_Information_management.js");
 			})
 		}
@@ -354,13 +354,20 @@ function getinfoByCardId() {
 		var reg = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/;
 		var card_num = $(".card_num").val();
 		if (reg.test(card_num) === false) {
-			$(this).addClass('error_form ').val("");
+			toastr.error("身份证号错误！");
+			return;
 		} else {
 			if (parseInt(card_num.substr(16, 1)) % 2 == 1) {
 				$(".sele").find("option[value='男']").attr("selected", "selected");
+				console.log($('.sele').val());
+				$(".sele").removeAttr('selected');
 			//是男则执行代码 ...
 			} else {
+				
+				
 				$(".sele").find("option[value='女']").attr("selected", "selected");
+				console.log($('.sele').val());
+				$(".sele").removeAttr('selected');
 			//是女则执行代码 ...
 			}
 			$(".bir").val(card_num.substring(6, 10) + "-" + card_num.substring(10, 12) + "-" + card_num.substring(12, 14));
@@ -486,6 +493,9 @@ function selectSeacher() {
 			break;
 		case 'wordsNum':
 			pla = '请输入成果字数';
+			break;
+		case 'publishTime':
+			pla = '请输入发表日期';
 			break;
 		case 'patentName':
 			pla = '请输入专利名称';
