@@ -12,44 +12,6 @@ $(function() {
 		})
 
 	}
-	var getinfoByCardIdb=function(){
-		var reg = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/;
-		var card_num = $(this).val();
-		if (reg.test(card_num) === false) {
-			$(this).val("");
-			toastr.error("身份证号错误！");
-			return;
-		} else {
-			if (parseInt(card_num.substr(16, 1)) % 2 == 1) {
-				$('select[name="teacherInfo.sex"]').find("option[value='男']").attr("selected", "selected");
-			//是男则执行代码 ...
-			} else {
-				$('select[name="teacherInfo.sex"]').find("option[value='女']").attr("selected", "selected");
-			//是女则执行代码 ...
-			}
-			$('input[name="teacherInfo.birthday"]').val(card_num.substring(6, 10) + "-" + card_num.substring(10, 12) + "-" + card_num.substring(12, 14));
-		}
-	
-	}
-	var getinfoByCardIdk=function(event){
-		if (event.keyCode == 13) {
-			var reg = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/;
-			var card_num = $(this).val();
-			if (reg.test(card_num) === false) {
-				$(this).val("");
-			} else {
-				if (parseInt(card_num.substr(16, 1)) % 2 == 1) {
-					$('select[name="teacherInfo.sex"]').find("option[value='男']").attr("selected", "selected");
-				//是男则执行代码 ...
-				} else {
-					$('select[name="teacherInfo.sex"]').find("option[value='女']").attr("selected", "selected");
-				//是女则执行代码 ...
-				}
-				$('input[name="teacherInfo.birthday"]').val(card_num.substring(6, 10) + "-" + card_num.substring(10, 12) + "-" + card_num.substring(12, 14));
-			}
-		}
-	
-	}
 	//提交审核
 	var commit_info = function() {
 		var id = $(this).siblings('input').val();
@@ -325,8 +287,6 @@ $(function() {
 			}
 		}, "json")
 	});
-	$('.card_num').blur(getinfoByCardIdb);
-	$('.card_num').keyup(getinfoByCardIdk);
 	//导出按钮点击事件
 	$('.export_button').click(export_info);
 	//确认导出按钮点击事件

@@ -92,7 +92,7 @@ $(function() {
 		}
 		//用户
 		if (($(this).text()) == "信息查看") {
-			$('.right-side').load('page/teacher/user_Information_management.jsp #content', selectSeacher(),getinfoByCardId(), function() {
+			$('.right-side').load('page/teacher/user_Information_management.jsp #content', selectSeacher(), function() {
 				$.getScript("js/teacher/user_Information_management.js");
 			})
 		}
@@ -353,21 +353,15 @@ function getinfoByCardId() {
 	$(document).on("blur", ".card_num", function() {
 		var reg = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/;
 		var card_num = $(".card_num").val();
-		if (reg.test(card_num) === false) {
+		if (reg.test(card_num) == false) {
 			toastr.error("身份证号错误！");
 			return;
 		} else {
 			if (parseInt(card_num.substr(16, 1)) % 2 == 1) {
 				$(".sele").find("option[value='男']").attr("selected", "selected");
-				console.log($('.sele').val());
-				$(".sele").removeAttr('selected');
 			//是男则执行代码 ...
 			} else {
-				
-				
 				$(".sele").find("option[value='女']").attr("selected", "selected");
-				console.log($('.sele').val());
-				$(".sele").removeAttr('selected');
 			//是女则执行代码 ...
 			}
 			$(".bir").val(card_num.substring(6, 10) + "-" + card_num.substring(10, 12) + "-" + card_num.substring(12, 14));
@@ -377,7 +371,7 @@ function getinfoByCardId() {
 		if (event.keyCode == 13) {
 			var reg = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/;
 			var card_num = $(".card_num").val();
-			if (reg.test(card_num) === false) {
+			if (reg.test(card_num) == false) {
 				$(this).val("");
 			} else {
 				if (parseInt(card_num.substr(16, 1)) % 2 == 1) {
@@ -537,7 +531,7 @@ function selectSeacher() {
 			var con = $(this).val();
 			if ((con.indexOf("Date")) >= 0 || (con.indexOf("Time")) >= 0) {
 				$(".all_options").siblings('#search_input').append('<div id="main_body">' + '<div id="Inputu' + $(this).val() + '" class="dateinput_div form-group">' +
-					'<input type="text"  placeholder="' + pla + '搜索起始时间" class="form-control  riliDate"  />' +
+					'<input type="text"  placeholder="' + pla + '搜索起始时间" class="form-control  riliDate"  />' +'--'+
 					'<input type="text"  placeholder="' + pla + '搜索结束时间" class="form-control  riliDate" />' +
 					'<button class="btn btn-primary"><i class="fa fa-times" aria-hidden="true"></i></button></div></div>')
 				option.addClass('true');
