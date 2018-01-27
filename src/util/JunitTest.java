@@ -61,8 +61,12 @@ public class JunitTest {
 
 	@Test
 	public void test_export() {
-		XSSFWorkbook workbook = adminService.getExcel("1,2,3,6,7,8,9,14,15", "TeacherInfo",
-				"649674ef-66c8-4ec1-9eb6-60761e95a708,6fd38307-40af-4e7c-8042-e6d542e56755");
+
+		// XSSFWorkbook workbook = adminService.getExcel("1,2,3,6,7,8,9,14,15",
+		// "TeacherInfo",
+		// "649674ef-66c8-4ec1-9eb6-60761e95a708,6fd38307-40af-4e7c-8042-e6d542e56755");
+
+		XSSFWorkbook workbook = adminService.getExcel("1,2,3,6,7,8,9,14,15", "TeacherInfo", null);
 		try {
 			FileOutputStream out = new FileOutputStream("E:/Attachment/张三/TeacherAward/test.xlsx");
 			workbook.write(out);
@@ -110,8 +114,9 @@ public class JunitTest {
 
 	@Test
 	public void test_teacher_getallinfo() {
-		//PageVO<Object> listAdmin = teacherService.getTableInfoInPaging("1001", "TeacherAward", "1", "");
-		//System.out.println(new Gson().toJson(listAdmin));
+		// PageVO<Object> listAdmin =
+		// teacherService.getTableInfoInPaging("1001", "TeacherAward", "1", "");
+		// System.out.println(new Gson().toJson(listAdmin));
 	}
 
 	@Test

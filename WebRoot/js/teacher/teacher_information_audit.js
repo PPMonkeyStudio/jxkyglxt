@@ -40,7 +40,7 @@ $(function() {
 				});
 				$("#" + modal_id).find('.sure_mod').unbind().click(function() {
 					var review_data = $("#" + modal_id + " form").serialize() + "&tableName=" + data.tableName;
-					$.post("/teacherms/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
+					$.post("/teacherms/Admin/admin_modifiedInfomation", review_data, function(sxh_data) {
 						if (sxh_data.result == "success") {
 							toastr.success("修改成功!");
 							$("#" + modal_id).modal('hide');

@@ -57,7 +57,7 @@ public class AdminDaoImpl implements AdminDao {
 
 	@Override
 	public List<Object> export_getAInfomationByTableId(String tableName, String tableInfoIdName, String query_id) {
-		String hql = "from " + tableName + " where " + tableInfoIdName + " in (" + query_id + ")";
+		String hql = "from " + tableName + query_id;
 		return getSession().createQuery(hql).list();
 	}
 
@@ -65,7 +65,8 @@ public class AdminDaoImpl implements AdminDao {
 	public boolean updateInfo(Object obj) {
 		boolean flag = true;
 		try {
-			getSession().saveOrUpdate(obj);
+			getSession().merge(obj);
+			getSession().update(obj);
 		} catch (Exception e) {
 			flag = false;
 			e.printStackTrace();
