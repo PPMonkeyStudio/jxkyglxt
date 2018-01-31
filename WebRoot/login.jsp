@@ -64,36 +64,6 @@
 				error : function() {}
 			});
 		}
-	
-		function exportExcel() {
-			$.ajax({
-				url : "Admin/admin_exportExcel",
-				type : "post",
-				timeout : 3000,
-				data : {
-					tableName : "TeacherWorks",
-					tableId : "6"
-				},
-				dataType : "json",
-				success : function(data) {},
-				error : function() {}
-			});
-		}
-		function importData(obj) {
-			var formData = new FormData();
-			formData.append("file", document.getElementById("importdata").files[0]);
-			//var formData = new FormData($("#importdata")[0]);
-			$.ajax({
-				url : "Admin/admin_importDatabase",
-				type : "post",
-				timeout : 3000,
-				data : formData,
-				contentType : false,
-				processData : false,
-				success : function(data) {},
-				error : function() {}
-			});
-		}
 	</script>
 </body>
 </html>
