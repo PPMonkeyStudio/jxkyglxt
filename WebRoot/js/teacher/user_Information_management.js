@@ -63,7 +63,7 @@ $(function() {
 					btnClass : 'btn-danger',
 					text : '确认',
 					action : function() {
-						$.post('/teacherms/Teacher/teacher_userPuchInfoToadmin', {
+						$.post('/jxkyglxt/Teacher/teacher_userPuchInfoToadmin', {
 							tableId : id,
 							tableName : data.tableName
 						}, function(xhr_data) {
@@ -167,7 +167,7 @@ $(function() {
 
 		if (data.export_id != "" && data.export_name != "") {
 			console.log("export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
-			location.href = "/teacherms/Teacher/teacher_userExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1);
+			location.href = "/jxkyglxt/Teacher/teacher_userExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1);
 		} else {
 			toastr.error("未选择数据");
 		}
@@ -191,7 +191,7 @@ $(function() {
 		//获取id
 		var id = $(this).siblings('input').val();
 		//查询单条信息
-		$.post("/teacherms/Teacher/teacher_userGetTableInfoByTableId",
+		$.post("/jxkyglxt/Teacher/teacher_userGetTableInfoByTableId",
 			{
 				tableId : id,
 				tableName : data.tableName
@@ -210,7 +210,7 @@ $(function() {
 				$.each(xhr.attachmentName, function(i, v) {
 					$.post('', '', '', '');
 					$("#" + modal_id + " .addInfo").before('<div class="img-default">' + '<div class="img">'
-						+ '<img src="/teacherms/System/system_Attachment?attachmentName=' + v + '!' + data.tableName + '" alt="" class="img-show">'
+						+ '<img src="/jxkyglxt/System/system_Attachment?attachmentName=' + v + '!' + data.tableName + '" alt="" class="img-show">'
 						+ '</div>'
 						+ '<div class="info" onclick="javascript:$(this).prev().find(\'img\').click()">'
 						+ '<div class="img-control-btn modify-btn" title="编辑">'
@@ -227,7 +227,7 @@ $(function() {
 				//确定修改按钮显示并添加绑定事件
 				$("#" + modal_id).find('.sure_mod').unbind().click(function() {
 					var review_data = $("#" + modal_id + " form").serialize() + "&tableName=" + data.tableName;
-					$.post("/teacherms/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
+					$.post("/jxkyglxt/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
 						if (sxh_data.result == "success") {
 							toastr.success("修改成功!");
 							$("#" + modal_id).modal('hide');
@@ -246,7 +246,7 @@ $(function() {
 		//获取id
 		var id = $(this).siblings('input').val();
 		//查询单条信息
-		$.post("/teacherms/Teacher/teacher_userGetTableInfoByTableId",
+		$.post("/jxkyglxt/Teacher/teacher_userGetTableInfoByTableId",
 			{
 				tableId : id,
 				tableName : data.tableName
@@ -304,7 +304,7 @@ $(function() {
 	//确认添加按钮点击事件
 	$('.sure_add').click(function() {
 		var review_data = $("#" + modal_id + " form").serialize() + "&tableName=" + data.tableName;
-		$.post("/teacherms/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
+		$.post("/jxkyglxt/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
 			if (sxh_data.result == "success") {
 				//如果包含附件
 				if ($("#" + modal_id + " .img-default").length > 0) {
@@ -315,7 +315,7 @@ $(function() {
 					formData.append("tableName", data.tableName);
 					formData.append("tableId", sxh_data.id);
 					//附件上传
-					if (AttachmentUpload("/teacherms/Teacher/teacher_userAttachmentUpload", formData)) {
+					if (AttachmentUpload("/jxkyglxt/Teacher/teacher_userAttachmentUpload", formData)) {
 						toastr.success("上传成功!");
 						$("#" + modal_id).modal('hide');
 						doQuery();
@@ -337,7 +337,7 @@ $(function() {
 			return;
 		}
 		var Waiting = $(this).attr('name').replace("UserNames", "UserIds");
-		$.post('/teacherms/Teacher/teacher_getUserIdOrderingByUserName', {
+		$.post('/jxkyglxt/Teacher/teacher_getUserIdOrderingByUserName', {
 			"user.userName" : $(this).val()
 		}, function(xhr) {
 			$('input[name="' + Waiting + '"]').val(xhr.result);
@@ -398,7 +398,7 @@ $(function() {
 	//查询方法
 	function doQuery() {
 		$.ajax({
-			url : "/teacherms/Teacher/teacher_userGetTableInfoInPaging",
+			url : "/jxkyglxt/Teacher/teacher_userGetTableInfoInPaging",
 			type : "post",
 			async : false,
 			timeout : 3000,

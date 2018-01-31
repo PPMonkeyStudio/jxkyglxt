@@ -30,7 +30,7 @@ $(function() {
 		//获取id、
 		var id = $(this).siblings('input').val();
 		//查询单条用户的信息
-		$.post("/teacherms/Admin/admin_getTeacherTableInfoById",
+		$.post("/jxkyglxt/Admin/admin_getTeacherTableInfoById",
 			{
 				tableId : id,
 				tableName : data.tableName
@@ -55,7 +55,7 @@ $(function() {
 				});
 				$('#info_modal').find('.sure_mod').unbind().click(function() {
 					var review_data = $("#info_modal form").serialize() + "&tableName=" + data.tableName;
-					$.post("/teacherms/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
+					$.post("/jxkyglxt/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
 						if (sxh_data.result == "success") {
 							toastr.success("修改成功!");
 							$('#info_modal').modal('hide');
@@ -71,7 +71,7 @@ $(function() {
 		//获取id
 		var id = $(this).siblings('input').val();
 		//查询单条信息
-		$.post("/teacherms/Admin/admin_getTeacherTableInfoById",
+		$.post("/jxkyglxt/Admin/admin_getTeacherTableInfoById",
 			{
 				tableId : id,
 				tableName : data.tableName
@@ -102,7 +102,7 @@ $(function() {
 	var relieveInfo = function() {
 		var infoid = $(this).siblings('input').val();
 		$(this).parent().empty().append('<img title="已解除固化"  src="img/ok1.png" />');
-		$.post('/teacherms/Admin/admin_LiftCuring', {
+		$.post('/jxkyglxt/Admin/admin_LiftCuring', {
 			tableId : infoid,
 			tableName : data.tableName,
 			dataState : "10"
@@ -130,8 +130,8 @@ $(function() {
 		})
 		if (data.export_id != "" && data.export_name != "") {
 			//console.log("export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
-			window.open("/teacherms/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
-		//location.href = "/teacherms/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1);
+			window.open("/jxkyglxt/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
+		//location.href = "/jxkyglxt/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1);
 		} else {
 			toastr.error("未选择数据");
 			return;
@@ -158,8 +158,8 @@ $(function() {
 			}
 		})
 		if (data.export_name != "") {
-			window.open("/teacherms/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
-		//location.href = "/teacherms/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1);
+			window.open("/jxkyglxt/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
+		//location.href = "/jxkyglxt/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1);
 		} else {
 			toastr.error("未选择数据");
 			return;
@@ -201,7 +201,7 @@ $(function() {
 			smoothContent : false,
 			content : str,
 			onContentReady : function() {
-				$.post('/teacherms/System/system_getAccountInformation', {}, function(xhr_data) {
+				$.post('/jxkyglxt/System/system_getAccountInformation', {}, function(xhr_data) {
 					$('#user_setting table input').each(function() {
 						//字符串截取
 						var name = $(this).attr('name').substr(5);
@@ -216,7 +216,7 @@ $(function() {
 					btnClass : 'btn-blue',
 					text : '修改',
 					action : function() {
-						$.post('/teacherms/System/system_modifyUserInfo', $('#user_setting').serialize(), function(xhr_data) {
+						$.post('/jxkyglxt/System/system_modifyUserInfo', $('#user_setting').serialize(), function(xhr_data) {
 							if (xhr_data.result.length > 1) {
 								$('.userName_info').text(xhr_data.result);
 								toastr.success("修改成功");
@@ -363,7 +363,7 @@ $(function() {
 	//用户信息添加(用户添加模态框是唯一的)
 	$('.sure_add_info').click(function() {
 		var review_data = $("#add_info_modal form").serialize() + "&tableName=" + data.tableName;
-		$.post("/teacherms/Admin/admin_addTeacherInfo", review_data, function(sxh_data) {
+		$.post("/jxkyglxt/Admin/admin_addTeacherInfo", review_data, function(sxh_data) {
 			if (sxh_data.result == "success") {
 				toastr.success('添加成功!')
 			} else {
@@ -378,7 +378,7 @@ $(function() {
 	//查询方法
 	function doQuery() {
 		$.ajax({
-			url : "/teacherms/Admin/admin_getSpecifiedInformationByPaging",
+			url : "/jxkyglxt/Admin/admin_getSpecifiedInformationByPaging",
 			type : "post",
 			async : false,
 			timeout : 3000,

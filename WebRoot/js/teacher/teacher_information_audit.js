@@ -10,7 +10,7 @@ $(function() {
 		//获取id、
 		var id = $(this).siblings('input').val();
 		//查询单条用户的信息
-		$.post("/teacherms/Admin/admin_getTeacherTableInfoById",
+		$.post("/jxkyglxt/Admin/admin_getTeacherTableInfoById",
 			{
 				tableId : id,
 				tableName : data.tableName
@@ -40,7 +40,7 @@ $(function() {
 				});
 				$("#" + modal_id).find('.sure_mod').unbind().click(function() {
 					var review_data = $("#" + modal_id + " form").serialize() + "&tableName=" + data.tableName;
-					$.post("/teacherms/Admin/admin_modifiedInfomation", review_data, function(sxh_data) {
+					$.post("/jxkyglxt/Admin/admin_modifiedInfomation", review_data, function(sxh_data) {
 						if (sxh_data.result == "success") {
 							toastr.success("修改成功!");
 							$("#" + modal_id).modal('hide');
@@ -54,7 +54,7 @@ $(function() {
 	var solidInfo = function() {
 		var infoid = $(this).siblings('input').val();
 		$(this).parent().empty().append('<img title="已固化"  src="img/ok1.png" />');
-		$.post('/teacherms/Admin/admin_LiftCuring', {
+		$.post('/jxkyglxt/Admin/admin_LiftCuring', {
 			tableId : infoid,
 			tableName : data.tableName,
 			dataState : "40"
@@ -192,7 +192,7 @@ $(function() {
 	//查询方法
 	function doQuery() {
 		$.ajax({
-			url : "/teacherms/Admin/admin_getSpecifiedInformationByPaging",
+			url : "/jxkyglxt/Admin/admin_getSpecifiedInformationByPaging",
 			type : "post",
 			async : false,
 			timeout : 3000,
