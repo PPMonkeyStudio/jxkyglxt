@@ -1,6 +1,6 @@
-<!DOCTYPE html>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <body>
 	<div class="modal fade" id="info_modal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
@@ -85,8 +85,8 @@
 										</select></td>
 										<td>出生年月：</td>
 										<td><input name="teacherInfo.birthday"
-											class="form-control table_infomation laydate-icon" onfocus="time()"
-											type="text">
+											class="form-control table_infomation laydate-icon"
+											onfocus="time()" type="text">
 									</tr>
 									<tr>
 										<td>最高学历：</td>
@@ -141,14 +141,12 @@
 									<tr>
 										<td>参加工作时间：</td>
 										<td><input name="teacherInfo.workDate"
-											class="form-control table_infomation laydate-icon" onfocus="time()"
-											type="text">
-											</td>
+											class="form-control table_infomation laydate-icon"
+											onfocus="time()" type="text"></td>
 										<td>入校时间：</td>
 										<td><input name="teacherInfo.inductionDate"
-											class="form-control table_infomation  laydate-icon" onfocus="time()"
-											type="text">
-											</td>
+											class="form-control table_infomation  laydate-icon"
+											onfocus="time()" type="text"></td>
 										<td>教师资格证号：</td>
 										<td><input name="teacherInfo.teacherCertificateNo"
 											class="form-control table_infomation" type="text"></td>

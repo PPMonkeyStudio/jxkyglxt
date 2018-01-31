@@ -1,6 +1,6 @@
-<!DOCTYPE html>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <body>
 	<!-- 模态框（Modal） -->
 	<div class="modal fade" id="works_modal" tabindex="-1" role="dialog"
@@ -44,8 +44,8 @@
 								<tr>
 									<td>出版时间：</td>
 									<td><input name="teacherWorks.publishTime"
-										class="form-control  table_infomation laydate-icon" onfocus="time()" type="text">
-										</td>
+										class="form-control  table_infomation laydate-icon"
+										onfocus="time()" type="text"></td>
 								</tr>
 								<tr>
 									<td>入选情况：</td>
@@ -60,8 +60,8 @@
 								<tr>
 									<td>入选时间：</td>
 									<td><input name="teacherWorks.selectedDate"
-										class="form-control  table_infomation laydate-icon" onfocus="time()" type="text">
-										</td>
+										class="form-control  table_infomation laydate-icon"
+										onfocus="time()" type="text"></td>
 								</tr>
 								<tr>
 									<td>主编（作者）：</td>
