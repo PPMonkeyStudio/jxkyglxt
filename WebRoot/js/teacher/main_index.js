@@ -192,7 +192,7 @@ function user_setting() {
 		smoothContent : false,
 		content : str,
 		onContentReady : function() {
-			$.post('/teacherms/System/system_getAccountInformation', {}, function(xhr_data) {
+			$.post('/jxkyglxt/System/system_getAccountInformation', {}, function(xhr_data) {
 				$('#user_setting table input').each(function() {
 					//字符串截取
 					var name = $(this).attr('name').substr(5);
@@ -207,7 +207,7 @@ function user_setting() {
 				btnClass : 'btn-blue',
 				text : '修改',
 				action : function() {
-					$.post('/teacherms/System/system_modifyUserInfo', $('#user_setting').serialize(), function(xhr_data) {
+					$.post('/jxkyglxt/System/system_modifyUserInfo', $('#user_setting').serialize(), function(xhr_data) {
 						if (xhr_data.result.length > 1) {
 							$('.userName_info').text(xhr_data.result);
 							toastr.success("修改成功");

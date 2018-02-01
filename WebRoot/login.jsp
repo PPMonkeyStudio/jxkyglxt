@@ -58,7 +58,7 @@
 				dataType : "json",
 				success : function(xhr_data) {
 					if (xhr_data.result == "success") {
-						location.href = "main_index.jsp";
+						location.href = "page/teacher/main_index.jsp";
 					}
 				},
 				error : function() {}
