@@ -122,7 +122,7 @@
 					</li>
 					<li class="divider"></li>
 					<li><a
-						href="javascript:location.href = '/teacherms/System/system_exit'"><i
+						href="javascript:location.href = '/jxkyglxt/System/system_exit'"><i
 							class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li>
 				</ul></li>
 		</ul>

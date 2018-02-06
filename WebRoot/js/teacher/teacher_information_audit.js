@@ -320,5 +320,7 @@ $(function() {
 		}
 		return str;
 	}
-//方法声明----end
+	//方法声明----end
+	//加载后默认点击用户
+	$('a[href="#info"]').click();
 })
