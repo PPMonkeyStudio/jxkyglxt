@@ -51,7 +51,7 @@
 	<script type="text/javascript">
 		function fun() {
 			$.ajax({
-				url : "/jxkyglxt/System/system_login",
+				url : "System/system_login",
 				type : "get",
 				timeout : 3000,
 				data : $("form").serialize(),

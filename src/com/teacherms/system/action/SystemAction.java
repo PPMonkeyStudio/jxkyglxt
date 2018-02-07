@@ -37,9 +37,6 @@ public class SystemAction extends ActionSupport {
 			if (result instanceof String) {
 				ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result.toString() + "\"}");
 			} else {
-				if (null != ActionContext.getContext().getSession().get("user")) {
-					exit();
-				}
 				// 通过角色ID获取角色名称
 				String rolename = systemService.getUserRoleNameByRoleId(((User) result).getRoleId());
 				ActionContext.getContext().getSession().put("role", rolename);
