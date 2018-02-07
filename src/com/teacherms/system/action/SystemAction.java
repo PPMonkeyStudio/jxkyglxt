@@ -75,7 +75,10 @@ public class SystemAction extends ActionSupport {
 				ServletActionContext.getResponse().getWriter().write(new Gson().toJson(new Teacher_NavigationTAB()));
 			} else if ("院系管理员".equals(rolename)) {
 				ServletActionContext.getResponse().getWriter().write(new Gson().toJson(new Admin_NavigationTAB()));
-			} else {
+			} else if("学生".equals(rolename)){
+				//ServletActionContext.getResponse().getWriter().write(new Gson().toJson(new Student_NavigationTAB()));
+			} else{
+				
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
