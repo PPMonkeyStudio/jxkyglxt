@@ -12,7 +12,7 @@ $(function() {
 		})
 
 	}
-	var getinfoByCardIdb=function(){
+	var getinfoByCardIdb = function() {
 		var reg = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/;
 		var card_num = $(this).val();
 		if (reg.test(card_num) === false) {
@@ -29,9 +29,9 @@ $(function() {
 			}
 			$('input[name="teacherInfo.birthday"]').val(card_num.substring(6, 10) + "-" + card_num.substring(10, 12) + "-" + card_num.substring(12, 14));
 		}
-	
+
 	}
-	var getinfoByCardIdk=function(event){
+	var getinfoByCardIdk = function(event) {
 		if (event.keyCode == 13) {
 			var reg = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/;
 			var card_num = $(this).val();
@@ -48,7 +48,7 @@ $(function() {
 				$('input[name="teacherInfo.birthday"]').val(card_num.substring(6, 10) + "-" + card_num.substring(10, 12) + "-" + card_num.substring(12, 14));
 			}
 		}
-	
+
 	}
 	//提交审核
 	var commit_info = function() {
@@ -564,4 +564,7 @@ $(function() {
 			type : 'image/png'
 		});
 	}
+
+	//加载后默认点击用户
+	$('a[href="#info"]').click();
 })
