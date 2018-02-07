@@ -122,7 +122,7 @@
 					</li>
 					<li class="divider"></li>
 					<li><a
-						href="javascript:location.href = '/teacherms/System/system_exit'"><i
+						href="javascript:location.href = '/jxkyglxt/System/system_exit'"><i
 							class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li>
 				</ul></li>
 		</ul>
@@ -158,6 +158,8 @@
 			</div>
 		</form>
 		<!-- /.search form --> <!-- sidebar menu: : style can be found in sidebar.less -->
+		
+		
 		<s:if test="#session.role=='院系管理员'">
 			<ul class="sidebar-menu">
 				<li><a href="#sub" data-toggle="collapse" class="collapsed"
@@ -174,7 +176,9 @@
 					</div></li>
 
 			</ul>
-		</s:if> <s:if test="#session.role=='教职工'">
+		</s:if> 
+		
+		<s:if test="#session.role=='教职工'">
 			<ul class="sidebar-menu">
 				<li><a href="#subPages" data-toggle="collapse"
 					class="collapsed" aria-expanded="false"><i class="fa fa-user"></i>
@@ -186,7 +190,28 @@
 						</ul>
 					</div></li>
 			</ul>
-		</s:if></aside>
+		</s:if>
+		
+		
+		
+		<s:if test="#session.role=='学生'">
+		<ul class="sidebar-menu">
+			<li><a href="#sub" data-toggle="collapse" class="collapsed"
+					aria-expanded="false">
+			<i class="fa fa-user"></i>
+						<span>学生信息</span>  <i class="icon-submenu fa fa-angle-left"></i></a>
+			<div id="subPages" class="collapse" aria-expanded="false"
+						style="height: 0px;">
+						<ul class="nav">
+							<li><a class="">信息查看</a></li>
+						</ul>
+					</div>
+			</li>			
+		</ul>
+		</s:if>
+		
+		
+		</aside>
 		<aside class="right-side"> <section class="content">
 		<div class="row">
 			<div class="col-md-12">
