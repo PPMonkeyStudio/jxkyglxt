@@ -22,7 +22,7 @@ public interface AdminService {
 	 * @return 对象
 	 */
 	PageVO<Object> getSpecifiedInformationByPaging(String tableName, String page, String time_interval,
-			String dataState, String collegeName);
+			String dataState, String collegeName, Object obj,String fuzzy_query);
 
 	/**
 	 * ---通过ID获取单条信息
@@ -97,5 +97,14 @@ public interface AdminService {
 	 * @return 部门名字
 	 */
 	String getDepartmentNameByDepartmentId(String departmentId, String what);
+
+	/**
+	 * 管理员获取输入用户名字，获取用户的id排名
+	 * 
+	 * @param userName
+	 *            名字(用逗号隔开)
+	 * @return
+	 */
+	String getUserIdOrderingByUserName(String userName);
 
 }

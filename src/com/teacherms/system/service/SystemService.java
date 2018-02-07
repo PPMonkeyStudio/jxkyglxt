@@ -1,5 +1,7 @@
 package com.teacherms.system.service;
 
+import com.teacherms.all.domain.User;
+
 public interface SystemService {
 
 	/**
@@ -21,5 +23,16 @@ public interface SystemService {
 	 * @return 角色名称
 	 */
 	String getUserRoleNameByRoleId(String roleId);
+
+	/**
+	 * 用户修改帐号信息
+	 * 
+	 * @param modify_userInfo
+	 *            对象内包含用户修改的内容
+	 * @param loging_user
+	 *            用户已经登录的帐号
+	 * @return
+	 */
+	User modifyPassword(User midify_userInfo, User loging_user);
 
 }

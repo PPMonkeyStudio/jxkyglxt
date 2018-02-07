@@ -11,6 +11,7 @@ import com.teacherms.all.domain.User;
 import com.teacherms.satffinfomanage.dao.TeacherDao;
 import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 
+@SuppressWarnings("unchecked")
 public class TeacherDaoImpl implements TeacherDao {
 	private SessionFactory sessionFactory;
 
@@ -24,9 +25,9 @@ public class TeacherDaoImpl implements TeacherDao {
 
 	@Override
 	public List<Object> getTableInfo(String time_interval, String tableName, String tableUserIds, String userid,
-			int begin, int toindex) {
+			int begin, int toindex, String multi_condition, String fuzzy) {
 		String hql = "select t from " + tableName + " t,User u where t." + tableUserIds + " like '%" + userid
-				+ "%' and u.userId =" + userid + time_interval + " order by t.createTime asc";
+				+ "%' and u.userId =" + userid + multi_condition + fuzzy + time_interval + " order by t.createTime asc";
 		System.out.println(hql);
 		return getSession().createQuery(hql).setFirstResult(begin).setMaxResults(toindex).list();
 	}
@@ -57,6 +58,7 @@ public class TeacherDaoImpl implements TeacherDao {
 	@Override
 	public List<Object> export_getAInfomationByTableId(String tableName, String tableInfoIdName, String query_id) {
 		String hql = "from " + tableName + " where " + tableInfoIdName + " in (" + query_id + ")";
+		System.out.println(hql);
 		return getSession().createQuery(hql).list();
 	}
 
@@ -67,9 +69,11 @@ public class TeacherDaoImpl implements TeacherDao {
 	}
 
 	@Override
-	public Object getTeacherInfoByUserId(String userId) {
-		String hql = "from TeacherInfo where userId = '" + userId + "'";
-		return getSession().createQuery(hql).uniqueResult();
+	public TableInfoAndUserVo getTeacherInfoByUserId(String userId) {
+		String hql = "select new com.teacherms.satffinfomanage.vo.TableInfoAndUserVo(t,u) from TeacherInfo t,User u where t.userId=u.userId and t.userId = '"
+				+ userId + "'";
+		System.out.println(hql);
+		return (TableInfoAndUserVo) getSession().createQuery(hql).uniqueResult();
 	}
 
 	@Override
@@ -112,4 +116,9 @@ public class TeacherDaoImpl implements TeacherDao {
 		return "success";
 	}
 
+	@Override
+	public List<String> getUserIdByUserName(String name) {
+		String hql = "select u.userId from User u where u.userName like '%" + name + "%'";
+		return getSession().createQuery(hql).list();
+	}
 }

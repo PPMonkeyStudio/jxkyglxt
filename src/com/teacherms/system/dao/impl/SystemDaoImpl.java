@@ -30,4 +30,11 @@ public class SystemDaoImpl implements SystemDao {
 		return (Role) getSession().createQuery(hql).uniqueResult();
 	}
 
+	@Override
+	public User updateUser(User loging_user) {
+		System.out.println(loging_user);
+		getSession().update(loging_user);
+		return loging_user;
+	}
+
 }
