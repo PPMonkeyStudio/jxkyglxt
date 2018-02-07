@@ -26,10 +26,11 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public List<Object> getAllStatusInfo(String table, String time, String status, String collegeName) {
+	public List<Object> getAllStatusInfo(String table, String time, String status, String collegeName,
+			String multi_condition, String fuzzy) {
 		String hql = "select t,u from " + table
 				+ " t,User u,Department d where u.userId=t.userId and u.departmentId=d.departmentId and d.departmentName='"
-				+ collegeName + "' and t.dataStatus = '" + status + "'" + time;
+				+ collegeName + "' and t.dataStatus = '" + status + "'" + time + multi_condition + fuzzy;
 		System.out.println(hql);
 		return getSession().createQuery(hql).list();
 	}
@@ -56,7 +57,7 @@ public class AdminDaoImpl implements AdminDao {
 
 	@Override
 	public List<Object> export_getAInfomationByTableId(String tableName, String tableInfoIdName, String query_id) {
-		String hql = "from " + tableName + " where " + tableInfoIdName + " in (" + query_id + ")";
+		String hql = "from " + tableName + query_id;
 		return getSession().createQuery(hql).list();
 	}
 
@@ -64,7 +65,8 @@ public class AdminDaoImpl implements AdminDao {
 	public boolean updateInfo(Object obj) {
 		boolean flag = true;
 		try {
-			getSession().saveOrUpdate(obj);
+			getSession().merge(obj);
+			getSession().update(obj);
 		} catch (Exception e) {
 			flag = false;
 			e.printStackTrace();
@@ -82,6 +84,12 @@ public class AdminDaoImpl implements AdminDao {
 	public String addInfo(Object obj) {
 		System.out.println(obj.toString());
 		return getSession().save(obj).toString();
+	}
+
+	@Override
+	public List<String> getUserIdByUserName(String name) {
+		String hql = "select u.userId from User u where u.userName like '%" + name + "%'";
+		return getSession().createQuery(hql).list();
 	}
 
 }

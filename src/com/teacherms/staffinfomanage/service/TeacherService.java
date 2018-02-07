@@ -2,8 +2,8 @@ package com.teacherms.staffinfomanage.service;
 
 import java.io.File;
 import java.util.List;
+import java.util.ResourceBundle;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.teacherms.all.domain.TeacherInfo;
@@ -12,6 +12,7 @@ import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 import util.PageVO;
 
 public interface TeacherService {
+	static final String propertiesPath = ResourceBundle.getBundle("_path").getString("filePath");
 
 	/**
 	 * ---用户分页获取信息表中信息
@@ -23,9 +24,14 @@ public interface TeacherService {
 	 * @param page
 	 *            页码
 	 * @param time_interval
+	 * @param fuzzy_query
+	 *            模糊查询
+	 * @param obj
+	 *            指定查询
 	 * @return 查询结果封装到PageVO<Object[]>中
 	 */
-	PageVO<Object> getTableInfoInPaging(String userid, String tableName, String page, String time_interval);
+	PageVO<Object> getTableInfoInPaging(String userid, String tableName, String page, String time_interval, Object obj,
+			String fuzzy_query);
 
 	/**
 	 * ---用户通过信息ID获取单条信息
@@ -78,7 +84,7 @@ public interface TeacherService {
 	 *            登录用户id
 	 * @return 对象
 	 */
-	Object userGetTeacherInfo(String userId);
+	TableInfoAndUserVo userGetTeacherInfo(String userId);
 
 	/**
 	 * ---用户补全或重新填写基本信息
@@ -135,5 +141,14 @@ public interface TeacherService {
 	 *            信息表ID
 	 */
 	List<File> getBase64Image(String name, String tableName, String downloadInfoId);
+
+	/**
+	 * 管理员获取输入用户名字，获取用户的id排名
+	 * 
+	 * @param userName
+	 *            名字(用逗号隔开)
+	 * @return
+	 */
+	String getUserIdOrderingByUserName(String userName);
 
 }

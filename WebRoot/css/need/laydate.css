@@ -15,8 +15,8 @@ html {
 .laydate-icon-danlan,
 .laydate-icon-dahong,
 .laydate-icon-molv {
-	height: 22px;
-	line-height: 22px;
+	/* height: 35px;
+	line-height: 22px; */
 	padding-right: 20px;
 	border: 1px solid #C6C6C6;
 	background-repeat: no-repeat;

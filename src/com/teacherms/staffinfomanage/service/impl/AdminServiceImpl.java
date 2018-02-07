@@ -2,6 +2,7 @@ package com.teacherms.staffinfomanage.service.impl;
 
 import java.util.*;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,7 +51,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public PageVO<Object> getSpecifiedInformationByPaging(String tableName, String page, String time_interval,
-			String dataState, String collegeName) {
+			String dataState, String collegeName, Object obj, String fuzzy_query) {
 		// 每页记录数
 		int pageSize = 10;
 		// 页数
@@ -64,26 +65,59 @@ public class AdminServiceImpl implements AdminService {
 			time_interval = "and t.createTime between '" + time_interval.split(",")[0] + "' and '"
 					+ time_interval.split(",")[1] + "'";
 		}
+		// 条件查询块----------------
+		boolean haveMulti_condition = false;// 是否包含指定查询的内容,用来判断是否执行模糊查询
+		StringBuffer Multi_condition = new StringBuffer();// 指定查询中的字符串
+		StringBuffer fuzzy = new StringBuffer();// 模糊查询字符串
+		fuzzy.append(" and (");// （模糊查询中or与and混合使用）or使用前先添加and
+		String field_value = "";// 属性中的值
+		String field_name = "";// 属性名字
+		// 多条件查询
+		try {
+			Field[] fields = obj.getClass().getDeclaredFields();
+			for (Field field : fields) {
+				field.setAccessible(true);
+				field_name = field.getName();
+				field_value = (String) field.get(obj);
+				// 模糊查询
+				fuzzy.append(" or t." + field_name + " like '%" + fuzzy_query + "%'");
+				// 属性值为空则跳过本次循环
+				if ("".equals(field_value) || null == field_value) {
+					continue;
+				}
+				// 判断是否为时间区间
+				if (field_name.contains("Date")) {
+					Multi_condition.append(" and t." + field_name + " between " + field_value.split(",")[0] + " and "
+							+ field_value.split(",")[1]);
+				} else {
+					Multi_condition.append(" and t." + field_name + "='" + field_value + "'");
+				}
+				if (!haveMulti_condition) {
+					haveMulti_condition = true;
+				}
+			}
+			// 模糊查询用户名称
+			fuzzy.append("or u.userName like '%" + fuzzy_query + "%')");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// 最后判断如果fuzzy_query为空或是null，则不做模糊查询
+		if (null == fuzzy_query || "".equals(fuzzy_query)) {
+			haveMulti_condition = true;
+		}
+		System.out.println(haveMulti_condition);
 		// 获取所有信息表中未审核的信息
-		System.out.println(time_interval);
 		if (!"".equals(tableName) && tableName != null) {
-			// 指定条件tableName查询，数据状态"20"
-			list = adminDao.getAllStatusInfo(tableName, time_interval, dataState, collegeName);
+			// 指定条件tableName查询
+			// haveMulti_condition?"":fuzzy.toString().replaceFirst(" or","")
+			// 三目运算，如果已经含有了指定查询内容，则不查询模糊查询内容，反则如果模糊查询有值，进行模糊查询
+			// 在之前循环过程中，首位添加or，所以第一位or为多余，应当去掉
+			list = adminDao.getAllStatusInfo(tableName, time_interval, dataState, collegeName,
+					Multi_condition.toString(), haveMulti_condition ? "" : fuzzy.toString().replaceFirst(" or", ""));
 		}
 		System.out.println(list.size());
 		// 总记录数
 		int totalSize = list.size();
-		// 限制page页数，避免过大或者过小
-		if (pageIndex > totalSize / pageSize) {
-			if (totalSize % pageSize > 0) {
-				pageIndex = (totalSize / pageSize) + 1;
-			} else {
-				pageIndex = totalSize / pageSize;
-			}
-		} else if (pageIndex < 1) {
-			pageIndex = 1;
-		}
-
 		// 当所要显示的最大值大于记录数最大值时，每页记录设置为不超过记录数值
 		if (pageIndex * pageSize > totalSize) {
 			toindex = totalSize - (pageIndex - 1) * pageSize;
@@ -114,21 +148,24 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public XSSFWorkbook getExcel(String query_num, String tableName, String query_id) {
-		int index = 0;
-		String[] exportid_arr = query_id.split(",");
-		for (String str : exportid_arr) {
-			exportid_arr[index] = "'" + str + "'";
-			index++;
+		String queryInfo = " where " + getTableInfoIdName(tableName) + " in (";
+		System.out.println(!"".equals(query_id) || null != query_id);
+		System.out.println(null != query_id);
+		System.out.println(!"".equals(query_id));
+		if ("".equals(query_id) || null != query_id) {
+			int index = 0;
+			// 分割所要查询的信息表ID
+			String[] exportid_arr = query_id.split(",");
+			for (String str : exportid_arr) {
+				exportid_arr[index] = "'" + str + "'";
+				index++;
+			}
+			queryInfo += Arrays.toString(exportid_arr).replaceAll("[\\[\\]]", "") + ")";
+		} else {
+			queryInfo = "";
 		}
-		// 创建List<Object>
-		// List<Object> list_all = new ArrayList<Object>();
-		// 分割所要查询的信息表ID
-		// String[] id = query_id.split(",");
-		// 循环查询每一个所要查询的信息表，并记录到list_all中
-		List<Object> list_all = adminDao.export_getAInfomationByTableId(tableName, getTableInfoIdName(tableName),
-				Arrays.toString(exportid_arr).replaceAll("[\\[\\]]", ""));
-		// list_all.add(adminDao.getAInfomationByTableId(tableName,
-		// getTableInfoIdName(tableName), query_id));
+
+		List<Object> list_all = adminDao.export_getAInfomationByTableId(tableName, null, queryInfo);
 
 		/**
 		 * 1.query_num：传入所需要查询的字段
@@ -144,22 +181,35 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public String curingInfomation(Object obj) {
 		String res = null;
+		Object obj0 = null;
+		Class<? extends Object> cla = obj.getClass();
 		try {
+			// 获取第一个id属性值
 			Field f = obj.getClass().getDeclaredFields()[0];
+			// 设置可用
 			f.setAccessible(true);
+			// 获得id值
 			String id = (String) f.get(obj);
 			if ("".equals(id) || id == null) {
 				f.set(obj, uuid.getUuid());
+				Field createTime = cla.getDeclaredField("createTime");
+				createTime.setAccessible(true);
+				createTime.set(obj, TimeUtil.getStringDay());
+			} else {
+				obj0 = adminDao.getInfoById(cla.getName(), f.getName(), id).getObject();
+				for (Field f0 : cla.getDeclaredFields()) {
+					f0.setAccessible(true);
+					String value_obj = (String) f0.get(obj);
+					String value_obj0 = (String) f0.get(obj0);
+					if (value_obj != null && !"".equals(value_obj) && !value_obj.equals(value_obj0)) {
+						f0.set(obj0, f0.get(obj));
+					}
+				}
 			}
-			adminDao.updateInfo(obj);
-			// 获取对象的数据状态
-			Field dataStatus = obj.getClass().getDeclaredField("dataStatus");
-			dataStatus.setAccessible(true);
-			res = (String) dataStatus.get(obj);
+			res = adminDao.updateInfo(obj0) ? "success" : "error";
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return res;
 	}
 
@@ -192,6 +242,32 @@ public class AdminServiceImpl implements AdminService {
 		user.setDepartmentId(departmentId);
 		String result = adminDao.addInfo(user);
 		return result.length() > 0 ? "success" : "error";
+	}
+
+	@Override
+	public String getUserIdOrderingByUserName(String userName) {
+		String[] names = userName.split(",|，");
+		String[] UserIdOrdering = new String[names.length];
+		List<String> userId = new ArrayList<String>();
+		for (int i = 0; i < names.length; i++) {
+			// 初始化第I的值，若不先初始化则初始值为null
+			UserIdOrdering[i] = "";
+			userId = adminDao.getUserIdByUserName(names[i]);
+			// 当一个用户名字对应多个ID时候，添加首位括号以表示区别
+			if (userId.size() > 1) {
+				UserIdOrdering[i] += "(";
+			}
+			for (String id : userId) {
+				UserIdOrdering[i] += "," + id + "_" + (i + 1);
+			}
+			// 除去第一位的逗号
+			UserIdOrdering[i] = UserIdOrdering[i].replaceFirst(",", "");
+			// 当一个用户名字对应多个ID时候，添加末尾括号以表示区别
+			if (userId.size() > 1) {
+				UserIdOrdering[i] += ")";
+			}
+		}
+		return StringUtils.join(UserIdOrdering, ",");
 	}
 
 	@Override

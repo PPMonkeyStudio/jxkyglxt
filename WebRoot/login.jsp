@@ -51,46 +51,16 @@
 	<script type="text/javascript">
 		function fun() {
 			$.ajax({
-				url : "System/system_login",
+				url : "/jxkyglxt/System/system_login",
 				type : "get",
 				timeout : 3000,
 				data : $("form").serialize(),
 				dataType : "json",
 				success : function(xhr_data) {
 					if (xhr_data.result == "success") {
-						location.href = "main_index.jsp";
+						location.href = "page/teacher/main_index.jsp";
 					}
 				},
-				error : function() {}
-			});
-		}
-	
-		function exportExcel() {
-			$.ajax({
-				url : "Admin/admin_exportExcel",
-				type : "post",
-				timeout : 3000,
-				data : {
-					tableName : "TeacherWorks",
-					tableId : "6"
-				},
-				dataType : "json",
-				success : function(data) {},
-				error : function() {}
-			});
-		}
-		function importData(obj) {
-			var formData = new FormData();
-			formData.append("file", document.getElementById("importdata").files[0]);
-			//var formData = new FormData($("#importdata")[0]);
-			$.ajax({
-				url : "Admin/admin_importDatabase",
-				type : "post",
-				timeout : 3000,
-				data : formData,
-				contentType : false,
-				processData : false,
-				success : function(data) {},
 				error : function() {}
 			});
 		}

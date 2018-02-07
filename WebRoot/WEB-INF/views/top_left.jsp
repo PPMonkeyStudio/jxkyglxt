@@ -25,27 +25,37 @@
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <!-- font Awesome -->
 <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<!-- 提示框css -->
+<link rel="stylesheet" href="<%=basePath%>css/toastr.css" />
+<!-- 模版自带css -->
+<link rel="stylesheet" href="<%=basePath%>css/style.css" />
+<!-- 自定义css -->
+<link rel="stylesheet" href="<%=basePath%>css/top_left.css" />
+<!-- 弹出提示框插件css -->
+<link rel="stylesheet" href="<%=basePath%>css/jquery-confirm.css" />
+<!-- 图片查看插件css -->
+<link rel="stylesheet" href="<%=basePath%>css/zoomify.min.css" />
 
-<link href="css/style.css" rel="stylesheet" type="text/css" />
+<%-- <link rel="stylesheet" href="<%=basePath%>css/need/laydate.css" /> --%>
+<%-- <link rel="stylesheet" href="<%=basePath%>css/calendar.css" /> --%>
+<link rel="stylesheet" href="<%=basePath%>css/flatpickr.min.css" />
 
-<link rel="stylesheet" href="css/top_left.css" />
-<link rel="stylesheet" href="css/jquery-confirm.css" />
+<script type="text/javascript" src="<%=basePath%>js/jquery-3.1.1.min.js"></script>
 
-<jsp:include page="/modal/addInfo/award_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/addInfo/info_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/addInfo/paper_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/addInfo/works_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/addInfo/project_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/addInfo/patent_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/addInfo/user_info_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/addInfo/user_add.html" flush="true"></jsp:include>
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
 
-<jsp:include page="/modal/exportInfo/info_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/exportInfo/award_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/exportInfo/paper_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/exportInfo/patent_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/exportInfo/project_modal.html" flush="true"></jsp:include>
-<jsp:include page="/modal/exportInfo/works_modal.html" flush="true"></jsp:include>
+<script type="text/javascript" src="<%=basePath%>js/app.js"></script>
+
+<script type="text/javascript" src="<%=basePath%>js/jquery-confirm.js"></script>
+
+<script type="text/javascript" src="<%=basePath%>js/toastr.js"></script>
+
+<script type="text/javascript" src="<%=basePath%>js/zoomify.min.js"></script>
+
+<%-- <script type="text/javascript" src="<%=basePath%>js/laydate.js"></script> --%>
+<%-- <script type="text/javascript" src="<%=basePath%>js/calendar.js"></script> --%>
+<script type="text/javascript" src="<%=basePath%>js/flatpickr.min.js"></script>
+
 </head>
 
 <body class="skin-black">
@@ -90,9 +100,9 @@
 			<!--用户信息------------------------------>
 			<!-- User Account: style can be found in dropdown.less -->
 			<li class="dropdown user user-menu"><a class="dropdown-toggle"
-				data-toggle="dropdown"> <i class="fa fa-user"></i> <span>Admin
-						<i class="caret"></i>
-				</span>
+				data-toggle="dropdown"> <i class="fa fa-user"></i> <span
+					class="userName_info"><s:property
+							value="#session.user.userName" /> <i class="caret"></i> </span>
 			</a>
 				<ul class="dropdown-menu dropdown-custom dropdown-menu-right">
 					<li class="dropdown-header text-center">Account</li>
@@ -100,13 +110,20 @@
 							class="badge badge-success pull-right">10</span> 更新首页信息
 					</a></li>
 					<li class="divider"></li>
-					<li><a href="javascript:import_to_database()"> <i class="fa fa-magnet fa-fw pull-right"
-							aria-hidden="true"></i> 导入信息
-					</a> <a data-toggle="modal" href="#modal-user-settings"> <i
+					<li>
+						<!-- 判断是否为管理员 --> <s:if test="#session.role=='院系管理员'">
+							<a href="javascript:import_to_database()"> <i
+								class="fa fa-magnet fa-fw pull-right" aria-hidden="true"></i>
+								导入信息
+							</a>
+						</s:if> <!-- end --> <a href="javascript:user_setting()"> <i
 							class="fa fa-cog fa-fw pull-right"></i> 修改信息
-					</a></li>
+					</a>
+					</li>
 					<li class="divider"></li>
-					<li><a  href="javascript:loginout()"><i class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li>
+					<li><a
+						href="javascript:location.href = '/jxkyglxt/System/system_exit'"><i
+							class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li>
 				</ul></li>
 		</ul>
 	</div>
@@ -120,7 +137,10 @@
 				<img src="img/login.jpg" class="img-circle" alt="User Image" />
 			</div>
 			<div class="pull-left info">
-				<p>Hello, Admin</p>
+				<p>
+					Hello,
+					<s:property value="#session.user.userName" />
+				</p>
 
 				<a><i class="fa fa-circle text-success"></i> Online</a>
 			</div>
@@ -138,6 +158,8 @@
 			</div>
 		</form>
 		<!-- /.search form --> <!-- sidebar menu: : style can be found in sidebar.less -->
+		
+		
 		<s:if test="#session.role=='院系管理员'">
 			<ul class="sidebar-menu">
 				<li><a href="#sub" data-toggle="collapse" class="collapsed"
@@ -148,10 +170,15 @@
 						<ul class="nav">
 							<li><a class="">信息审核</a></li>
 							<li><a class="">信息管理</a></li>
+							<li><a onclick="user_setting(user_setting)"
+								class=" setButton">重置密码</a></li>
 						</ul>
 					</div></li>
+
 			</ul>
-		</s:if> <s:if test="#session.role=='教职工'">
+		</s:if> 
+		
+		<s:if test="#session.role=='教职工'">
 			<ul class="sidebar-menu">
 				<li><a href="#subPages" data-toggle="collapse"
 					class="collapsed" aria-expanded="false"><i class="fa fa-user"></i>
@@ -163,17 +190,34 @@
 						</ul>
 					</div></li>
 			</ul>
-		</s:if></aside>
+		</s:if>
+		
+		
+		
+		<s:if test="#session.role=='学生'">
+		<ul class="sidebar-menu">
+			<li><a href="#sub" data-toggle="collapse" class="collapsed"
+					aria-expanded="false">
+			<i class="fa fa-user"></i>
+						<span>学生信息</span>  <i class="icon-submenu fa fa-angle-left"></i></a>
+			<div id="subPages" class="collapse" aria-expanded="false"
+						style="height: 0px;">
+						<ul class="nav">
+							<li><a class="">信息查看</a></li>
+						</ul>
+					</div>
+			</li>			
+		</ul>
+		</s:if>
+		
+		
+		</aside>
 		<aside class="right-side"> <section class="content">
 		<div class="row">
 			<div class="col-md-12">
 				<!--breadcrumbs start -->
 				<ul class="breadcrumb">
 					<li><a><i class="fa fa-home"></i> 首页</a></li>
-					<!--<li>
-									<a >Dashboard</a>
-								</li>-->
-					<!--<li class="active">信息查看</li>-->
 				</ul>
 				<!--breadcrumbs end -->
 			</div>
@@ -183,9 +227,17 @@
 	</div>
 	<!-- ./wrapper -->
 	<!-- Director App -->
-	
-	<script src="js/app.js" type="text/javascript"></script>
-	<script src="js/main_index.js" type="text/javascript"></script>
-	<script src="js/jquery-confirm.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		document.getElementsByClassName("riliDate").flatpickr();
+		//创建一个当前日期对象
+		var now = new Date();
+		//格式化日，如果小于9，前面补0
+		var day = ("0" + now.getDate()).slice(-2);
+		//格式化月，如果小于9，前面补0
+		var month = ("0" + (now.getMonth() + 1)).slice(-2);
+		//拼装完整日期格式
+		var today = now.getFullYear() + "-" + (month) + "-" + (day);
+		$(".riliDate").val(today);
+	</script>
 </body>
 </html>
