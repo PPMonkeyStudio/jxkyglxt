@@ -66,7 +66,7 @@ public class AdminDaoImpl implements AdminDao {
 		boolean flag = true;
 		try {
 			getSession().merge(obj);
-			getSession().update(obj);
+			getSession().saveOrUpdate(obj);
 		} catch (Exception e) {
 			flag = false;
 			e.printStackTrace();

@@ -19,7 +19,6 @@
 	<include file="struts2/struts2_system.xml"></include>
 	<include file="struts2/struts2_teacher.xml"></include>
 	<include file="struts2/struts2_page.xml"></include>
-	
 	<include file="struts2/struts2_student.xml"></include>
 
 </struts>

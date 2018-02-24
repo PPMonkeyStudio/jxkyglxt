@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 测试注入action -->
+	<bean id="test" class="util.JunitTest" scope="prototype">
+		<property name="studentService" ref="studentService"></property>
+	</bean>
+
+	<!-- Aciton注入servcie -->
+	<bean id="studentAction" class="com.teacherms.studentinfomanage.action.StudentAction"
+		scope="prototype">
+		<property name="studentService" ref="studentService"></property>
+	</bean>
+
+	<!-- service注入dao层 -->
+	<bean id="studentService"
+		class="com.teacherms.studentinfomanage.service.impl.StudentServiceImpl">
+		<property name="studentDao" ref="studentDao"></property>
+	</bean>
+
+	<!-- dao注入sessionFactory -->
+	<bean id="studentDao" class="com.teacherms.studentinfomanage.dao.impl.StudentDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+</beans>

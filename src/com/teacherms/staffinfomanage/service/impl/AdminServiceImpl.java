@@ -195,12 +195,15 @@ public class AdminServiceImpl implements AdminService {
 				Field createTime = cla.getDeclaredField("createTime");
 				createTime.setAccessible(true);
 				createTime.set(obj, TimeUtil.getStringDay());
+				obj0 = obj;
 			} else {
 				obj0 = adminDao.getInfoById(cla.getName(), f.getName(), id).getObject();
+				String value_obj = null;
+				String value_obj0 = null;
 				for (Field f0 : cla.getDeclaredFields()) {
 					f0.setAccessible(true);
-					String value_obj = (String) f0.get(obj);
-					String value_obj0 = (String) f0.get(obj0);
+					value_obj = (String) f0.get(obj);
+					value_obj0 = (String) f0.get(obj0);
 					if (value_obj != null && !"".equals(value_obj) && !value_obj.equals(value_obj0)) {
 						f0.set(obj0, f0.get(obj));
 					}

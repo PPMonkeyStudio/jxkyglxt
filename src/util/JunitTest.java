@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 import com.teacherms.staffinfomanage.service.AdminService;
 import com.teacherms.staffinfomanage.service.TeacherService;
+import com.teacherms.studentinfomanage.service.StudentService;
 import com.teacherms.system.service.SystemService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -31,6 +32,8 @@ public class JunitTest {
 	private TeacherService teacherService;
 	@Resource
 	private SystemService systemService;
+	@Resource
+	private StudentService studentService;
 
 	public void setAdminService(AdminService adminService) {
 		this.adminService = adminService;
@@ -42,6 +45,10 @@ public class JunitTest {
 
 	public void setSystemService(SystemService systemService) {
 		this.systemService = systemService;
+	}
+
+	public void setStudentService(StudentService studentService) {
+		this.studentService = studentService;
 	}
 
 	@Test
@@ -153,4 +160,9 @@ public class JunitTest {
 	 * System.out.println(str.length()); System.out.println(); } }
 	 */
 
+	/*---------------------------------------------------------------------------*/
+	@Test
+	public void test_Student_test() {
+		studentService.test();
+	}
 }

@@ -7,4 +7,5 @@
 	<import resource="spring/spring_admin.xml" />
 	<import resource="spring/spring_system.xml" />
 	<import resource="spring/spring_teacher.xml" />
+	<import resource="spring/spring_student.xml" />
 </beans>
