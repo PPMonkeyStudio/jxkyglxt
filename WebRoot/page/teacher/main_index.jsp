@@ -10,7 +10,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>管理员登录</title>
+<title><s:property value="#session.user.userName" /> - 本科数据管理系统</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">

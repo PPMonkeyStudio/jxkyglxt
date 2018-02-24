@@ -7,6 +7,28 @@
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%
+	Locale locale = request.getLocale();
+	Calendar calendar = Calendar.getInstance(locale);
+	int hour = calendar.get(Calendar.HOUR_OF_DAY);
+	String greeting = "";
+	if (hour <= 1) {
+		greeting = "夜深了，";
+	} else if (hour <= 6) {
+	} else if (hour <= 9) {
+		greeting = "早安，";
+	} else if (hour <= 13) {
+		greeting = "中午好，";
+	} else if (hour <= 18) {
+		greeting = "下午好，";
+	} else if (hour <= 22) {
+		greeting = "晚上好，";
+	} else if (hour <= 24) {
+		greeting = "夜深了，";
+	} else {
+		greeting = "您好，";
+	}
+%>
 <html>
 <head>
 <base href="<%=basePath%>">
@@ -138,18 +160,20 @@
 			</div>
 			<div class="pull-left info">
 				<p>
-					Hello,
+					<%=greeting%>
 					<s:property value="#session.user.userName" />
+					。
+
 				</p>
 
-				<a><i class="fa fa-circle text-success"></i> Online</a>
+				<a><i class="fa fa-circle text-success"></i> 在线</a>
 			</div>
 		</div>
 		<!-- search form -->
 		<form action="#" method="get" class="sidebar-form">
 			<div class="input-group">
-				<input type="text" name="q" class="form-control"
-					placeholder="Search..." /> <span class="input-group-btn">
+				<input type="text" name="q" class="form-control" placeholder="搜索功能" />
+				<span class="input-group-btn">
 					<button type='submit' name='seach' id='search-btn'
 						class="btn btn-flat">
 						<i class="fa fa-search"></i>
@@ -158,27 +182,73 @@
 			</div>
 		</form>
 		<!-- /.search form --> <!-- sidebar menu: : style can be found in sidebar.less -->
-		
-		
+
+
 		<s:if test="#session.role=='院系管理员'">
 			<ul class="sidebar-menu">
 				<li><a href="#sub" data-toggle="collapse" class="collapsed"
-					aria-expanded="false"><i class="fa fa-user"></i> <span>教师信息</span>
-						<i class="icon-submenu fa fa-angle-left"></i></a>
+					aria-expanded="false"> <i class="fa fa-user"></i> <span>教师管理</span>
+						<i class="icon-submenu fa fa-angle-left"></i>
+				</a>
+
 					<div id="sub" class="collapse" aria-expanded="false"
 						style="height: 0px;">
 						<ul class="nav">
-							<li><a class="">信息审核</a></li>
-							<li><a class="">信息管理</a></li>
-							<li><a onclick="user_setting(user_setting)"
-								class=" setButton">重置密码</a></li>
+							<li><a class="">教师信息审核</a></li>
+							<li><a class="">教师信息管理</a></li>
+
 						</ul>
 					</div></li>
 
 			</ul>
-		</s:if> 
-		
-		<s:if test="#session.role=='教职工'">
+
+
+			<ul class="sidebar-menu">
+				<li><a href="#sub2" data-toggle="collapse" class="collapsed"
+					aria-expanded="false"> <i class="fa fa-user"></i> <span>学生管理</span>
+						<i class="icon-submenu fa fa-angle-left"></i>
+				</a>
+
+					<div id="sub2" class="collapse" aria-expanded="false"
+						style="height: 0px;">
+						<ul class="nav">
+							<li><a class="">学生信息查看</a></li>
+							<li><a class="">学生信息管理</a></li>
+							
+						</ul>
+					</div></li>
+
+			</ul>
+
+			<ul class="sidebar-menu">
+				<li><a href="#sub3" data-toggle="collapse" class="collapsed"
+					aria-expanded="false"> <i class="fa fa-user"></i> <span>我的账户</span>
+						<i class="icon-submenu fa fa-angle-left"></i>
+				</a>
+
+					<div id="sub3" class="collapse" aria-expanded="false"
+						style="height: 0px;">
+						<ul class="nav">
+							<li><a class="">账户设置</a></li>
+							<li><a onclick="user_setting(user_setting)"
+								class=" setButton">重置密码</a></li>
+
+							<li><a
+								href="javascript:location.href = '/jxkyglxt/System/system_exit'"><i
+									class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li>
+
+						</ul>
+					</div></li>
+
+			</ul>
+
+
+
+
+
+
+
+		</s:if> <s:if test="#session.role=='教职工'">
 			<ul class="sidebar-menu">
 				<li><a href="#subPages" data-toggle="collapse"
 					class="collapsed" aria-expanded="false"><i class="fa fa-user"></i>
@@ -186,32 +256,57 @@
 					<div id="subPages" class="collapse" aria-expanded="false"
 						style="height: 0px;">
 						<ul class="nav">
-							<li><a class="">信息查看</a></li>
+							<li><a class="">教师信息查看</a></li>
 						</ul>
 					</div></li>
 			</ul>
-		</s:if>
-		
-		
-		
-		<s:if test="#session.role=='学生'">
-		<ul class="sidebar-menu">
-			<li><a href="#sub" data-toggle="collapse" class="collapsed"
-					aria-expanded="false">
-			<i class="fa fa-user"></i>
-						<span>学生信息</span>  <i class="icon-submenu fa fa-angle-left"></i></a>
-			<div id="subPages" class="collapse" aria-expanded="false"
+
+			<ul class="sidebar-menu">
+				<li><a href="#sub4" data-toggle="collapse" class="collapsed"
+					aria-expanded="false"> <i class="fa fa-user"></i> <span>学生管理</span>
+						<i class="icon-submenu fa fa-angle-left"></i>
+				</a>
+
+					<div id="sub4" class="collapse" aria-expanded="false"
 						style="height: 0px;">
 						<ul class="nav">
-							<li><a class="">信息查看</a></li>
+							<li><a class="">学生信息查看</a></li>
+							<li><a class="">学生信息管理</a></li>
+							
+							
 						</ul>
-					</div>
-			</li>			
-		</ul>
-		</s:if>
-		
-		
-		</aside>
+					</div></li>
+
+			</ul>
+
+			<ul class="sidebar-menu">
+				<li><a href="#sub5" data-toggle="collapse" class="collapsed"
+					aria-expanded="false"> <i class="fa fa-user"></i> <span>我的账户</span>
+						<i class="icon-submenu fa fa-angle-left"></i>
+				</a>
+
+					<div id="sub5" class="collapse" aria-expanded="false"
+						style="height: 0px;">
+						<ul class="nav">
+							<li><a class="">账户设置</a></li>
+							<li><a onclick="user_setting(user_setting)"
+								class=" setButton">重置密码</a></li>
+
+							<li><a
+								href="javascript:location.href = '/jxkyglxt/System/system_exit'"><i
+									class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li>
+
+						</ul>
+					</div></li>
+
+			</ul>
+
+
+
+
+
+
+		</s:if></aside>
 		<aside class="right-side"> <section class="content">
 		<div class="row">
 			<div class="col-md-12">

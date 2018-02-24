@@ -77,26 +77,49 @@ $(function() {
 		$(this).addClass("Atfer_li");
 		$(this).parent().siblings().children().removeClass("Atfer_li");
 		//管理员
-		if (($(this).text()) == "信息审核") {
+		if (($(this).text()) == "教师信息审核") {
 			$('.right-side').load('page/teacher/teacher_information_audit.jsp #content', selectSeacher(), function() {
 				data.dataState = "20";
 				$.getScript("js/teacher/teacher_information_audit.js");
 			});
 		}
 		//管理员
-		if (($(this).text()) == "信息管理") {
+		if (($(this).text()) == "教师信息管理") {
 			$('.right-side').load('page/teacher/teacher_Information_management.jsp #content', selectSeacher(), function() {
 				data.dataState = "40";
 				$.getScript("js/teacher/teacher_Information_management.js");
 			});
 		}
-		//用户
-		if (($(this).text()) == "信息查看") {
+		
+		//管理员-学生
+		if (($(this).text()) == "学生信息查看") {
+			$('.right-side').load('page/student/student_information_management.jsp #content', selectSeacher(), function() {
+				data.dataState = "20";
+				$.getScript("js/teacher/teacher_information_audit.js");
+			});
+		}
+		
+		//管理员-学生
+		if (($(this).text()) == "学生信息管理") {
+			$('.right-side').load('page/student/student_information_audit.jsp #content', selectSeacher(), function() {
+				data.dataState = "40";
+				$.getScript("js/teacher/teacher_information_audit.js");
+			});
+		}
+		//教师用户
+		if (($(this).text()) == "教师信息查看") {
 			$('.right-side').load('page/teacher/user_Information_management.jsp #content', selectSeacher(), function() {
 				$.getScript("js/teacher/user_Information_management.js");
 			})
 		}
 	});
+	//管理员
+//	if (($(this).text()) == "账户设置") {
+//		$('.right-side').load('page/setting.jsp #content', selectSeacher(), function() {
+//			$.getScript("js/teacher/user_Information_management.js");
+//		})
+//	}
+//});
 	//用户信息模态框
 	$('#info_modal').on('hidden.bs.modal', function() {
 		$(this).find('.basic').hide();

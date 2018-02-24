@@ -3612,9 +3612,12 @@ body>.header .logo .icon {
 	margin-right: 1px;
 }
 
-.skin-black .sidebar>.sidebar-menu>li>a:hover,
-.skin-black .sidebar>.sidebar-menu>li.active>a {
+.skin-black .sidebar>.sidebar-menu>li>a:hover{
 	color: #f6f6f6;
+	background: #adbac9;
+}
+.skin-black .sidebar>.sidebar-menu>li.active>a {
+	color: #c6c6c6;
 	background: #425164;
 }
 
