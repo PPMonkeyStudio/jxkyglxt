@@ -102,4 +102,11 @@ public class StudentPatent implements java.io.Serializable {
 		this.alterTime = alterTime;
 	}
 
+	@Override
+	public String toString() {
+		return "StudentPatent [patentId=" + patentId + ", studentId=" + studentId + ", awardName=" + awardName
+				+ ", awardClass=" + awardClass + ", authorizationNo=" + authorizationNo + ", time=" + time
+				+ ", firstPatent=" + firstPatent + ", alterTime=" + alterTime + "]";
+	}
+
 }

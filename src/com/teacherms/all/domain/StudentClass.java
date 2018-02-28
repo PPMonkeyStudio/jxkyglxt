@@ -61,4 +61,10 @@ public class StudentClass implements java.io.Serializable {
 		this.alterTime = alterTime;
 	}
 
+	@Override
+	public String toString() {
+		return "StudentClass [classId=" + classId + ", className=" + className + ", userId=" + userId + ", alterTime="
+				+ alterTime + "]";
+	}
+
 }

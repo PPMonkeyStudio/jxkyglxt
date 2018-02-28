@@ -296,4 +296,18 @@ public class StudentInfo implements java.io.Serializable {
 		this.alterTime = alterTime;
 	}
 
+	@Override
+	public String toString() {
+		return "StudentInfo [studentId=" + studentId + ", studentName=" + studentName + ", calendarYear=" + calendarYear
+				+ ", enrolmentYear=" + enrolmentYear + ", certificateType=" + certificateType + ", certificateNo="
+				+ certificateNo + ", birthYear=" + birthYear + ", sex=" + sex + ", nation=" + nation
+				+ ", politicalStatus=" + politicalStatus + ", studentSource=" + studentSource + ", studentType="
+				+ studentType + ", enrolmentType=" + enrolmentType + ", classType=" + classType + ", classNumber="
+				+ classNumber + ", className=" + className + ", inClassName=" + inClassName + ", departmentId="
+				+ departmentId + ", teacherTraining=" + teacherTraining + ", deformed=" + deformed + ", changes="
+				+ changes + ", entranceRecord=" + entranceRecord + ", enrolmentStyle=" + enrolmentStyle
+				+ ", droppingReason=" + droppingReason + ", registeredType=" + registeredType + ", degree=" + degree
+				+ ", alterTime=" + alterTime + "]";
+	}
+
 }

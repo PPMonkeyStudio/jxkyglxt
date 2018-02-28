@@ -84,4 +84,11 @@ public class StudentPaper implements java.io.Serializable {
 		this.alterTime = alterTime;
 	}
 
+	@Override
+	public String toString() {
+		return "StudentPaper [paperId=" + paperId + ", studentId=" + studentId + ", periodical=" + periodical
+				+ ", publishTime=" + publishTime + ", includedSituation=" + includedSituation + ", alterTime="
+				+ alterTime + "]";
+	}
+
 }

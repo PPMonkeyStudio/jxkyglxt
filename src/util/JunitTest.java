@@ -3,6 +3,7 @@ package util;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.annotation.Resource;
 
@@ -164,5 +165,113 @@ public class JunitTest {
 	@Test
 	public void test_Student_test() {
 		studentService.test();
+	}
+
+	@Test
+	public void test_setStudentOneInfo() {
+		try {
+			System.out
+					.println(studentService.setStudentAllInfo(new StudentAward(null, "1", "2", "2", "", "", "", null)));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void test_upodateStudentOneInfo() {
+		try {
+			System.out.println(studentService.updateStudentAllInfo(
+					new StudentAward("d2ebf782-c12c-404c-b60f-b5f2160cd83c", "1", "6", "7", "8", "9", "22", "")));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void test_getStudentOneInfo() {
+		try {
+			System.out.println(
+					studentService.getStudentOneInfo(new StudentAward("1", "1", null, null, null, null, null, null)));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void test_getStudentAllInfo() {
+		try {
+			System.out.println(studentService.getStudentAllInfo("StudentAward"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void test_deleteStudentAllInfo() {
+		try {
+			System.out.println(studentService.deleteStudentInfo(
+					new StudentAward("d2ebf782-c12c-404c-b60f-b5f2160cd83c", "1", null, null, null, null, null, null)));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void test() {
+		Scanner sc = new Scanner(System.in);
+		int year = 2018, month = 2, day = 4, sum = 0;
+		System.out.println("请输入天数：");
+		while (true) {
+			day = sc.nextInt();
+			// 非闰年，月份为2，天数大于28
+			if (!(year % 4 == 0 && year % 100 != 0 || year % 400 == 0) && month == 2) {
+				if (day < 29 && day > 0) {
+					break;
+				} else {
+					System.out.println("输入天数有误,请重新输入：");
+				}
+			} else
+				break;
+		}
+		switch (month - 1) {
+		case 12:
+			sum += 31;
+		case 11:
+			sum += 30;
+		case 10:
+			sum += 31;
+		case 9:
+			sum += 30;
+		case 8:
+			sum += 31;
+		case 7:
+			sum += 31;
+		case 6:
+			sum += 30;
+		case 5:
+			sum += 31;
+		case 4:
+			sum += 30;
+		case 3:
+			sum += 31;
+		case 2:
+			if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+				sum += 29;
+			} else {
+				sum += 28;
+			}
+			;
+		case 1:
+			sum += 31;
+			break;
+		default:
+			break;
+		}
+		System.out.println(sum + day);
 	}
 }

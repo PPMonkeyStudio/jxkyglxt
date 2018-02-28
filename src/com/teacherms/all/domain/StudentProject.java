@@ -82,4 +82,10 @@ public class StudentProject implements java.io.Serializable {
 		this.alterTime = alterTime;
 	}
 
+	@Override
+	public String toString() {
+		return "StudentProject [projectId=" + projectId + ", projectName=" + projectName + ", studentId=" + studentId
+				+ ", projectLeading=" + projectLeading + ", userId=" + userId + ", alterTime=" + alterTime + "]";
+	}
+
 }

@@ -102,4 +102,11 @@ public class StudentAward implements java.io.Serializable {
 		this.alterTime = alterTime;
 	}
 
+	@Override
+	public String toString() {
+		return "StudentAward [awardId=" + awardId + ", studentId=" + studentId + ", awardName=" + awardName
+				+ ", awardClass=" + awardClass + ", authorizationNo=" + authorizationNo + ", time=" + time
+				+ ", firstAward=" + firstAward + ", alterTime=" + alterTime + "]";
+	}
+
 }
