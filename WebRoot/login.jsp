@@ -41,7 +41,7 @@
 
 			</div>
 		</div>
-		<div id="copyRight">CopyRight@2017教学科研管理系统版权所有</div>
+		<div id="copyRight">CopyRight@2018      本科数据管理系统 版权所有</div>
 	</div>
 
 
@@ -57,9 +57,13 @@
 				data : $("form").serialize(),
 				dataType : "json",
 				success : function(xhr_data) {
+
 					if (xhr_data.result == "success") {
 						location.href = "page/teacher/main_index.jsp";
 					}
+					else{
+						window.alert("登录失败，请检查您的用户名或密码是否有误！");
+						}
 				},
 				error : function() {}
 			});

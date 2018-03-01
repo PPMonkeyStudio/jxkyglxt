@@ -12,11 +12,12 @@
 	Calendar calendar = Calendar.getInstance(locale);
 	int hour = calendar.get(Calendar.HOUR_OF_DAY);
 	String greeting = "";
-	if (hour <= 1) {
+	if (hour <= 5) {
 		greeting = "夜深了，";
-	} else if (hour <= 6) {
 	} else if (hour <= 9) {
-		greeting = "早安，";
+		greeting = "早安了，";
+	} else if (hour <= 11) {
+		greeting = "上午好，";
 	} else if (hour <= 13) {
 		greeting = "中午好，";
 	} else if (hour <= 18) {
@@ -105,7 +106,7 @@
 							<li>
 								<!-- start message --> <a>
 									<div class="pull-left">
-										<img src="img/26115.jpg" class="img-circle" alt="User Image" />
+										<img src="" class="img-circle" alt="" />
 									</div>
 									<h4>Support Team</h4>
 									<p>Why not buy a new awesome theme?</p> <small
@@ -143,10 +144,16 @@
 					</a>
 					</li>
 					<li class="divider"></li>
-					<li><a
-						href="javascript:location.href = '/jxkyglxt/System/system_exit'"><i
-							class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li>
+					
+					<li><a href="javascript:location.href = '/jxkyglxt/System/system_exit'">
+					<i class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li>
+					
+<!-- 					<li><a href="#" onclick="exit_alert()">
+					<i class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li> -->
+					
+					
 				</ul></li>
+				
 		</ul>
 	</div>
 	</nav> </header>
@@ -214,7 +221,7 @@
 						<ul class="nav">
 							<li><a class="">学生信息查看</a></li>
 							<li><a class="">学生信息管理</a></li>
-							
+
 						</ul>
 					</div></li>
 
@@ -236,6 +243,8 @@
 							<li><a
 								href="javascript:location.href = '/jxkyglxt/System/system_exit'"><i
 									class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li>
+							<!-- <li><a href="#" onclick="exit_alert()">
+					<i class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li> -->
 
 						</ul>
 					</div></li>
@@ -272,8 +281,8 @@
 						<ul class="nav">
 							<li><a class="">学生信息查看</a></li>
 							<li><a class="">学生信息管理</a></li>
-							
-							
+
+
 						</ul>
 					</div></li>
 
@@ -292,9 +301,11 @@
 							<li><a onclick="user_setting(user_setting)"
 								class=" setButton">重置密码</a></li>
 
-							<li><a
-								href="javascript:location.href = '/jxkyglxt/System/system_exit'"><i
+							<li><a href="javascript:location.href = '/jxkyglxt/System/system_exit'"><i
 									class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li>
+									
+<!-- 					<li><a href="#" onclick="exit_alert()">
+					<i class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li> -->
 
 						</ul>
 					</div></li>
@@ -333,6 +344,14 @@
 		//拼装完整日期格式
 		var today = now.getFullYear() + "-" + (month) + "-" + (day);
 		$(".riliDate").val(today);
+	
+	
+		function exit_alert() {
+			var exit = confirm("您确定要注销吗？")
+			if (exit == true) {
+				window.location.href = "/jxkyglxt/System/system_exit"
+			}
+		}
 	</script>
 </body>
 </html>

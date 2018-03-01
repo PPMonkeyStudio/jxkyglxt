@@ -9,5 +9,6 @@ encoding//src/com/teacherms/all/domain/z_teacher_paper.properties=UTF-8
 encoding//src/com/teacherms/all/domain/z_teacher_patent.properties=UTF-8
 encoding//src/com/teacherms/all/domain/z_teacher_project.properties=UTF-8
 encoding//src/com/teacherms/all/domain/z_teacher_works.properties=UTF-8
+encoding//src/util/uuid.java=UTF-8
 encoding/<project>=UTF-8
 encoding/src=UTF-8
