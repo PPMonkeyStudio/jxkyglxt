@@ -14,7 +14,7 @@
 			<!--breadcrumbs start -->
 			<ul class="breadcrumb">
 				<li><a><i class="fa fa-home"></i> 首页</a></li>
-				<li class="active">信息审核</li>
+				<li class="active">教师信息审核</li>
 			</ul>
 			<!--breadcrumbs end -->
 		</div>

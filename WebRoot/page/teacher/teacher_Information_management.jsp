@@ -14,7 +14,7 @@
 			<!--breadcrumbs start -->
 			<ul class="breadcrumb">
 				<li><a><i class="fa fa-home"></i> 首页</a></li>
-				<li class="active">信息管理</li>
+				<li class="active">教师信息管理</li>
 			</ul>
 			<!--breadcrumbs end -->
 		</div>
@@ -591,6 +591,9 @@
 						<li><a>上一页</a></li>
 						<li><a>下一页</a></li>
 						<li><a>尾页</a></li>
+						
+						
+						
 					</ul>
 				</div>
 			</div>

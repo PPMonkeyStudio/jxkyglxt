@@ -165,6 +165,8 @@
 			<div class="pull-left image">
 				<img src="img/login.jpg" class="img-circle" alt="User Image" />
 			</div>
+			
+			<!-- 问候区域 -->
 			<div class="pull-left info">
 				<p>
 					<%=greeting%>
