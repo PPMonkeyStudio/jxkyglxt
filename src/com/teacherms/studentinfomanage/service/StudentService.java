@@ -5,6 +5,8 @@ import java.util.ResourceBundle;
 
 import com.teacherms.studentinfomanage.vo.StudentInfoAndOtherInfo;
 
+import util.PageVO;
+
 public interface StudentService {
 	static final String propertiesPath = ResourceBundle.getBundle("_path").getString("filePath");
 
@@ -18,5 +20,5 @@ public interface StudentService {
 
 	public StudentInfoAndOtherInfo getStudentOneInfo(Object InfoObject) throws Exception;
 
-	public List<StudentInfoAndOtherInfo> getStudentAllInfo(String InfoName) throws Exception;
+	public PageVO<StudentInfoAndOtherInfo> getStudentAllInfo(String InfoName,String page) throws Exception;
 }

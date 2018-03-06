@@ -17,6 +17,8 @@ import com.teacherms.all.domain.User;
 import com.teacherms.studentinfomanage.service.StudentService;
 import com.teacherms.studentinfomanage.vo.StudentInfoAndOtherInfo;
 
+import util.PageVO;
+
 /**
  * @author Administrator
  *
@@ -32,7 +34,7 @@ import com.teacherms.studentinfomanage.vo.StudentInfoAndOtherInfo;
 public class StudentAction extends ActionSupport {
 
 	private StudentService studentService;
-
+	private String page;// 分页
 	private String tableName;
 	private StudentInfo studentInfo;
 	private StudentAward studentAward;
@@ -97,9 +99,9 @@ public class StudentAction extends ActionSupport {
 	 */
 	public void getStudentAllInfo() {
 		try {
-			List<StudentInfoAndOtherInfo> list = studentService.getStudentAllInfo(tableName);
+			PageVO<StudentInfoAndOtherInfo> pageVo = studentService.getStudentAllInfo(tableName, page);
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
-			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(list));
+			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(pageVo));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -187,6 +189,10 @@ public class StudentAction extends ActionSupport {
 
 	public void setStudentPaper(StudentPaper studentPaper) {
 		this.studentPaper = studentPaper;
+	}
+
+	public void setPage(String page) {
+		this.page = page;
 	}
 
 }

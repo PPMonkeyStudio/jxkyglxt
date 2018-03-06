@@ -8,6 +8,7 @@ import com.teacherms.studentinfomanage.dao.StudentDao;
 import com.teacherms.studentinfomanage.service.StudentService;
 import com.teacherms.studentinfomanage.vo.StudentInfoAndOtherInfo;
 
+import util.PageVO;
 import util.TimeUtil;
 import util.uuid;
 
@@ -58,16 +59,16 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public StudentInfoAndOtherInfo getStudentOneInfo(Object InfoObject) throws Exception {
 		Class<? extends Object> infoClass = InfoObject.getClass();
-		
+
 		// 学生id
 		Field studentId = infoClass.getDeclaredField("studentId");
 		studentId.setAccessible(true);
 		String studentIdValue = (String) studentId.get(InfoObject);
-		
+
 		// 信息ID
 		Field infoID = infoClass.getDeclaredFields()[0];
 		infoID.setAccessible(true);
-		
+
 		// ID名，值
 		String IDName = infoID.getName();
 		String IDValue = (String) infoID.get(InfoObject);
@@ -77,8 +78,24 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public List<StudentInfoAndOtherInfo> getStudentAllInfo(String InfoName) throws Exception {
-		return studentDao.getStudentAllInfo(InfoName);
+	public PageVO<StudentInfoAndOtherInfo> getStudentAllInfo(String InfoName, String page) throws Exception {
+		// 每页记录数
+		int pageSize = 10;
+		// 页数
+		int pageIndex = Integer.parseInt(page);
+		// 查询长度
+		int toindex = pageSize;
+		List<StudentInfoAndOtherInfo> list = studentDao.getStudentAllInfo(InfoName);
+		// 总记录数
+		int totalSize = list.size();
+		// 当所要显示的最大值大于记录数最大值时，每页记录设置为不超过记录数值
+		if (pageIndex * pageSize > totalSize) {
+			toindex = totalSize - (pageIndex - 1) * pageSize;
+		}
+		// 设置VO内参数页码，每页记录数，总记录数
+		PageVO<StudentInfoAndOtherInfo> pageVO = new PageVO<StudentInfoAndOtherInfo>(pageIndex, pageSize, totalSize);
+		pageVO.setObjDatas(list.subList((pageIndex - 1) * pageSize, (pageIndex - 1) * pageSize + toindex));
+		return pageVO;
 	}
 
 	@Override
