@@ -33,7 +33,7 @@ public class StudentAction extends ActionSupport {
 
 	private StudentService studentService;
 
-	private String InfoName;
+	private String tableName;
 	private StudentInfo studentInfo;
 	private StudentAward studentAward;
 	private StudentPatent studentPatent;
@@ -51,13 +51,13 @@ public class StudentAction extends ActionSupport {
 		this.studentService = studentService;
 	}
 
-	// getInfoClassByInfoName()执行返回后参数为对象，通过InfoName获取，以下称返回的对象为object0
+	// getInfoClassBytableName()执行返回后参数为对象，通过tableName获取，以下称返回的对象为object0
 	/**
 	 * 保存学生信息 object0内该包含日期，主键除外外的其他信息
 	 */
 	public void setStudentAllInfo() {
 		try {
-			String msg = studentService.setStudentAllInfo(getInfoObjectByInfoName());
+			String msg = studentService.setStudentAllInfo(getInfoObjectBytableName());
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + msg + "\"}");
 		} catch (Exception e) {
@@ -71,7 +71,7 @@ public class StudentAction extends ActionSupport {
 	 */
 	public void deleteStudentAllInfo() {
 		try {
-			String msg = studentService.deleteStudentInfo(getInfoObjectByInfoName());
+			String msg = studentService.deleteStudentInfo(getInfoObjectBytableName());
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + msg + "\"}");
 		} catch (Exception e) {
@@ -84,7 +84,7 @@ public class StudentAction extends ActionSupport {
 	 */
 	public void updateStudentAllInfo() {
 		try {
-			String msg = studentService.updateStudentAllInfo(getInfoObjectByInfoName());
+			String msg = studentService.updateStudentAllInfo(getInfoObjectBytableName());
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + msg + "\"}");
 		} catch (Exception e) {
@@ -93,11 +93,11 @@ public class StudentAction extends ActionSupport {
 	}
 
 	/**
-	 * 获取学生信息（所有） 通过InfoName辨别需要获取什么信息
+	 * 获取学生信息（所有） 通过tableName辨别需要获取什么信息
 	 */
 	public void getStudentAllInfo() {
 		try {
-			List<StudentInfoAndOtherInfo> list = studentService.getStudentAllInfo(InfoName);
+			List<StudentInfoAndOtherInfo> list = studentService.getStudentAllInfo(tableName);
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(list));
 		} catch (Exception e) {
@@ -106,11 +106,11 @@ public class StudentAction extends ActionSupport {
 	}
 
 	/**
-	 * 获取学生信息（所有） object0内至少id应当含有
+	 * 获取学生信息（单个） object0内至少表id和studentId应当含有
 	 */
 	public void getStudentOneInfo() {
 		try {
-			StudentInfoAndOtherInfo obj = studentService.getStudentOneInfo(getInfoObjectByInfoName());
+			StudentInfoAndOtherInfo obj = studentService.getStudentOneInfo(getInfoObjectBytableName());
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(obj));
 		} catch (Exception e) {
@@ -118,12 +118,12 @@ public class StudentAction extends ActionSupport {
 		}
 	}
 
-	public void setInfoName(String infoName) {
-		InfoName = infoName;
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
 	}
 
-	private Object getInfoObjectByInfoName() {
-		switch (this.InfoName) {
+	private Object getInfoObjectBytableName() {
+		switch (this.tableName) {
 		case "StudentInfo":
 			return studentInfo;
 		case "StudentPaper":

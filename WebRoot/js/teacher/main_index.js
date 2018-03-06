@@ -90,7 +90,7 @@ $(function() {
 				$.getScript("js/teacher/teacher_Information_management.js");
 			});
 		}
-		
+
 		//管理员-学生
 		if (($(this).text()) == "学生信息查看") {
 			$('.right-side').load('page/student/student_information_management.jsp #content', selectSeacher(), function() {
@@ -98,7 +98,7 @@ $(function() {
 				$.getScript("js/teacher/teacher_information_audit.js");
 			});
 		}
-		
+
 		//管理员-学生
 		if (($(this).text()) == "学生信息管理") {
 			$('.right-side').load('page/student/student_information_audit.jsp #content', selectSeacher(), function() {
@@ -114,12 +114,12 @@ $(function() {
 		}
 	});
 	//管理员
-//	if (($(this).text()) == "账户设置") {
-//		$('.right-side').load('page/setting.jsp #content', selectSeacher(), function() {
-//			$.getScript("js/teacher/user_Information_management.js");
-//		})
-//	}
-//});
+	//	if (($(this).text()) == "账户设置") {
+	//		$('.right-side').load('page/setting.jsp #content', selectSeacher(), function() {
+	//			$.getScript("js/teacher/user_Information_management.js");
+	//		})
+	//	}
+	//});
 	//用户信息模态框
 	$('#info_modal').on('hidden.bs.modal', function() {
 		$(this).find('.basic').hide();
@@ -171,6 +171,8 @@ var m_check = {
 			} else {
 				o.click(function() {
 					$(this).children('i').attr('class', self.getInverse(this));
+					alert("11");
+					div.find('.tab-inneed').append($(this));
 				});
 			}
 		});

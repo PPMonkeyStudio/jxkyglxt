@@ -26,13 +26,6 @@
 								<li><button id="inverse" class="btn btn-info btn-sm">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>反选</span>
 									</button></li>
-
-								<!-- <li><label>全选</label><input id="btn1" type="checkbox"
-									value=""></li>
-								<li><label>取消全选</label><input id="btn2" type="checkbox"
-									value=""></li>
-								<li><label>反选</label><input id="btn3" type="checkbox"
-									value=""></li> -->
 							</ul>
 							<ul class="group-list">
 
@@ -48,24 +41,15 @@
 								<li><button value="5" class="btn btn-info btn-sm">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>获奖者工号_排名</span>
 									</button></li>
-
-								<!-- <li><input name="checkbox" id="check" type="checkbox"
-									value="1"> <label for="check">工号</label></li>
-
-								<li><input name="checkbox" type="checkbox" value="2">
-									<label for="check">获奖作品名称</label></li>
-
-								<li><label><input name="checkbox" type="checkbox"
-										value="3">奖励名称</label></li>
-								<li><label><input name="checkbox" type="checkbox"
-										value="4">获奖者姓名</label></li>
-								<li><label><input name="checkbox" type="checkbox"
-										value="5">获奖者工号_排名</label></li> -->
-							</ul>
-							<ul class="group-list">
 								<li><button value="6" class="btn btn-info btn-sm">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>奖励类型</span>
 									</button></li>
+								<li><button value="11" class="btn btn-info btn-sm">
+										<i class="fa fa-times" aria-hidden="true"></i> <span>获奖证书编号</span>
+									</button></li>
+							</ul>
+							<ul class="group-list">
+
 								<li><button value="7" class="btn btn-info btn-sm">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>奖励类别</span>
 									</button></li>
@@ -78,43 +62,19 @@
 								<li><button value="10" class="btn btn-info btn-sm">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>获奖时间</span>
 									</button></li>
-								<!-- 
-								<li><label><input name="checkbox" type="checkbox"
-										value="6">奖励类型</label></li>
-								<li><label><input name="checkbox" type="checkbox"
-										value="7">奖励类别</label></li>
-								<li><label><input name="checkbox" type="checkbox"
-										value="8">获奖等级</label></li>
-								<li><label><input name="checkbox" type="checkbox"
-										value="9">获奖级别</label></li>
-								<li><label><input name="checkbox" type="checkbox"
-										value="10">获奖时间</label></li> -->
-							</ul>
-							<ul class="group-list">
-								<li><button value="11" class="btn btn-info btn-sm">
-										<i class="fa fa-times" aria-hidden="true"></i> <span>获奖证书编号</span>
-									</button></li>
 								<li><button value="12" class="btn btn-info btn-sm">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>授予单位</span>
 									</button></li>
+							</ul>
+							<ul class="group-list">
 
 								<!-- <li><button value="13" class="btn btn-info btn-sm">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>附件地址</span>
 									</button></li> -->
-
-								<!-- <li><label><input name="checkbox" type="checkbox"
-										value="11">获奖证书编号</label></li>
-								<li><label><input name="checkbox" type="checkbox"
-										value="12">授予单位</label></li>
-								<li><label><input name="checkbox" type="checkbox"
-										value="13">附件地址</label></li>
-								<li><label><input name="checkbox" type="checkbox"
-										value="14">数据状态</label></li>
-								<li><label><input name="checkbox" type="checkbox"
-										value="15">创建时间</label></li> -->
 							</ul>
 						</div>
 					</div>
+					<div class="tab-inneed"></div>
 				</div>
 
 				<div class="modal-footer">
