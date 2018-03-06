@@ -25,9 +25,9 @@
 			<section class="panel general"> <header
 				class="panel-heading tab-bg-dark-navy-blue">
 			<ul class="nav nav-tabs">
-				<li class=""><a data-toggle="tab" href="#info">用户</a></li>
+				<li class=""><a data-toggle="tab" href="#info">学生</a></li>
 				<li class=""><a data-toggle="tab" href="#award">奖励</a></li>
-				<li class=""><a data-toggle="tab" href="#works">著作</a></li>
+				<li class=""><a data-toggle="tab" href="#works">学生著作</a></li>
 				<li class=""><a data-toggle="tab" href="#paper">论文</a></li>
 				<li class=""><a data-toggle="tab" href="#patent">专利</a></li>
 				<li class=""><a data-toggle="tab" href="#project">项目(课题)</a></li>
@@ -68,15 +68,10 @@
 													<option value="student_name">姓名</option>
 													<option value="studentId">学号</option>
 													<option value="studentName">姓名</option>
-													<option value="calendarYear">年制</option>
-													
-													<option value="enrolmentYear">入学年份</option>
-													
-													<option value="certificateType">证件类型</option>
-													
-													
-													<option value="certificateNo">身份证/护照号码</option>
-													
+													<option value="calendarYear">年制</option>												
+													<option value="enrolmentYear">入学年份</option>										
+													<option value="certificateType">证件类型</option>												
+													<option value="certificateNo">身份证/护照号码</option>												
 													<option value="sex">性别</option>
 													<option value="nation">民族</option>
 													<option value="politicalStatus">政治面貌</option>
@@ -117,18 +112,18 @@
 							</div>
 							<!--查询存放信息的表格-->
 							<section class="panel"> <header class="panel-heading">
-							用户信息 </header>
+							学生信息 </header>
 							<div class="panel-body table-responsive">
 								<table class="table table-hover ">
 									<thead>
 										<tr>
 											<th>序号</th>
-											<th>工号</th>
+											<th>学号</th>
 											<th>姓名</th>
-											<th>职工类型</th>
-											<th>职工状态</th>
-											<th>授课类型</th>
-											<th>授课状态</th>
+											<th>性别</th>
+											<th>入学年份</th>
+											<th>身份证号码</th>
+											<th>专业名称</th>
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -206,7 +201,7 @@
 											<th>序号</th>
 											<th>奖励名称</th>
 											<th>获奖者姓名</th>
-											<th>获奖级别</th>
+											<th>获奖类别</th>
 											<th>获奖时间</th>
 											<th>授予单位</th>
 											<th>操作</th>
@@ -257,7 +252,7 @@
 													<option value="publishTime">出版时间</option>
 													<option value="selectedSituation">入选情况</option>
 													<option value="selectedDate">入选时间</option>
-													<option value="editorUserNames">主编（作者）</option>
+													<option value="editorUserNames">主编</option>
 												</select>
 												<button style="float: right; margin-left: 6px;"
 													class="btn btn-danger search_info">
@@ -284,11 +279,11 @@
 									<thead>
 										<tr>
 											<th>序号</th>
-											<th>著作名称</th>
-											<th>主编</th>
-											<th>ISBN</th>
-											<th>出版时间</th>
-											<th>出版社</th>
+											<th>学号</th>
+											<th>发表期刊</th>
+											<th>发表时间</th>
+											<th>收录情况</th>
+											<th>修改时间</th>
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -544,6 +539,7 @@
 					<ul class="pager">
 						<li><a>首页</a></li>
 						<li><a>上一页</a></li>
+						<li>audit</li>
 						<li><a>下一页</a></li>
 						<li><a>尾页</a></li>
 					</ul>

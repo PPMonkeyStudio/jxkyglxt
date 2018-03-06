@@ -109,17 +109,17 @@ $(function() {
 		
 		//管理员-学生
 		if (($(this).text()) == "学生信息查看") {
-			$('.right-side').load('page/student/student_Information_management.jsp #content', selectSeacher(), function() {
+			$('.right-side').load('page/student/student_information_audit.jsp #content', function() {
 				data.dataState = "20";
-				$.getScript("js/student/student_Information_audit.js");
+				$.getScript("js/student/student_information_audit.js");
 			});
 		}
 		
 		//管理员-学生
 		if (($(this).text()) == "学生信息管理") {
-			$('.right-side').load('page/student/student_information_audit.jsp #content', selectSeacher(), function() {
-				data.dataState = "40";
-				$.getScript("js/student/student_information_audit.js");
+			$('.right-side').load('page/student/student_information_management.jsp #content', function() {
+				data.dataState = "20";
+				$.getScript("js/student/student_information_management.js");
 			});
 		}
 		//教师用户
@@ -432,7 +432,7 @@ function getinfoByCardId() {
 			}else{
 				document.title=normal_title;
 				}});
-
+	
 function selectSeacher() {
 	$(document).on("change", "#all_options", function() {
 		var option = $(this).find('option:selected');
@@ -603,7 +603,5 @@ function selectSeacher() {
 
 			}
 		}
-
-
 	})
 }
