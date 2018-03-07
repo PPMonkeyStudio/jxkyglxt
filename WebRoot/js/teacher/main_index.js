@@ -63,7 +63,6 @@ var data = {
 	"studentInfo." : "",
 	"studentInfo." : "",
 	"studentInfo." : "",
-	
 }
 
 //保存分页信息
@@ -463,17 +462,15 @@ function getinfoByCardId() {
 	})
 }
 
-<<<<<<< HEAD
+document.addEventListener('visibilitychange', function() {
+	if (document.visibilityState == 'hidden') {
+		normal_title = document.title;
+		document.title = '[在线] - 本科数据管理系统';
+	} else {
+		document.title = normal_title;
+	}
+});
 
-=======
-	document.addEventListener('visibilitychange',function(){
-		if(document.visibilityState=='hidden'){
-			normal_title=document.title;document.title='[在线] - 本科数据管理系统';
-			}else{
-				document.title=normal_title;
-				}});
-	
->>>>>>> LM
 function selectSeacher() {
 	$(document).on("change", "#all_options", function() {
 		var option = $(this).find('option:selected');
