@@ -213,22 +213,18 @@
 
 			</ul>
 
-
 			<ul class="sidebar-menu">
 				<li><a href="#sub2" data-toggle="collapse" class="collapsed"
 					aria-expanded="false"> <i class="fa fa-user"></i> <span>学生管理</span>
 						<i class="icon-submenu fa fa-angle-left"></i>
 				</a>
-
 					<div id="sub2" class="collapse" aria-expanded="false"
 						style="height: 0px;">
 						<ul class="nav">
 							<li><a class="">学生信息查看</a></li>
 							<li><a class="">学生信息管理</a></li>
-
 						</ul>
 					</div></li>
-
 			</ul>
 
 			<ul class="sidebar-menu">
@@ -241,8 +237,7 @@
 						style="height: 0px;">
 						<ul class="nav">
 							<li><a class="">账户设置</a></li>
-							<li><a onclick="user_setting(user_setting)"
-								class=" setButton">重置密码</a></li>
+							<li><a onclick="user_setting(user_setting)" class=" setButton">重置密码</a></li>
 
 							<li><a
 								href="javascript:location.href = '/jxkyglxt/System/system_exit'"><i
@@ -402,6 +397,11 @@
 		var today = now.getFullYear() + "-" + (month) + "-" + (day);
 		$(".riliDate").val(today);
 	
+		$(function(){
+			$("#info_ul").on('click',function(e){
+				
+			})
+		})
 	
 		function exit_alert() {
 			var exit = confirm("您确定要注销吗？");

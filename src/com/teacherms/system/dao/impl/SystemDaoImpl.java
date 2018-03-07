@@ -42,7 +42,7 @@ public class SystemDaoImpl implements SystemDao {
 
 	@Override
 	public List<Introduction> getIntroduction(String departmentId) {
-		String hql = "from Introduction where Introduction_department ='" + departmentId + "'";
+		String hql = "from Introduction where Introduction_department ='" + departmentId + "' order by introductionRanking";
 		return getSession().createQuery(hql).list();
 	}
 
