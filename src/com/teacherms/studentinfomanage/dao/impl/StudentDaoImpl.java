@@ -82,8 +82,14 @@ public class StudentDaoImpl implements StudentDao {
 
 	@Override
 	public List<StudentInfoAndOtherInfo> getStudentAllInfo(String tableName) {
-		String hql = "select new com.teacherms.studentinfomanage.vo.StudentInfoAndOtherInfo(t,u) from " + tableName
-				+ " t,StudentInfo u where t.studentId=u.studentId";
+		String hql = "";
+		if (!"StudentClass".equals(tableName)) {
+			hql = "select new com.teacherms.studentinfomanage.vo.StudentInfoAndOtherInfo(t,u) from " + tableName
+					+ " t,StudentInfo u where t.studentId=u.studentId";
+
+		} else {
+			hql = " from " + tableName;
+		}
 		return getSession().createQuery(hql).list();
 	}
 }

@@ -39,19 +39,6 @@
 	<jsp:include page="/modal/exportInfo/patent_modal.jsp" flush="true"></jsp:include>
 	<jsp:include page="/modal/exportInfo/project_modal.jsp" flush="true"></jsp:include>
 	<jsp:include page="/modal/exportInfo/works_modal.jsp" flush="true"></jsp:include>
-<%-- 	
-	
-	<jsp:include page="/modal/student_audit/award_modal.jsp" flush="true"></jsp:include>
-	<jsp:include page="/modal/student_audit/info_modal.jsp" flush="true"></jsp:include>
-	<jsp:include page="/modal/student_audit/paper_modal.jsp" flush="true"></jsp:include>
-	<jsp:include page="/modal/student_audit/patent_modal.jsp" flush="true"></jsp:include>
-	<jsp:include page="/modal/student_audit/project_modal.jsp" flush="true"></jsp:include>
-	<jsp:include page="/modal/student_check/award_modal.jsp" flush="true"></jsp:include>
-	<jsp:include page="/modal/student_check/info_modal.jsp" flush="true"></jsp:include>
-	<jsp:include page="/modal/student_check/paper_modal.jsp" flush="true"></jsp:include>
-	<jsp:include page="/modal/student_check/patent_modal.jsp" flush="true"></jsp:include>
-	<jsp:include page="/modal/student_check/project_modal.jsp" flush="true"></jsp:include> --%>
-
 
 	<script type="text/javascript" src="<%=basePath%>js/teacher/main_index.js"></script>
 </body>

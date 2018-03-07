@@ -1,5 +1,8 @@
 package com.teacherms.system.service;
 
+import java.util.List;
+
+import com.teacherms.all.domain.Introduction;
 import com.teacherms.all.domain.User;
 
 public interface SystemService {
@@ -34,5 +37,14 @@ public interface SystemService {
 	 * @return
 	 */
 	User modifyPassword(User midify_userInfo, User loging_user);
+
+	/**
+	 * 获取介绍
+	 * 
+	 * @param departmentId
+	 *            部门ID
+	 * @return
+	 */
+	List<Introduction> getIntroduction(String departmentId);
 
 }

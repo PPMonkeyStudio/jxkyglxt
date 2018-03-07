@@ -123,11 +123,12 @@ $(function() {
 			}
 		})
 		//通过a标签的链接属性，判断是哪一个导出模态框内的值
-		$('#export_' + a_href + ' .group-list button').each(function() {
-			if (($(this).children('i').hasClass('fa-check')) && $(this).attr('value') != undefined) {
+		$('#export_' + a_href + ' .tab-inneed button').each(function() {
+			if ($(this).attr('value') != undefined) {
 				data.export_name += $(this).val() + ',';
 			}
 		})
+		console.log(data.export_name);
 		if (data.export_id != "" && data.export_name != "") {
 			//console.log("export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
 			window.open("/jxkyglxt/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
@@ -143,7 +144,7 @@ $(function() {
 		//确认导出按钮隐藏,this为当前被点击的元素
 		parent_div.find('.sure_export').hide();
 		parent_div.find('.all_sure_export').hide();
-		//将tr的第一个td返回显示为数字
+		//将tr的第一个td返回显为数字
 		parent_div.find('#info_table tbody tr').each(function(i, v) {
 			$(this).children('td:first-child').empty().html(i + 1);
 		})
@@ -260,7 +261,7 @@ $(function() {
 		doQuery();
 		//导出模态框初始化
 		m_check.init({
-			id : '#export_' + a_href + ' #check'
+			id : '#export_' + a_href + ' .tab_content'
 		});
 	})
 	//分页信息

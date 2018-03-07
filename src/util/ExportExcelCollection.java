@@ -25,20 +25,13 @@ public class ExportExcelCollection {
 		sheet.setDefaultColumnWidth((short) 15);
 		// 产生表格标题行
 		XSSFRow row = sheet.createRow(0);
-		// 表格头部的列数
-		int cell_num = 0;
 		if (export_num != null) {
 			// 将所需要导出的属性索引（字符串）分割成数组
 			String[] arr_num = export_num.split(",");
-			// 循环
-			for (short i = 0; i < headers.length; i++) {
-				// 判断是否选中
-				if (ArrayUtils.contains(arr_num, i + "")) {
-					XSSFCell cell = row.createCell(cell_num);
-					XSSFRichTextString text = new XSSFRichTextString(headers[i]);
-					cell.setCellValue(text);
-					cell_num++;
-				}
+			for (int i = 0; i < arr_num.length; i++) {
+				XSSFCell cell = row.createCell(i);
+				XSSFRichTextString text = new XSSFRichTextString(headers[Integer.parseInt(arr_num[i])]);
+				cell.setCellValue(text);
 			}
 		} else
 			for (short i = 0; i < headers.length; i++) {

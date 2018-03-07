@@ -1,140 +1,158 @@
-*{
-	margin:0;
-	padding:0;
+* {
+	margin: 0;
+	padding: 0;
 }
-   
- #check  input + label {
+
+#check  input+label {
 	transition: color .7s ease;
 }
- #check input:checked + label {
+
+#check input:checked+label {
+	
 }
 
-.group-list{
-	width:100%;
-	height:60px;
-	background: rgba(0,0,0,.015);
-    border: 1px solid rgba(0,0,0,.04);
-}
-.group-list li{
-	margin-left:20px;
-}
-.group-list input{
-	margin-top:25px !important;
-}
-#check ul:first-child{
-	color:#42a5f5;
-}
- input[type=checkbox]{
-	outline:0 !important;
+.group-list {
+	width: 98%;
+	height: 40px;
+	background: rgba(0, 0, 0, .015);
+	border: 1px solid rgba(0, 0, 0, .04);
 }
 
-.group-list li{
-	width:20%;
-	height:60px;
-	line-height:60px;
-	float:left;
-	list-style:none;
+#check ul:first-child {
+	color: #42a5f5;
+}
+
+input[type=checkbox] {
+	outline: 0 !important;
+}
+
+.group-list li {
+	/* width:20%; */
+	/* height:60px; */
+	margin-left: 6px;
+	line-height: 34px;
+	float: left;
+	list-style: none;
+}
+
+.tab-inneed {
+	width: 90%;
+	margin: auto;
+}
+
+.tab-inneed button {
+	margin-left: 6px;
+	margin-top: 20px;
+	float: left;
 }
 
 /* 添加附件样式 */
-.img-control{
-	width:100%;
+.img-control {
+	width: 100%;
 }
-.img-control td:first-child{
-	position:fixed;
-	margin-left:4%;
+
+.img-control td:first-child {
+	position: fixed;
+	margin-left: 4%;
 }
-.img-default{           
-    position: relative;
-    width: 130px;
-    height: 90px;
-    border: 1px solid rgba(0,0,0,.1);
-    margin-bottom:5px;
-    float:left;
-    } 
-    .addInfo{
-    position: relative;
-    width: 130px;
-    height: 90px;
-    border: 1px solid rgba(0,0,0,.1);
-    margin-bottom:5px;
-   float:left;
-    }
+
+.img-default {
+	position: relative;
+	width: 130px;
+	height: 90px;
+	border: 1px solid rgba(0, 0, 0, .1);
+	margin-bottom: 5px;
+	float: left;
+}
+
+.addInfo {
+	position: relative;
+	width: 130px;
+	height: 90px;
+	border: 1px solid rgba(0, 0, 0, .1);
+	margin-bottom: 5px;
+	float: left;
+}
 
 /*首先确定遮罩层中图片的大小*/
-
-.img-default .img img{
-    position: relative;
-  width: 128px;
-    height: 88px;
-    max-width: 100%;
-    } 
-
+.img-default .img img {
+	position: relative;
+	width: 128px;
+	height: 88px;
+	max-width: 100%;
+}
 
 .img-default .info {
-position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    -webkit-backface-visibility: hidden;/* 隐藏旋转元素的背面*/
-    backface-visibility: hidden;
-    background: rgba(0, 0, 0, 0.5);   /*后面这个0.6是指的背景的透明度*/
-    opacity: 0;
-    -webkit-transition: all 0.35s ease-in-out;   /*规定提示信息怎样出现ease-in-out以慢速度开始和结束*/
-    -moz-transition: all 0.35s ease-in-out;
-    transition: all 0.35s ease-in-out;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	-webkit-backface-visibility: hidden; /* 隐藏旋转元素的背面*/
+	backface-visibility: hidden;
+	background: rgba(0, 0, 0, 0.5); /*后面这个0.6是指的背景的透明度*/
+	opacity: 0;
+	-webkit-transition: all 0.35s ease-in-out;
+	/*规定提示信息怎样出现ease-in-out以慢速度开始和结束*/
+	-moz-transition: all 0.35s ease-in-out;
+	transition: all 0.35s ease-in-out;
 }
 
-.img-control-btn{
+.img-control-btn {
 	z-index: 2;
 	background: transparent;
-margin: 0 .25rem;
-padding: 0;
-color: #fff;
-display: inline-block;
-text-align: center;
-border: 1px solid #fff;
-width:2.5rem;
-height:2.5rem;
-border-radius: 50%;
-position: relative;
-top:0;
-left:0;
- -webkit-transition: all 0.35s ease-in-out;   /*规定提示信息怎样出现ease-in-out以慢速度开始和结束*/
-    -moz-transition: all 0.35s ease-in-out;
-    transition: all 0.35s ease-in-out;
+	margin: 0 .25rem;
+	padding: 0;
+	color: #fff;
+	display: inline-block;
+	text-align: center;
+	border: 1px solid #fff;
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 50%;
+	position: relative;
+	top: 0;
+	left: 0;
+	-webkit-transition: all 0.35s ease-in-out;
+	/*规定提示信息怎样出现ease-in-out以慢速度开始和结束*/
+	-moz-transition: all 0.35s ease-in-out;
+	transition: all 0.35s ease-in-out;
 }
-.modify-btn{
-	top:35%;
-left:0;
- -webkit-transition: all 0.35s ease-in-out;   /*规定提示信息怎样出现ease-in-out以慢速度开始和结束*/
-    -moz-transition: all 0.35s ease-in-out;
-    transition: all 0.35s ease-in-out;
+
+.modify-btn {
+	top: 35%;
+	left: 0;
+	-webkit-transition: all 0.35s ease-in-out;
+	/*规定提示信息怎样出现ease-in-out以慢速度开始和结束*/
+	-moz-transition: all 0.35s ease-in-out;
+	transition: all 0.35s ease-in-out;
 }
-.delete-btn{
-	top:0;
-left:5%;
- -webkit-transition: all 0.35s ease-in-out;   /*规定提示信息怎样出现ease-in-out以慢速度开始和结束*/
-    -moz-transition: all 0.35s ease-in-out;
-    transition: all 0.35s ease-in-out;
+
+.delete-btn {
+	top: 0;
+	left: 5%;
+	-webkit-transition: all 0.35s ease-in-out;
+	/*规定提示信息怎样出现ease-in-out以慢速度开始和结束*/
+	-moz-transition: all 0.35s ease-in-out;
+	transition: all 0.35s ease-in-out;
 }
-.add-btn img{
-	  position: relative;
-	top:100%;
-	left:5%;
+
+.add-btn img {
+	position: relative;
+	top: 100%;
+	left: 5%;
 }
 /*最最重要的来了，鼠标化划过的时候刚开始info是opacity: 0;现在透明底变成1就显示出来了*/
-
 .img-default:hover .info {
-    opacity: 1;    /*有opacity有0变成1*/            
+	opacity: 1; /*有opacity有0变成1*/
 }
+
 .img-default:hover .modify-btn {
-	top:35%;
-	left:5%;
+	top: 35%;
+	left: 5%;
 }
-.img-default:hover .delete-btn{
-	top:35%;
-	left:5%;
+
+.img-default:hover .delete-btn {
+	top: 35%;
+	left: 5%;
 }
-	

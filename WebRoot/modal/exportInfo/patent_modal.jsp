@@ -22,71 +22,38 @@
 								<li><button id="inverse" class="btn btn-info btn-sm">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>反选</span>
 									</button></li>
-
-								<!-- <li><label><input id="btn1" type="checkbox"
-										value="">全选</label></li>
-								<li><label><input id="btn2" type="checkbox"
-										value="">取消全选</label></li>
-								<li><label><input id="btn3" type="checkbox"
-										value="">反选</label></li> -->
 							</ul>
 							<ul class="group-list">
-								<!-- <li><button value="20" class="btn btn-info btn-sm">
-										<i class="fa fa-times" aria-hidden="true"></i> <span>工号</span>
-									</button></li>
-								<li><button value="21" class="btn btn-info btn-sm">
-										<i class="fa fa-times" aria-hidden="true"></i> <span>姓名</span>
-									</button></li> -->
-								<li><button value="2" class="btn btn-info btn-sm">
+
+								<li><button value="2" class="btn btn-info btn-sm pro">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>专利名称</span>
 									</button></li>
-								<li><button value="3" class="btn btn-info btn-sm">
+								<li><button value="3" class="btn btn-info btn-sm pro">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>作者</span>
 									</button></li>
-								<li><button value="4" class="btn btn-info btn-sm">
+								<li><button value="4" class="btn btn-info btn-sm pro">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>作者工号_排名</span>
 									</button></li>
-								<li><button value="5" class="btn btn-info btn-sm">
+								<li><button value="5" class="btn btn-info btn-sm pro">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>专利类型</span>
 									</button></li>
-								<li><button value="6" class="btn btn-info btn-sm">
+								<li><button value="6" class="btn btn-info btn-sm pro">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>授权号</span>
 									</button></li>
-
-								<!-- <li><input name="checkbox" type="checkbox" value="">
-									<label>工号</label></li>
-								<li><input name="checkbox" type="checkbox" value="">
-									<label>姓名</label></li>
-								<li><input name="checkbox" type="checkbox" value="">
-									<label>作者工号_排名</label></li>
-								<li><input name="checkbox" type="checkbox" value="">
-									<label>专利类型</label></li>
-								<li><input name="checkbox" type="checkbox" value="">
-									<label>授权号</label></li> -->
 							</ul>
 							<ul class="group-list">
-								<li><button value="7" class="btn btn-info btn-sm">
+								<li><button value="7" class="btn btn-info btn-sm pro">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>获批日期</span>
 									</button></li>
-								<li><button value="8" class="btn btn-info btn-sm">
+								<li><button value="8" class="btn btn-info btn-sm pro">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>是否应用</span>
 									</button></li>
-								<li><button value="9" class="btn btn-info btn-sm">
+								<li><button value="9" class="btn btn-info btn-sm pro">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>是否行业联合专利（著作权）</span>
 									</button></li>
-								<!-- 
-								<li><input name="checkbox" type="checkbox" value="">
-									<label>获批日期</label></li>
-								<li><input name="checkbox" type="checkbox" value="">
-									<label>是否应用</label></li>
-								<li><input name="checkbox" type="checkbox" value="">
-									<label>是否行业联合专利（著作权）</label></li>
-								<li><input name="checkbox" type="checkbox" value="">
-									<label>数据状态</label></li>
-								<li><input name="checkbox" type="checkbox" value="">
-									<label>创建时间</label></li> -->
 							</ul>
 						</div>
+						<div class="tab-inneed"></div>
 					</div>
 				</div>
 

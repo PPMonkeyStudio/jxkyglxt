@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,8 @@ import com.teacherms.all.domain.User;
 import com.teacherms.system.TAB.Admin_NavigationTAB;
 import com.teacherms.system.TAB.Teacher_NavigationTAB;
 import com.teacherms.system.service.SystemService;
+
+import com.teacherms.all.domain.*;
 
 public class SystemAction extends ActionSupport {
 	private SystemService systemService;
@@ -63,24 +66,15 @@ public class SystemAction extends ActionSupport {
 		}
 	}
 
-	// 获得顶部导航标签
-	public void getTheTopNavigationTAB() {
+	// 获得首页教师信息
+	public void getIntroduction() {
 		try {
 			User user = (User) ActionContext.getContext().getSession().get("user");
 			// 通过角色ID获取角色名称
 			String rolename = systemService.getUserRoleNameByRoleId(user.getRoleId());
-			System.out.println(rolename);
-			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
-			if ("教职工".equals(rolename)) {
-				ServletActionContext.getResponse().getWriter().write(new Gson().toJson(new Teacher_NavigationTAB()));
-			} else if ("院系管理员".equals(rolename)) {
-				ServletActionContext.getResponse().getWriter().write(new Gson().toJson(new Admin_NavigationTAB()));
-			} else if("学生".equals(rolename)){
-				//ServletActionContext.getResponse().getWriter().write(new Gson().toJson(new Student_NavigationTAB()));
-			} else{
-				
-			}
-		} catch (IOException e) {
+			List<Introduction> list = systemService.getIntroduction(user.getDepartmentId());
+			ServletActionContext.getRequest().setAttribute("Introductions", list);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
