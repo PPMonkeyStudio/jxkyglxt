@@ -36,7 +36,7 @@
 		</property>
 		<property name="firstAward" type="string">
 			<column name="first_award" length="4" not-null="true">
-				<comment>是否第一发明人</comment>
+				<comment>是否第一获奖人</comment>
 			</column>
 		</property>
 		<property name="alterTime" type="string">

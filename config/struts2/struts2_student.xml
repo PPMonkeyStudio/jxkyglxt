@@ -3,8 +3,8 @@
 	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
-	<package name="student" namespace="/Student" extends="struts-default">
-		<action name="teacher_*"
+	<package name="Student" namespace="/Student" extends="struts-default">
+		<action name="student_*"
 			class="com.teacherms.studentinfomanage.action.StudentAction" method="{1}">
 			<result name="test">/WEB-INF/views/test.jsp</result>
 		</action>

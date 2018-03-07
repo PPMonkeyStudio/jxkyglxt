@@ -18,38 +18,38 @@
 							<table class="tab com-table">
 								<tr>
 									<td>专利名称：</td>
-									<td><input name="teacherPatent.patentName"
+									<td><input name="studentPatent.patentName"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
 									<td>作者姓名：</td>
-									<td><input name="teacherPatent.authorUserNames"
+									<td><input name="studentPatent.authorUserNames"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
 									<td>作者工号_排名：</td>
-									<td><input name="teacherPatent.authorUserIds"
+									<td><input name="studentPatent.authorUserIds"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
 									<td>专利类型：</td>
-									<td><input name="teacherPatent.patentType"
+									<td><input name="studentPatent.patentType"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
 									<td>授权号：</td>
-									<td><input name="teacherPatent.authorizationNo"
+									<td><input name="studentPatent.authorizationNo"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
 									<td>获批日期：</td>
-									<td><input name="teacherPatent.approvedDate"
+									<td><input name="studentPatent.approvedDate"
 										class="form-control table_infomation laydate-icon"
 										onfocus="time()" type="text"></td>
 								</tr>
 								<tr>
 									<td>是否应用：</td>
-									<td><select name="teacherPatent.isApplication"
+									<td><select name="studentPatent.isApplication"
 										class="form-control table_infomation">
 											<option>否</option>
 											<option>是</option>
@@ -57,7 +57,7 @@
 								</tr>
 								<tr>
 									<td>是否行业联合专利（著作权）：</td>
-									<td><select name="teacherPatent.sfhylh"
+									<td><select name="studentPatent.sfhylh"
 										class="form-control table_infomation">
 											<option>否</option>
 											<option>是</option>
@@ -85,7 +85,7 @@
 							class="btn btn-danger sure_mod">修改</button>
 						<button type="button" class="btn btn-default close-btn"
 							data-dismiss="modal">关闭</button>
-						<input name="teacherPatent.patentId" id="tableid" type="hidden" />
+						<input name="studentPatent.patentId" id="tableid" type="hidden" />
 						<!-- 	<button type="button" class="btn btn-danger review-info"
 							data-dismiss="modal">信息未审核</button> -->
 					</div>

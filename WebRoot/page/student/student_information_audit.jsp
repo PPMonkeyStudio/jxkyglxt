@@ -25,12 +25,14 @@
 			<section class="panel general"> <header
 				class="panel-heading tab-bg-dark-navy-blue">
 			<ul class="nav nav-tabs">
-				<li class=""><a data-toggle="tab" href="#info">学生</a></li>
-				<li class=""><a data-toggle="tab" href="#award">奖励</a></li>
-				<li class=""><a data-toggle="tab" href="#works">学生著作</a></li>
-				<li class=""><a data-toggle="tab" href="#paper">论文</a></li>
-				<li class=""><a data-toggle="tab" href="#patent">专利</a></li>
-				<li class=""><a data-toggle="tab" href="#project">项目(课题)</a></li>
+				<li class=""><a data-toggle="tab" href="#info">学生查看</a></li>
+				<li class=""><a data-toggle="tab" href="#award">奖励列表</a></li>
+				<li class=""><a data-toggle="tab" href="#patent">学生专利列表</a></li>
+				
+				<li class=""><a data-toggle="tab" href="#paper">学生论文列表</a></li>
+			
+				<li class=""><a data-toggle="tab" href="#project">学生参与项目(课题)列表</a></li>
+				<li class=""><a data-toggle="tab" href="#class">班级查看</a></li>
 			</ul>
 			</header>
 			<div class="panel-body">
@@ -123,7 +125,7 @@
 											<th>性别</th>
 											<th>入学年份</th>
 											<th>身份证号码</th>
-											<th>专业名称</th>
+											<th>所在学院</th>
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -166,12 +168,10 @@
 												<label>指定条件搜索：</label> <select id="all_options"
 													class="all_options form-control ">
 													<option value="">请选择</option>
-													<option value="awardType">获奖类型</option>
 													<option value="awardName">获奖名称</option>
-													<option value="awardUserNames">获奖人姓名</option>
-													<option value="awardGrade">获奖等级</option>
-													<option value="awardLevel">获奖级别</option>
-													<option value="awardTime">获奖时间</option>
+													<option value="awardName">获奖类型</option>
+													<option value="firstAward">获奖人姓名</option>
+													<option value="time">获奖时间</option>
 												</select>
 
 												<button style="float: right; margin-left: 6px;"
@@ -199,11 +199,12 @@
 									<thead>
 										<tr>
 											<th>序号</th>
+											<th>奖励ID</th>
 											<th>奖励名称</th>
-											<th>获奖者姓名</th>
 											<th>获奖类别</th>
+											<th>奖项授权号</th>
 											<th>获奖时间</th>
-											<th>授予单位</th>
+											<th>第一获奖人</th>
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -215,7 +216,8 @@
 							</section>
 						</div>
 					</div>
-					<div id="works" class="tab-pane">
+					
+					<div id="patent" class="tab-pane">
 						<div id="works_table_audit">
 							<!--表投上按钮组-->
 							<div class="box-tools m-b-15">
@@ -245,14 +247,12 @@
 												<label>指定条件搜索：</label> <select id="all_options"
 													class="all_options form-control ">
 													<option value="">请选择</option>
-													<option value="worksName">著作（专著）名称</option>
-													<option value="worksType">著作类别</option>
-													<option value="press">出版社</option>
-													<option value="isbn">ISBN</option>
-													<option value="publishTime">出版时间</option>
-													<option value="selectedSituation">入选情况</option>
-													<option value="selectedDate">入选时间</option>
-													<option value="editorUserNames">主编</option>
+													<option value="patentId">著作（专著）名称</option>
+													<option value="studentId">学号</option>
+													<option value="awardName">奖励类别</option>
+													<option value="authorizationNo">专利授权号</option>
+													<option value="time">著作时间</option>
+													<option value="firstPatent">是否第一著作人</option>
 												</select>
 												<button style="float: right; margin-left: 6px;"
 													class="btn btn-danger search_info">
@@ -273,17 +273,17 @@
 							</div>
 							<!--查询存放信息的表格-->
 							<section class="panel"> <header class="panel-heading">
-							著作信息 </header>
+							专利信息 </header>
 							<div class="panel-body table-responsive">
 								<table class="table table-hover">
 									<thead>
 										<tr>
-											<th>序号</th>
-											<th>学号</th>
-											<th>发表期刊</th>
-											<th>发表时间</th>
-											<th>收录情况</th>
-											<th>修改时间</th>
+											<th>专利序号</th>
+											<th>学生学号</th>
+											<th>专利名称</th>
+											<th>专利类型</th>
+											<th>专利授权号</th>
+											<th>时间</th>
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -325,16 +325,7 @@
 												<label>指定条件搜索：</label> <select id="all_options"
 													class="all_options form-control ">
 													<option value="">请选择</option>
-													<option value="userName">姓名</option>
-													<option value="userId">工号</option>
-													<option value="paperName">论文名称</option>
-													<option value="paperType">论文类别</option>
-													<option value="periodical">发表期刊</option>
-													<option value="periodicalNo">期号</option>
-													<option value="includedSituation">收录情况</option>
-													<option value="totalCitations">他引次数</option>
-													<option value="wordsNum">成果字数</option>
-													<option value="publishTime">发表日期</option>
+<!-- paper搜索条件 -->
 												</select>
 												<button style="float: right; margin-left: 6px;"
 													class="btn btn-danger search_info">
@@ -377,7 +368,7 @@
 							</section>
 						</div>
 					</div>
-					<div id="patent" class="tab-pane">
+					<div id="project" class="tab-pane">
 						<div id="patent_table_audit">
 							<!--表投上按钮组-->
 							<div class="box-tools m-b-15">
@@ -407,12 +398,7 @@
 												<label>指定条件搜索：</label> <select id="all_options"
 													class="all_options form-control ">
 													<option value="">请选择</option>
-													<option value="userName">姓名</option>
-													<option value="userId">工号</option>
-													<option value="patentName">专利名称</option>
-													<option value="patentType">专利类型</option>
-													<option value="authorizationNo">授权号</option>
-													<option value="approvedDate">获批日期</option>
+<!-- project搜索条件 -->
 												</select>
 												<button style="float: right; margin-left: 6px;"
 													class="btn btn-danger search_info">
@@ -438,7 +424,7 @@
 								<table class="table table-hover">
 									<thead>
 										<tr>
-											<th>#</th>
+											<th>序号</th>
 											<th>专利名称</th>
 											<th>作者</th>
 											<th>专利类型</th>
@@ -455,7 +441,7 @@
 							</section>
 						</div>
 					</div>
-					<div id="project" class="tab-pane">
+					<div id="class" class="tab-pane">
 						<div id="project_table_audit">
 							<!--表投上按钮组-->
 							<div class="box-tools m-b-15">
@@ -485,12 +471,7 @@
 												<label>指定条件搜索：</label> <select id="all_options"
 													class="all_options form-control ">
 													<option value="">请选择</option>
-													<option value="projectName">项目名称</option>
-													<option value="projectType">项目类型</option>
-													<option value="projectSource">项目来源</option>
-													<option value="projectUserNames">成员姓名</option>
-													<option value="approvalDate">立项时间</option>
-													<option value="endUpDate">结题验收时间</option>
+<!-- class搜索条件 -->
 												</select>
 												<button style="float: right; margin-left: 6px;"
 													class="btn btn-danger search_info">

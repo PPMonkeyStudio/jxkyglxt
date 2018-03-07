@@ -18,12 +18,12 @@
 							<table class="tab com-table">
 								<tr>
 									<td>项目名称：</td>
-									<td><input name="teacherProject.projectName"
+									<td><input name="studentProject.projectName"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
 									<td>项目来源：</td>
-									<td><select name="teacherProject.projectSource"
+									<td><select name="studentProject.projectSource"
 										class="form-control table_infomation">
 											<option>国家自然科学基金项目</option>
 											<option>国家社会科学基金项目</option>
@@ -48,49 +48,49 @@
 								</tr>
 								<tr>
 									<td>成员姓名：</td>
-									<td><input name="teacherProject.projectUserNames"
+									<td><input name="studentProject.projectUserNames"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
 									<td>成员工号_排名：</td>
-									<td><input name="teacherProject.projectUserIds"
+									<td><input name="studentProject.projectUserIds"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
 									<td>立项编号或批准文号：</td>
-									<td><input name="teacherProject.projectNo"
+									<td><input name="studentProject.projectNo"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
 									<td>项目类别：</td>
-									<td><input name="teacherProject.projectType"
+									<td><input name="studentProject.projectType"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
 									<td>立项日期：</td>
-									<td><input name="teacherProject.approvalDate"
+									<td><input name="studentProject.approvalDate"
 										class="form-control table_infomation laydate-icon"
 										onfocus="time()" type="text"></td>
 								</tr>
 								<tr>
 									<td>结题验收或鉴定日期：</td>
-									<td><input name="teacherProject.endUpDate"
+									<td><input name="studentProject.endUpDate"
 										class="form-control table_infomation laydate-icon"
 										onfocus="time()" type="text"></td>
 								</tr>
 								<tr>
 									<td>经费：</td>
-									<td><input name="teacherProject.funds"
+									<td><input name="studentProject.funds"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
 									<td>参与教师数：</td>
-									<td><input name="teacherProject.memberNum"
+									<td><input name="studentProject.memberNum"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
 									<td>级别：</td>
-									<td><select name="teacherProject.level"
+									<td><select name="studentProject.level"
 										class="form-control table_infomation">
 											<option>国家级</option>
 											<option>省部级</option>
@@ -98,7 +98,7 @@
 								</tr>
 								<tr>
 									<td>是否重点：</td>
-									<td><select name="teacherProject.isImportant"
+									<td><select name="studentProject.isImportant"
 										class="form-control table_infomation">
 											<option>否</option>
 											<option>是</option>
@@ -126,7 +126,7 @@
 							class="btn btn-danger sure_mod">修改</button>
 						<button type="button" class="btn btn-default close-btn"
 							data-dismiss="modal">关闭</button>
-						<input name="teacherProject.projectId" id="tableid" type="hidden" />
+						<input name="studentProject.projectId" id="tableid" type="hidden" />
 						<!-- <button type="button" class="btn btn-danger review-info"
 							data-dismiss="modal">信息未审核</button> -->
 					</div>

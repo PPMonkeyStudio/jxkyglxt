@@ -33,12 +33,7 @@
 	<div id="img"
 		style="width: 400px; height: 400px; background-color: gray;"></div>
 	<script type="text/javascript">
-		function DownloadTest() {
-			location.href = "/teacherms/Teacher/teacher_downloadAttachment?username=张三&tableName=TeacherAward&downloadInfoId=0c52c25a-b844-4e6d-9b33-576e8938c611,c40f4a5d-7d83-4729-bb1a-012c8ec796c1";
-		}
-		function getImg() {
-			$('#img').append('<img alt="" src="/teacherms/Teacher/teacher_getImage?tableName=TeacherAward&downloadInfoId=0c52c25a-b844-4e6d-9b33-576e8938c611">');
-		}
+
 	</script>
 </body>
 </html>

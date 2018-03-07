@@ -30,7 +30,7 @@ $(function() {
 		//获取id、
 		var id = $(this).siblings('input').val();
 		//查询单条用户的信息
-		$.post("/jxkyglxt/Admin/admin_getTeacherTableInfoById",
+		$.post("/jxkyglxt/Student/student_getStudentOneInfo",
 			{
 				tableId : id,
 				tableName : data.tableName
@@ -55,7 +55,7 @@ $(function() {
 				});
 				$('#info_modal').find('.sure_mod').unbind().click(function() {
 					var review_data = $("#info_modal form").serialize() + "&tableName=" + data.tableName;
-					$.post("/jxkyglxt/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
+					$.post("/jxkyglxt/Student/student_userSetTableInfo", review_data, function(sxh_data) {
 						if (sxh_data.result == "success") {
 							toastr.success("修改成功!");
 							$('#info_modal').modal('hide');
@@ -71,14 +71,14 @@ $(function() {
 		//获取id
 		var id = $(this).siblings('input').val();
 		//查询单条信息
-		$.post("/jxkyglxt/Admin/admin_getTeacherTableInfoById",
+		$.post("/jxkyglxt/Student/student_getStudentOneInfo",
 			{
 				tableId : id,
 				tableName : data.tableName
 			}, function(xhr) {
 				//data.tableName中获取当前的表名称，进行判断对具体哪一个模态框进行操作
-				//modal_id_1，除去Teacher前部分，方便后部分操作
-				var modal_id_1 = data.tableName.replace("Teacher", "");
+				//modal_id_1，除去Student前部分，方便后部分操作
+				var modal_id_1 = data.tableName.replace("Student", "");
 				//modal_id，最终获取到的模态框id
 				var modal_id = modal_id_1.substring(0, 1).toLowerCase() + modal_id_1.substring(1) + "_modal";
 				$("#" + modal_id + " .modal-body").find("input,select").each(function() {
@@ -98,11 +98,11 @@ $(function() {
 			}, "json");
 	}
 
-	//解除固化
+/*	//解除固化
 	var relieveInfo = function() {
 		var infoid = $(this).siblings('input').val();
 		$(this).parent().empty().append('<img title="已解除固化"  src="img/ok1.png" />');
-		$.post('/jxkyglxt/Admin/admin_LiftCuring', {
+		$.post('/jxkyglxt/Student/admin_LiftCuring', {
 			tableId : infoid,
 			tableName : data.tableName,
 			dataState : "10"
@@ -113,7 +113,7 @@ $(function() {
 				toastr.error("信息解除固化失败");
 			}
 		}, 'json')
-	}
+	}*/
 
 	//确定导出
 	var sure_export = function() {
@@ -130,7 +130,7 @@ $(function() {
 		})
 		if (data.export_id != "" && data.export_name != "") {
 			//console.log("export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
-			window.open("/jxkyglxt/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
+			//window.open("/jxkyglxt/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
 		//location.href = "/jxkyglxt/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1);
 		} else {
 			toastr.error("未选择数据");
@@ -158,7 +158,7 @@ $(function() {
 			}
 		})
 		if (data.export_name != "") {
-			window.open("/jxkyglxt/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
+		//	window.open("/jxkyglxt/Student/student_ExportExcelCollection?tableName=" + data.tableName + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
 		//location.href = "/jxkyglxt/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1);
 		} else {
 			toastr.error("未选择数据");
@@ -255,7 +255,7 @@ $(function() {
 		//条件筛选清空
 		parent_div.find("#search_input").empty();
 		//通过点击的a标签的链接属性，来给全局对象data.tableName赋值
-		data.tableName = "Teacher" + a_href.substring(0, 1).toUpperCase() + a_href.substring(1);
+		data.tableName = "Student" + a_href.substring(0, 1).toUpperCase() + a_href.substring(1);
 		//执行查询操作
 		doQuery();
 		//导出模态框初始化
@@ -318,7 +318,7 @@ $(function() {
 			var name = '';
 			var value = '';
 			this_object.siblings('#search_input').find('div').each(function() {
-				name = data.tableName.replace("Teacher", "teacher") + '.' + $(this).attr('id').replace("Inputu", "");
+				name = data.tableName.replace("Student", "student") + '.' + $(this).attr('id').replace("Inputu", "");
 				var val_arr = [];
 				$(this).find('input').each(function() {
 					val_arr.push($(this).val());
@@ -341,7 +341,7 @@ $(function() {
 						action : function() {
 							this_object.siblings('#search_input').empty();
 							$.each(data, function(k, v) {
-								if (k.indexOf('teacher') > -1) {
+								if (k.indexOf('student') > -1) {
 									data[k] = "";
 								}
 							})
@@ -363,7 +363,7 @@ $(function() {
 	//用户信息添加(用户添加模态框是唯一的)
 	$('.sure_add_info').click(function() {
 		var review_data = $("#add_info_modal form").serialize() + "&tableName=" + data.tableName;
-		$.post("/jxkyglxt/Admin/admin_addTeacherInfo", review_data, function(sxh_data) {
+		$.post("/jxkyglxt/Student/stdudent_setStudentAllInfo", review_data, function(sxh_data) {
 			if (sxh_data.result == "success") {
 				toastr.success('添加成功!')
 			} else {
@@ -378,18 +378,18 @@ $(function() {
 	//查询方法
 	function doQuery() {
 		$.ajax({
-			url : "/jxkyglxt/Admin/admin_getSpecifiedInformationByPaging",
+			url : "/jxkyglxt/Student/student_getStudentAllInfo",
 			type : "post",
 			async : false,
 			timeout : 3000,
-			data : data,
+			data : data.tableName,
 			dataType : "json",
 			success : function(xhr_data) {
 				$('#' + a_href).find('table tbody').html(getStr(xhr_data.ObjDatas));
 				//每次做查询之后，按钮需要重新绑定事件
-				$('.relieveButton').click(relieveInfo);
+/*				$('.relieveButton').click(relieveInfo);
 				$('.modiButton').click(modiUserInfo);
-				$('.viewButton').click(viewInfo);
+				$('.viewButton').click(viewInfo);*/
 				//----end
 				//记录分页信息
 				setPageInfo(xhr_data);
@@ -405,95 +405,132 @@ $(function() {
 		var str = "";
 		switch (a_href) {
 		case 'info':
-			for (i = 0; i < xhr.length; i++) {
+			for (i = 0; i < xhr[i].length; i++) {
 				str += "<tr>";
 				str += "<td>" + (i + 1) + "</td>";
-				str += "<td>" + xhr[i][0].userId + "</td>";
-				str += "<td>" + xhr[i][1].userName + "</td>";
-				str += "<td>" + xhr[i][0].professionalGrade + "</td>";
-				str += "<td>" + xhr[i][0].employeeType + "</td>";
-				str += "<td>" + xhr[i][0].teachingType + "</td>";
-				str += "<td>" + xhr[i][0].teachingStatus + "</td>";
-				str += '<td><input type="hidden" value="' + xhr[i][0].teacherInfoId + '" >'
-					+ '<button class="btn btn-default btn-xs  relieveButton" title="解除固化"><i class="fa fa-chain-broken fa-lg"></i></button>'
-					+ '<button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg" ></i></button>'
+				str += "<td>" + xhr[i].object.studentId + "</td>";
+				str += "<td>" + xhr[i].object.studentName + "</td>";
+				str += "<td>" + xhr[i].object.sex + "</td>";
+				str += "<td>" + xhr[i].object.enrolmentYear + "</td>";
+				str += "<td>" + xhr[i].object.certificateNo + "</td>";
+				str += "<td>" + xhr[i].object.departmentId + "</td>";
+				str += '<td><input type="hidden" value="' + xhr[i].object.studentId + '" >'
+					+ '<button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button>'
+					+ '<button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button>'
 					+ '</td></tr>';
+				str += "</tr>";
 			}
+			console.log("xhr为："+xhr);
+			console.log("str为："+str);
 			break;
+			
+			
+
 		case 'award':
-			for (i = 0; i < xhr.length; i++) {
+			for (i = 0; i < xhr[i].length; i++) {
 				str += "<tr>";
 				str += "<td>" + (i + 1) + "</td>";
-				str += "<td>" + xhr[i][0].awardName + "</td>";
-				str += "<td>" + xhr[i][0].awardUserNames + "</td>";
-				str += "<td>" + xhr[i][0].awardLevel + "</td>";
-				str += "<td>" + xhr[i][0].awardDate + "</td>";
-				str += "<td>" + xhr[i][0].grantUnit + "</td>";
-				str += '<td><input type="hidden" value="' + xhr[i][0].awardId + '" >'
-					+ '<button class="btn btn-default btn-xs relieveButton" title="解除固化"><i class="fa fa-chain-broken fa-lg"></i></button>'
-					+ '<button class="btn btn-default btn-xs viewButton" title="查看"><i class="fa fa-search-plus fa-lg"  aria-hidden="true"></i></button>'
+				str += "<td>" + xhr[i].object.awardId + "</td>";
+				str += "<td>" + xhr[i].object.awardName + "</td>";
+				str += "<td>" + xhr[i].object.awardClass + "</td>";
+				str += "<td>" + xhr[i].object.authorizationNo + "</td>";
+				str += "<td>" + xhr[i].object.time + "</td>";
+				str += "<td>" + xhr[i].object.firstAward + "</td>";
+				str += '<td><input type="hidden" value="' + xhr[i].object.awardId + '" >'
+					+ '<button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button>'
+					+ '<button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button>'
 					+ '</td></tr>';
+				str += "</tr>";
 			}
-			break;
-		case 'works':
-			for (i = 0; i < xhr.length; i++) {
-				str += "<tr>";
-				str += "<td>" + (i + 1) + "</td>";
-				str += "<td>" + xhr[i][0].worksName + "</td>";
-				str += "<td>" + xhr[i][0].editorUserNames + "</td>";
-				str += "<td>" + xhr[i][0].isbn + "</td>";
-				str += "<td>" + xhr[i][0].publishTime + "</td>";
-				str += "<td>" + xhr[i][0].press + "</td>";
-				str += '<td><input type="hidden" value="' + xhr[i][0].worksId + '" >'
-					+ '<button class="btn btn-default btn-xs relieveButton" title="解除固化"><i class="fa fa-chain-broken fa-lg"></i></button>'
-					+ '<button class="btn btn-default btn-xs viewButton" title="查看"><i class="fa fa-search-plus fa-lg"  aria-hidden="true"></i></button>'
-					+ '</td></tr>';
-			}
-			break;
-		case 'paper':
-			for (i = 0; i < xhr.length; i++) {
-				str += "<tr>";
-				str += "<td>" + (i + 1) + "</td>";
-				str += "<td>" + xhr[i][0].paperName + "</td>";
-				str += "<td>" + xhr[i][0].authorUserNames + "</td>";
-				str += "<td>" + xhr[i][0].periodical + "</td>";
-				str += "<td>" + xhr[i][0].periodicalNo + "</td>";
-				str += "<td>" + xhr[i][0].publishTime + "</td>";
-				str += '<td><input type="hidden" value="' + xhr[i][0].paperId + '" >'
-					+ '<button class="btn btn-default btn-xs relieveButton" title="解除固化"><i class="fa fa-chain-broken fa-lg"></i></button>'
-					+ '<button class="btn btn-default btn-xs viewButton" title="查看"><i class="fa fa-search-plus fa-lg"  aria-hidden="true"></i></button>'
-					+ '</td></tr>';
-			}
+			console.log("xhr为："+xhr);
+			console.log("str为："+str);
 			break;
 		case 'patent':
-			for (i = 0; i < xhr.length; i++) {
+			for (i = 0; i < xhr[i].length; i++) {
 				str += "<tr>";
 				str += "<td>" + (i + 1) + "</td>";
-				str += "<td>" + xhr[i][0].patentName + "</td>";
-				str += "<td>" + xhr[i][0].authorUserNames + "</td>";
-				str += "<td>" + xhr[i][0].patentType + "</td>";
-				str += "<td>" + xhr[i][0].authorizationNo + "</td>";
-				str += "<td>" + xhr[i][0].approvedDate + "</td>";
-				str += '<td><input type="hidden" value="' + xhr[i][0].patentId + '" >'
-					+ '<button class="btn btn-default btn-xs relieveButton" title="解除固化"><i class="fa fa-chain-broken fa-lg"></i></button>'
-					+ '<button class="btn btn-default btn-xs viewButton" title="查看"><i class="fa fa-search-plus fa-lg"  aria-hidden="true"></i></button>'
+				str += "<td>" + xhr[i].object.patentId + "</td>";
+				str += "<td>" + xhr[i].object.studentId + "</td>";
+				str += "<td>" + xhr[i].object.awardName + "</td>";
+				str += "<td>" + xhr[i].object.awardClass + "</td>";
+				str += "<td>" + xhr[i].object.authorizationNo + "</td>";
+				str += "<td>" + xhr[i].object.time + "</td>";
+				str += "<td>" + xhr[i].object.firstPatent + "</td>";
+				str += '<td><input type="hidden" value="' + xhr[i].object.patentId + '" >'
+					+ '<button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button>'
+					+ '<button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button>'
 					+ '</td></tr>';
+				str += "</tr>";
 			}
+			console.log("xhr为："+xhr);
+			console.log("str为："+str);
 			break;
-		case 'project':
-			for (i = 0; i < xhr.length; i++) {
+		case 'paper':
+			for (i = 0; i < xhr[i].length; i++) {
 				str += "<tr>";
 				str += "<td>" + (i + 1) + "</td>";
-				str += "<td>" + xhr[i][0].projectName + "</td>";
-				str += "<td>" + xhr[i][0].projectUserNames + "</td>";
-				str += "<td>" + xhr[i][0].projectSource + "</td>";
-				str += "<td>" + xhr[i][0].projectType + "</td>";
-				str += "<td>" + xhr[i][0].projectNo + "</td>";
-				str += '<td><input type="hidden" value="' + xhr[i][0].projectId + '" >'
-					+ '<button class="btn btn-default btn-xs relieveButton" title="解除固化"><i class="fa fa-chain-broken fa-lg"></i></button>'
-					+ '<button class="btn btn-default btn-xs viewButton" title="查看"><i class="fa fa-search-plus fa-lg"  aria-hidden="true"></i></button>'
+				str += "<td>" + xhr[i].object.paperId + "</td>";
+				str += "<td>" + xhr[i].object.studentId + "</td>";
+				str += "<td>" + xhr[i].object.periodical + "</td>";
+				str += "<td>" + xhr[i].object.publishTime + "</td>";
+				str += "<td>" + xhr[i].object.includedSituation + "</td>";
+				str += '<td><input type="hidden" value="' + xhr[i].object.paperId + '" >'
+					+ '<button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button>'
+					+ '<button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button>'
 					+ '</td></tr>';
+				str += "</tr>";
 			}
+			console.log("xhr为："+xhr);
+			console.log("str为："+str);
+			break;
+			
+			
+			
+			
+		case 'project':
+			for (i = 0; i < xhr[i].length; i++) {
+				str += "<tr>";
+				str += "<td>" + (i + 1) + "</td>";
+				str += "<td>" + xhr[i].object.paperName + "</td>";
+				str += "<td>" + xhr[i].object.authorUserNames + "</td>";
+				str += "<td>" + xhr[i].object.periodical + "</td>";
+				str += "<td>" + xhr[i].object.periodicalNo + "</td>";
+				str += "<td>" + xhr[i].object.publishTime + "</td>";
+				str += '<td><input type="hidden" value="' + xhr[i].object.paperId + '" >'
+					+ '<button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button>'
+					+ '<button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button>'
+					+ '</td></tr>';
+				str += "</tr>";
+			}
+			console.log("xhr为："+xhr);
+			console.log("str为："+str);
+			break;
+			
+			
+			
+			
+	
+			
+			
+			
+			
+		case 'project':
+			for (i = 0; i < xhr[i].length; i++) {
+				str += "<tr>";
+				str += "<td>" + (i + 1) + "</td>";
+				str += "<td>" + xhr[i].object.projectName + "</td>";
+				str += "<td>" + xhr[i].object.projectUserNames + "</td>";
+				str += "<td>" + xhr[i].object.projectSource + "</td>";
+				str += "<td>" + xhr[i].object.projectType + "</td>";
+				str += "<td>" + xhr[i].object.projectNo + "</td>";
+				str += '<td><input type="hidden" value="' + xhr[i].object.projectId + '" >'
+					+ '<button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button>'
+					+ '<button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button>'
+					+ '</td></tr>';
+				str += "</tr>";
+			}
+			console.log("xhr为："+xhr);
+			console.log("str为："+str);
 			break;
 		default:
 			toastr.warning('服务器错误!');

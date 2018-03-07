@@ -18,22 +18,22 @@
 
 								<tr>
 									<td>奖励名称：</td>
-									<td><input name="teacherAward.awardName"
+									<td><input name="studentAward.awardName"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
 									<td>获奖者姓名：</td>
-									<td><input name="teacherAward.awardUserNames"
+									<td><input name="studentAward.awardUserNames"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
 									<td>获奖者工号_排名：</td>
-									<td><input name="teacherAward.awardUserIds"
+									<td><input name="studentAward.awardUserIds"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
 									<td>奖励类型：</td>
-									<td><select name="teacherAward.awardType" draggable="true"
+									<td><select name="studentAward.awardType" draggable="true"
 										class="form-control table_infomation">
 											<option>教学成果</option>
 											<option>科研成果</option>
@@ -43,7 +43,7 @@
 								</tr>
 								<tr>
 									<td>获奖类别：</td>
-									<td><select name="teacherAward.awardClass"
+									<td><select name="studentAward.awardClass"
 										class="form-control table_infomation">
 											<option>国家自然科学奖</option>
 											<option>国家技术发明奖</option>
@@ -57,7 +57,7 @@
 								</tr>
 								<tr>
 									<td>获奖等级：</td>
-									<td><select name="teacherAward.awardGrade"
+									<td><select name="studentAward.awardGrade"
 										class="form-control table_infomation">
 											<option>特等奖</option>
 											<option>一等奖</option>
@@ -67,7 +67,7 @@
 								</tr>
 								<tr>
 									<td>获奖级别：</td>
-									<td><select name="teacherAward.awardLevel"
+									<td><select name="studentAward.awardLevel"
 										class="form-control table_infomation">
 											<option>国家</option>
 											<option>省级</option>
@@ -76,18 +76,18 @@
 								</tr>
 								<tr>
 									<td>获奖时间：</td>
-									<td><input name="teacherAward.awardDate"
+									<td><input name="studentAward.awardDate"
 										class="form-control table_infomation laydate-icon"
 										onfocus="time()" type="text"></td>
 								</tr>
 								<tr>
 									<td>获奖证书编号：</td>
-									<td><input name="teacherAward.awardCertificationNo"
+									<td><input name="studentAward.awardCertificationNo"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
 									<td>授予单位：</td>
-									<td><input name="teacherAward.grantUnit"
+									<td><input name="studentAward.grantUnit"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr class="img-control">
@@ -115,7 +115,7 @@
 							class="btn btn-danger sure_mod">修改</button>
 						<button type="button" class="btn btn-default close-btn"
 							data-dismiss="modal">关闭</button>
-						<input name="teacherAward.awardId" id="tableid" type="hidden" />
+						<input name="studentAward.awardId" id="tableid" type="hidden" />
 					</div>
 				</div>
 			</form>

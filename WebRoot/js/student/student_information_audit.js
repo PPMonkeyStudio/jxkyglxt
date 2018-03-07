@@ -11,23 +11,22 @@ $(function() {
 		//获取id、
 		var id = $(this).siblings('input').val();
 		//查询单条用户的信息
-		$.post("/jxkyglxt/Admin/admin_getTeacherTableInfoById",
+		$.post("/jxkyglxt/Student/student_getStudentAllInfo",
 			{
-				tableId : id,
 				tableName : data.tableName
 			}, function(xhr) {
-				//modal_id_1，除去Teacher前部分，方便后部分操作
-				var modal_id_1 = data.tableName.replace("Teacher", "");
+				//modal_id_1，除去学生前部分，方便后部分操作
+				var modal_id_1 = data.tableName.replace("Student", "");
 				//modal_id，最终获取到的模态框id
 				var modal_id = modal_id_1.substring(0, 1).toLowerCase() + modal_id_1.substring(1) + "_modal";
 				$('#' + modal_id + ' form').find("input,select").each(function() {
 					var na = $(this).attr('name').split(".")[1];
 					if (na == "userId") {
-						$(this).val(xhr.user.userId);
+						$(this).val(xhr[i].user.userId);
 					} else if ($(this).attr('name') == "userName") {
-						$(this).val(xhr.user.userName);
+						$(this).val(xhr[i].user.userName);
 					}
-					else $(this).val(xhr.object[na]);
+					else $(this).val(xhr[i].object[na]);
 				})
 				//等全部信息加载完毕，再将模态框显示出来，避免模态框出现但是对应的值还未加载情况
 				//如果为用户信息，则只显示基础部分（当前为用户审核页面）
@@ -41,7 +40,7 @@ $(function() {
 				});
 				$("#" + modal_id).find('.sure_mod').unbind().click(function() {
 					var review_data = $("#" + modal_id + " form").serialize() + "&tableName=" + data.tableName;
-					$.post("/jxkyglxt/Admin/admin_modifiedInfomation", review_data, function(sxh_data) {
+					$.post("/jxkyglxt/Student/student_updateStudentAllInfo", review_data, function(sxh_data) {
 						if (sxh_data.result == "success") {
 							toastr.success("修改成功!");
 							$("#" + modal_id).modal('hide');
@@ -50,22 +49,6 @@ $(function() {
 					}, "json")
 				}).show();
 			}, "json");
-	}
-	//固化信息
-	var solidInfo = function() {
-		var infoid = $(this).siblings('input').val();
-		$(this).parent().empty().append('<img title="已固化"  src="img/ok1.png" />');
-		$.post('/jxkyglxt/Admin/admin_LiftCuring', {
-			tableId : infoid,
-			tableName : data.tableName,
-			dataState : "40"
-		}, function(xhr) {
-			if (xhr.result == "success") {
-				toastr.success("信息固化成功!");
-			} else {
-				toastr.error("信息固化失败");
-			}
-		}, 'json')
 	}
 
 	//页面加载开始，给与元素加载事件-----------------------end
@@ -81,12 +64,14 @@ $(function() {
 		$('.sure_export').hide();
 		//清空模糊查询内容
 		data.fuzzy_query = '';
+
+
 		//除去链接属性中的#号
 		a_href = $(this).attr("href").substr(1);
 		//获取panel-body内和所点击的类别相对应的div父元素
 		parent_div = $('#' + a_href);
 		//通过点击的a标签的链接属性，来给全局对象data.tableName赋值
-		data.tableName = "Teacher" + a_href.substring(0, 1).toUpperCase() + a_href.substring(1);
+		data.tableName = "Student" + a_href.substring(0, 1).toUpperCase() + a_href.substring(1);
 		//条件筛选清空
 		parent_div.find("#search_input").empty();
 		//执行查询操作
@@ -104,7 +89,7 @@ $(function() {
 			var name = '';
 			var value = '';
 			this_object.siblings('#search_input').find('div').each(function() {
-				name = data.tableName.replace("Teacher", "teacher") + '.' + $(this).attr('id').replace("Inputu", "");
+				name = data.tableName.replace("Student", "student") + '.' + $(this).attr('id').replace("Inputu", "");
 				var val_arr = [];
 				$(this).find('input').each(function() {
 					val_arr.push($(this).val());
@@ -127,7 +112,7 @@ $(function() {
 						action : function() {
 							this_object.siblings('#search_input').empty();
 							$.each(data, function(k, v) {
-								if (k.indexOf('teacher') > -1) {
+								if (k.indexOf('student') > -1) {
 									data[k] = "";
 								}
 							})
@@ -193,20 +178,20 @@ $(function() {
 	//查询方法
 	function doQuery() {
 		$.ajax({
-			url : "/jxkyglxt/Admin/admin_getSpecifiedInformationByPaging",
+			url : "/jxkyglxt/Student/student_getStudentAllInfo",
 			type : "post",
 			async : false,
 			timeout : 3000,
 			data : data,
 			dataType : "json",
 			success : function(xhr_data) {
-				$('#' + a_href).find('table tbody').html(getStr(xhr_data.ObjDatas));
+				$('#' + a_href).find('table tbody').html(getStr(xhr_data));
 				//每次做查询之后，按钮需要重新绑定事件
-				$('.solidButton').click(solidInfo);
-				$('.modiButton').click(modiInfo);
+				/*				$('.solidButton').click(solidInfo);
+								$('.modiButton').click(modiInfo);*/
 
-				//记录分页信息
-				setPageInfo(xhr_data);
+			//记录分页信息
+			/*				setPageInfo(xhr_data);*/
 			},
 			error : function() {
 				toastr.error('服务器错误!');
@@ -219,101 +204,124 @@ $(function() {
 		var str = "";
 		switch (a_href) {
 		case 'info':
+			console.log(xhr.length);
 			for (i = 0; i < xhr.length; i++) {
 				str += "<tr>";
 				str += "<td>" + (i + 1) + "</td>";
-				str += "<td>" + xhr[i][0].userId + "</td>";
-				str += "<td>" + xhr[i][1].userName + "</td>";
-				str += "<td>" + xhr[i][0].professionalGrade + "</td>";
-				str += "<td>" + xhr[i][0].employeeType + "</td>";
-				str += "<td>" + xhr[i][0].teachingType + "</td>";
-				str += "<td>" + xhr[i][0].teachingStatus + "</td>";
-				str += '<td><input type="hidden" value="' + xhr[i][0].teacherInfoId + '" >'
+				str += "<td>" + xhr[i].object.studentId + "</td>";
+				str += "<td>" + xhr[i].object.studentName + "</td>";
+				str += "<td>" + xhr[i].object.sex + "</td>";
+				str += "<td>" + xhr[i].object.enrolmentYear + "</td>";
+				str += "<td>" + xhr[i].object.certificateNo + "</td>";
+				str += "<td>" + xhr[i].object.departmentId + "</td>";
+				str += '<td><input type="hidden" value="' + xhr[i].object.studentId + '" >'
 					+ '<button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button>'
 					+ '<button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button>'
 					+ '</td></tr>';
 				str += "</tr>";
 			}
+			console.log("xhr为：" + xhr);
+			console.log("str为：" + str);
 			break;
+
+
+
 		case 'award':
-			for (i = 0; i < xhr.length; i++) {
+			for (i = 0; i < xhr[i].length; i++) {
 				str += "<tr>";
 				str += "<td>" + (i + 1) + "</td>";
-				str += "<td>" + xhr[i][0].awardName + "</td>";
-				str += "<td>" + xhr[i][0].awardUserNames + "</td>";
-				str += "<td>" + xhr[i][0].awardLevel + "</td>";
-				str += "<td>" + xhr[i][0].awardDate + "</td>";
-				str += "<td>" + xhr[i][0].grantUnit + "</td>";
-				str += '<td><input type="hidden" value="' + xhr[i][0].awardId + '" >'
+				str += "<td>" + xhr[i].object.awardId + "</td>";
+				str += "<td>" + xhr[i].object.awardName + "</td>";
+				str += "<td>" + xhr[i].object.awardClass + "</td>";
+				str += "<td>" + xhr[i].object.authorizationNo + "</td>";
+				str += "<td>" + xhr[i].object.time + "</td>";
+				str += "<td>" + xhr[i].object.firstAward + "</td>";
+				str += '<td><input type="hidden" value="' + xhr[i].object.awardId + '" >'
 					+ '<button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button>'
 					+ '<button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button>'
 					+ '</td></tr>';
 				str += "</tr>";
 			}
-			break;
-		case 'works':
-			for (i = 0; i < xhr.length; i++) {
-				str += "<tr>";
-				str += "<td>" + (i + 1) + "</td>";
-				str += "<td>" + xhr[i][0].worksName + "</td>";
-				str += "<td>" + xhr[i][0].editorUserNames + "</td>";
-				str += "<td>" + xhr[i][0].isbn + "</td>";
-				str += "<td>" + xhr[i][0].publishTime + "</td>";
-				str += "<td>" + xhr[i][0].press + "</td>";
-				str += '<td><input type="hidden" value="' + xhr[i][0].worksId + '" >'
-					+ '<button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button>'
-					+ '<button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button>'
-					+ '</td></tr>';
-				str += "</tr>";
-			}
-			break;
-		case 'paper':
-			for (i = 0; i < xhr.length; i++) {
-				str += "<tr>";
-				str += "<td>" + (i + 1) + "</td>";
-				str += "<td>" + xhr[i][0].paperName + "</td>";
-				str += "<td>" + xhr[i][0].authorUserNames + "</td>";
-				str += "<td>" + xhr[i][0].periodical + "</td>";
-				str += "<td>" + xhr[i][0].periodicalNo + "</td>";
-				str += "<td>" + xhr[i][0].publishTime + "</td>";
-				str += '<td><input type="hidden" value="' + xhr[i][0].paperId + '" >'
-					+ '<button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button>'
-					+ '<button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button>'
-					+ '</td></tr>';
-				str += "</tr>";
-			}
+			console.log("xhr为：" + xhr);
+			console.log("str为：" + str);
 			break;
 		case 'patent':
-			for (i = 0; i < xhr.length; i++) {
+			for (i = 0; i < xhr[i].length; i++) {
 				str += "<tr>";
 				str += "<td>" + (i + 1) + "</td>";
-				str += "<td>" + xhr[i][0].patentName + "</td>";
-				str += "<td>" + xhr[i][0].authorUserNames + "</td>";
-				str += "<td>" + xhr[i][0].patentType + "</td>";
-				str += "<td>" + xhr[i][0].authorizationNo + "</td>";
-				str += "<td>" + xhr[i][0].approvedDate + "</td>";
-				str += '<td><input type="hidden" value="' + xhr[i][0].patentId + '" >'
+				str += "<td>" + xhr[i].object.patentId + "</td>";
+				str += "<td>" + xhr[i].object.studentId + "</td>";
+				str += "<td>" + xhr[i].object.awardName + "</td>";
+				str += "<td>" + xhr[i].object.awardClass + "</td>";
+				str += "<td>" + xhr[i].object.authorizationNo + "</td>";
+				str += "<td>" + xhr[i].object.time + "</td>";
+				str += "<td>" + xhr[i].object.firstPatent + "</td>";
+				str += '<td><input type="hidden" value="' + xhr[i].object.patentId + '" >'
 					+ '<button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button>'
 					+ '<button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button>'
 					+ '</td></tr>';
 				str += "</tr>";
 			}
+			console.log("xhr为：" + xhr);
+			console.log("str为：" + str);
 			break;
-		case 'project':
-			for (i = 0; i < xhr.length; i++) {
+		case 'paper':
+			for (i = 0; i < xhr[i].length; i++) {
 				str += "<tr>";
 				str += "<td>" + (i + 1) + "</td>";
-				str += "<td>" + xhr[i][0].projectName + "</td>";
-				str += "<td>" + xhr[i][0].projectUserNames + "</td>";
-				str += "<td>" + xhr[i][0].projectSource + "</td>";
-				str += "<td>" + xhr[i][0].projectType + "</td>";
-				str += "<td>" + xhr[i][0].projectNo + "</td>";
-				str += '<td><input type="hidden" value="' + xhr[i][0].projectId + '" >'
+				str += "<td>" + xhr[i].object.paperId + "</td>";
+				str += "<td>" + xhr[i].object.studentId + "</td>";
+				str += "<td>" + xhr[i].object.periodical + "</td>";
+				str += "<td>" + xhr[i].object.publishTime + "</td>";
+				str += "<td>" + xhr[i].object.includedSituation + "</td>";
+				str += '<td><input type="hidden" value="' + xhr[i].object.paperId + '" >'
 					+ '<button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button>'
 					+ '<button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button>'
 					+ '</td></tr>';
 				str += "</tr>";
 			}
+			console.log("xhr为：" + xhr);
+			console.log("str为：" + str);
+			break;
+
+
+		case 'project':
+			for (i = 0; i < xhr[i].length; i++) {
+				str += "<tr>";
+				str += "<td>" + (i + 1) + "</td>";
+				str += "<td>" + xhr[i].object.paperName + "</td>";
+				str += "<td>" + xhr[i].object.authorUserNames + "</td>";
+				str += "<td>" + xhr[i].object.periodical + "</td>";
+				str += "<td>" + xhr[i].object.periodicalNo + "</td>";
+				str += "<td>" + xhr[i].object.publishTime + "</td>";
+				str += '<td><input type="hidden" value="' + xhr[i].object.paperId + '" >'
+					+ '<button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button>'
+					+ '<button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button>'
+					+ '</td></tr>';
+				str += "</tr>";
+			}
+			console.log("xhr为：" + xhr);
+			console.log("str为：" + str);
+			break;
+
+
+		case 'project':
+			for (i = 0; i < xhr[i].length; i++) {
+				str += "<tr>";
+				str += "<td>" + (i + 1) + "</td>";
+				str += "<td>" + xhr[i].object.projectName + "</td>";
+				str += "<td>" + xhr[i].object.projectUserNames + "</td>";
+				str += "<td>" + xhr[i].object.projectSource + "</td>";
+				str += "<td>" + xhr[i].object.projectType + "</td>";
+				str += "<td>" + xhr[i].object.projectNo + "</td>";
+				str += '<td><input type="hidden" value="' + xhr[i].object.projectId + '" >'
+					+ '<button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button>'
+					+ '<button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button>'
+					+ '</td></tr>';
+				str += "</tr>";
+			}
+			console.log("xhr为：" + xhr);
+			console.log("str为：" + str);
 			break;
 		default:
 			toastr.warning('服务器错误!');

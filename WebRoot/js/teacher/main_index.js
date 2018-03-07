@@ -56,13 +56,7 @@ var data = {
 	"studentInfo.className" : "",
 	"studentInfo.departmentId" : "",
 	"studentInfo.teacherTraining" : "",
-	"studentInfo.deformed" : "",
-	"studentInfo." : "",
-	"studentInfo." : "",
-	"studentInfo." : "",
-	"studentInfo." : "",
-	"studentInfo." : "",
-	"studentInfo." : "",
+	"studentInfo.deformed" : ""
 	
 }
 
