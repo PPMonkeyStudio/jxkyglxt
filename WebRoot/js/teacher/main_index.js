@@ -48,6 +48,22 @@ var data = {
 	"teacherWorks.editorUserNames" : "",
 	"teacherWorks.selectedSituation" : "",
 	"teacherWorks.selectedDate" : "",
+	//学生模块模态框string赋空值
+	"studentInfo.student_id" : "",
+	"studentInfo.studentName" : "",
+	"studentInfo.certificateNo" : "",
+	"studentInfo.classNumber" : "",
+	"studentInfo.className" : "",
+	"studentInfo.departmentId" : "",
+	"studentInfo.teacherTraining" : "",
+	"studentInfo.deformed" : "",
+	"studentInfo." : "",
+	"studentInfo." : "",
+	"studentInfo." : "",
+	"studentInfo." : "",
+	"studentInfo." : "",
+	"studentInfo." : "",
+	
 }
 
 //保存分页信息
@@ -93,17 +109,17 @@ $(function() {
 
 		//管理员-学生
 		if (($(this).text()) == "学生信息查看") {
-			$('.right-side').load('page/student/student_information_management.jsp #content', selectSeacher(), function() {
+			$('.right-side').load('page/student/student_information_audit.jsp #content', function() {
 				data.dataState = "20";
-				$.getScript("js/teacher/teacher_information_audit.js");
+				$.getScript("js/student/student_information_audit.js");
 			});
 		}
 
 		//管理员-学生
 		if (($(this).text()) == "学生信息管理") {
-			$('.right-side').load('page/student/student_information_audit.jsp #content', selectSeacher(), function() {
-				data.dataState = "40";
-				$.getScript("js/teacher/teacher_information_audit.js");
+			$('.right-side').load('page/student/student_information_management.jsp #content', function() {
+				data.dataState = "20";
+				$.getScript("js/student/student_information_management.js");
 			});
 		}
 		//教师用户
@@ -447,7 +463,17 @@ function getinfoByCardId() {
 	})
 }
 
+<<<<<<< HEAD
 
+=======
+	document.addEventListener('visibilitychange',function(){
+		if(document.visibilityState=='hidden'){
+			normal_title=document.title;document.title='[在线] - 本科数据管理系统';
+			}else{
+				document.title=normal_title;
+				}});
+	
+>>>>>>> LM
 function selectSeacher() {
 	$(document).on("change", "#all_options", function() {
 		var option = $(this).find('option:selected');
@@ -618,7 +644,5 @@ function selectSeacher() {
 
 			}
 		}
-
-
 	})
 }
