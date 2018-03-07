@@ -1,5 +1,8 @@
 package com.teacherms.system.service.impl;
 
+import java.util.List;
+
+import com.teacherms.all.domain.Introduction;
 import com.teacherms.all.domain.Role;
 import com.teacherms.all.domain.User;
 import com.teacherms.system.dao.SystemDao;
@@ -41,6 +44,11 @@ public class SystemServiceImpl implements SystemService {
 		// 修改的密码
 		loging_user.setPassword(md5.GetMD5Code(modify_userInfo.getPassword()));
 		return systemDao.updateUser(loging_user);
+	}
+
+	@Override
+	public List<Introduction> getIntroduction(String departmentId) {
+		return systemDao.getIntroduction(departmentId);
 	}
 
 }

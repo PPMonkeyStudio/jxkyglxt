@@ -149,9 +149,6 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public XSSFWorkbook getExcel(String query_num, String tableName, String query_id) {
 		String queryInfo = " where " + getTableInfoIdName(tableName) + " in (";
-		System.out.println(!"".equals(query_id) || null != query_id);
-		System.out.println(null != query_id);
-		System.out.println(!"".equals(query_id));
 		if ("".equals(query_id) || null != query_id) {
 			int index = 0;
 			// 分割所要查询的信息表ID

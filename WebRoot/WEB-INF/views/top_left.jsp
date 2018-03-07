@@ -82,6 +82,8 @@
 </head>
 
 <body class="skin-black">
+	<!-- 访问首页介绍的信息 -->
+	<s:action namespace="/System" name="system_getIntroduction" executeResult="false"></s:action>
 	<!-- header logo: style can be found in header.less -->
 	<header class="header"> <a class="logo"> 本科数据管理系统 </a> <!-- Header Navbar: style can be found in header.less -->
 	<nav class="navbar navbar-static-top" role="navigation"> <!-- Sidebar toggle button-->
@@ -144,16 +146,18 @@
 					</a>
 					</li>
 					<li class="divider"></li>
-					
-					<li><a href="javascript:location.href = '/jxkyglxt/System/system_exit'">
-					<i class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li>
-					
-<!-- 					<li><a href="#" onclick="exit_alert()">
+
+					<li><a
+						href="javascript:location.href = '/jxkyglxt/System/system_exit'">
+							<i class="fa fa-ban fa-fw pull-right"></i> 退出系统
+					</a></li>
+
+					<!-- 					<li><a href="#" onclick="exit_alert()">
 					<i class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li> -->
-					
-					
+
+
 				</ul></li>
-				
+
 		</ul>
 	</div>
 	</nav> </header>
@@ -301,10 +305,11 @@
 							<li><a onclick="user_setting(user_setting)"
 								class=" setButton">重置密码</a></li>
 
-							<li><a href="javascript:location.href = '/jxkyglxt/System/system_exit'"><i
+							<li><a
+								href="javascript:location.href = '/jxkyglxt/System/system_exit'"><i
 									class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li>
-									
-<!-- 					<li><a href="#" onclick="exit_alert()">
+
+							<!-- 					<li><a href="#" onclick="exit_alert()">
 					<i class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li> -->
 
 						</ul>
@@ -313,18 +318,70 @@
 			</ul>
 
 
-
-
-
-
 		</s:if></aside>
 		<aside class="right-side"> <section class="content">
 		<div class="row">
 			<div class="col-md-12">
 				<!--breadcrumbs start -->
-				<ul class="breadcrumb">
+				<section class="content" id="content">
+				<div class="row">
+					<div class="col-md-12">
+						<!--breadcrumbs start -->
+						<ul class="breadcrumb">
+							<li><a><i class="fa fa-home"></i> 首页</a></li>
+						</ul>
+						<section class="panel general"> <header
+							class="panel-heading tab-bg-dark-navy-blue">
+						<ul class="nav nav-tabs">
+						</ul>
+						</header>
+						<div id="info_display">
+							<div class="panel-body">
+								<div class="tab-content">
+									<div id="info_content">
+										<div class="top_line">
+											<h4 class="h4_style">教师信息 </h4>
+											<hr class="hr_style" />
+										</div>
+										<ul id="info_ul">
+										<s:iterator value="#request.Introductions" status="st">
+											<li>
+												<ul class='innner_ul delay<s:property value="(#st.index+1)*200" /> '>
+													<li>
+														<h4><s:property value="introductionName" /></h4> <span><s:property value="introductionContent" /></span>
+													</li>
+												</ul>
+											</li>
+											<s:if test="#st.Last">
+												<li>
+													<ul class='innner_ul delay<s:property value="(#st.index+2)*200" /> '>
+														<li><img id="addImg" src="<%=basePath%>/img/add(2).png" />
+															<h4 id="addInfo">添加信息</h4></li>
+													</ul>
+												</li> 
+											</s:if>
+										</s:iterator>
+
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						</section>
+						<!--breadcrumbs end -->
+					</div>
+				</div>
+				</section>
+				<!--breadcrumbs end -->
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<!--breadcrumbs start -->
+
+				<!-- <ul class="breadcrumb">
 					<li><a><i class="fa fa-home"></i> 首页</a></li>
-				</ul>
+				</ul> -->
 				<!--breadcrumbs end -->
 			</div>
 		</div>
@@ -347,7 +404,7 @@
 	
 	
 		function exit_alert() {
-			var exit = confirm("您确定要注销吗？")
+			var exit = confirm("您确定要注销吗？");
 			if (exit == true) {
 				window.location.href = "/jxkyglxt/System/system_exit"
 			}

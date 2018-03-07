@@ -14,7 +14,7 @@
 					<h4 class="modal-title" id="myModalLabel">信息管理-导出</h4>
 				</div>
 
-				<div class="modal-body  " id="modal-content">
+				<div class="modal-body " id="modal-content">
 
 					<div class="tab_content">
 						<div id="check" class="checkbox">
@@ -28,53 +28,45 @@
 									</button></li>
 							</ul>
 							<ul class="group-list">
-
-								<li><button value="2" class="btn btn-info btn-sm">
+								<li><button value="2" class="btn btn-info btn-sm pro">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>获奖作品名称</span>
 									</button></li>
-								<li><button value="3" class="btn btn-info btn-sm">
+								<li><button value="3" class="btn btn-info btn-sm pro">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>奖励名称</span>
 									</button></li>
-								<li><button value="4" class="btn btn-info btn-sm">
+								<li><button value="4" class="btn btn-info btn-sm pro">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>获奖者姓名</span>
 									</button></li>
-								<li><button value="5" class="btn btn-info btn-sm">
+								<li><button value="5" class="btn btn-info btn-sm pro">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>获奖者工号_排名</span>
 									</button></li>
-								<li><button value="6" class="btn btn-info btn-sm">
+								<li><button value="6" class="btn btn-info btn-sm pro">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>奖励类型</span>
 									</button></li>
-								<li><button value="11" class="btn btn-info btn-sm">
+								<li><button value="11" class="btn btn-info btn-sm pro">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>获奖证书编号</span>
 									</button></li>
 							</ul>
 							<ul class="group-list">
-
-								<li><button value="7" class="btn btn-info btn-sm">
+								<li><button value="7" class="btn btn-info btn-sm pro">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>奖励类别</span>
 									</button></li>
-								<li><button value="8" class="btn btn-info btn-sm">
+								<li><button value="8" class="btn btn-info btn-sm pro">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>获奖等级</span>
 									</button></li>
-								<li><button value="9" class="btn btn-info btn-sm">
+								<li><button value="9" class="btn btn-info btn-sm pro">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>获奖级别</span>
 									</button></li>
-								<li><button value="10" class="btn btn-info btn-sm">
+								<li><button value="10" class="btn btn-info btn-sm pro">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>获奖时间</span>
 									</button></li>
-								<li><button value="12" class="btn btn-info btn-sm">
+								<li><button value="12" class="btn btn-info btn-sm pro">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>授予单位</span>
 									</button></li>
 							</ul>
-							<ul class="group-list">
-
-								<!-- <li><button value="13" class="btn btn-info btn-sm">
-										<i class="fa fa-times" aria-hidden="true"></i> <span>附件地址</span>
-									</button></li> -->
-							</ul>
 						</div>
+						<div class="tab-inneed"></div>
 					</div>
-					<div class="tab-inneed"></div>
 				</div>
 
 				<div class="modal-footer">

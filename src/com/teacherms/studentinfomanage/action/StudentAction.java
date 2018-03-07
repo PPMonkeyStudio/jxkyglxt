@@ -120,10 +120,6 @@ public class StudentAction extends ActionSupport {
 		}
 	}
 
-	public void setTableName(String tableName) {
-		this.tableName = tableName;
-	}
-
 	private Object getInfoObjectBytableName() {
 		switch (this.tableName) {
 		case "StudentInfo":
@@ -141,6 +137,10 @@ public class StudentAction extends ActionSupport {
 		default:
 			return null;
 		}
+	}
+
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
 	}
 
 	public StudentInfo getStudentInfo() {

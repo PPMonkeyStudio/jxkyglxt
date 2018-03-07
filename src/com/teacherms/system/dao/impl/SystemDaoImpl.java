@@ -1,8 +1,11 @@
 package com.teacherms.system.dao.impl;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import com.teacherms.all.domain.Introduction;
 import com.teacherms.all.domain.Role;
 import com.teacherms.all.domain.User;
 import com.teacherms.system.dao.SystemDao;
@@ -35,6 +38,12 @@ public class SystemDaoImpl implements SystemDao {
 		System.out.println(loging_user);
 		getSession().update(loging_user);
 		return loging_user;
+	}
+
+	@Override
+	public List<Introduction> getIntroduction(String departmentId) {
+		String hql = "from Introduction where Introduction_department ='" + departmentId + "'";
+		return getSession().createQuery(hql).list();
 	}
 
 }

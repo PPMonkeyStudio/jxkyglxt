@@ -139,6 +139,7 @@ $(function() {
 
 });
 
+
 var m_check = {
 	div : null,
 	button : null,
@@ -149,34 +150,68 @@ var m_check = {
 		//这边范围对应的对象，可以实现链式调用
 		return this;
 	},
-	bind : function() {
-		this.render();
-	},
 	//渲染元素
 	render : function() {
 		var self = this;
-		var o = null;
-		$.each(this.input, function() {
-			o = $(this);
-			if (o.attr('id') == 'all') {
-				o.click(function() {
-					self.input.children('i').attr('class', 'fa fa-check');
-				});
-			} else if (o.attr('id') == 'inverse') {
-				o.click(function() {
-					$.each(self.input, function() {
-						$(this).children('i').attr('class', self.getInverse(this));
-					})
-				});
+		var div = this.div;
+		this.div.children().on("click", function(e) {
+			//console.log(e);
+			if (e.target.tagName == "BUTTON") {
+				var but = e.target;
+				if (e.currentTarget.className == "checkbox") {
+					//全选
+					if (but.id == 'all') {
+						//全部选择时
+						if ($(but).children('i').hasClass('fa-check')) {
+							div.find('.checkbox .pro').each(function() {
+								self.checkout(this);
+							});
+						}
+						//未全部选择时
+						else {
+							div.find('.checkbox .pro').each(function() {
+								//部分已经选择，则不做再次的选择处理
+								if ($(this).attr('disabled') == false || $(this).attr('disabled') == undefined) {
+									self.checkin(this); //选中
+								}
+							});
+						}
+					//反选
+					} else if (but.id == 'inverse') {
+						div.find('.checkbox .pro').each(function() {
+							//按钮可以点击，执行点击
+							if ($(this).attr('disabled') == false || $(this).attr('disabled') == undefined) {
+								self.checkin(this); //选中
+							}
+							//按钮不可以点击，则除去该条件，变为可点击
+							else if ($(this).attr('disabled') == 'disabled') {
+								self.checkout(this); //取消选中
+							}
+						});
+					//选择点击
+					} else {
+						self.checkin(but);
+						return; //不执行最后改变样式的方法
+					}
+					//最后执行
+					//改变全选按钮的样式
+					$(but).children('i').attr('class', self.getInverse($(but)));
+				} else if (e.currentTarget.className == "tab-inneed") {
+					self.checkout(but);
+				}
 			} else {
-				o.click(function() {
-					$(this).children('i').attr('class', self.getInverse(this));
-					alert("11");
-					div.find('.tab-inneed').append($(this));
-				});
+				return;
 			}
 		});
 		self.after();
+	},
+	checkin : function(button) {
+		this.div.children('.tab-inneed').append($(button).clone());
+		$(button).attr('disabled', true).children('i').attr('class', this.getInverse(button));
+	},
+	checkout : function(button) {
+		this.div.find('.checkbox button[value="' + $(button).val() + '"]').attr('disabled', false).children('i').attr('class', 'fa fa-times');
+		this.div.find('.tab-inneed button[value="' + $(button).val() + '"]').remove();
 	},
 	getInverse : function(button) {
 		return $(button).children('i').hasClass('fa-check') ? 'fa fa-times' : 'fa fa-check';
@@ -184,8 +219,8 @@ var m_check = {
 	before : function() {
 		if (this.div.hasClass('m_check')) {
 			return;
-		}
-		this.bind();
+		} else
+			this.render();
 	},
 	after : function() {
 		this.div.addClass('m_check');
@@ -411,6 +446,7 @@ function getinfoByCardId() {
 		}
 	})
 }
+
 
 function selectSeacher() {
 	$(document).on("change", "#all_options", function() {
