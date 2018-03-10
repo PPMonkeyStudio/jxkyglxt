@@ -337,10 +337,8 @@
 													</li>
 													<s:if test="#st.Last">
 														<li>
-															<ul
-																class='innner_ul delay<s:property value="(#st.index+2)*200" /> '>
-																<li><img id="addImg"
-																	src="<%=basePath%>/img/add(2).png" />
+															<ul class='innner_ul delay<s:property value="(#st.index+2)*200" /> '>
+																<li><img id="addImg" src="<%=basePath%>/img/add(2).png" />
 																	<h4 id="addInfo">添加信息</h4></li>
 															</ul>
 														</li>

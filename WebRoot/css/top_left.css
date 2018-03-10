@@ -79,6 +79,15 @@
 	max-height: 350px;
 }
 
+#addImg {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#addInfo {
+	margin: auto;
+}
+
 #info_ul {
 	width: auto;
 	height: 350px;
@@ -91,12 +100,14 @@
 	width: 25%;
 	height: 180px;
 	float: left;
+	text-align: center;
 }
 
 #info_ul ul li {
 	width: 90%;
 	height: 150px;
-	padding: 20px 0 0 20px;
+	/* padding: 20px 0 0 20px; */
+	padding:20px 0px 0px 0px ;
 	border-radius: 5%;
 	list-style: none;
 	margin-top: 10px;
@@ -147,15 +158,15 @@
 	box-shadow: none;
 }
 
-@keyframes buttomIn {
-	from { 
-		transform: translateY(25px);
-		opacity: 0;
-	}
-	to {
-		transform: translateX(0px);
-		opacity: 1;
-	}
+@
+keyframes buttomIn {from { transform:translateY(25px);
+	opacity: 0;
+}
+
+to {
+	transform: translateX(0px);
+	opacity: 1;
+}
 
 }
 .delay200 {
