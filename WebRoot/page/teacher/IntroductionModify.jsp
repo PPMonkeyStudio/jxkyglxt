@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -20,7 +21,6 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
 </head>
 
 <body>
@@ -35,27 +35,40 @@
 			<!--breadcrumbs end -->
 		</div>
 	</div>
+	<!-- 访问首页介绍的信息 --> 
+	<s:action namespace="/System" name="system_getIntroduction" executeResult="false"></s:action>
 	<div class="row">
 		<div class="col-md-12">
 			<!--breadcrumbs start -->
 			<section class="panel general"> <header
-				class="panel-heading"> 课题(项目)信息 </header>
-			<div class="panel-body table-responsive">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>序号</th>
-							<th>课题(项目)名称</th>
-							<th>成员姓名</th>
-							<th>项目来源</th>
-							<th>项目类别</th>
-							<th>立项编号或批准文号</th>
-							<th>操作</th>
-						</tr>
-					</thead>
-					<tbody>
-					</tbody>
-				</table>
+				class="panel-heading"> 首页信息管理
+			<button class="btn btn-default btn-sm introduction_add">
+				<i class="fa fa-plus"></i>添加用户
+			</button>
+			</header>
+			<div class="panel-body table-responsive col-md-6">
+				<div class="list-group">
+					<s:iterator value="#request.Introductions" status="st">
+						<s:if test="#st.odd">
+							<a class="list-group-item"
+								introduction-id="<s:property value="introductionId"/>"><span
+								class="badge"><s:property value="introductionRanking" />
+							</span> <s:property value="introductionName" /> </a>
+						</s:if>
+					</s:iterator>
+				</div>
+			</div>
+			<div class="panel-body table-responsive col-md-6">
+				<div class="list-group">
+					<s:iterator value="#request.Introductions" status="st">
+						<s:if test="#st.even">
+							<a class="list-group-item"
+								introduction-id="<s:property value="introductionId"/>"><span
+								class="badge"><s:property value="introductionRanking" /></span>
+								<s:property value="introductionName" /> </a>
+						</s:if>
+					</s:iterator>
+				</div>
 			</div>
 			</section>
 			<!--breadcrumbs end -->

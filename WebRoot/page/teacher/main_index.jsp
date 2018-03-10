@@ -20,6 +20,8 @@
 <link rel="stylesheet" href="<%=basePath%>css/com.css" />
 <!-- 导出模态框css -->
 <link rel="stylesheet" href="<%=basePath%>css/export_modal.css" />
+
+<link rel="stylesheet" href="<%=basePath%>css/bootstrap-select.css" />
 </head>
 <body>
 	<s:action name="page_nav" namespace="/Page" executeResult="true" />
@@ -41,5 +43,6 @@
 	<jsp:include page="/modal/exportInfo/works_modal.jsp" flush="true"></jsp:include>
 
 	<script type="text/javascript" src="<%=basePath%>js/teacher/main_index.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/bootstrap-select.js"></script>
 </body>
 </html>

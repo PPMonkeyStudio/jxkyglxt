@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import com.teacherms.all.domain.Introduction;
 import com.teacherms.all.domain.TeacherAward;
 import com.teacherms.all.domain.TeacherInfo;
 import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
@@ -22,7 +23,7 @@ public interface AdminService {
 	 * @return 对象
 	 */
 	PageVO<Object> getSpecifiedInformationByPaging(String tableName, String page, String time_interval,
-			String dataState, String collegeName, Object obj,String fuzzy_query);
+			String dataState, String collegeName, Object obj, String fuzzy_query);
 
 	/**
 	 * ---通过ID获取单条信息
@@ -106,5 +107,36 @@ public interface AdminService {
 	 * @return
 	 */
 	String getUserIdOrderingByUserName(String userName);
+
+	/**
+	 * 获取单个介绍信息
+	 * 
+	 * @param tableId
+	 *            表主键
+	 * @return 介绍信息对象
+	 */
+	Introduction getOneOfIntroduction(String tableId);
+
+	/**
+	 * 修改介绍信息
+	 * 
+	 * @param introduction
+	 *            介绍对象
+	 * @return
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 */
+	String modifyIntroduction(Introduction introduction) throws IllegalArgumentException, IllegalAccessException;
+
+	/**
+	 * 添加介绍信息
+	 * 
+	 * @param introduction
+	 *            介绍对象
+	 * @param string
+	 *            部门id
+	 * @return
+	 */
+	String setIntroduction(Introduction introduction, String string);
 
 }

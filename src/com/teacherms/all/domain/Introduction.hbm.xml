@@ -7,7 +7,7 @@
 		catalog="pxxyteacherms">
 		<id name="introductionId" type="integer">
 			<column name="Introduction_id" />
-			<generator class="assigned" />
+			<generator class="identity" />
 		</id>
 		<property name="introductionName" type="string">
 			<column name="Introduction_name" length="8" not-null="true">
@@ -25,7 +25,7 @@
 			</column>
 		</property>
 		<property name="introductionImage" type="string">
-			<column name="Introduction_image" length="40" not-null="true">
+			<column name="Introduction_image" length="40" not-null="false">
 				<comment>头像</comment>
 			</column>
 		</property>

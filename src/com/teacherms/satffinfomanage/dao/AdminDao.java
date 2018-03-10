@@ -100,4 +100,22 @@ public interface AdminDao {
 	 */
 	List<String> getUserIdByUserName(String name);
 
+	/**
+	 * 获取单个介绍信息
+	 * 
+	 * @param tableId
+	 *            表主键
+	 * @return 介绍信息对象
+	 */
+	Introduction getOneOfIntroduction(String tableId);
+
+	/**
+	 * 修改介绍信息
+	 * 
+	 * @param introduction
+	 *            介绍对象
+	 * @return
+	 */
+	boolean modifyIntroduction(Introduction introduction) throws IllegalArgumentException, IllegalAccessException;
+
 }

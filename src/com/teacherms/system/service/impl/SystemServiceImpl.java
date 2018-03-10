@@ -1,12 +1,18 @@
 package com.teacherms.system.service.impl;
 
+import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.teacherms.all.domain.Department;
 import com.teacherms.all.domain.Introduction;
 import com.teacherms.all.domain.Role;
 import com.teacherms.all.domain.User;
 import com.teacherms.system.dao.SystemDao;
 import com.teacherms.system.service.SystemService;
+import com.teacherms.system.vo.DepartmentAndUserList;
+
 import util.md5;
 
 public class SystemServiceImpl implements SystemService {
@@ -49,6 +55,73 @@ public class SystemServiceImpl implements SystemService {
 	@Override
 	public List<Introduction> getIntroduction(String departmentId) {
 		return systemDao.getIntroduction(departmentId);
+	}
+
+	@Override
+	public List<User> getAllAdminUser() {
+		List<User> list = systemDao.getAllAdminUser();
+		List<Map<String, String>> department = systemDao.getDepartment();
+		Map<String, String> map = new HashMap<String, String>();
+		for (Map m : department) {
+			map.put(m.get("0") + "", m.get("1") + "");
+		}
+		for (User user : list) {
+			user.setDepartmentId((String) map.get(user.getDepartmentId()));
+		}
+		return list;
+	}
+
+	@Override
+	public User getOneOfUser(User user) {
+		return systemDao.getUserByUser_id(user.getUserId());
+	}
+
+	@Override
+	public List<Map<String, String>> getAllDepartment() {
+		return systemDao.getDepartment();
+	}
+
+	@Override
+	public String modifyUser(User user) throws IllegalArgumentException, IllegalAccessException {
+		Class<? extends Object> cla = user.getClass();
+		Field[] fields = cla.getDeclaredFields();
+		User u = systemDao.getUserByUser_id(user.getUserId());
+
+		for (Field f : fields) {
+			f.setAccessible(true);
+			if (!"".equals(f.get(user)) && f.get(user) != null && !f.get(u).equals(f.get(user))) {
+				f.set(u, f.get(user));
+			}
+		}
+		return systemDao.updateUser(u).getUserId();
+	}
+
+	@Override
+	public String resetPassword(User user) {
+		User u = systemDao.getUserByUser_id(user.getUserId());
+		u.setPassword(md5.GetMD5Code("000000"));
+		return systemDao.updateUser(u).getUserId();
+	}
+
+	@Override
+	public String setAdminUser(User user) {
+		user.setPassword(md5.GetMD5Code("000000"));
+		user.setRoleId("20");
+		return systemDao.updateUser(user).getUserId();
+	}
+
+	@Override
+	public String deleteUser(User user) {
+		return systemDao.deleteUser(user);
+	}
+
+	@Override
+	public List<DepartmentAndUserList> GetTheDepartmentWithTheCollege() {
+		List<DepartmentAndUserList> list = systemDao.getTheDepartmentWithTheCollege();
+		for (DepartmentAndUserList de : list) {
+			de.setList(systemDao.getUserByDeparmentId(de.getDepartment().getDepartmentId()));
+		}
+		return list;
 	}
 
 }

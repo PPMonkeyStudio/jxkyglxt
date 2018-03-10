@@ -59,7 +59,6 @@
 <!-- 图片查看插件css -->
 <link rel="stylesheet" href="<%=basePath%>css/zoomify.min.css" />
 
-<%-- <link rel="stylesheet" href="<%=basePath%>css/need/laydate.css" /> --%>
 <%-- <link rel="stylesheet" href="<%=basePath%>css/calendar.css" /> --%>
 <link rel="stylesheet" href="<%=basePath%>css/flatpickr.min.css" />
 
@@ -75,15 +74,14 @@
 
 <script type="text/javascript" src="<%=basePath%>js/zoomify.min.js"></script>
 
-<%-- <script type="text/javascript" src="<%=basePath%>js/laydate.js"></script> --%>
-<%-- <script type="text/javascript" src="<%=basePath%>js/calendar.js"></script> --%>
 <script type="text/javascript" src="<%=basePath%>js/flatpickr.min.js"></script>
 
 </head>
 
 <body class="skin-black">
 	<!-- 访问首页介绍的信息 -->
-	<s:action namespace="/System" name="system_getIntroduction" executeResult="false"></s:action>
+	<s:action namespace="/System" name="system_getIntroduction"
+		executeResult="false"></s:action>
 	<!-- header logo: style can be found in header.less -->
 	<header class="header"> <a class="logo"> 本科数据管理系统 </a> <!-- Header Navbar: style can be found in header.less -->
 	<nav class="navbar navbar-static-top" role="navigation"> <!-- Sidebar toggle button-->
@@ -131,8 +129,10 @@
 			</a>
 				<ul class="dropdown-menu dropdown-custom dropdown-menu-right">
 					<li class="dropdown-header text-center">Account</li>
-					<li><a> <i class="fa fa-clock-o fa-fw pull-right"></i> <span
-							class="badge badge-success pull-right">10</span> 更新首页信息
+					<li><a href="javascript:toIntroductionModify()"> <i
+							class="fa fa-clock-o fa-fw pull-right"></i> <span
+							class="badge badge-success pull-right"><s:property
+									value="#request.Introductions.size()" /></span> 更新首页信息
 					</a></li>
 					<li class="divider"></li>
 					<li>
@@ -146,16 +146,10 @@
 					</a>
 					</li>
 					<li class="divider"></li>
-
 					<li><a
 						href="javascript:location.href = '/jxkyglxt/System/system_exit'">
 							<i class="fa fa-ban fa-fw pull-right"></i> 退出系统
 					</a></li>
-
-					<!-- 					<li><a href="#" onclick="exit_alert()">
-					<i class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li> -->
-
-
 				</ul></li>
 
 		</ul>
@@ -169,16 +163,12 @@
 			<div class="pull-left image">
 				<img src="img/login.jpg" class="img-circle" alt="User Image" />
 			</div>
-			
-			<!-- 问候区域 -->
 			<div class="pull-left info">
 				<p>
 					<%=greeting%>
 					<s:property value="#session.user.userName" />
 					。
-
 				</p>
-
 				<a><i class="fa fa-circle text-success"></i> 在线</a>
 			</div>
 		</div>
@@ -195,26 +185,33 @@
 			</div>
 		</form>
 		<!-- /.search form --> <!-- sidebar menu: : style can be found in sidebar.less -->
-
-
-		<s:if test="#session.role=='院系管理员'">
+		<s:if test="#session.role=='系统管理员'">
 			<ul class="sidebar-menu">
-				<li><a href="#sub" data-toggle="collapse" class="collapsed"
+				<li><a href="#sub0" data-toggle="collapse" class="collapsed"
+					aria-expanded="false"> <i class="fa fa-user"></i> <span>管理员账户管理</span>
+						<i class="icon-submenu fa fa-angle-left"></i>
+				</a>
+					<div id="sub0" class="collapse" aria-expanded="false"
+						style="height: 0px;">
+						<ul class="nav">
+							<li><a class="">管理员帐号</a></li>
+							<li><a class="">人员调动</a></li>
+						</ul>
+					</div></li>
+			</ul>
+			<ul class="sidebar-menu">
+				<li><a href="#sub1" data-toggle="collapse" class="collapsed"
 					aria-expanded="false"> <i class="fa fa-user"></i> <span>教师管理</span>
 						<i class="icon-submenu fa fa-angle-left"></i>
 				</a>
-
-					<div id="sub" class="collapse" aria-expanded="false"
+					<div id="sub1" class="collapse" aria-expanded="false"
 						style="height: 0px;">
 						<ul class="nav">
 							<li><a class="">教师信息审核</a></li>
 							<li><a class="">教师信息管理</a></li>
-
 						</ul>
 					</div></li>
-
 			</ul>
-
 			<ul class="sidebar-menu">
 				<li><a href="#sub2" data-toggle="collapse" class="collapsed"
 					aria-expanded="false"> <i class="fa fa-user"></i> <span>学生管理</span>
@@ -228,36 +225,33 @@
 						</ul>
 					</div></li>
 			</ul>
-
+		</s:if> <s:if test="#session.role=='院系管理员'">
 			<ul class="sidebar-menu">
-				<li><a href="#sub3" data-toggle="collapse" class="collapsed"
-					aria-expanded="false"> <i class="fa fa-user"></i> <span>我的账户</span>
+				<li><a href="#sub1" data-toggle="collapse" class="collapsed"
+					aria-expanded="false"> <i class="fa fa-user"></i> <span>教师管理</span>
 						<i class="icon-submenu fa fa-angle-left"></i>
 				</a>
-
-					<div id="sub3" class="collapse" aria-expanded="false"
+					<div id="sub1" class="collapse" aria-expanded="false"
 						style="height: 0px;">
 						<ul class="nav">
-							<li><a class="">账户设置</a></li>
-							<li><a onclick="user_setting(user_setting)" class=" setButton">重置密码</a></li>
-
-							<li><a
-								href="javascript:location.href = '/jxkyglxt/System/system_exit'"><i
-									class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li>
-							<!-- <li><a href="#" onclick="exit_alert()">
-					<i class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li> -->
-
+							<li><a class="">教师信息审核</a></li>
+							<li><a class="">教师信息管理</a></li>
 						</ul>
 					</div></li>
-
 			</ul>
-
-
-
-
-
-
-
+			<ul class="sidebar-menu">
+				<li><a href="#sub2" data-toggle="collapse" class="collapsed"
+					aria-expanded="false"> <i class="fa fa-user"></i> <span>学生管理</span>
+						<i class="icon-submenu fa fa-angle-left"></i>
+				</a>
+					<div id="sub2" class="collapse" aria-expanded="false"
+						style="height: 0px;">
+						<ul class="nav">
+							<li><a class="">学生信息查看</a></li>
+							<li><a class="">学生信息管理</a></li>
+						</ul>
+					</div></li>
+			</ul>
 		</s:if> <s:if test="#session.role=='教职工'">
 			<ul class="sidebar-menu">
 				<li><a href="#subPages" data-toggle="collapse"
@@ -272,50 +266,38 @@
 			</ul>
 
 			<ul class="sidebar-menu">
-				<li><a href="#sub4" data-toggle="collapse" class="collapsed"
+				<li><a href="#sub2" data-toggle="collapse" class="collapsed"
 					aria-expanded="false"> <i class="fa fa-user"></i> <span>学生管理</span>
 						<i class="icon-submenu fa fa-angle-left"></i>
 				</a>
 
-					<div id="sub4" class="collapse" aria-expanded="false"
+					<div id="sub2" class="collapse" aria-expanded="false"
 						style="height: 0px;">
 						<ul class="nav">
 							<li><a class="">学生信息查看</a></li>
 							<li><a class="">学生信息管理</a></li>
-
-
 						</ul>
 					</div></li>
-
 			</ul>
+		</s:if>
+		<ul class="sidebar-menu">
+			<li><a href="#sub3" data-toggle="collapse" class="collapsed"
+				aria-expanded="false"> <i class="fa fa-user"></i> <span>我的账户</span>
+					<i class="icon-submenu fa fa-angle-left"></i>
+			</a>
+				<div id="sub3" class="collapse" aria-expanded="false"
+					style="height: 0px;">
+					<ul class="nav">
+						<li><a class="">账户设置</a></li>
+						<li><a onclick="user_setting(user_setting)"
+							class=" setButton">重置密码</a></li>
+						<li><a
+							href="javascript:location.href = '/jxkyglxt/System/system_exit'"><i
+								class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li>
+					</ul>
+				</div></li>
 
-			<ul class="sidebar-menu">
-				<li><a href="#sub5" data-toggle="collapse" class="collapsed"
-					aria-expanded="false"> <i class="fa fa-user"></i> <span>我的账户</span>
-						<i class="icon-submenu fa fa-angle-left"></i>
-				</a>
-
-					<div id="sub5" class="collapse" aria-expanded="false"
-						style="height: 0px;">
-						<ul class="nav">
-							<li><a class="">账户设置</a></li>
-							<li><a onclick="user_setting(user_setting)"
-								class=" setButton">重置密码</a></li>
-
-							<li><a
-								href="javascript:location.href = '/jxkyglxt/System/system_exit'"><i
-									class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li>
-
-							<!-- 					<li><a href="#" onclick="exit_alert()">
-					<i class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li> -->
-
-						</ul>
-					</div></li>
-
-			</ul>
-
-
-		</s:if></aside>
+		</ul></aside>
 		<aside class="right-side"> <section class="content">
 		<div class="row">
 			<div class="col-md-12">
@@ -337,29 +319,35 @@
 								<div class="tab-content">
 									<div id="info_content">
 										<div class="top_line">
-											<h4 class="h4_style">教师信息 </h4>
+											<h4 class="h4_style">教师信息</h4>
 											<hr class="hr_style" />
 										</div>
-										<ul id="info_ul">
-										<s:iterator value="#request.Introductions" status="st">
-											<li>
-												<ul class='innner_ul delay<s:property value="(#st.index+1)*200" /> '>
+										<div class="top_content">
+											<ul id="info_ul">
+												<s:iterator value="#request.Introductions" status="st">
 													<li>
-														<h4><s:property value="introductionName" /></h4> <span><s:property value="introductionContent" /></span>
+														<ul
+															class='innner_ul delay<s:property value="(#st.index+1)*200" /> '>
+															<li>
+																<h4>
+																	<s:property value="introductionName" />
+																</h4> <span><s:property value="introductionContent" /></span>
+															</li>
+														</ul>
 													</li>
-												</ul>
-											</li>
-											<s:if test="#st.Last">
-												<li>
-													<ul class='innner_ul delay<s:property value="(#st.index+2)*200" /> '>
-														<li><img id="addImg" src="<%=basePath%>/img/add(2).png" />
-															<h4 id="addInfo">添加信息</h4></li>
-													</ul>
-												</li> 
-											</s:if>
-										</s:iterator>
-
-										</ul>
+													<s:if test="#st.Last">
+														<li>
+															<ul
+																class='innner_ul delay<s:property value="(#st.index+2)*200" /> '>
+																<li><img id="addImg"
+																	src="<%=basePath%>/img/add(2).png" />
+																	<h4 id="addInfo">添加信息</h4></li>
+															</ul>
+														</li>
+													</s:if>
+												</s:iterator>
+											</ul>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -399,12 +387,42 @@
 		var today = now.getFullYear() + "-" + (month) + "-" + (day);
 		$(".riliDate").val(today);
 	
-		$(function(){
-			$("#info_ul").on('click',function(e){
-				
+		$(function() {
+			$("#info_ul").on({
+				mousedown : function(e) {
+					if (e.target.parentElement.id == "info_ul") {
+						var el = $(this);
+						var os = el.offset();
+						//dx = e.pageX - os.left;  left : e.pageX - dx
+						dy = e.pageY - os.top;
+						$(document).on('mousemove.drag', function(e) {
+							el.offset({
+								top : e.pageY - dy,
+							});
+						});
+					}
+				},
+				mouseup : function(e) {
+					if ($(this).offset().top > 425) {
+						$(this).offset({
+							top : 425,
+						});
+					}
+					console.log($(this).offset().top);
+					if ($(this).offset().top < -125) {
+						$(this).offset({
+							top : -125,
+						});
+					}
+					$(document).off('mousemove.drag');
+				}
 			})
 		})
-	
+		function toIntroductionModify() {
+			$('.right-side').load('page/teacher/IntroductionModify.jsp #content', function() {
+				$.getScript("js/teacher/IntroductionModify.js");
+			});
+		}
 		function exit_alert() {
 			var exit = confirm("您确定要注销吗？");
 			if (exit == true) {

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +22,7 @@ import com.teacherms.all.domain.User;
 import com.teacherms.system.TAB.Admin_NavigationTAB;
 import com.teacherms.system.TAB.Teacher_NavigationTAB;
 import com.teacherms.system.service.SystemService;
-
+import com.teacherms.system.vo.DepartmentAndUserList;
 import com.teacherms.all.domain.*;
 
 public class SystemAction extends ActionSupport {
@@ -97,7 +98,7 @@ public class SystemAction extends ActionSupport {
 		return "exit";
 	}
 
-	// 用户修改信息
+	// 用户修改自身帐号信息
 	public void modifyUserInfo() {
 		try {
 			User u = systemService.modifyPassword(user, (User) ActionContext.getContext().getSession().get("user"));
@@ -107,6 +108,96 @@ public class SystemAction extends ActionSupport {
 			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + u.getUserName() + "\"}");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	// 获取全部用户
+	public void getAllAdminUser() {
+		try {
+			List<User> list = systemService.getAllAdminUser();
+			ServletActionContext.getRequest().setAttribute("adminList", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 获取单个用户
+	public void getOneOfUser() {
+		try {
+			User u = systemService.getOneOfUser(user);
+			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
+			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(u));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 系统管理修改用户
+	public void modifyUser() {
+		try {
+			String u = systemService.modifyUser(user);
+			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
+			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(u));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 系统管理重置密码
+	public void resetPassword() {
+		try {
+			String u = systemService.resetPassword(user);
+			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
+			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(u));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 系统管理添加管理
+	public void setAdminUser() {
+		try {
+			String u = systemService.setAdminUser(user);
+			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
+			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(u));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 系统管理添加管理
+	public void deleteUser() {
+		try {
+			String u = systemService.deleteUser(user);
+			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
+			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(u));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 获取所有部门
+	public void getAllDepartment() {
+		try {
+			List<Map<String, String>> de = systemService.getAllDepartment();
+			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
+			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(de));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 获取带学院字的部门
+	public void GetTheDepartmentWithTheCollege() {
+		try {
+			List<DepartmentAndUserList> list = systemService.GetTheDepartmentWithTheCollege();
+			ServletActionContext.getRequest().setAttribute("DepartmentList", list);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

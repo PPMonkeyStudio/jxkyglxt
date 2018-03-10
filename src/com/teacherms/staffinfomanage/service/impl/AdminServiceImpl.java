@@ -281,6 +281,35 @@ public class AdminServiceImpl implements AdminService {
 			return department.getDepartmentId();
 	}
 
+	@Override
+	public Introduction getOneOfIntroduction(String tableId) {
+		return adminDao.getOneOfIntroduction(tableId);
+	}
+
+	@Override
+	public String modifyIntroduction(Introduction introduction)
+			throws IllegalArgumentException, IllegalAccessException {
+		Class<? extends Object> cla = introduction.getClass();
+		Field[] fields = cla.getDeclaredFields();
+
+		Introduction in = adminDao.getOneOfIntroduction(introduction.getIntroductionId() + "");
+
+		for (Field f : fields) {
+			f.setAccessible(true);
+			if (!"".equals(f.get(introduction)) && f.get(introduction) != null
+					&& !f.get(in).equals(f.get(introduction))) {
+				f.set(in, f.get(introduction));
+			}
+		}
+		return adminDao.updateInfo(in) ? "success" : "error";
+	}
+
+	@Override
+	public String setIntroduction(Introduction introduction, String id) {
+		introduction.setIntroductionDepartment(id);
+		return adminDao.addInfo(introduction);
+	}
+
 	// ----------------------------------------------------------------------封装
 	/**
 	 * ---封装list中的对象信息到AdminVo

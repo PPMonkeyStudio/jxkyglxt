@@ -1,10 +1,13 @@
 package com.teacherms.system.dao;
 
 import java.util.List;
+import java.util.Map;
 
+import com.teacherms.all.domain.Department;
 import com.teacherms.all.domain.Introduction;
 import com.teacherms.all.domain.Role;
 import com.teacherms.all.domain.User;
+import com.teacherms.system.vo.DepartmentAndUserList;
 
 public interface SystemDao {
 
@@ -43,5 +46,36 @@ public interface SystemDao {
 	 * @return
 	 */
 	List<Introduction> getIntroduction(String departmentId);
+
+	/**
+	 * 获取全部管理员用户的帐号信息
+	 * 
+	 * @return
+	 */
+	List<User> getAllAdminUser();
+
+	/**
+	 * 获取全部部门
+	 * 
+	 * @return
+	 */
+	List<Map<String, String>> getDepartment();
+
+	String deleteUser(User user);
+
+	/**
+	 * 获取带学院字的部门
+	 * 
+	 * @return
+	 */
+	List<DepartmentAndUserList> getTheDepartmentWithTheCollege();
+
+	/**
+	 * 通过部门ID获取在该部门的所有用户
+	 * 
+	 * @param departmentId
+	 * @return
+	 */
+	List<User> getUserByDeparmentId(String departmentId);
 
 }

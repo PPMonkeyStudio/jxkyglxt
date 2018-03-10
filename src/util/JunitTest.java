@@ -72,7 +72,8 @@ public class JunitTest {
 		// XSSFWorkbook workbook = adminService.getExcel("1,2,3,6,7,8,9,14,15",
 		// "TeacherInfo",
 		// "649674ef-66c8-4ec1-9eb6-60761e95a708,6fd38307-40af-4e7c-8042-e6d542e56755");
-		XSSFWorkbook workbook = adminService.getExcel("12,10,9,8,7", "TeacherAward", "016a004d-9b9e-4244-9f56-da94b60daf75,04248d06-3c45-476c-ad4e-ba8945186646,044a2baf-d4e9-4b11-8d27-511fe3ca6db3");
+		XSSFWorkbook workbook = adminService.getExcel("12,10,9,8,7", "TeacherAward",
+				"016a004d-9b9e-4244-9f56-da94b60daf75,04248d06-3c45-476c-ad4e-ba8945186646,044a2baf-d4e9-4b11-8d27-511fe3ca6db3");
 		try {
 			FileOutputStream out = new FileOutputStream("E:/Attachment/张三/TeacherAward/test.xlsx");
 			workbook.write(out);
@@ -96,6 +97,34 @@ public class JunitTest {
 						null, null, null, null, null, null, null, null, null, null, null, null, null, null, null),
 				null);
 		System.out.println(pageVO.toString());
+	}
+
+	@Test
+	public void test_modifyIntroduction() {
+		try {
+			System.out.println(adminService.modifyIntroduction(new Introduction(1, null, null, null, "111", null)));
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void test_getAllAdminUser() {
+		try {
+			System.out.println(systemService.getAllAdminUser());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	@Test
+	public void test_getDE() {
+		try {
+			System.out.println(systemService.GetTheDepartmentWithTheCollege());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/*---------------------------------------------------------------------------*/
@@ -272,4 +301,10 @@ public class JunitTest {
 		}
 		System.out.println(sum + day);
 	}
+	
+	@Test
+	public void test111(){
+		System.out.println(md5.GetMD5Code("admin"));
+	}
+
 }

@@ -1,5 +1,6 @@
 package com.teacherms.satffinfomanage.dao.impl;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -31,6 +32,9 @@ public class AdminDaoImpl implements AdminDao {
 		String hql = "select t,u from " + table
 				+ " t,User u,Department d where u.userId=t.userId and u.departmentId=d.departmentId and d.departmentName='"
 				+ collegeName + "' and t.dataStatus = '" + status + "'" + time + multi_condition + fuzzy;
+		if("TeacherInfo".equals(table)){
+			hql+=" and u.roleId!='20'";
+		}
 		System.out.println(hql);
 		return getSession().createQuery(hql).list();
 	}
@@ -90,6 +94,25 @@ public class AdminDaoImpl implements AdminDao {
 	public List<String> getUserIdByUserName(String name) {
 		String hql = "select u.userId from User u where u.userName like '%" + name + "%'";
 		return getSession().createQuery(hql).list();
+	}
+
+	@Override
+	public Introduction getOneOfIntroduction(String tableId) {
+		String hql = "from Introduction where introductionId='" + tableId + "'";
+		return (Introduction) getSession().createQuery(hql).uniqueResult();
+	}
+
+	@Override
+	public boolean modifyIntroduction(Introduction introduction) {
+		boolean flag = true;
+		try {
+			getSession().merge(introduction);
+			getSession().saveOrUpdate(introduction);
+		} catch (Exception e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
 	}
 
 }

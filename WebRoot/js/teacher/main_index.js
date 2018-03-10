@@ -56,18 +56,7 @@ var data = {
 	"studentInfo.className" : "",
 	"studentInfo.departmentId" : "",
 	"studentInfo.teacherTraining" : "",
-<<<<<<< HEAD
 	"studentInfo.deformed" : ""
-	
-=======
-	"studentInfo.deformed" : "",
-	"studentInfo." : "",
-	"studentInfo." : "",
-	"studentInfo." : "",
-	"studentInfo." : "",
-	"studentInfo." : "",
-	"studentInfo." : "",
->>>>>>> HY
 }
 
 //保存分页信息
@@ -96,6 +85,18 @@ $(function() {
 		data.page = 1;
 		$(this).addClass("Atfer_li");
 		$(this).parent().siblings().children().removeClass("Atfer_li");
+		//系统管理员
+		if (($(this).text()) == "人员调动") {
+			$('.right-side').load('page/administrator/PersonnelRedeploy.jsp #content', function() {
+				$.getScript("js/administrator/PersonnelRedeploy.js");
+			});
+		}
+		//系统管理员
+		if (($(this).text()) == "管理员帐号") {
+			$('.right-side').load('page/administrator/adminAccountManagement.jsp #content', function() {
+				$.getScript("js/administrator/adminAccountManagement.js");
+			});
+		}
 		//管理员
 		if (($(this).text()) == "教师信息审核") {
 			$('.right-side').load('page/teacher/teacher_information_audit.jsp #content', selectSeacher(), function() {

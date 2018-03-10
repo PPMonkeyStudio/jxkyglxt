@@ -18,6 +18,7 @@ import org.apache.struts2.ServletActionContext;
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.teacherms.all.domain.Introduction;
 import com.teacherms.all.domain.TeacherAward;
 import com.teacherms.all.domain.TeacherInfo;
 import com.teacherms.all.domain.TeacherPaper;
@@ -61,6 +62,7 @@ public class AdminAction extends ActionSupport {
 	private TeacherPatent teacherPatent;
 	private TeacherProject teacherProject;
 	private TeacherWorks teacherWorks;
+	private Introduction introduction;
 	private User user;
 	private Object obj;
 
@@ -219,7 +221,37 @@ public class AdminAction extends ActionSupport {
 	public String getSecondaryCollegeInfo(String what) {
 		User user = (User) ActionContext.getContext().getSession().get("user");
 		return adminService.getDepartmentNameByDepartmentId(user.getDepartmentId(), what);
+	}
 
+	public void getOneOfIntroduction() {
+		try {
+			Introduction introduction = adminService.getOneOfIntroduction(tableId);
+			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
+			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(introduction));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void modifyIntroduction() {
+		try {
+			String result = adminService.modifyIntroduction(introduction);
+			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
+			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void setIntroduction() {
+		try {
+			User user = (User) ActionContext.getContext().getSession().get("user");
+			String result = adminService.setIntroduction(introduction, user.getDepartmentId());
+			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
+			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	// 通过tablename来判断给信息对象赋值
@@ -396,6 +428,14 @@ public class AdminAction extends ActionSupport {
 
 	public void setFuzzy_query(String fuzzy_query) {
 		this.fuzzy_query = fuzzy_query;
+	}
+
+	public Introduction getIntroduction() {
+		return introduction;
+	}
+
+	public void setIntroduction(Introduction introduction) {
+		this.introduction = introduction;
 	}
 
 }

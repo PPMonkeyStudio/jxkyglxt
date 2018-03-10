@@ -1,9 +1,12 @@
 package com.teacherms.system.service;
 
 import java.util.List;
+import java.util.Map;
 
+import com.teacherms.all.domain.Department;
 import com.teacherms.all.domain.Introduction;
 import com.teacherms.all.domain.User;
+import com.teacherms.system.vo.DepartmentAndUserList;
 
 public interface SystemService {
 
@@ -46,5 +49,58 @@ public interface SystemService {
 	 * @return
 	 */
 	List<Introduction> getIntroduction(String departmentId);
+
+	/**
+	 * 获取全部管理员用户的帐号信息
+	 * 
+	 * @return
+	 */
+	List<User> getAllAdminUser();
+
+	User getOneOfUser(User user);
+
+	List<Map<String, String>> getAllDepartment();
+
+	/**
+	 * 系统管理修改用户信息
+	 * 
+	 * @param user
+	 *            用户信息
+	 * @return
+	 */
+	String modifyUser(User user) throws IllegalArgumentException, IllegalAccessException;
+
+	/**
+	 * 系统管重置密码
+	 * 
+	 * @param user
+	 *            用户信息
+	 * @return
+	 */
+	String resetPassword(User user);
+
+	/**
+	 * 添加管理用户
+	 * 
+	 * @param user
+	 *            添加的对象
+	 * @return
+	 */
+	String setAdminUser(User user);
+
+	/**
+	 * 删除用户
+	 * 
+	 * @param user
+	 * @return
+	 */
+	String deleteUser(User user);
+
+	/**
+	 * 获取带'学院'字的部门
+	 * 
+	 * @return
+	 */
+	List<DepartmentAndUserList> GetTheDepartmentWithTheCollege();
 
 }
