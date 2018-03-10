@@ -79,15 +79,6 @@
 	max-height: 350px;
 }
 
-#addImg {
-	margin-left: auto;
-	margin-right: auto;
-}
-
-#addInfo {
-	margin: auto;
-}
-
 #info_ul {
 	width: auto;
 	height: 350px;
@@ -158,16 +149,15 @@
 	box-shadow: none;
 }
 
-@
-keyframes buttomIn {from { transform:translateY(25px);
+@keyframes buttomIn {
+	from { 
+	transform:translateY(25px);
 	opacity: 0;
-}
-
-to {
+	}
+	to {
 	transform: translateX(0px);
 	opacity: 1;
-}
-
+	}
 }
 .delay200 {
 	animation-delay: 200ms;

@@ -296,7 +296,7 @@ $(function() {
 		doQuery();
 		//导出模态框初始化
 		m_check.init({
-			id : '#export_' + a_href + ' #check'
+			id : '#export_' + a_href + ' .tab_content'
 		});
 	});
 	//添加按钮点击事件

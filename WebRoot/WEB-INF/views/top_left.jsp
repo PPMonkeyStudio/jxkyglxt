@@ -129,11 +129,13 @@
 			</a>
 				<ul class="dropdown-menu dropdown-custom dropdown-menu-right">
 					<li class="dropdown-header text-center">Account</li>
-					<li><a href="javascript:toIntroductionModify()"> <i
-							class="fa fa-clock-o fa-fw pull-right"></i> <span
-							class="badge badge-success pull-right"><s:property
-									value="#request.Introductions.size()" /></span> 更新首页信息
-					</a></li>
+					<s:if test="#session.role!='教职工'">
+						<li><a href="javascript:toIntroductionModify()"> <i
+								class="fa fa-clock-o fa-fw pull-right"></i> <span
+								class="badge badge-success pull-right"><s:property
+										value="#request.Introductions.size()" /></span> 更新首页信息
+						</a></li>
+					</s:if>
 					<li class="divider"></li>
 					<li>
 						<!-- 判断是否为管理员 --> <s:if test="#session.role=='院系管理员'">
@@ -335,10 +337,12 @@
 															</li>
 														</ul>
 													</li>
-													<s:if test="#st.Last">
+													<s:if test="#st.Last && #session.role!='教职工'">
 														<li>
-															<ul class='innner_ul delay<s:property value="(#st.index+2)*200" /> '>
-																<li><img id="addImg" src="<%=basePath%>/img/add(2).png" />
+															<ul
+																class='innner_ul delay<s:property value="(#st.index+2)*200" /> '>
+																<li><img id="addImg"
+																	src="<%=basePath%>/img/add(2).png" />
 																	<h4 id="addInfo">添加信息</h4></li>
 															</ul>
 														</li>
