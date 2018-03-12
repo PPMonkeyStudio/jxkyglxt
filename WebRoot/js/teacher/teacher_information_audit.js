@@ -90,10 +90,10 @@ $(function() {
 		parent_div.find("#search_input").empty();
 		//执行查询操作
 		doQuery();
-		//导出模态框初始化
+		/*//导出模态框初始化
 		m_check.init({
-			id : '#export_' + a_href + ' #check'
-		});
+			id : '#export_' + a_href + '  .tab_content'
+		});*/
 	});
 
 	//指定查询
