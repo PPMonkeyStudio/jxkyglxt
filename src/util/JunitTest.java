@@ -111,6 +111,18 @@ public class JunitTest {
 	}
 
 	@Test
+	public void test_curingInfomation() {
+		try {
+			System.out.println(adminService.curingInfomation(new TeacherInfo("dd12c8ec-4d22-4ff9-a024-22e3071dc8bb",
+					"23010007", null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+					null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+					null, null, null, null, null, null, null, null, "0000", "20", TimeUtil.getStringDay())));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
 	public void test_getAllAdminUser() {
 		try {
 			System.out.println(systemService.getAllAdminUser());
@@ -118,6 +130,7 @@ public class JunitTest {
 			e.printStackTrace();
 		}
 	}
+
 	@Test
 	public void test_getDE() {
 		try {
@@ -145,6 +158,11 @@ public class JunitTest {
 	@Test
 	public void test_userGetTeacherInfo() {
 		System.out.println(teacherService.userGetTeacherInfo("23010003"));
+	}
+
+	@Test
+	public void test_PuchInfoToadmin() {
+		teacherService.PuchInfoToadmin("TeacherInfo", "e6ce9843-8fb0-405a-ab04-35176538ca7e");
 	}
 
 	@Test
@@ -200,7 +218,6 @@ public class JunitTest {
 			System.out
 					.println(studentService.setStudentAllInfo(new StudentAward(null, "1", "2", "2", "", "", "", null)));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -211,7 +228,6 @@ public class JunitTest {
 			System.out.println(studentService.updateStudentAllInfo(
 					new StudentAward("d2ebf782-c12c-404c-b60f-b5f2160cd83c", "1", "6", "7", "8", "9", "22", "")));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -222,7 +238,6 @@ public class JunitTest {
 			System.out.println(
 					studentService.getStudentOneInfo(new StudentAward("1", "1", null, null, null, null, null, null)));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -230,9 +245,8 @@ public class JunitTest {
 	@Test
 	public void test_getStudentAllInfo() {
 		try {
-			System.out.println(studentService.getStudentAllInfo("StudentClass", "1"));
+			System.out.println(studentService.getStudentAllInfo("StudentAward", "1"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -243,7 +257,6 @@ public class JunitTest {
 			System.out.println(studentService.deleteStudentInfo(
 					new StudentAward("d2ebf782-c12c-404c-b60f-b5f2160cd83c", "1", null, null, null, null, null, null)));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -301,9 +314,9 @@ public class JunitTest {
 		}
 		System.out.println(sum + day);
 	}
-	
+
 	@Test
-	public void test111(){
+	public void test111() {
 		System.out.println(md5.GetMD5Code("admin"));
 	}
 

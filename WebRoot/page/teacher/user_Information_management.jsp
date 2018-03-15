@@ -48,148 +48,150 @@
 								class="panel-heading second-panel-heading"> 用户信息
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
-								<button style="display: none;float: right;"
-								class="btn btn-danger commmit-btn">提交审核</button>
+							<button style="display: none;float: right;"
+								class="btn btn-danger commmit-btn commit-info">提交审核</button>
 							</header>
-							<div class="panel-body table-responsive user-info" id="panel-body">
+							<div class="panel-body table-responsive user-info"
+								id="panel-body">
 								<form id="info-form">
 									<table class="tab" id="info_table">
 										<tr></tr>
 										<tr class="title">
 											<td>基本信息</td>
 										</tr>
-										<tr>
-											<!-- name="teacherInfo." -->
-											<td>工号：</td>
-											<td><input name="teacherInfo.teacherInfoId"
-												type="hidden"> <input
-												name="teacherInfo.userId"
-												class="form-control table_infomation" type="text"></td>
-											<td>姓名:</td>
-											<td><input name="teacherInfo.userName"
-												class="form-control table_infomation" type="text"></td>
-										</tr>
-										<tr>
-											<td>证件类型：</td>
-											<td><select name="teacherInfo.certificateType"
-												class="form-control table_infomation">
-													<option>居民身份证</option>
-													<option>军人证</option>
-													<option>护照</option>
-											</select></td>
-											<td>证件号码:</td>
-											<td><input name="teacherInfo.certificateNo"
-												class="form-control table_infomation  card_num" type="text"></td>
-											<td>民族：</td>
-											<td><select name="teacherInfo.nation"
-												class="form-control table_infomation">
-													<option>汉族</option>
-													<option>少数民族</option>
-											</select></td>
-										</tr>
-										<tr>
-											<td>国籍：</td>
-											<td><select name="teacherInfo.nationality"
-												class="form-control table_infomation">
-													<option>中国</option>
-													<option>国外</option>
-											</select></td>
-											<td>港澳台：</td>
-											<td><select name="teacherInfo.GAT"
-												class="form-control table_infomation">
-													<option>否</option>
-													<option>是</option>
-											</select></td>
-											<td>华侨：</td>
-											<td><select name="teacherInfo.huaQiao"
-												class="form-control table_infomation">
-													<option>否</option>
-													<option>是</option>
-											</select></td>
-										</tr>
-										<tr>
-											<td>政治面貌：</td>
-											<td><select name="teacherInfo.politicalStatus"
-												class="form-control table_infomation">
-													<option>共青团员</option>
-													<option>共产党员</option>
-													<option>民主党派</option>
-													<option>群众</option>
-											</select></td>
-											<td>性别：</td>
-											<td><select name="teacherInfo.sex"
-												class="form-control table_infomation sele">
-													<option value="男">男</option>
-													<option value="女">女</option>
-											</select></td>
-											<td>出生年月：</td>
-											<td><input name="teacherInfo.birthday"
-												class="form-control table_infomation laydate-icon bir"
-												type="text" value="出生日期"></td>
-										</tr>
-										<tr>
-											<td>最高学历：</td>
-											<td><select name="teacherInfo.highestEducation"
-												class="form-control table_infomation">
-													<option>博士研究生</option>
-													<option>硕士研究生</option>
-													<option>本科</option>
-													<option>专科</option>
-													<option>专科以下</option>
-											</select></td>
-											<td>最高学位：</td>
-											<td><select name="teacherInfo.highestDegree"
-												class="form-control table_infomation">
-													<option>博士</option>
-													<option>硕士</option>
-													<option>学士</option>
-													<option>无</option>
-											</select></td>
-											<td>学缘：</td>
-											<td><select name="teacherInfo.learnEdgeStructure"
-												class="form-control table_infomation">
-													<option>本校</option>
-													<option>外校（境内）</option>
-													<option>外校（境外）</option>
-											</select></td>
-										</tr>
-										<tr>
-											<td>专业技术职称：</td>
-											<td><select name="teacherInfo.professionalTitle"
-												class="form-control table_infomation">
-													<option>教授</option>
-													<option>副教授</option>
-													<option>讲师</option>
-													<option>助教</option>
-													<option>未评级</option>
-													<option>其他</option>
-											</select></td>
-											<td>职称级别：</td>
-											<td><select name="teacherInfo.professionalGrade"
-												class="form-control table_infomation">
-													<option>正高级</option>
-													<option>副高级</option>
-													<option>中级</option>
-													<option>初级</option>
-													<option>未定职级</option>
-											</select></td>
-											<td>学科类别：</td>
-											<td><input name="teacherInfo.subjectCategory"
-												class="form-control table_infomation " type="text"></td>
-										</tr>
-										<tr>
-											<td>参加工作时间：</td>
-											<td><input name="teacherInfo.workDate"
-												class="form-control table_infomation laydate-icon "
-												type="text"></td>
-											<td>入校时间：</td>
-											<td><input name="teacherInfo.inductionDate"
-												class="form-control table_infomation  laydate-icon"
-												type="text"></td>
-											<td>教师资格证号：</td>
-											<td><input name="teacherInfo.teacherCertificateNo"
-												class="form-control table_infomation" type="text"></td>
-										</tr>
+										<tbody id="baseinfo">
+											<tr>
+												<!-- name="teacherInfo." -->
+												<td>工号：</td>
+												<td><input name="teacherInfo.teacherInfoId"
+													type="hidden"> <input name="teacherInfo.userId"
+													class="form-control table_infomation" type="text"></td>
+												<td>姓名:</td>
+												<td><input name="username"
+													class="form-control table_infomation" type="text"></td>
+											</tr>
+											<tr>
+												<td>证件类型：</td>
+												<td><select name="teacherInfo.certificateType"
+													class="form-control table_infomation">
+														<option>居民身份证</option>
+														<option>军人证</option>
+														<option>护照</option>
+												</select></td>
+												<td>证件号码:</td>
+												<td><input name="teacherInfo.certificateNo"
+													class="form-control table_infomation  card_num" type="text"></td>
+												<td>民族：</td>
+												<td><select name="teacherInfo.nation"
+													class="form-control table_infomation">
+														<option>汉族</option>
+														<option>少数民族</option>
+												</select></td>
+											</tr>
+											<tr>
+												<td>国籍：</td>
+												<td><select name="teacherInfo.nationality"
+													class="form-control table_infomation">
+														<option>中国</option>
+														<option>国外</option>
+												</select></td>
+												<td>港澳台：</td>
+												<td><select name="teacherInfo.GAT"
+													class="form-control table_infomation">
+														<option>否</option>
+														<option>是</option>
+												</select></td>
+												<td>华侨：</td>
+												<td><select name="teacherInfo.huaQiao"
+													class="form-control table_infomation">
+														<option>否</option>
+														<option>是</option>
+												</select></td>
+											</tr>
+											<tr>
+												<td>政治面貌：</td>
+												<td><select name="teacherInfo.politicalStatus"
+													class="form-control table_infomation">
+														<option>共青团员</option>
+														<option>共产党员</option>
+														<option>民主党派</option>
+														<option>群众</option>
+												</select></td>
+												<td>性别：</td>
+												<td><select name="teacherInfo.sex"
+													class="form-control table_infomation sele">
+														<option value="男">男</option>
+														<option value="女">女</option>
+												</select></td>
+												<td>出生年月：</td>
+												<td><input name="teacherInfo.birthday"
+													class="form-control table_infomation laydate-icon bir"
+													type="text" value="出生日期"></td>
+											</tr>
+											<tr>
+												<td>最高学历：</td>
+												<td><select name="teacherInfo.highestEducation"
+													class="form-control table_infomation">
+														<option>博士研究生</option>
+														<option>硕士研究生</option>
+														<option>本科</option>
+														<option>专科</option>
+														<option>专科以下</option>
+												</select></td>
+												<td>最高学位：</td>
+												<td><select name="teacherInfo.highestDegree"
+													class="form-control table_infomation">
+														<option>博士</option>
+														<option>硕士</option>
+														<option>学士</option>
+														<option>无</option>
+												</select></td>
+												<td>学缘：</td>
+												<td><select name="teacherInfo.learnEdgeStructure"
+													class="form-control table_infomation">
+														<option>本校</option>
+														<option>外校（境内）</option>
+														<option>外校（境外）</option>
+												</select></td>
+											</tr>
+											<tr>
+												<td>专业技术职称：</td>
+												<td><select name="teacherInfo.professionalTitle"
+													class="form-control table_infomation">
+														<option>教授</option>
+														<option>副教授</option>
+														<option>讲师</option>
+														<option>助教</option>
+														<option>未评级</option>
+														<option>其他</option>
+												</select></td>
+												<td>职称级别：</td>
+												<td><select name="teacherInfo.professionalGrade"
+													class="form-control table_infomation">
+														<option>正高级</option>
+														<option>副高级</option>
+														<option>中级</option>
+														<option>初级</option>
+														<option>未定职级</option>
+												</select></td>
+												<td>学科类别：</td>
+												<td><input name="teacherInfo.subjectCategory"
+													class="form-control table_infomation " type="text"></td>
+											</tr>
+											<tr>
+												<td>参加工作时间：</td>
+												<td><input name="teacherInfo.workDate"
+													class="form-control table_infomation laydate-icon "
+													type="text"></td>
+												<td>入校时间：</td>
+												<td><input name="teacherInfo.inductionDate"
+													class="form-control table_infomation  laydate-icon"
+													type="text"></td>
+												<td>教师资格证号：</td>
+												<td><input name="teacherInfo.teacherCertificateNo"
+													class="form-control table_infomation" type="text"></td>
+											</tr>
+										</tbody>
 										<tr></tr>
 										<tr class="title">
 											<td>其他信息</td>
@@ -353,7 +355,6 @@
 													<option>其他高校教师</option>
 													<option>其他</option>
 											</select></td>
-
 										</tr>
 									</table>
 								</form>
@@ -430,7 +431,7 @@
 								class="panel-heading second-panel-heading"> 奖励信息
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
-								<button style="display: none;float: right;"
+							<button style="display: none;float: right;"
 								class="btn btn-danger all_sure_export">导出全部</button>
 							</header>
 							<div class="panel-body table-responsive">
@@ -524,7 +525,7 @@
 								class="panel-heading second-panel-heading"> 著作信息
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
-								<button style="display: none;float: right;"
+							<button style="display: none;float: right;"
 								class="btn btn-danger all_sure_export">导出全部</button>
 							</header>
 							<div class="panel-body table-responsive">
@@ -620,7 +621,7 @@
 								class="panel-heading second-panel-heading"> 论文信息
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
-								<button style="display: none;float: right;"
+							<button style="display: none;float: right;"
 								class="btn btn-danger all_sure_export">导出全部</button>
 							</header>
 							<div class="panel-body table-responsive">
@@ -712,7 +713,7 @@
 								class="panel-heading second-panel-heading"> 专利信息
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
-								<button style="display: none;float: right;"
+							<button style="display: none;float: right;"
 								class="btn btn-danger all_sure_export">导出全部</button>
 							</header>
 							<div class="panel-body table-responsive">
@@ -804,7 +805,7 @@
 								class="panel-heading second-panel-heading"> 课题(项目)信息
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
-								<button style="display: none;float: right;"
+							<button style="display: none;float: right;"
 								class="btn btn-danger all_sure_export">导出全部</button>
 							</header>
 							<div class="panel-body table-responsive">

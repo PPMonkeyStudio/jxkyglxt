@@ -195,13 +195,14 @@ public class AdminServiceImpl implements AdminService {
 				obj0 = obj;
 			} else {
 				obj0 = adminDao.getInfoById(cla.getName(), f.getName(), id).getObject();
-				String value_obj = null;
-				String value_obj0 = null;
+				Object value_obj = null;
+				Object value_obj0 = null;
 				for (Field f0 : cla.getDeclaredFields()) {
 					f0.setAccessible(true);
-					value_obj = (String) f0.get(obj);
-					value_obj0 = (String) f0.get(obj0);
-					if (value_obj != null && !"".equals(value_obj) && !value_obj.equals(value_obj0)) {
+					value_obj = f0.get(obj);
+					value_obj0 = f0.get(obj0);
+					if (!"".equals(value_obj) && value_obj != null && !value_obj.equals(value_obj0)) {
+						// 不用value_obj，存在类型转换错误
 						f0.set(obj0, f0.get(obj));
 					}
 				}

@@ -174,7 +174,7 @@ public class TeacherAction extends ActionSupport {
 		}
 	}
 
-	// 用户提交信息至管理员审核(除基本信息外)
+	// 用户提交信息至管理员审核(-----除基本信息外------)..
 	public void userPuchInfoToadmin() {
 		try {
 			String result = teacherService.PuchInfoToadmin(tableName, tableId);

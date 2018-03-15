@@ -448,7 +448,7 @@ function getinfoByCardId() {
 			$(".bir").val(card_num.substring(6, 10) + "-" + card_num.substring(10, 12) + "-" + card_num.substring(12, 14));
 		}
 	});
-	$(document).on("keyup", ".card_num", function(event) {
+	/*$(document).on("keyup", ".card_num", function(event) {
 		if (event.keyCode == 13) {
 			var reg = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/;
 			var card_num = $(".card_num").val();
@@ -465,7 +465,7 @@ function getinfoByCardId() {
 				$(".bir").val(card_num.substring(6, 10) + "-" + card_num.substring(10, 12) + "-" + card_num.substring(12, 14));
 			}
 		}
-	})
+	})*/
 }
 
 document.addEventListener('visibilitychange', function() {

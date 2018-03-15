@@ -62,7 +62,7 @@ public class SystemServiceImpl implements SystemService {
 		List<User> list = systemDao.getAllAdminUser();
 		List<Map<String, String>> department = systemDao.getDepartment();
 		Map<String, String> map = new HashMap<String, String>();
-		for (Map m : department) {
+		for (Map<String, String> m : department) {
 			map.put(m.get("0") + "", m.get("1") + "");
 		}
 		for (User user : list) {

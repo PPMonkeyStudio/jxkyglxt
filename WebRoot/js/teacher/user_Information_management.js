@@ -51,8 +51,25 @@ $(function() {
 
 	}
 	//提交审核
-	var commit_info = function() {
-		var id = $(this).siblings('input').val();
+	var commit_info = function(e) {
+		//数据
+		var dat = {
+			tableId : "",
+			tableName : data.tableName
+		};
+		//异步链接
+		var url = "";
+		//用户信息补全
+		if ($(e.target).hasClass('commit-info')) {
+			dat.tableId = $('input[name="teacherInfo.teacherInfoId"]').val();
+			$('#info #info-form #baseinfo').find('input,select').each(function(i, o) {
+				dat[$(o).attr('name')] = $(o).val();
+			});
+			url = '/jxkyglxt/Teacher/teacher_userCompleteBasicInformation';
+		} else { //其他信息提交审核
+			dat.tableId = $(this).siblings('input').val();
+			url = '/jxkyglxt/Teacher/teacher_userPuchInfoToadmin';
+		}
 		$.confirm({
 			title : '确认提交？',
 			smoothContent : false,
@@ -63,10 +80,7 @@ $(function() {
 					btnClass : 'btn-danger',
 					text : '确认',
 					action : function() {
-						$.post('/jxkyglxt/Teacher/teacher_userPuchInfoToadmin', {
-							tableId : id,
-							tableName : data.tableName
-						}, function(xhr_data) {
+						$.post(url, dat, function(xhr_data) {
 							if (xhr_data.result == "success") {
 								toastr.success("提交成功");
 								doQuery();
@@ -273,7 +287,6 @@ $(function() {
 	$('.nav-tabs li a').click(function() {
 		//如果已经是点击状态，则点击不作为
 		if ($(this).parent('li').attr('class') == 'active') return;
-
 		//重置页码
 		data.page = 1;
 		//将所有的确认导出按钮隐藏
@@ -438,9 +451,8 @@ $(function() {
 					$(this).attr("disabled", "disabled")
 				}
 			});
-
 			//设置用户名
-			$('input[name="teacherInfo.userName"]').val($('.userName_info').text());
+			$('input[name="username"]').val($('.userName_info').text());
 
 			return;
 			break;
