@@ -262,60 +262,6 @@ public class JunitTest {
 	}
 
 	@Test
-	public void test() {
-		Scanner sc = new Scanner(System.in);
-		int year = 2018, month = 2, day = 4, sum = 0;
-		System.out.println("请输入天数：");
-		while (true) {
-			day = sc.nextInt();
-			// 非闰年，月份为2，天数大于28
-			if (!(year % 4 == 0 && year % 100 != 0 || year % 400 == 0) && month == 2) {
-				if (day < 29 && day > 0) {
-					break;
-				} else {
-					System.out.println("输入天数有误,请重新输入：");
-				}
-			} else
-				break;
-		}
-		switch (month - 1) {
-		case 12:
-			sum += 31;
-		case 11:
-			sum += 30;
-		case 10:
-			sum += 31;
-		case 9:
-			sum += 30;
-		case 8:
-			sum += 31;
-		case 7:
-			sum += 31;
-		case 6:
-			sum += 30;
-		case 5:
-			sum += 31;
-		case 4:
-			sum += 30;
-		case 3:
-			sum += 31;
-		case 2:
-			if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
-				sum += 29;
-			} else {
-				sum += 28;
-			}
-			;
-		case 1:
-			sum += 31;
-			break;
-		default:
-			break;
-		}
-		System.out.println(sum + day);
-	}
-
-	@Test
 	public void test111() {
 		System.out.println(md5.GetMD5Code("admin"));
 	}
