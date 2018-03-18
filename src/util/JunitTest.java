@@ -261,6 +261,8 @@ public class JunitTest {
 		}
 	}
 
+	
+	
 	@Test
 	public void test111() {
 		System.out.println(md5.GetMD5Code("admin"));
