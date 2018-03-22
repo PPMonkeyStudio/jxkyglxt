@@ -3,9 +3,7 @@ package com.teacherms.staffinfomanage.service.impl;
 import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Field;
@@ -25,9 +23,6 @@ import util.uuid;
 
 public class AdminServiceImpl implements AdminService {
 	private AdminDao adminDao;
-	// 全部信息表
-	private final String[] Infotable = { "TeacherInfo", "TeacherAward", "TeacherWorks", "TeacherPaper", "TeacherPatent",
-			"TeacherProject" };
 
 	public void setAdminDao(AdminDao adminDao) {
 		this.adminDao = adminDao;
@@ -51,7 +46,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public PageVO<Object> getSpecifiedInformationByPaging(String tableName, String page, String time_interval,
-			String dataState, String collegeName, Object obj, String fuzzy_query) {
+			String dataState, String collegeName, Object obj, User user, String fuzzy_query) {
 		// 每页记录数
 		int pageSize = 10;
 		// 页数
@@ -67,7 +62,7 @@ public class AdminServiceImpl implements AdminService {
 		}
 		// 条件查询块----------------
 		boolean haveMulti_condition = false;// 是否包含指定查询的内容,用来判断是否执行模糊查询
-		StringBuffer Multi_condition = new StringBuffer();// 指定查询中的字符串
+		StringBuilder Multi_condition = new StringBuilder();// 指定查询中的字符串
 		StringBuffer fuzzy = new StringBuffer();// 模糊查询字符串
 		fuzzy.append(" and (");// （模糊查询中or与and混合使用）or使用前先添加and
 		String field_value = "";// 属性中的值
@@ -100,6 +95,10 @@ public class AdminServiceImpl implements AdminService {
 			fuzzy.append("or u.userName like '%" + fuzzy_query + "%')");
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		//用户名字作为单独的一个对象判断
+		if (user != null && !"".equals(user.getUserName()) && user.getUserName() != null) {
+			Multi_condition.append(" and u.userName='"+user.getUserName()+"' ");
 		}
 		// 最后判断如果fuzzy_query为空或是null，则不做模糊查询
 		if (null == fuzzy_query || "".equals(fuzzy_query)) {

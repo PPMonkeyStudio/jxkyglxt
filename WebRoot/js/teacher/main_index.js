@@ -2,7 +2,7 @@ var data = {
 	tableName : "",
 	dataState : "",
 	page : 1,
-	time_interval:"",
+	time_interval : "",
 	tableId : "",
 	export_name : "",
 	export_id : "",
@@ -47,6 +47,7 @@ var info_data = {
 		"teacherInfo.teachingProfessionName" : "",
 		"teacherInfo.professionTeachingDate" : "",
 		"teacherInfo.workDate" : "",
+		"user.userName" : "",
 	},
 	TeacherPaper : { //论文
 		"teacherPaper.userId" : "",
@@ -103,62 +104,43 @@ $(function() {
 		data.page = 1;
 		$(this).addClass("Atfer_li");
 		$(this).parent().siblings().children().removeClass("Atfer_li");
-		//系统管理员
-		if (($(this).text()) == "人员调动") {
+		switch ($(this).text()) {
+		case "人员调动": //只开放系统管理员操作
 			$('.right-side').load('page/administrator/PersonnelRedeploy.jsp #content', function() {
 				$.getScript("js/administrator/PersonnelRedeploy.js");
-			});
-		}
-		//系统管理员
-		if (($(this).text()) == "管理员帐号") {
+			});			break;
+		case "管理员帐号": //只开放系统管理员操作
 			$('.right-side').load('page/administrator/adminAccountManagement.jsp #content', function() {
 				$.getScript("js/administrator/adminAccountManagement.js");
-			});
-		}
-		//管理员
-		if (($(this).text()) == "教师信息审核") {
+			});			break;
+		case "教师信息审核": //管理员
 			$('.right-side').load('page/teacher/teacher_information_audit.jsp #content', selectSeacher(), function() {
 				data.dataState = "20";
 				$.getScript("js/teacher/teacher_information_audit.js");
-			});
-		}
-		//管理员
-		if (($(this).text()) == "教师信息管理") {
+			});			break;
+		case "教师信息管理": //管理员
 			$('.right-side').load('page/teacher/teacher_Information_management.jsp #content', selectSeacher(), function() {
 				data.dataState = "40";
 				$.getScript("js/teacher/teacher_Information_management.js");
-			});
-		}
-
-		//管理员-学生
-		if (($(this).text()) == "学生信息查看") {
+			});			break;
+		case "学生信息查看": //管理员-学生
 			$('.right-side').load('page/student/student_information_audit.jsp #content', function() {
 				data.dataState = "20";
 				$.getScript("js/student/student_information_audit.js");
-			});
-		}
-
-		//管理员-学生
-		if (($(this).text()) == "学生信息管理") {
+			});			break;
+		case "学生信息管理": //管理员-学生
 			$('.right-side').load('page/student/student_information_management.jsp #content', function() {
 				data.dataState = "20";
 				$.getScript("js/student/student_information_management.js");
-			});
-		}
-		//教师用户
-		if (($(this).text()) == "教师信息查看") {
+			});			break;
+		case "教师信息查看": //教师用户登录时使用
 			$('.right-side').load('page/teacher/user_Information_management.jsp #content', selectSeacher(), function() {
 				$.getScript("js/teacher/user_Information_management.js");
-			})
+			})			break;
+		default:
+			break;
 		}
 	});
-	//管理员
-	//	if (($(this).text()) == "账户设置") {
-	//		$('.right-side').load('page/setting.jsp #content', selectSeacher(), function() {
-	//			$.getScript("js/teacher/user_Information_management.js");
-	//		})
-	//	}
-	//});
 	//用户信息模态框
 	$('#info_modal').on('hidden.bs.modal', function() {
 		$(this).find('.basic').hide();
@@ -175,7 +157,6 @@ $(function() {
 			$(this).find('option:first-child').attr("selected", "selected");
 		});
 	})
-
 });
 
 
@@ -614,12 +595,11 @@ function selectSeacher() {
 			break;
 		}
 		if (option.hasClass('true') || pla == "") {
-			console.log($("#Inputu" + $(this).val()))
 			return;
 		} else {
 			var con = $(this).val();
 			if ((con.indexOf("Date")) >= 0 || (con.indexOf("Time")) >= 0) {
-				$(".all_options").siblings('#search_input').append('<div id="main_body">' + '<div id="Inputu' + $(this).val() + '" class="dateinput_div form-group">' +
+				$(".all_options").siblings('#search_input').append('<div id="main_body">' + '<div id="' + $(this).val() + '" class="dateinput_div form-group">' +
 					'<input type="text"  placeholder="' + pla + '搜索起始时间" class="form-control  riliDate"  />' + '--' +
 					'<input type="text"  placeholder="' + pla + '搜索结束时间" class="form-control  riliDate" />' +
 					'<button class="btn btn-primary"><i class="fa fa-times" aria-hidden="true"></i></button></div></div>')
@@ -627,19 +607,22 @@ function selectSeacher() {
 				$('.dateinput_div button').click(function() {
 					option.removeClass('true');
 					//移除时候清空js中已存的数据
-					data[data.tableName.replace("T", "t") + "." + $(this).parent().val()] = "";
+					info_data[data.tableName][data.tableName.replace("T", "t") + "." + $(this).parent().val()] = "";
 					$(this).parent().remove();
 				});
 			} else {
-
-				$(".all_options").siblings('#search_input').append('<div id="Inputu' + $(this).val() + '" class="input_div form-group">' +
+				$(".all_options").siblings('#search_input').append('<div id="' + $(this).val() + '" class="input_div form-group">' +
 					'<input type="text"  placeholder="' + pla + '" class="form-control"/>' +
 					'<button class="btn btn-primary"><i class="fa fa-times" aria-hidden="true"></i></button></div>')
 				option.addClass('true');
 				$('.input_div button').click(function() {
 					option.removeClass('true');
 					//移除时候清空js中已存的数据
-					data[data.tableName.replace("T", "t") + "." + $(this).parent().val()] = "";
+					if (con == "userName") {
+						info_data["TeacherInfo"]["user.userName"] = "";
+					} else {
+						info_data[data.tableName][data.tableName.replace("T", "t") + "." + $(this).parent().val()] = "";
+					}
 					$(this).parent().remove();
 					$(this).parent().empty();
 				});

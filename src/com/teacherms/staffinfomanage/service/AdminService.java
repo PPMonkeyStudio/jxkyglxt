@@ -1,16 +1,11 @@
 package com.teacherms.staffinfomanage.service;
 
 import java.util.List;
-import java.util.Map;
-
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import com.teacherms.all.domain.Introduction;
-import com.teacherms.all.domain.TeacherAward;
 import com.teacherms.all.domain.TeacherInfo;
+import com.teacherms.all.domain.User;
 import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
-
 import util.PageVO;
 
 public interface AdminService {
@@ -23,7 +18,7 @@ public interface AdminService {
 	 * @return 对象
 	 */
 	PageVO<Object> getSpecifiedInformationByPaging(String tableName, String page, String time_interval,
-			String dataState, String collegeName, Object obj, String fuzzy_query);
+			String dataState, String collegeName, Object obj, User user,String fuzzy_query);
 
 	/**
 	 * ---通过ID获取单条信息
