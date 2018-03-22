@@ -79,7 +79,6 @@ function setPageInfo(xhr_data) {
 }
 
 $(function() {
-	$('.right-side').load('page/teacher/index_info.jsp #content');
 	$('.sidebar-menu .nav li a').click(function() {
 		//重置页码
 		data.page = 1;
@@ -384,7 +383,6 @@ function AttachmentUpload(url, formData) {
 		},
 		error : function(data) {
 			console.log("error");
-		//console.log(data.status + " : " + data.statusText + " : " + data.responseText);
 		}
 	});
 	return result;
@@ -448,24 +446,6 @@ function getinfoByCardId() {
 			$(".bir").val(card_num.substring(6, 10) + "-" + card_num.substring(10, 12) + "-" + card_num.substring(12, 14));
 		}
 	});
-	/*$(document).on("keyup", ".card_num", function(event) {
-		if (event.keyCode == 13) {
-			var reg = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/;
-			var card_num = $(".card_num").val();
-			if (reg.test(card_num) == false) {
-				$(this).val("");
-			} else {
-				if (parseInt(card_num.substr(16, 1)) % 2 == 1) {
-					$(".sele").find("option[value='男']").attr("selected", "selected");
-				//是男则执行代码 ...
-				} else {
-					$(".sele").find("option[value='女']").attr("selected", "selected");
-				//是女则执行代码 ...
-				}
-				$(".bir").val(card_num.substring(6, 10) + "-" + card_num.substring(10, 12) + "-" + card_num.substring(12, 14));
-			}
-		}
-	})*/
 }
 
 document.addEventListener('visibilitychange', function() {

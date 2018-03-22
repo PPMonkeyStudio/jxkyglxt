@@ -94,7 +94,7 @@
 		<ul class="nav navbar-nav">
 			<!--通知信息--------------------->
 			<!-- Messages: style can be found in dropdown.less-->
-			<li class="dropdown messages-menu"><a class="dropdown-toggle"
+			<%-- <li class="dropdown messages-menu"><a class="dropdown-toggle"
 				data-toggle="dropdown"> <i class="fa fa-envelope"></i> <span
 					class="label label-success">1</span>
 			</a>
@@ -117,7 +117,7 @@
 						</ul>
 					</li>
 					<li class="footer"><a>See All Messages</a></li>
-				</ul></li>
+				</ul></li> --%>
 			<!--任务信息---------------------------------->
 			<!----------=略=-------->
 			<!--用户信息------------------------------>
@@ -129,7 +129,7 @@
 			</a>
 				<ul class="dropdown-menu dropdown-custom dropdown-menu-right">
 					<li class="dropdown-header text-center">Account</li>
-					<s:if test="#session.role!='教职工'">
+					<s:if test="#session.role!='教职工'&&#session.role!='系统管理员'">
 						<li><a href="javascript:toIntroductionModify()"> <i
 								class="fa fa-clock-o fa-fw pull-right"></i> <span
 								class="badge badge-success pull-right"><s:property
@@ -175,17 +175,15 @@
 			</div>
 		</div>
 		<!-- search form -->
-		<form action="#" method="get" class="sidebar-form">
-			<div class="input-group">
-				<input type="text" name="q" class="form-control" placeholder="搜索功能" />
-				<span class="input-group-btn">
-					<button type='submit' name='seach' id='search-btn'
-						class="btn btn-flat">
-						<i class="fa fa-search"></i>
-					</button>
-				</span>
-			</div>
-		</form>
+		<%-- <div class="input-group">
+			<input type="text" name="q" class="form-control" placeholder="搜索功能" />
+			<span class="input-group-btn">
+				<button type='submit' name='seach' id='search-btn'
+					class="btn btn-flat">
+					<i class="fa fa-search"></i>
+				</button>
+			</span>
+		</div> --%>
 		<!-- /.search form --> <!-- sidebar menu: : style can be found in sidebar.less -->
 		<s:if test="#session.role=='系统管理员'">
 			<ul class="sidebar-menu">
@@ -290,7 +288,7 @@
 				<div id="sub3" class="collapse" aria-expanded="false"
 					style="height: 0px;">
 					<ul class="nav">
-						<li><a class="">账户设置</a></li>
+						<!-- <li><a class="">账户设置</a></li> -->
 						<li><a onclick="user_setting(user_setting)"
 							class=" setButton">重置密码</a></li>
 						<li><a
