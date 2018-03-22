@@ -317,16 +317,17 @@ $(function() {
 		var this_object = $(this);
 		if (this_object.text().trim() == "确认搜索") {
 			var name = '';
-			var value = '';
 			this_object.siblings('#search_input').find('div').each(function() {
-				name = data.tableName.replace("Teacher", "teacher") + '.' + $(this).attr('id').replace("Inputu", "");
+				name = data.tableName.replace("Teacher", "teacher") + '.' + $(this).attr('id');
+				if (name == "teacherInfo.userName") {
+					name = "user.userName";
+				}
 				var val_arr = [];
 				$(this).find('input').each(function() {
 					val_arr.push($(this).val());
 				});
-				//value = $(this).find('input').val();
 				//将搜索的内容放入js的数据中
-				data[name] = val_arr.join(",");
+				info_data[data.tableName][name] = val_arr.join(",");
 			});
 			doQuery();
 		} else if (this_object.text().trim() == "清空搜索") {
@@ -341,11 +342,18 @@ $(function() {
 						text : '确定',
 						action : function() {
 							this_object.siblings('#search_input').empty();
-							$.each(data, function(k, v) {
-								if (k.indexOf('teacher') > -1) {
-									data[k] = "";
-								}
+							$.each(info_data[data.tableName], function(k, v) {
+								info_data[data.tableName][k] = "";
 							})
+							//选择框初始化
+							parent_div.find('.all_options').val('').children().each(function() {
+								if ($(this).hasClass('true')) {
+									$(this).removeClass('true');
+									return;
+								}
+							});
+							//做查询
+							doQuery();
 						}
 					},
 					cancelAction : {

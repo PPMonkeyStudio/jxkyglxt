@@ -77,7 +77,7 @@ public class AdminAction extends ActionSupport {
 			getObjectByTableName(tableName);
 			System.out.println("" + obj.toString());
 			PageVO<Object> list = adminService.getSpecifiedInformationByPaging(tableName, page == null ? "1" : page,
-					time_interval, dataState, getSecondaryCollegeInfo("name"), obj, fuzzy_query);
+					time_interval, dataState, getSecondaryCollegeInfo("name"), obj,user, fuzzy_query);
 			System.out.println(new Gson().toJson(list));
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(list));

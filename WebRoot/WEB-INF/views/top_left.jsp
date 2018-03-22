@@ -148,9 +148,8 @@
 					</a>
 					</li>
 					<li class="divider"></li>
-					<li><a
-						href="javascript:location.href = '/jxkyglxt/System/system_exit'">
-							<i class="fa fa-ban fa-fw pull-right"></i> 退出系统
+					<li><a href="javascript:exit_alert()"> <i
+							class="fa fa-ban fa-fw pull-right"></i> 退出系统
 					</a></li>
 				</ul></li>
 
@@ -385,6 +384,7 @@
 		$(".riliDate").val(today);
 	
 		$(function() {
+			var top_val = 240 - (Math.floor($("#info_ul li").length % 4) - 1) * 180;
 			$("#info_ul").on({
 				mousedown : function(e) {
 					if (e.target.parentElement.id == "info_ul") {
@@ -405,10 +405,10 @@
 							top : 425,
 						});
 					}
-					console.log($(this).offset().top);
-					if ($(this).offset().top < -125) {
+					console.log($(this).offset().top < top_val);
+					if ($(this).offset().top < top_val) {
 						$(this).offset({
-							top : -125,
+							top : top_val,
 						});
 					}
 					$(document).off('mousemove.drag');

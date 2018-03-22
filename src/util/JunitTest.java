@@ -95,7 +95,7 @@ public class JunitTest {
 				new TeacherInfo(null, null, null, null, null, null, null, null, null, null, null, null, null, null,
 						null, null, null, null, "2000/1,2017/1", null, null, null, null, null, null, null, null, null,
 						null, null, null, null, null, null, null, null, null, null, null, null, null, null, null),
-				null);
+				null, null);
 		System.out.println(pageVO.toString());
 	}
 
