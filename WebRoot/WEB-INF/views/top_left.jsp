@@ -401,17 +401,18 @@
 				},
 				mouseup : function(e) {
 					if ($(this).offset().top > 425) {
+						$(this).css('transition', 'all 1.5s');
 						$(this).offset({
 							top : 425,
 						});
-					}
-					console.log($(this).offset().top < top_val);
-					if ($(this).offset().top < top_val) {
+					} else if ($(this).offset().top < top_val) {
+						$(this).css('transition', 'all 2s');
 						$(this).offset({
 							top : top_val,
 						});
 					}
 					$(document).off('mousemove.drag');
+					setTimeout(() => $(this).css('transition', ''), 1000);
 				}
 			})
 		})
