@@ -13,7 +13,7 @@
 		<div class="col-md-12">
 			<!--breadcrumbs start -->
 			<ul class="breadcrumb">
-				<li><a><i class="fa fa-home"></i> 首页</a></li>
+				<li><a href="javascript:location.reload();"><i class="fa fa-home"></i> 首页</a></li>
 				<li class="active">学生信息管理</li>
 			</ul>
 			<!--breadcrumbs end -->

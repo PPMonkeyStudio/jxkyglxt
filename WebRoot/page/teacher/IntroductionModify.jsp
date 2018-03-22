@@ -30,7 +30,7 @@
 		<div class="col-md-12">
 			<!--breadcrumbs start -->
 			<ul class="breadcrumb">
-				<li><a><i class="fa fa-home"></i> 首页</a></li>
+				<li><a href="javascript:location.reload();"><i class="fa fa-home"></i> 首页</a></li>
 			</ul>
 			<!--breadcrumbs end -->
 		</div>
