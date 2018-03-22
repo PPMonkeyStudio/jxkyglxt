@@ -66,11 +66,6 @@ public class AdminAction extends ActionSupport {
 	private User user;
 	private Object obj;
 
-	public String test() {
-		System.out.println("yes");
-		return "test";
-	}
-
 	public void setAdminService(AdminService adminService) {
 		this.adminService = adminService;
 	}

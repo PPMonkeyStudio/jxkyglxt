@@ -2,61 +2,11 @@ var data = {
 	tableName : "",
 	dataState : "",
 	page : 1,
-	time_interval : "",
+	time_interval:"",
 	tableId : "",
 	export_name : "",
 	export_id : "",
 	fuzzy_query : "",
-	//奖励
-	"teacherAward.awardType" : "",
-	"teacherAward.awardName" : "",
-	"teacherAward.awardUserNames" : "",
-	"teacherAward.awardGrade" : "",
-	"teacherAward.awardLevel" : "",
-	//用户
-	"teacherInfo.userId" : "",
-	"teacherInfo.jobStatue" : "",
-	"teacherInfo.highestDegree" : "",
-	"teacherInfo.highestEducation" : "",
-	"teacherInfo.learnEdgeStructure" : "",
-	"teacherInfo.professionalTitle" : "",
-	"teacherInfo.subjectCategory" : "",
-	"teacherInfo.teachingProfessionName" : "",
-	"teacherInfo.professionTeachingDate" : "",
-	"teacherInfo.workDate" : "",
-	//论文
-	"teacherPaper.userId" : "",
-	"teacherPaper.paperName" : "",
-	"teacherPaper.authorUserNames" : "",
-	"teacherPaper.paperType" : "",
-	"teacherPaper.periodical" : "",
-	"teacherPaper.periodicalNo" : "",
-	//专利
-	"teacherPatent.patentName" : "",
-	"teacherPatent.patentType" : "",
-	"teacherPatent.authorizationNo" : "",
-	//项目
-	"teacherProject.projectName" : "",
-	"teacherProject.projectSource" : "",
-	"teacherProject.projectUserNames" : "",
-	"teacherProject.projectType" : "",
-	//著作
-	"teacherWorks.worksName" : "",
-	"teacherWorks.worksType" : "",
-	"teacherWorks.press" : "",
-	"teacherWorks.isbn" : "",
-	"teacherWorks.editorUserNames" : "",
-	"teacherWorks.selectedSituation" : "",
-	"teacherWorks.selectedDate" : "",
-	//学生模块模态框string赋空值
-	"studentInfo.student_id" : "",
-	"studentInfo.studentName" : "",
-	"studentInfo.certificateNo" : "",
-	"studentInfo.classNumber" : "",
-	"studentInfo.className" : "",
-	"studentInfo.departmentId" : "",
-	"studentInfo.teacherTraining" : "",
-	"studentInfo.deformed" : ""
 }
 
 //保存分页信息
@@ -76,6 +26,75 @@ function setPageInfo(xhr_data) {
 	pageDataInformation.pageSize = xhr_data.pageSize;
 	pageDataInformation.totalPages = xhr_data.totalPages;
 	pageDataInformation.totalRecords = xhr_data.totalRecords;
+}
+
+var info_data = {
+	TeacherAward : { //奖励
+		"teacherAward.awardType" : "",
+		"teacherAward.awardName" : "",
+		"teacherAward.awardUserNames" : "",
+		"teacherAward.awardGrade" : "",
+		"teacherAward.awardLevel" : "",
+	},
+	TeacherInfo : { //用户
+		"teacherInfo.userId" : "",
+		"teacherInfo.jobStatue" : "",
+		"teacherInfo.highestDegree" : "",
+		"teacherInfo.highestEducation" : "",
+		"teacherInfo.learnEdgeStructure" : "",
+		"teacherInfo.professionalTitle" : "",
+		"teacherInfo.subjectCategory" : "",
+		"teacherInfo.teachingProfessionName" : "",
+		"teacherInfo.professionTeachingDate" : "",
+		"teacherInfo.workDate" : "",
+	},
+	TeacherPaper : { //论文
+		"teacherPaper.userId" : "",
+		"teacherPaper.paperName" : "",
+		"teacherPaper.authorUserNames" : "",
+		"teacherPaper.paperType" : "",
+		"teacherPaper.periodical" : "",
+		"teacherPaper.periodicalNo" : "",
+	},
+	TeacherPatent : { //专利
+		"teacherPatent.patentName" : "",
+		"teacherPatent.patentType" : "",
+		"teacherPatent.authorizationNo" : "",
+	},
+	TeacherProject : { //项目
+		"teacherProject.projectName" : "",
+		"teacherProject.projectSource" : "",
+		"teacherProject.projectUserNames" : "",
+		"teacherProject.projectType" : "",
+	},
+	TeacherWorks : { //著作
+		"teacherWorks.worksName" : "",
+		"teacherWorks.worksType" : "",
+		"teacherWorks.press" : "",
+		"teacherWorks.isbn" : "",
+		"teacherWorks.editorUserNames" : "",
+		"teacherWorks.selectedSituation" : "",
+		"teacherWorks.selectedDate" : "",
+	},
+	StudentInfo : { //学生模块模态框string赋空值
+		"studentInfo.student_id" : "",
+		"studentInfo.studentName" : "",
+		"studentInfo.certificateNo" : "",
+		"studentInfo.classNumber" : "",
+		"studentInfo.className" : "",
+		"studentInfo.departmentId" : "",
+		"studentInfo.teacherTraining" : "",
+		"studentInfo.deformed" : "",
+	},
+	getQueryInfo : function() {
+		return this.merge(data, this[data.tableName]);
+	},
+	merge : function(destination, source) {
+		var new_destination = destination;
+		for (var property in source)
+			new_destination[property] = source[property];
+		return new_destination;
+	}
 }
 
 $(function() {

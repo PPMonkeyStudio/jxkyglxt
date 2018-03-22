@@ -90,10 +90,6 @@ $(function() {
 		parent_div.find("#search_input").empty();
 		//执行查询操作
 		doQuery();
-		/*//导出模态框初始化
-		m_check.init({
-			id : '#export_' + a_href + '  .tab_content'
-		});*/
 	});
 
 	//指定查询
@@ -110,7 +106,7 @@ $(function() {
 				});
 				//value = $(this).find('input').val();
 				//将搜索的内容放入js的数据中
-				data[name] = val_arr.join(",");
+				info_data[data.tableName][name] = val_arr.join(",");
 			});
 			doQuery();
 		} else if (this_object.text().trim() == "清空搜索") {
@@ -127,7 +123,7 @@ $(function() {
 							this_object.siblings('#search_input').empty();
 							$.each(data, function(k, v) {
 								if (k.indexOf('teacher') > -1) {
-									data[k] = "";
+									info_data[data.tableName][k] = "";
 								}
 							})
 						}
@@ -196,7 +192,7 @@ $(function() {
 			type : "post",
 			async : false,
 			timeout : 3000,
-			data : data,
+			data : info_data.getQueryInfo(),
 			dataType : "json",
 			success : function(xhr_data) {
 				$('#' + a_href).find('table tbody').html(getStr(xhr_data.ObjDatas));
