@@ -128,7 +128,7 @@
 							value="#session.user.userName" /> <i class="caret"></i> </span>
 			</a>
 				<ul class="dropdown-menu dropdown-custom dropdown-menu-right">
-					<li class="dropdown-header text-center">Account</li>
+					<li class="dropdown-header text-center">帐号</li>
 					<s:if test="#session.role!='教职工'&&#session.role!='系统管理员'">
 						<li><a href="javascript:toIntroductionModify()"> <i
 								class="fa fa-clock-o fa-fw pull-right"></i> <span
@@ -174,8 +174,7 @@
 				<a><i class="fa fa-circle text-success"></i> 在线</a>
 			</div>
 		</div>
-		<!-- search form -->
-		<%-- <div class="input-group">
+		<!-- search form --> <%-- <div class="input-group">
 			<input type="text" name="q" class="form-control" placeholder="搜索功能" />
 			<span class="input-group-btn">
 				<button type='submit' name='seach' id='search-btn'
@@ -183,8 +182,7 @@
 					<i class="fa fa-search"></i>
 				</button>
 			</span>
-		</div> --%>
-		<!-- /.search form --> <!-- sidebar menu: : style can be found in sidebar.less -->
+		</div> --%> <!-- /.search form --> <!-- sidebar menu: : style can be found in sidebar.less -->
 		<s:if test="#session.role=='系统管理员'">
 			<ul class="sidebar-menu">
 				<li><a href="#sub0" data-toggle="collapse" class="collapsed"
@@ -291,8 +289,7 @@
 						<!-- <li><a class="">账户设置</a></li> -->
 						<li><a onclick="user_setting(user_setting)"
 							class=" setButton">重置密码</a></li>
-						<li><a
-							href="javascript:location.href = '/jxkyglxt/System/system_exit'"><i
+						<li><a href="javascript:exit_alert()"><i
 								class="fa fa-ban fa-fw pull-right"></i> 退出系统</a></li>
 					</ul>
 				</div></li>
@@ -424,10 +421,25 @@
 			});
 		}
 		function exit_alert() {
-			var exit = confirm("您确定要注销吗？");
-			if (exit == true) {
-				window.location.href = "/jxkyglxt/System/system_exit"
-			}
+			$.confirm({
+				title : '退出登录',
+				content : '即将退出系统,确定继续退出吗?',
+				smoothContent : false,
+				autoClose : 'cancelAction|10000',
+				buttons : {
+					deleteUser : {
+						btnClass : 'btn-danger',
+						text : '确定',
+						action : function() {
+							window.location.href = "/jxkyglxt/System/system_exit"
+						}
+					},
+					cancelAction : {
+						btnClass : 'btn-blue',
+						text : '取消',
+					}
+				}
+			});
 		}
 	</script>
 </body>

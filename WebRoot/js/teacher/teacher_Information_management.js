@@ -383,7 +383,7 @@ $(function() {
 			type : "post",
 			async : false,
 			timeout : 3000,
-			data : data,
+			data : info_data.getQueryInfo(),
 			dataType : "json",
 			success : function(xhr_data) {
 				$('#' + a_href).find('table tbody').html(getStr(xhr_data.ObjDatas));
