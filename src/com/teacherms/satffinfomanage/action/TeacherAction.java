@@ -77,7 +77,7 @@ public class TeacherAction extends ActionSupport {
 	private Object obj;
 
 	public TeacherAction() {
-		sessionuser = (User) ActionContext.getContext().getSession().get("user");
+		sessionuser = (User) ActionContext.getContext().getSession().get("loginuser");
 	}
 
 	// 教职工分页获取指定的信息

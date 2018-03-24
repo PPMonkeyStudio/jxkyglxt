@@ -104,7 +104,6 @@ public class AdminServiceImpl implements AdminService {
 		if (null == fuzzy_query || "".equals(fuzzy_query)) {
 			haveMulti_condition = true;
 		}
-		System.out.println(haveMulti_condition);
 		// 获取所有信息表中未审核的信息
 		if (!"".equals(tableName) && tableName != null) {
 			// 指定条件tableName查询
@@ -114,7 +113,6 @@ public class AdminServiceImpl implements AdminService {
 			list = adminDao.getAllStatusInfo(tableName, time_interval, dataState, collegeName,
 					Multi_condition.toString(), haveMulti_condition ? "" : fuzzy.toString().replaceFirst(" or", ""));
 		}
-		System.out.println(list.size());
 		// 总记录数
 		int totalSize = list.size();
 		// 当所要显示的最大值大于记录数最大值时，每页记录设置为不超过记录数值
@@ -310,88 +308,8 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.addInfo(introduction);
 	}
 
-	// ----------------------------------------------------------------------封装
-	/**
-	 * ---封装list中的对象信息到AdminVo
-	 * 
-	 * @param list
-	 *            信息表信息
-	 * @return AdminVo的list集合
-	 */
-	private List<AdminVo> EncapsulationAdminVo(List<Object[]> list) {
-		List<AdminVo> Volist = new ArrayList<AdminVo>();
-		// 对所查询的第一项信息表中对象进行封装
-		for (int j = 0; j < list.size(); j++) {
-			// 通过用户ID查询用户信息
-			User user = adminDao.getUserById(getTableInfoByGetMothed("getUserId", list.get(j)));
-			// new AdminVo( 信息表中所属的用户ID, 用户名称, 信息类别（奖励或是著作或是其他）, 信息提交时间,信息ID )
-			Volist.add(
-					new AdminVo(user.getUserId(), user.getUserName(), getTableInfoByGetMothed("getType", list.get(j)),
-							getTableInfoByGetMothed("getCreateTime", list.get(j)), getTableInfoId(list.get(j))));
-		}
-		return Volist;
-	}
+	// ----------------------------------------------------------------------私有
 
-	/**
-	 * ---反射获取信息对象中属性的id值
-	 * 
-	 * @param obj
-	 *            对象，为不确定值，对应持久层中信息表
-	 * @return 获得的持久层中信息表中第一个属性值，即为信息表ID
-	 */
-	private String getTableInfoId(Object obj) {
-		Field f = obj.getClass().getDeclaredFields()[0];
-		f.setAccessible(true);
-		String val = null;
-		try {
-			val = (String) f.get(obj);
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-		return val;
-	}
-
-	/**
-	 * ---反射获取查询的表中信息
-	 * 
-	 * @param mothed
-	 *            持久层类的get方法，用于获取get方法指定的属性
-	 * @param obj
-	 *            持久化对象
-	 * @return 指定的GetMothed获得的属性值
-	 */
-	private String getTableInfoByGetMothed(String mothed, Object obj) {
-		String val = null;
-		try {
-			Method M = obj.getClass().getMethod(mothed, null);
-			val = (String) M.invoke(obj, null);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return val;
-	}
-
-	/**
-	 * ---反射改变对象中的值
-	 * 
-	 * @param mothed
-	 *            持久层类的set方法，用于获取set方法改变属性值
-	 * @param obj
-	 *            持久化对象
-	 * @return 获得的属性值
-	 */
-	private Object changeTableInfoBySetMothed(String mothed, Object obj, String value) {
-		try {
-			Method M = obj.getClass().getMethod(mothed, obj.getClass());
-			M.setAccessible(true);
-			M.invoke(obj, value);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return obj;
-	}
 
 	/**
 	 * ---通过查询信息表名字，获取信息表中第一个参数(****Id)的Name
@@ -421,97 +339,6 @@ public class AdminServiceImpl implements AdminService {
 			idname = "worksId";
 		}
 		return idname;
-	}
-
-	/**
-	 * ---通过查询信息表名字，封装sql查询不同表的信息
-	 * 
-	 * @param tableName
-	 *            持久层类名称
-	 * @return 部分sql语句
-	 */
-	private String getSqlToQueryByTableName(String tableName) {
-		String str = null;
-		if (("TeacherAward").equals(tableName)) {
-			//
-			str = "t.achievementName,t.awardName,t.awardUserNames,t.awardType,t.awardClass,t.awardDate,t.awardId";
-		}
-		if (("TeacherInfo").equals(tableName)) {
-
-			str = "t.userId,u.userName,t.employeeType,t.jobStatue,t.workDate,t.teacherInfoId";
-		}
-		if (("TeacherPaper").equals(tableName)) {
-			//
-			str = "t.paperName,t.authorUserNames,t.paperType,t.includedSituation,t.publishTime,t.paperId";
-		}
-		if (("TeacherPatent").equals(tableName)) {
-			//
-			str = "t.patentName,t.authorUserNames,t.patentType,t.authorizationNo,t.approvedDate,t.patentId";
-		}
-		if (("TeacherProject").equals(tableName)) {
-			//
-			str = "t.projectName,t.projectSource,t.projectUserNames,t.level,t.endUpDatet,t.projectId";
-		}
-		if (("TeacherWorks").equals(tableName)) {
-			//
-			str = "t.worksName,t.worksType,t.selectedSituation,t.publishTime,t.worksId";
-		}
-		return str;
-	}
-
-	private Object objReplace(Object obj) {
-		Object obj_result = null;
-		if (obj.getClass() == TeacherAward.class) {
-			TeacherAward teacherAward = (TeacherAward) obj;
-			// AwardType
-			switch (teacherAward.getAwardType()) {
-			case "10":
-				teacherAward.setAwardType("教学成果");
-				break;
-			case "20":
-				teacherAward.setAwardType("科研成果");
-				break;
-			case "30":
-				teacherAward.setAwardType("指导学生获奖");
-				break;
-			case "40":
-				teacherAward.setAwardType("个人业绩获奖");
-				break;
-			default:
-				break;
-			}
-
-			// awardClass
-			switch (teacherAward.getAwardClass()) {
-			case "10":
-				teacherAward.setAwardClass("国家自然科学奖");
-				break;
-			case "20":
-				teacherAward.setAwardClass("国家技术发明奖");
-				break;
-			case "30":
-				teacherAward.setAwardClass("国家科技进步奖");
-				break;
-			case "40":
-				teacherAward.setAwardClass("教育部高校科研成果奖(科学技术,人文社科)");
-				break;
-			case "50":
-				teacherAward.setAwardClass("省(市、自治区)政府自然科学奖");
-				break;
-			case "60":
-				teacherAward.setAwardClass("省(市、自治区)政府技术发明奖");
-				break;
-			case "70":
-				teacherAward.setAwardClass("省(市、自治区)政府科技进步奖");
-				break;
-			case "80":
-				teacherAward.setAwardClass("省(市、自治区)政府哲学社科奖");
-				break;
-			default:
-				break;
-			}
-		}
-		return obj_result;
 	}
 
 }

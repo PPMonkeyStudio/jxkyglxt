@@ -1,7 +1,5 @@
 package com.teacherms.studentinfomanage.action;
 
-import java.util.List;
-
 import org.apache.struts2.ServletActionContext;
 
 import com.google.gson.Gson;
@@ -19,18 +17,6 @@ import com.teacherms.studentinfomanage.vo.StudentInfoAndOtherInfo;
 
 import util.PageVO;
 
-/**
- * @author Administrator
- *
- */
-/**
- * @author Administrator
- *
- */
-/**
- * @author Administrator
- *
- */
 public class StudentAction extends ActionSupport {
 
 	private StudentService studentService;
@@ -46,7 +32,7 @@ public class StudentAction extends ActionSupport {
 	private User sessionuser;
 
 	public StudentAction() {
-		sessionuser = (User) ActionContext.getContext().getSession().get("user");
+		sessionuser = (User) ActionContext.getContext().getSession().get("loginuser");
 	}
 
 	public void setStudentService(StudentService studentService) {

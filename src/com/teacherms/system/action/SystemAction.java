@@ -48,11 +48,14 @@ public class SystemAction extends ActionSupport {
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			User loginuser = (User) ActionContext.getContext().getSession().get("loginuser");
 			if (loginuser != null && user_id.equals(loginuser.getUserId())) {
+				System.out.println("已登录");
 				ServletActionContext.getResponse().getWriter().write("{\"result\":\"帐号已经登录！请勿重复登录\"}");
 			} else {
 				if (result instanceof String) {
+					System.out.println("登录异常");
 					ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result.toString() + "\"}");
 				} else {
+					System.out.println("正常登录");
 					// 通过角色ID获取角色名称
 					String rolename = systemService.getUserRoleNameByRoleId(((User) result).getRoleId());
 					ActionContext.getContext().getSession().put("role", rolename);

@@ -214,7 +214,7 @@ public class AdminAction extends ActionSupport {
 	}
 
 	public String getSecondaryCollegeInfo(String what) {
-		User user = (User) ActionContext.getContext().getSession().get("user");
+		User user = (User) ActionContext.getContext().getSession().get("loginuser");
 		return adminService.getDepartmentNameByDepartmentId(user.getDepartmentId(), what);
 	}
 
