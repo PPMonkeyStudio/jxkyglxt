@@ -125,7 +125,7 @@
 			<li class="dropdown user user-menu"><a class="dropdown-toggle"
 				data-toggle="dropdown"> <i class="fa fa-user"></i> <span
 					class="userName_info"><s:property
-							value="#session.user.userName" /> <i class="caret"></i> </span>
+							value="#session.loginuser.userName" /> <i class="caret"></i> </span>
 			</a>
 				<ul class="dropdown-menu dropdown-custom dropdown-menu-right">
 					<li class="dropdown-header text-center">帐号</li>
@@ -167,7 +167,7 @@
 			<div class="pull-left info">
 				<p>
 					<%=greeting%>
-					<s:property value="#session.user.userName" />
+					<s:property value="#session.loginuser.userName" />
 					。
 				</p>
 				<a><i class="fa fa-circle text-success"></i> 在线</a>
@@ -384,7 +384,8 @@
 		$(".riliDate").val(today);
 	
 		$(function() {
-			var top_val = 240 - (Math.floor($("#info_ul li").length % 4) - 1) * 180;
+			var top_val = 240 - (parseInt($("#info_ul li").length / 8) - 1) * 180;
+			console.log(parseInt($("#info_ul li").length / 8));
 			$("#info_ul").on({
 				mousedown : function(e) {
 					if (e.target.parentElement.id == "info_ul") {
@@ -400,13 +401,15 @@
 					}
 				},
 				mouseup : function(e) {
+					console.log(top_val);
 					if ($(this).offset().top > 425) {
-						$(this).css('transition', 'all 1.5s');
+						$(this).css('transition', 'all 1s');
 						$(this).offset({
 							top : 425,
 						});
-					} else if ($(this).offset().top < top_val) {
-						$(this).css('transition', 'all 2s');
+					}
+					if ($(this).offset().top < top_val) {
+						$(this).css('transition', 'all 1s');
 						$(this).offset({
 							top : top_val,
 						});

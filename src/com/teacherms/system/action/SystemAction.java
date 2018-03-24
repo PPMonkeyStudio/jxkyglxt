@@ -19,8 +19,6 @@ import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.teacherms.all.domain.User;
-import com.teacherms.system.TAB.Admin_NavigationTAB;
-import com.teacherms.system.TAB.Teacher_NavigationTAB;
 import com.teacherms.system.service.SystemService;
 import com.teacherms.system.vo.DepartmentAndUserList;
 import com.teacherms.all.domain.*;
@@ -33,33 +31,44 @@ public class SystemAction extends ActionSupport {
 	private String attachmentName;
 	private final String propertiesPath = ResourceBundle.getBundle("_path").getString("filePath");
 
+	// 跳转到登录界面
+	public String toLoginView() {
+		return "exit";
+	}
+
+	// 获取顶部
+	public String nav() {
+		return "nav";
+	}
+
 	// 进行登录的判断
 	public void login() {
 		try {
 			Object result = systemService.login(user_id, password);
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
-			if (result instanceof String) {
-				ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result.toString() + "\"}");
+			User loginuser = (User) ActionContext.getContext().getSession().get("loginuser");
+			if (loginuser != null && user_id.equals(loginuser.getUserId())) {
+				ServletActionContext.getResponse().getWriter().write("{\"result\":\"帐号已经登录！请勿重复登录\"}");
 			} else {
-				if (null != ActionContext.getContext().getSession().get("user")) {
-					exit();
+				if (result instanceof String) {
+					ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result.toString() + "\"}");
+				} else {
+					// 通过角色ID获取角色名称
+					String rolename = systemService.getUserRoleNameByRoleId(((User) result).getRoleId());
+					ActionContext.getContext().getSession().put("role", rolename);
+					ActionContext.getContext().getSession().put("loginuser", (User) result);
+					ServletActionContext.getResponse().getWriter().write("{\"result\":\"success\"}");
 				}
-				// 通过角色ID获取角色名称
-				String rolename = systemService.getUserRoleNameByRoleId(((User) result).getRoleId());
-				ActionContext.getContext().getSession().put("role", rolename);
-				ActionContext.getContext().getSession().put("user", (User) result);
-				ServletActionContext.getResponse().getWriter().write("{\"result\":\"success\"}");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	// 获得登录用户的帐号信息
 	public void getAccountInformation() {
 		try {
-			User user = (User) ActionContext.getContext().getSession().get("user");
+			User user = (User) ActionContext.getContext().getSession().get("loginuser");
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(user));
 		} catch (IOException e) {
@@ -70,7 +79,7 @@ public class SystemAction extends ActionSupport {
 	// 获得首页教师信息
 	public void getIntroduction() {
 		try {
-			User user = (User) ActionContext.getContext().getSession().get("user");
+			User user = (User) ActionContext.getContext().getSession().get("loginuser");
 			// 通过角色ID获取角色名称
 			String rolename = systemService.getUserRoleNameByRoleId(user.getRoleId());
 			List<Introduction> list = systemService.getIntroduction(user.getDepartmentId());
@@ -83,7 +92,7 @@ public class SystemAction extends ActionSupport {
 	// 通过角色ID获取角色名称
 	public void getNowUserRoleName() {
 		try {
-			User user = (User) ActionContext.getContext().getSession().get("user");
+			User user = (User) ActionContext.getContext().getSession().get("loginuser");
 			String rolename = systemService.getUserRoleNameByRoleId(user.getRoleId());
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + rolename + "\"}");
@@ -94,16 +103,17 @@ public class SystemAction extends ActionSupport {
 
 	// 退出登录
 	public String exit() {
-		ActionContext.getContext().getSession().remove("user");
+		ActionContext.getContext().getSession().remove("loginuser");
 		return "exit";
 	}
 
 	// 用户修改自身帐号信息
 	public void modifyUserInfo() {
 		try {
-			User u = systemService.modifyPassword(user, (User) ActionContext.getContext().getSession().get("user"));
-			ActionContext.getContext().getSession().remove("user");
-			ActionContext.getContext().getSession().put("user", u);
+			User u = systemService.modifyPassword(user,
+					(User) ActionContext.getContext().getSession().get("loginuser"));
+			ActionContext.getContext().getSession().remove("loginuser");
+			ActionContext.getContext().getSession().put("loginuser", u);
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + u.getUserName() + "\"}");
 		} catch (Exception e) {

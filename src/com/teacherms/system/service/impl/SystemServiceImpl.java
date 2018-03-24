@@ -26,11 +26,10 @@ public class SystemServiceImpl implements SystemService {
 	public Object login(String user_id, String password) {
 		User user = systemDao.getUserByUser_id(user_id);
 		if (user == null) {
-			return "nouser";
+			return "无此用户。请检查帐号是否正确";
 		}
-		System.out.println(user.getPassword().equals(md5.GetMD5Code(password)));
 		if (!user.getPassword().equals(md5.GetMD5Code(password))) {
-			return "passworderror";
+			return "密码错误，请检查密码。";
 		}
 		return user;
 	}

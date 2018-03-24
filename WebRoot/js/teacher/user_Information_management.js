@@ -363,16 +363,14 @@ $(function() {
 		var this_object = $(this);
 		if (this_object.text().trim() == "确认搜索") {
 			var name = '';
-			var value = '';
 			this_object.siblings('#search_input').find('div').each(function() {
-				name = data.tableName.replace("Teacher", "teacher") + '.' + $(this).attr('id').replace("Inputu", "");
+				name = data.tableName.replace("Teacher", "teacher") + '.' + $(this).attr('id');
 				var val_arr = [];
 				$(this).find('input').each(function() {
 					val_arr.push($(this).val());
 				});
-				//value = $(this).find('input').val();
 				//将搜索的内容放入js的数据中
-				data[name] = val_arr.join(",");
+				info_data[data.tableName][name] = val_arr.join(",");
 			});
 			doQuery();
 		} else if (this_object.text().trim() == "清空搜索") {
@@ -387,11 +385,18 @@ $(function() {
 						text : '确定',
 						action : function() {
 							this_object.siblings('#search_input').empty();
-							$.each(data, function(k, v) {
-								if (k.indexOf('teacher') > -1) {
-									data[k] = "";
-								}
+							$.each(info_data[data.tableName], function(k, v) {
+								info_data[data.tableName][k] = "";
 							})
+							//选择框初始化
+							parent_div.find('.all_options').val('').children().each(function() {
+								if ($(this).hasClass('true')) {
+									$(this).removeClass('true');
+									return;
+								}
+							});
+							//做查询
+							doQuery();
 						}
 					},
 					cancelAction : {
@@ -415,10 +420,10 @@ $(function() {
 			type : "post",
 			async : false,
 			timeout : 3000,
-			data : data,
+			data : info_data.getQueryInfo(),
 			dataType : "json",
 			success : function(xhr_data) {
-				$('#' + a_href).find('table tbody').html(getStr(xhr_data.ObjDatas));
+				parent_div.find('#' + a_href + ' table tbody').html(getStr(xhr_data.ObjDatas));
 
 				$('.viewButton').click(viewInfo);
 				$('.modiButton').click(modiInfo);
@@ -434,27 +439,25 @@ $(function() {
 	//通过a标签的href属性，获取查询到的组合成的字符串结果
 	function getStr(xhr) {
 		var str = "";
-		console.log(a_href)
 		switch (a_href) {
 		case 'info':
+			var dataStatus = xhr[0].dataStatus;
 			parent_div.find('#info_table select,input').each(function() {
 				var na = $(this).attr("name").split(".")[1];
-				var dataStatus = xhr[0].dataStatus;
 				$(this).val(xhr[0][na]);
-				if (dataStatus == "10") {
-					parent_div.find('.commmit-btn').unbind().show();
-				} else if (dataStatus == "20" || dataStatus == "30") {
-					parent_div.find('.commmit-btn').html("信息审核中");
-					parent_div.find('.commmit-btn').unbind().show();
-					parent_div.find('.commmit-btn').attr("disabled", "true");
-				} else if (dataStatus == "40") {
-					$(this).attr("disabled", "disabled")
+				if (dataStatus == "40"||dataStatus == "20"||dataStatus == "30") {
+					$(this).attr("disabled", "disabled");
 				}
 			});
+			if (dataStatus == "10") {
+				parent_div.find('.commmit-btn').unbind().show();
+			} else if (dataStatus == "20" || dataStatus == "30") {
+				parent_div.find('.commmit-btn').html("信息审核中").attr("disabled", "true").show();
+			} else if (dataStatus == "40") {
+				$(this).attr("disabled", "disabled")
+			}
 			//设置用户名
 			$('input[name="username"]').val($('.userName_info').text());
-
-			return;
 			break;
 		case 'award':
 			for (i = 0; i < xhr.length; i++) {

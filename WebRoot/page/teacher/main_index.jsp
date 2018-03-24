@@ -42,7 +42,9 @@
 	<jsp:include page="/modal/exportInfo/project_modal.jsp" flush="true"></jsp:include>
 	<jsp:include page="/modal/exportInfo/works_modal.jsp" flush="true"></jsp:include>
 
-	<script type="text/javascript" src="<%=basePath%>js/teacher/main_index.js"></script>
-	<script type="text/javascript" src="<%=basePath%>js/bootstrap-select.js"></script>
+	<script type="text/javascript"
+		src="<%=basePath%>js/teacher/main_index.js"></script>
+	<script type="text/javascript"
+		src="<%=basePath%>js/bootstrap-select.js"></script>
 </body>
 </html>

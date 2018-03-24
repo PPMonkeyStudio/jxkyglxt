@@ -13,13 +13,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.teacherms.all.domain.TeacherAward;
@@ -33,8 +30,6 @@ import com.teacherms.satffinfomanage.dao.TeacherDao;
 import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 import com.teacherms.staffinfomanage.service.TeacherService;
 
-import sun.misc.BASE64Encoder;
-import util.Attachment;
 import util.ExcelHead;
 import util.ExportExcelCollection;
 import util.GudgmentImage;
