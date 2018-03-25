@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.teacherms.all.domain.TeacherInfo;
 import com.teacherms.all.domain.User;

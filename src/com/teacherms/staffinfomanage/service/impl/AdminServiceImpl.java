@@ -5,11 +5,9 @@ import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.lang.reflect.Method;
 import java.lang.reflect.Field;
 import com.teacherms.all.domain.*;
 import com.teacherms.satffinfomanage.dao.AdminDao;
-import com.teacherms.satffinfomanage.vo.AdminVo;
 import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 import com.teacherms.staffinfomanage.service.AdminService;
 

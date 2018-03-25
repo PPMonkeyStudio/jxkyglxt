@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -36,6 +35,7 @@ import util.GudgmentImage;
 import util.MapUtil;
 import util.PageVO;
 import util.uuid;
+
 
 public class TeacherServiceImpl implements TeacherService {
 	private TeacherDao teacherDao;
@@ -84,7 +84,6 @@ public class TeacherServiceImpl implements TeacherService {
 			time_interval = "and t.createTime between '" + time_interval.split(",")[0] + "' and '"
 					+ time_interval.split(",")[1] + "'";
 		}
-
 		// 条件查询块----------------
 		boolean haveMulti_condition = false;// 是否包含指定查询的内容,用来判断是否执行模糊查询
 		StringBuffer Multi_condition = new StringBuffer();// 指定查询中的字符串
@@ -198,10 +197,8 @@ public class TeacherServiceImpl implements TeacherService {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
 			System.out.println("转换错误");
-			// e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			System.out.println("转换错误");
-			// e.printStackTrace();
 		}
 		return vo;
 	}
@@ -402,7 +399,6 @@ public class TeacherServiceImpl implements TeacherService {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return info;
@@ -422,8 +418,8 @@ public class TeacherServiceImpl implements TeacherService {
 		String[] downloadInfoId_arr = downloadInfoId.split(",");
 		for (String infoId : downloadInfoId_arr) {
 			// 获取信息名字.对应信息id
-			id_name_Map.put(infoId, teacherDao.getTableInfoName(tableName, getTableInfoName(tableName),
-					getTableInfoIdName(tableName), infoId));
+			id_name_Map.put(infoId, teacherDao.getTableInfoName(tableName,
+					tableName.replaceAll("Teacher", "").toLowerCase() + "Name", getTableInfoIdName(tableName), infoId));
 			for (File f1 : fs) {
 				if (f1.getName().indexOf(infoId) > -1) {
 					List_attachment.add(f1);
@@ -474,7 +470,7 @@ public class TeacherServiceImpl implements TeacherService {
 	 * @return 第一个参数的Name
 	 */
 	private String getTableInfoIdName(String tableName) {
-		Class cla = null;
+		Class<? extends Object> cla = null;
 		if (("TeacherAward").equals(tableName)) {
 			cla = TeacherAward.class;
 		}
@@ -495,22 +491,4 @@ public class TeacherServiceImpl implements TeacherService {
 		}
 		return cla.getDeclaredFields()[0].getName();
 	}
-
-	/**
-	 * 获取信息的名称
-	 * 
-	 * @return 名称
-	 */
-	private String getTableInfoName(String tableName) {
-		String str = tableName.replaceAll("Teacher", "").toLowerCase() + "Name";
-		/*
-		 * switch (tableName) { case "TeacherAward": str = "awardName"; break;
-		 * case "TeacherInfo": str = ""; break; case "TeacherPaper": str =
-		 * "paperName"; break; case "TeacherPatent": str = "patentName"; break;
-		 * case "TeacherProject": str = "projectName"; break; case
-		 * "TeacherWorks": str = "worksName"; break; default: break; }
-		 */
-		return str;
-	}
-
 }

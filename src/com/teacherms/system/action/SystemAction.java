@@ -23,6 +23,7 @@ import com.teacherms.system.service.SystemService;
 import com.teacherms.system.vo.DepartmentAndUserList;
 import com.teacherms.all.domain.*;
 
+@SuppressWarnings("serial")
 public class SystemAction extends ActionSupport {
 	private SystemService systemService;
 	private String user_id; // 登陆帐号
@@ -84,7 +85,7 @@ public class SystemAction extends ActionSupport {
 		try {
 			User user = (User) ActionContext.getContext().getSession().get("loginuser");
 			// 通过角色ID获取角色名称
-			String rolename = systemService.getUserRoleNameByRoleId(user.getRoleId());
+			//String rolename = systemService.getUserRoleNameByRoleId(user.getRoleId());
 			List<Introduction> list = systemService.getIntroduction(user.getDepartmentId());
 			ServletActionContext.getRequest().setAttribute("Introductions", list);
 		} catch (Exception e) {
@@ -120,7 +121,6 @@ public class SystemAction extends ActionSupport {
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + u.getUserName() + "\"}");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
