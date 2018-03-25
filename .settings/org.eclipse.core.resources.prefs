@@ -1,6 +1,6 @@
 eclipse.preferences.version=1
+encoding//WebRoot/page/main_index.jsp=UTF-8
 encoding//WebRoot/page/student/student_information_management.jsp=UTF-8
-encoding//WebRoot/page/teacher/main_index.jsp=UTF-8
 encoding//src/com/teacherms/all/domain/z_teacher_award.properties=UTF-8
 encoding//src/com/teacherms/all/domain/z_teacher_info.properties=UTF-8
 encoding//src/com/teacherms/all/domain/z_teacher_paper.properties=UTF-8

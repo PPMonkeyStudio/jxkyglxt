@@ -445,6 +445,20 @@
 				}
 			});
 		}
+		//监听窗口关闭
+		$(window).unload(function(evt) {
+			if (typeof evt == 'undefined') {
+				evt = window.event;
+			}
+			if (evt) {
+				var n = window.event.screenX - window.screenLeft;
+				var b = n > document.documentElement.scrollWidth - 20;
+				if (b && window.event.clientY < 0 || window.event.altKey) {
+					tosstr.info('已退出登录');
+					$.post('/jxkyglxt/System/system_exit', {}, function(xhr) {}, 'json');
+				}
+			}
+		});
 	</script>
 </body>
 </html>

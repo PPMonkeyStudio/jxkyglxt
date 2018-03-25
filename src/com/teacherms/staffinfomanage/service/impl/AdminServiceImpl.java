@@ -94,9 +94,13 @@ public class AdminServiceImpl implements AdminService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//用户名字作为单独的一个对象判断
+		// 用户名字作为单独的一个对象判断
 		if (user != null && !"".equals(user.getUserName()) && user.getUserName() != null) {
-			Multi_condition.append(" and u.userName='"+user.getUserName()+"' ");
+			Multi_condition.append(" and u.userName='" + user.getUserName() + "' ");
+		}
+		// 若用户为系统管理员，则查看所有教师的信息
+		if ("萍乡学院".equals(collegeName)) {
+			collegeName = "%";
 		}
 		// 最后判断如果fuzzy_query为空或是null，则不做模糊查询
 		if (null == fuzzy_query || "".equals(fuzzy_query)) {
@@ -307,7 +311,6 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	// ----------------------------------------------------------------------私有
-
 
 	/**
 	 * ---通过查询信息表名字，获取信息表中第一个参数(****Id)的Name

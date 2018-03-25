@@ -29,7 +29,7 @@ public class AdminDaoImpl implements AdminDao {
 	public List<Object> getAllStatusInfo(String table, String time, String status, String collegeName,
 			String multi_condition, String fuzzy) {
 		String hql = "select t,u from " + table
-				+ " t,User u,Department d where u.userId=t.userId and u.departmentId=d.departmentId and d.departmentName='"
+				+ " t,User u,Department d where u.userId=t.userId and u.departmentId=d.departmentId and d.departmentName like '"
 				+ collegeName + "' and t.dataStatus = '" + status + "'" + time + multi_condition + fuzzy;
 		if("TeacherInfo".equals(table)){
 			hql+=" and u.roleId!='20'";

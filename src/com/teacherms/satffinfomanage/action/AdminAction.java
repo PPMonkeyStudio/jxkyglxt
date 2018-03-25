@@ -158,7 +158,7 @@ public class AdminAction extends ActionSupport {
 	}
 
 	// execl信息表导入到数据库
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public void importDatabase() {
 		try {
 			FileInputStream is = new FileInputStream(file);

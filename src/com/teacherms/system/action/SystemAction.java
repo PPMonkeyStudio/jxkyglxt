@@ -37,11 +37,6 @@ public class SystemAction extends ActionSupport {
 		return "exit";
 	}
 
-	// 获取顶部
-	public String nav() {
-		return "nav";
-	}
-
 	// 进行登录的判断
 	public void login() {
 		try {
