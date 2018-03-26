@@ -17,12 +17,10 @@
 						<div id="main_body">
 							<table class="tab com-table">
 								<tr>
-									<td>项目名称：</td>
+									<td>项目名称:</td>
 									<td><input name="teacherProject.projectName"
 										class="form-control table_infomation" type="text"></td>
-								</tr>
-								<tr>
-									<td>项目来源：</td>
+									<td>项目来源:</td>
 									<td><select name="teacherProject.projectSource"
 										class="form-control table_infomation">
 											<option>国家自然科学基金项目</option>
@@ -47,75 +45,67 @@
 									</select></td>
 								</tr>
 								<tr>
-									<td>成员姓名：</td>
+									<td>成员姓名:</td>
 									<td><input name="teacherProject.projectUserNames"
 										class="form-control table_infomation" type="text"></td>
-								</tr>
-								<tr>
-									<td>成员工号_排名：</td>
+									<td>成员工号_排名:</td>
 									<td><input name="teacherProject.projectUserIds"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
-									<td>立项编号或批准文号：</td>
+									<td>立项编号(批准文号):</td>
 									<td><input name="teacherProject.projectNo"
 										class="form-control table_infomation" type="text"></td>
-								</tr>
-								<tr>
-									<td>项目类别：</td>
+									<td>项目类别:</td>
 									<td><input name="teacherProject.projectType"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
-									<td>立项日期：</td>
+									<td>立项日期:</td>
 									<td><input name="teacherProject.approvalDate"
 										class="form-control table_infomation laydate-icon"
 										onfocus="time()" type="text"></td>
-								</tr>
-								<tr>
-									<td>结题验收或鉴定日期：</td>
+									<td>结题验收(鉴定日期):</td>
 									<td><input name="teacherProject.endUpDate"
 										class="form-control table_infomation laydate-icon"
 										onfocus="time()" type="text"></td>
 								</tr>
 								<tr>
-									<td>经费：</td>
+									<td>经费:</td>
 									<td><input name="teacherProject.funds"
 										class="form-control table_infomation" type="text"></td>
-								</tr>
-								<tr>
-									<td>参与教师数：</td>
+									<td>参与教师数:</td>
 									<td><input name="teacherProject.memberNum"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
-									<td>级别：</td>
+									<td>级别:</td>
 									<td><select name="teacherProject.level"
 										class="form-control table_infomation">
 											<option>国家级</option>
 											<option>省部级</option>
 									</select></td>
-								</tr>
-								<tr>
-									<td>是否重点：</td>
+									<td>是否重点:</td>
 									<td><select name="teacherProject.isImportant"
 										class="form-control table_infomation">
 											<option>否</option>
 											<option>是</option>
 									</select></td>
 								</tr>
-
 								<tr class="img-control">
-									<td>附件：</td>
-									<td class="img-upload">
-										<div class="addInfo">
+									<td>附件:</td>
+									<td colspan="3" class="img-upload">
+										<div class="addInfo"
+											onclick="javascript:$(this).next().click()">
 											<div class="img-control-btn add-btn">
 												<img src="img/add.png" />
 											</div>
-										</div>
+										</div> <input name="" type="file" multiple
+										onchange="previewFile(this)"
+										accept="image/gif, image/pdf, image/png, image/jpeg"
+										style="display:none">
 									</td>
 								</tr>
-
 							</table>
 						</div>
 					</div>

@@ -88,13 +88,7 @@ var info_data = {
 		"studentInfo.deformed" : "",
 	},
 	getQueryInfo : function() {
-		return this.merge(data, this[data.tableName]);
-	},
-	merge : function(destination, source) {
-		var new_destination = destination;
-		for (var property in source)
-			new_destination[property] = source[property];
-		return new_destination;
+		return $.extend({}, data, this[data.tableName]);
 	}
 }
 
@@ -156,6 +150,7 @@ $(function() {
 		$(this).find('select').each(function() {
 			$(this).find('option:first-child').attr("selected", "selected");
 		});
+		$(this).find('.img-upload').children('div[class!="addInfo"]').remove();
 	})
 });
 

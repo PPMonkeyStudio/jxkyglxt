@@ -100,17 +100,17 @@
 
 .com-table {
 	margin: 0 auto;
-	width: 600px !important;
+	width: 700px !important;
 }
 
 .com-table input {
 	width: 250px;
-	margin-left: -40%;
+	/* margin-left: -40%; */
 }
 
 .com-table select {
 	width: 250px;
-	margin-left: -40%;
+	/* margin-left: -40%; */
 }
 
 .com-table tr:nth-child(odd) td {

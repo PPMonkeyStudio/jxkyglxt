@@ -158,7 +158,6 @@ public class AdminAction extends ActionSupport {
 	}
 
 	// execl信息表导入到数据库
-	@SuppressWarnings("rawtypes")
 	public void importDatabase() {
 		try {
 			FileInputStream is = new FileInputStream(file);
@@ -222,8 +221,19 @@ public class AdminAction extends ActionSupport {
 
 	public void setIntroduction() {
 		try {
-			User user = (User) ActionContext.getContext().getSession().get("user");
+			User user = (User) ActionContext.getContext().getSession().get("loginuser");
 			String result = adminService.setIntroduction(introduction, user.getDepartmentId());
+			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
+			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteIntroduction() {
+		try {
+			System.out.println(introduction);
+			String result = adminService.deleteIntroduction(introduction);
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
 		} catch (Exception e) {

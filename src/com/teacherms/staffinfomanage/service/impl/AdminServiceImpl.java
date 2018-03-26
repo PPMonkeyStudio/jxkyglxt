@@ -310,6 +310,11 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.addInfo(introduction);
 	}
 
+	@Override
+	public String deleteIntroduction(Introduction introduction) {
+		return adminDao.deleteInfo(introduction) ? "success" : "error";
+	}
+
 	// ----------------------------------------------------------------------私有
 
 	/**

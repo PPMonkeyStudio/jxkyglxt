@@ -15,24 +15,19 @@
 					<div class="modal-body">
 						<div id="main_body">
 							<table class="tab com-table">
-
 								<tr>
-									<td>奖励名称：</td>
+									<td>奖励名称:</td>
 									<td><input name="teacherAward.awardName"
 										class="form-control table_infomation" type="text"></td>
-								</tr>
-								<tr>
-									<td>获奖者姓名：</td>
+									<td>获奖者姓名:</td>
 									<td><input name="teacherAward.awardUserNames"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
-									<td>获奖者工号_排名：</td>
+									<td>获奖者工号_排名:</td>
 									<td><input name="teacherAward.awardUserIds"
 										class="form-control table_infomation" type="text"></td>
-								</tr>
-								<tr>
-									<td>奖励类型：</td>
+									<td>奖励类型:</td>
 									<td><select name="teacherAward.awardType" draggable="true"
 										class="form-control table_infomation">
 											<option>教学成果</option>
@@ -42,7 +37,7 @@
 									</select></td>
 								</tr>
 								<tr>
-									<td>获奖类别：</td>
+									<td>获奖类别:</td>
 									<td><select name="teacherAward.awardClass"
 										class="form-control table_infomation">
 											<option>国家自然科学奖</option>
@@ -54,9 +49,7 @@
 											<option>省（市、自治区）政府科技进步奖</option>
 											<option>省（市、自治区）政府哲学社科奖</option>
 									</select></td>
-								</tr>
-								<tr>
-									<td>获奖等级：</td>
+									<td>获奖等级:</td>
 									<td><select name="teacherAward.awardGrade"
 										class="form-control table_infomation">
 											<option>特等奖</option>
@@ -66,33 +59,29 @@
 									</select></td>
 								</tr>
 								<tr>
-									<td>获奖级别：</td>
+									<td>获奖级别:</td>
 									<td><select name="teacherAward.awardLevel"
 										class="form-control table_infomation">
 											<option>国家</option>
 											<option>省级</option>
 											<option>市级</option>
 									</select></td>
-								</tr>
-								<tr>
-									<td>获奖时间：</td>
+									<td>获奖时间:</td>
 									<td><input name="teacherAward.awardDate"
 										class="form-control table_infomation laydate-icon"
 										onfocus="time()" type="text"></td>
 								</tr>
 								<tr>
-									<td>获奖证书编号：</td>
+									<td>获奖证书编号:</td>
 									<td><input name="teacherAward.awardCertificationNo"
 										class="form-control table_infomation" type="text"></td>
-								</tr>
-								<tr>
-									<td>授予单位：</td>
+									<td>授予单位:</td>
 									<td><input name="teacherAward.grantUnit"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr class="img-control">
-									<td>附件：</td>
-									<td class="img-upload">
+									<td>附件:</td>
+									<td colspan="3" class="img-upload">
 										<div class="addInfo"
 											onclick="javascript:$(this).next().click()">
 											<div class="img-control-btn add-btn">

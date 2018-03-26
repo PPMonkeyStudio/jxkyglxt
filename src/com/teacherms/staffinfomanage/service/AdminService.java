@@ -18,7 +18,7 @@ public interface AdminService {
 	 * @return 对象
 	 */
 	PageVO<Object> getSpecifiedInformationByPaging(String tableName, String page, String time_interval,
-			String dataState, String collegeName, Object obj, User user,String fuzzy_query);
+			String dataState, String collegeName, Object obj, User user, String fuzzy_query);
 
 	/**
 	 * ---通过ID获取单条信息
@@ -133,5 +133,14 @@ public interface AdminService {
 	 * @return
 	 */
 	String setIntroduction(Introduction introduction, String string);
+
+	/**
+	 * 删除介绍信息
+	 * 
+	 * @param introduction
+	 *            对象
+	 * @return
+	 */
+	String deleteIntroduction(Introduction introduction);
 
 }

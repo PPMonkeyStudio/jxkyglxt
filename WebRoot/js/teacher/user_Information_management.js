@@ -31,6 +31,8 @@ $(function() {
 		}
 
 	}
+
+
 	var getinfoByCardIdk = function(event) {
 		if (event.keyCode == 13) {
 			var reg = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/;
@@ -126,7 +128,6 @@ $(function() {
 				return;
 			}
 			data.page = 1;
-			doQuery();
 			break;
 		case '上一页':
 			if (!pageDataInformation.HavePrePage) {
@@ -134,7 +135,6 @@ $(function() {
 				return;
 			}
 			data.page = pageDataInformation.pageIndex - 1;
-			doQuery();
 			break;
 		case '下一页':
 			if (!pageDataInformation.HaveNextPage) {
@@ -142,7 +142,6 @@ $(function() {
 				return;
 			}
 			data.page = pageDataInformation.pageIndex + 1;
-			doQuery();
 			break;
 		case '尾页':
 			if (pageDataInformation.pageIndex == pageDataInformation.totalPages) {
@@ -150,12 +149,12 @@ $(function() {
 				return;
 			}
 			data.page = pageDataInformation.totalPages;
-			doQuery();
 			break;
 		default:
 			toastr.error('服务器错误');
 			break;
 		}
+		doQuery();
 	});
 
 	//确定导出
@@ -423,7 +422,9 @@ $(function() {
 			data : info_data.getQueryInfo(),
 			dataType : "json",
 			success : function(xhr_data) {
-				parent_div.find('#' + a_href + ' table tbody').html(getStr(xhr_data.ObjDatas));
+				console.log(parent_div);
+				console.log(parent_div.find('#info_table tbody'));
+				parent_div.find('#info_table tbody').html(getStr(xhr_data.ObjDatas));
 
 				$('.viewButton').click(viewInfo);
 				$('.modiButton').click(modiInfo);
@@ -445,7 +446,7 @@ $(function() {
 			parent_div.find('#info_table select,input').each(function() {
 				var na = $(this).attr("name").split(".")[1];
 				$(this).val(xhr[0][na]);
-				if (dataStatus == "40"||dataStatus == "20"||dataStatus == "30") {
+				if (dataStatus == "40" || dataStatus == "20" || dataStatus == "30") {
 					$(this).attr("disabled", "disabled");
 				}
 			});
@@ -458,7 +459,7 @@ $(function() {
 			}
 			//设置用户名
 			$('input[name="username"]').val($('.userName_info').text());
-			break;
+			return; //结束执行
 		case 'award':
 			for (i = 0; i < xhr.length; i++) {
 				var dataStatus = xhr[i].dataStatus;

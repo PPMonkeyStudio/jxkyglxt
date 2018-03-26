@@ -18,7 +18,7 @@
 								<tbody>
 									<tr class="title"></tr>
 									<tr>
-										<td>工号：</td>
+										<td>工号:</td>
 										<td><input name="teacherInfo.userId"
 											class="form-control table_infomation" type="text"></td>
 									</tr>
@@ -26,12 +26,12 @@
 								<tbody class="basic">
 									<tr>
 										<!-- name="teacherInfo." -->
-										<td>姓名：</td>
+										<td>姓名:</td>
 										<td><input name="userName"
 											class="form-control table_infomation" type="text"></td>
 									</tr>
 									<tr>
-										<td>证件类型：</td>
+										<td>证件类型:</td>
 										<td><select name="teacherInfo.certificateType"
 											class="form-control table_infomation">
 												<option>居民身份证</option>
@@ -41,7 +41,7 @@
 										<td>证件号码</td>
 										<td><input name="teacherInfo.certificateNo"
 											class="form-control table_infomation" type="text"></td>
-										<td>民族：</td>
+										<td>民族:</td>
 										<td><select name="teacherInfo.nation"
 											class="form-control table_infomation">
 												<option>汉族</option>
@@ -49,19 +49,19 @@
 										</select></td>
 									</tr>
 									<tr>
-										<td>国籍：</td>
+										<td>国籍:</td>
 										<td><select name="teacherInfo.nationality"
 											class="form-control table_infomation">
 												<option>中国</option>
 												<option>国外</option>
 										</select></td>
-										<td>港澳台：</td>
+										<td>港澳台:</td>
 										<td><select name="teacherInfo.GAT"
 											class="form-control table_infomation">
 												<option>否</option>
 												<option>是</option>
 										</select></td>
-										<td>华侨：</td>
+										<td>华侨:</td>
 										<td><select name="teacherInfo.huaQiao"
 											class="form-control table_infomation">
 												<option>否</option>
@@ -69,7 +69,7 @@
 										</select></td>
 									</tr>
 									<tr>
-										<td>政治面貌：</td>
+										<td>政治面貌:</td>
 										<td><select name="teacherInfo.politicalStatus"
 											class="form-control table_infomation">
 												<option>共青团员</option>
@@ -77,19 +77,19 @@
 												<option>民主党派</option>
 												<option>群众</option>
 										</select></td>
-										<td>性别：</td>
+										<td>性别:</td>
 										<td><select name="teacherInfo.sex"
 											class="form-control table_infomation">
 												<option>男</option>
 												<option>女</option>
 										</select></td>
-										<td>出生年月：</td>
+										<td>出生年月:</td>
 										<td><input name="teacherInfo.birthday"
 											class="form-control table_infomation laydate-icon"
 											onfocus="time()" type="text">
 									</tr>
 									<tr>
-										<td>最高学历：</td>
+										<td>最高学历:</td>
 										<td><select name="teacherInfo.highestEducation"
 											class="form-control table_infomation">
 												<option>博士研究生</option>
@@ -98,7 +98,7 @@
 												<option>专科</option>
 												<option>专科以下</option>
 										</select></td>
-										<td>最高学位：</td>
+										<td>最高学位:</td>
 										<td><select name="teacherInfo.highestDegree"
 											class="form-control table_infomation">
 												<option>博士</option>
@@ -106,7 +106,7 @@
 												<option>学士</option>
 												<option>无</option>
 										</select></td>
-										<td>学缘：</td>
+										<td>学缘:</td>
 										<td><select name="teacherInfo.learnEdgeStructure"
 											class="form-control table_infomation">
 												<option>本校</option>
@@ -115,7 +115,7 @@
 										</select></td>
 									</tr>
 									<tr>
-										<td>专业技术职称：</td>
+										<td>专业技术职称:</td>
 										<td><select name="teacherInfo.professionalTitle"
 											class="form-control table_infomation">
 												<option>教授</option>
@@ -125,7 +125,7 @@
 												<option>未评级</option>
 												<option>其他</option>
 										</select></td>
-										<td>职称级别：</td>
+										<td>职称级别:</td>
 										<td><select name="teacherInfo.professionalGrade"
 											class="form-control table_infomation">
 												<option>正高级</option>
@@ -134,20 +134,20 @@
 												<option>初级</option>
 												<option>未定职级</option>
 										</select></td>
-										<td>学科类别：</td>
+										<td>学科类别:</td>
 										<td><input name="teacherInfo.subjectCategory"
 											class="form-control table_infomation " type="text"></td>
 									</tr>
 									<tr>
-										<td>参加工作时间：</td>
+										<td>参加工作时间:</td>
 										<td><input name="teacherInfo.workDate"
 											class="form-control table_infomation laydate-icon"
 											onfocus="time()" type="text"></td>
-										<td>入校时间：</td>
+										<td>入校时间:</td>
 										<td><input name="teacherInfo.inductionDate"
 											class="form-control table_infomation  laydate-icon"
 											onfocus="time()" type="text"></td>
-										<td>教师资格证号：</td>
+										<td>教师资格证号:</td>
 										<td><input name="teacherInfo.teacherCertificateNo"
 											class="form-control table_infomation" type="text"></td>
 									</tr>
@@ -161,7 +161,7 @@
 								<tbody class="other">
 									<tr>
 
-										<td>授课类型：</td>
+										<td>授课类型:</td>
 										<td><select name="teacherInfo.teachingType"
 											class="form-control table_infomation">
 												<option>公共课、专业课</option>
@@ -171,7 +171,7 @@
 										</select></td>
 									</tr>
 									<tr>
-										<td>授课状态：</td>
+										<td>授课状态:</td>
 										<td><select name="teacherInfo.teachingStatus"
 											class="form-control table_infomation">
 												<option>授课</option>
@@ -180,30 +180,30 @@
 												<option>不授课科研</option>
 												<option>不授课其他</option>
 										</select></td>
-										<td>任教专业名称：</td>
+										<td>任教专业名称:</td>
 										<td><input name="teacherInfo.teachingProfessionName"
 											class="form-control table_infomation" type="text"
 											placeholder="请输入任教专业名称"></td>
 									</tr>
 									<tr>
-										<td>任教专业代码：</td>
+										<td>任教专业代码:</td>
 										<td><input name="teacherInfo.teachingProfessionNo"
 											class="form-control table_infomation" type="text"
 											placeholder="请输入任教专业代码"></td>
-										<td>专业任教时间：</td>
+										<td>专业任教时间:</td>
 										<td><input name="teacherInfo.professionTeachingDate"
 											class="form-control table_infomation " type="text"
 											placeholder="请输入专业任教时间"></td>
 									</tr>
 									<tr>
-										<td>是否实验技术人员：</td>
+										<td>是否实验技术人员:</td>
 										<td><select
 											name="teacherInfo.experimentalTechnicalPersonnel"
 											class="form-control table_infomation">
 												<option>否</option>
 												<option>是</option>
 										</select></td>
-										<td>是否双师型：</td>
+										<td>是否双师型:</td>
 										<td><select name="teacherInfo.doubleTeacherType"
 											class="form-control table_infomation">
 												<option>否</option>
@@ -211,13 +211,13 @@
 										</select></td>
 									</tr>
 									<tr>
-										<td>是否工程背景：</td>
+										<td>是否工程背景:</td>
 										<td><select name="teacherInfo.engineeringBackground"
 											class="form-control table_infomation">
 												<option>否</option>
 												<option>是</option>
 										</select></td>
-										<td>是否行业背景：</td>
+										<td>是否行业背景:</td>
 										<td><select name="teacherInfo.industryBackground"
 											class="form-control table_infomation">
 												<option>否</option>
@@ -226,7 +226,7 @@
 
 									</tr>
 									<tr>
-										<td>行政职务级别：</td>
+										<td>行政职务级别:</td>
 										<td><select name="teacherInfo.administrativeRank"
 											class="form-control table_infomation">
 												<option>正厅级</option>
@@ -236,7 +236,7 @@
 												<option>正科级</option>
 												<option>副科级及以下</option>
 										</select></td>
-										<td>研究生导师类型：</td>
+										<td>研究生导师类型:</td>
 										<td><select name="teacherInfo.graduateTutorType"
 											class="form-control table_infomation">
 												<option>否</option>
@@ -246,17 +246,17 @@
 										</select></td>
 									</tr>
 									<tr>
-										<td>校内指导博士生人数：</td>
+										<td>校内指导博士生人数:</td>
 										<td><input name="teacherInfo.numberOfDoctor"
 											class="form-control table_infomation" type="text"
 											placeholder="请输入校内指导博士生人数"></td>
-										<td>校内指导硕士生人数：</td>
+										<td>校内指导硕士生人数:</td>
 										<td><input name="teacherInfo.numberOfMaster"
 											class="form-control table_infomation" type="text"
 											placeholder="请输入校内指导硕士生人数"></td>
 									</tr>
 									<tr>
-										<td>职工类型：</td>
+										<td>职工类型:</td>
 										<td><select name="teacherInfo.employeeType"
 											class="form-control table_infomation">
 												<option>专任教师</option>
@@ -269,7 +269,7 @@
 												<option>研究生专职辅导员</option>
 												<option>心理咨询人员</option>
 										</select></td>
-										<td>录用类型：</td>
+										<td>录用类型:</td>
 										<td><select name="teacherInfo.employmentType"
 											class="form-control table_infomation">
 												<option>在编</option>
@@ -277,7 +277,7 @@
 										</select></td>
 									</tr>
 									<tr>
-										<td>任职状态：</td>
+										<td>任职状态:</td>
 										<td><select name="teacherInfo.jobStatue"
 											class="form-control table_infomation">
 												<option>在职</option>
@@ -286,7 +286,7 @@
 												<option>进修</option>
 												<option>无</option>
 										</select></td>
-										<td>异动类型：</td>
+										<td>异动类型:</td>
 										<td><select name="teacherInfo.transactionType"
 											class="form-control table_infomation">
 												<option>无</option>
@@ -300,13 +300,13 @@
 
 									</tr>
 									<tr>
-										<td>高校调入：</td>
+										<td>高校调入:</td>
 										<td><select name="teacherInfo.universityTransfer"
 											class="form-control table_infomation">
 												<option>否</option>
 												<option>是</option>
 										</select></td>
-										<td>本校毕业：</td>
+										<td>本校毕业:</td>
 										<td><select name="teacherInfo.schoolGraduation"
 											class="form-control table_infomation">
 												<option>否</option>
@@ -315,13 +315,13 @@
 
 									</tr>
 									<tr>
-										<td>本校调整：</td>
+										<td>本校调整:</td>
 										<td><select name="teacherInfo.schoolAdjustment"
 											class="form-control table_infomation">
 												<option>否</option>
 												<option>是</option>
 										</select></td>
-										<td>校外教师类型：</td>
+										<td>校外教师类型:</td>
 										<td><select name="teacherInfo.offCampusTeacherType"
 											class="form-control table_infomation">
 												<option>否</option>
