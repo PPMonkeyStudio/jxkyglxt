@@ -39,6 +39,15 @@ public interface SystemDao {
 	User updateUser(User loging_user);
 
 	/**
+	 * 添加用户信息
+	 * 
+	 * @param user
+	 *            更新后的用户对象
+	 * @return
+	 */
+	User saveUser(User user);
+
+	/**
 	 * 获取介绍
 	 * 
 	 * @param departmentId

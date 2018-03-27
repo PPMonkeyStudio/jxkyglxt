@@ -28,7 +28,8 @@
 		<div class="col-md-12">
 			<!--breadcrumbs start -->
 			<ul class="breadcrumb">
-				<li><a href="javascript:location.reload();"><i class="fa fa-home"></i> 首页</a></li>
+				<li><a href="javascript:location.reload();"><i
+						class="fa fa-home"></i> 首页</a></li>
 				<li class="active">人员调动 <i
 					class="fa fa-spinner fa-spin PersonnelRedeploy-loading"></i></li>
 			</ul>
@@ -64,7 +65,8 @@
 							id="<s:property value="#DL.department.departmentId" />">
 							<div class="list-group">
 								<s:iterator id="list" value="#DL.list" status="st">
-									<a href="javascript:void(0);" class="list-group-item col-md-2"
+									<a style="height: 42px;" href="javascript:void(0);"
+										class="list-group-item col-md-2"
 										user-id="<s:property value="#list.userId" />"><s:property
 											value="#list.userName" /></a>
 								</s:iterator>
@@ -79,6 +81,6 @@
 			<!--breadcrumbs end -->
 		</div>
 	</div>
-	</section> 
+	</section>
 </body>
 </html>
