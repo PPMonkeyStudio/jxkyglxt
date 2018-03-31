@@ -725,7 +725,7 @@
 								<table class="table table-hover" id="info_table">
 									<thead>
 										<tr>
-											<th>#</th>
+											<th>序号</th>
 											<th>专利名称</th>
 											<th>作者</th>
 											<th>专利类型</th>

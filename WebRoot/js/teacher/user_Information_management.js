@@ -210,7 +210,6 @@ $(function() {
 				tableName : data.tableName
 			}, function(xhr) {
 				//data.tableName中获取当前的表名称，进行判断对具体哪一个模态框进行操作
-				console.log($("#" + modal_id + " form"));
 				$("#" + modal_id + " form").find("input,select").each(function() {
 					var na = $(this).attr("name").split(".")[1];
 					if (na == "userId") {
@@ -221,8 +220,8 @@ $(function() {
 					else $(this).val(xhr.object[na]);
 				})
 				$.each(xhr.attachmentName, function(i, v) {
-					$.post('', '', '', '');
-					$("#" + modal_id + " .addInfo").before('<div class="img-default">' + '<div class="img">'
+					$("#" + modal_id + " .addInfo").before(setImgDiv(v));
+					/*$("#" + modal_id + " .addInfo").before('<div class="img-default">' + '<div class="img">'
 						+ '<img src="/jxkyglxt/System/system_Attachment?attachmentName=' + v + '!' + data.tableName + '" alt="" class="img-show">'
 						+ '</div>'
 						+ '<div class="info" onclick="javascript:$(this).prev().find(\'img\').click()">'
@@ -234,7 +233,7 @@ $(function() {
 						+ '</div>'
 						+ '</div>'
 						+ '<input type="file" name="" onchange="modiFiles(this)" accept="image/gif, image/pdf, image/png, image/jpeg" style="display:none" >'
-						+ '</div>')
+						+ '</div>')*/
 				})
 
 				//确定修改按钮显示并添加绑定事件
@@ -356,7 +355,6 @@ $(function() {
 		}, 'json')
 
 	})
-	//日期输入框点击事件
 	//指定查询
 	$('.search_info').click(function() {
 		var this_object = $(this);
@@ -406,6 +404,7 @@ $(function() {
 			});
 		}
 	});
+
 	//模糊查询
 	$('.fuzzy_query').click(function() {
 		data.fuzzy_query = $(this).parent().prev().val();
@@ -453,7 +452,7 @@ $(function() {
 			if (dataStatus == "10") {
 				parent_div.find('.commmit-btn').unbind().show();
 			} else if (dataStatus == "20" || dataStatus == "30") {
-				parent_div.find('.commmit-btn').html("信息审核中").attr("disabled", "true").show();
+				parent_div.find('.commmit-btn').html("信息审核中...").attr("disabled", "true").show();
 			} else if (dataStatus == "40") {
 				$(this).attr("disabled", "disabled")
 			}

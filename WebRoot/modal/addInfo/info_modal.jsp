@@ -141,11 +141,11 @@
 									<tr>
 										<td>参加工作时间:</td>
 										<td><input name="teacherInfo.workDate"
-											class="form-control table_infomation laydate-icon"
+											class="form-control table_infomation mydate"
 											onfocus="time()" type="text"></td>
 										<td>入校时间:</td>
 										<td><input name="teacherInfo.inductionDate"
-											class="form-control table_infomation  laydate-icon"
+											class="form-control table_infomation mydate"
 											onfocus="time()" type="text"></td>
 										<td>教师资格证号:</td>
 										<td><input name="teacherInfo.teacherCertificateNo"
@@ -192,7 +192,7 @@
 											placeholder="请输入任教专业代码"></td>
 										<td>专业任教时间:</td>
 										<td><input name="teacherInfo.professionTeachingDate"
-											class="form-control table_infomation " type="text"
+											class="form-control table_infomation mydate" type="text"
 											placeholder="请输入专业任教时间"></td>
 									</tr>
 									<tr>

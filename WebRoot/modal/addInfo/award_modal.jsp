@@ -68,8 +68,8 @@
 									</select></td>
 									<td>获奖时间:</td>
 									<td><input name="teacherAward.awardDate"
-										class="form-control table_infomation laydate-icon"
-										onfocus="time()" type="text"></td>
+										class="form-control table_infomation mydate" onfocus="time()"
+										type="text"></td>
 								</tr>
 								<tr>
 									<td>获奖证书编号:</td>
@@ -82,15 +82,14 @@
 								<tr class="img-control">
 									<td>附件:</td>
 									<td colspan="3" class="img-upload">
-										<div class="addInfo"
-											onclick="javascript:$(this).next().click()">
+										<div class="addInfo" onclick="javascript:$(this).next().click()">
 											<div class="img-control-btn add-btn">
 												<img src="img/add.png" />
 											</div>
-										</div> <input name="" type="file" multiple
-										onchange="previewFile(this)"
+										</div> 
+										<input name="" upload-type="award" type="file" multiple onchange="previewFile(this)"
 										accept="image/gif, image/pdf, image/png, image/jpeg"
-										style="display:none">
+										style="display:none" >
 									</td>
 								</tr>
 							</table>

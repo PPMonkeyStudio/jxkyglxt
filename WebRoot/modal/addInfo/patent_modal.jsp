@@ -63,7 +63,7 @@
 											<div class="img-control-btn add-btn">
 												<img src="img/add.png" />
 											</div>
-										</div> <input name="" type="file" multiple
+										</div> <input name="" upload-type="patent" type="file" multiple
 										onchange="previewFile(this)"
 										accept="image/gif, image/pdf, image/png, image/jpeg"
 										style="display:none">

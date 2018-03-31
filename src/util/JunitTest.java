@@ -3,7 +3,6 @@ package util;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import javax.annotation.Resource;
 
@@ -58,6 +57,8 @@ public class JunitTest {
 		// adminService.getSpecifiedInformationByPaging("TeacherAward", "1", "",
 		// "20", "信息与计算机工程学院");
 		// System.out.println(new Gson().toJson(list));
+		TeacherInfo teacherInfo = null;
+		System.out.println(teacherInfo == null);
 	}
 
 	@Test
@@ -261,8 +262,6 @@ public class JunitTest {
 		}
 	}
 
-	
-	
 	@Test
 	public void test111() {
 		System.out.println(md5.GetMD5Code("admin"));

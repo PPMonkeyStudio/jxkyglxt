@@ -13,7 +13,8 @@
 		<div class="col-md-12">
 			<!--breadcrumbs start -->
 			<ul class="breadcrumb">
-				<li><a href="javascript:location.reload();"><i class="fa fa-home"></i> 首页</a></li>
+				<li><a href="javascript:location.reload();"><i
+						class="fa fa-home"></i> 首页</a></li>
 				<li class="active">教师信息管理</li>
 			</ul>
 			<!--breadcrumbs end -->
@@ -108,10 +109,10 @@
 							<!--查询存放信息的表格-->
 							<section class="panel"> <header
 								class="panel-heading second-panel-heading"> 用户信息
-								
+
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
-								<button style="display: none;float: right;"
+							<button style="display: none;float: right;"
 								class="btn btn-danger all_sure_export">导出全部</button>
 							</header>
 							<div class="panel-body table-responsive">
@@ -200,8 +201,8 @@
 									class="panel-heading second-panel-heading"> 奖励信息
 								<button style="display: none;float: right;"
 									class="btn btn-primary sure_export">确认导出</button>
-									<button style="display: none;float: right;"
-								class="btn btn-danger all_sure_export">导出全部</button>
+								<button style="display: none;float: right;"
+									class="btn btn-danger all_sure_export">导出全部</button>
 								</header>
 								<div class="panel-body table-responsive">
 									<table class="table table-hover" id="info_table">
@@ -291,7 +292,7 @@
 								class="panel-heading second-panel-heading"> 著作信息
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
-								<button style="display: none;float: right;"
+							<button style="display: none;float: right;"
 								class="btn btn-danger all_sure_export">导出全部</button>
 							</header>
 							<div class="panel-body table-responsive">
@@ -383,7 +384,7 @@
 								class="panel-heading second-panel-heading"> 论文信息
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
-								<button style="display: none;float: right;"
+							<button style="display: none;float: right;"
 								class="btn btn-danger all_sure_export">导出全部</button>
 							</header>
 							<div class="panel-body table-responsive">
@@ -471,7 +472,7 @@
 								class="panel-heading second-panel-heading"> 专利信息
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
-								<button style="display: none;float: right;"
+							<button style="display: none;float: right;"
 								class="btn btn-danger all_sure_export">导出全部</button>
 							</header>
 							<div class="panel-body table-responsive">
@@ -559,7 +560,7 @@
 								class="panel-heading second-panel-heading"> 课题(项目)信息
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
-								<button style="display: none;float: right;"
+							<button style="display: none;float: right;"
 								class="btn btn-danger all_sure_export">导出全部</button>
 							</header>
 							<div class="panel-body table-responsive">
@@ -591,9 +592,9 @@
 						<li><a>上一页</a></li>
 						<li><a>下一页</a></li>
 						<li><a>尾页</a></li>
-						
-						
-						
+
+
+
 					</ul>
 				</div>
 			</div>

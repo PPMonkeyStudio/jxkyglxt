@@ -48,8 +48,8 @@
 									</select></td>
 									<td>入选时间:</td>
 									<td><input name="teacherWorks.selectedDate"
-										class="form-control  table_infomation laydate-icon"
-										onfocus="time()" type="text"></td>
+										class="form-control  table_infomation mydate" onfocus="time()"
+										type="text"></td>
 								</tr>
 								<tr>
 									<td>主编(作者):</td>
@@ -73,8 +73,8 @@
 										class="form-control table_infomation" type="text"></td>
 									<td>出版时间:</td>
 									<td><input name="teacherWorks.publishTime"
-										class="form-control  table_infomation laydate-icon"
-										onfocus="time()" type="text"></td>
+										class="form-control  table_infomation mydate" onfocus="time()"
+										type="text"></td>
 								</tr>
 								<tr>
 									<td>参编工号_排名:</td>
@@ -89,7 +89,7 @@
 											<div class="img-control-btn add-btn">
 												<img src="img/add.png" />
 											</div>
-										</div> <input name="" type="file" multiple
+										</div> <input name="" upload-type="works" type="file" multiple
 										onchange="previewFile(this)"
 										accept="image/gif, image/pdf, image/png, image/jpeg"
 										style="display:none">

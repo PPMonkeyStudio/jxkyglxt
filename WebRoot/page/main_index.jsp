@@ -10,7 +10,8 @@
 <head>
 <base href="<%=basePath%>">
 
-<title><s:property value="#session.loginuser.userName" /> - 本科数据管理系统</title>
+<title><s:property value="#session.loginuser.userName" /> -
+	本科数据管理系统</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -32,7 +33,7 @@
 	<jsp:include page="/modal/addInfo/works_modal.jsp" flush="true"></jsp:include>
 	<jsp:include page="/modal/addInfo/project_modal.jsp" flush="true"></jsp:include>
 	<jsp:include page="/modal/addInfo/patent_modal.jsp" flush="true"></jsp:include>
-	<jsp:include page="/modal/addInfo/user_info_modal.jsp" flush="true"></jsp:include>
+	<jsp:include page="/modal/addInfo/add_info_modal.jsp" flush="true"></jsp:include>
 	<jsp:include page="/modal/addInfo/userSetting.jsp" flush="true"></jsp:include>
 
 	<jsp:include page="/modal/exportInfo/info_modal.jsp" flush="true"></jsp:include>
