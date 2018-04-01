@@ -28,12 +28,17 @@ $(function() {
 					}
 					else $(this).val(xhr.object[na]);
 				})
+				$.each(xhr.attachmentName, function(i, v) {
+					$("#" + modal_id + " .addInfo").before(ImgManiFunc.setImgDiv(v, xhr.user.userId));
+				})
 				//等全部信息加载完毕，再将模态框显示出来，避免模态框出现但是对应的值还未加载情况
 				//如果为用户信息，则只显示基础部分（当前为用户审核页面）
 				if (a_href == "info") {
 					$("#" + modal_id).find('.other').show();
 					$("#" + modal_id).find('.basic').hide();
 				}
+				//关闭图片添加
+				$("#" + modal_id).find('.addInfo').hide();
 				//显示出模态框
 				$("#" + modal_id).modal({
 					keyboard : true

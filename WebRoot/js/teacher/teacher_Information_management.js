@@ -50,6 +50,7 @@ $(function() {
 				$('#info_modal .other').hide();
 				$('.sure_mod').show();
 				//显示出模态框
+				//关闭图片添加
 				$('#info_modal').modal({
 					keyboard : true
 				});
@@ -90,7 +91,11 @@ $(function() {
 					}
 					else $(this).val(xhr.object[na]);
 				})
+				$.each(xhr.attachmentName, function(i, v) {
+					$("#" + modal_id + " .addInfo").before(ImgManiFunc.setImgDiv(v, xhr.user.userId));
+				})
 				$("#" + modal_id + " .review-info").hide();
+				$("#" + modal_id).find('.addInfo').hide();
 				//显示出模态框
 				$("#" + modal_id).modal({
 					keyboard : true

@@ -1,6 +1,8 @@
 package com.teacherms.staffinfomanage.service;
 
 import java.util.List;
+import java.util.ResourceBundle;
+
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.teacherms.all.domain.Introduction;
 import com.teacherms.all.domain.TeacherInfo;
@@ -9,6 +11,7 @@ import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 import util.PageVO;
 
 public interface AdminService {
+	static final String propertiesPath = ResourceBundle.getBundle("_path").getString("filePath");
 
 	/**
 	 * ---通过分页获取表中指定未审核信息（若未指定则查询全部），并且进行时间 的排序

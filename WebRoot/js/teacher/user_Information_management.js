@@ -8,6 +8,7 @@ $(function() {
 	var add_info = function() {
 		$("#" + modal_id).find('.sure_add').show();
 		$("#" + modal_id).find('.addInfo').show();
+		toastr.info("照片不便更改,请确认后再继续上传!", "提示");
 		$("#" + modal_id).modal({
 			keyboard : true
 		})
@@ -222,7 +223,7 @@ $(function() {
 					else $(this).val(xhr.object[na]);
 				})
 				$.each(xhr.attachmentName, function(i, v) {
-					$("#" + modal_id + " .addInfo").before(ImgManiFunc.setImgDiv(v));
+					$("#" + modal_id + " .addInfo").before(ImgManiFunc.setImgDiv(v, xhr.user.userId));
 				})
 				//确定修改按钮显示并添加绑定事件
 				active_modal.find('.sure_mod').unbind().click(function() {
@@ -262,6 +263,7 @@ $(function() {
 					}
 					else $(this).val(xhr.object[na]);
 				})
+				//图片添加显示关闭
 				$("#" + modal_id).find('.addInfo').hide();
 				//显示出模态框
 				$("#" + modal_id).modal({
@@ -269,8 +271,6 @@ $(function() {
 				})
 			}, "json");
 	}
-
-
 
 	$('.nav-tabs li a').click(function() {
 		//如果已经是点击状态，则点击不作为
@@ -304,27 +304,41 @@ $(function() {
 	$('.add-btn').click(add_info);
 	//确认添加按钮点击事件
 	$('.sure_add').click(function() {
-		var review_data = $("#" + modal_id + " form").serialize() + "&tableName=" + data.tableName;
-		$.post("/jxkyglxt/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
-			if (sxh_data.result == "success") {
-				//如果包含附件
-				if ($("#" + modal_id + " .img-default").length > 0) {
-					var formData = new FormData()
-					$("#" + modal_id + " .img-default").each(function(i, o) {
-						formData.append("_file", convertBase64UrlToBlob($(this).find('.img-show').attr('src')));
-					})
-					formData.append("tableName", data.tableName);
-					formData.append("tableId", sxh_data.id);
-					//附件上传
-					if (AttachmentUpload("/jxkyglxt/Teacher/teacher_userAttachmentUpload", formData)) {
-						toastr.success("上传成功!");
-						$("#" + modal_id).modal('hide');
-						doQuery();
-					}
-				}
-				toastr.success("添加成功！");
+		var isInputHaveValue = true;
+		//判是否为空
+		$("#" + modal_id).find('input:visible').each(function() {
+			var val = $(this).val();
+			if (val == undefined || val == null || val == "") {
+				isInputHaveValue = false;
+				return false;
 			}
-		}, "json")
+		});
+		if (isInputHaveValue) {
+			var review_data = $("#" + modal_id + " form").serialize() + "&tableName=" + data.tableName;
+			$.post("/jxkyglxt/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
+				if (sxh_data.result == "success") {
+					//如果包含附件
+					if ($("#" + modal_id + " .img-default").length > 0) {
+						var formData = new FormData()
+						$("#" + modal_id + " .img-default").each(function(i, o) {
+							formData.append("_file", convertBase64UrlToBlob($(this).find('.img-show').attr('src')));
+						})
+						formData.append("tableName", data.tableName);
+						formData.append("tableId", sxh_data.id);
+						//附件上传
+						if (AttachmentUpload("/jxkyglxt/Teacher/teacher_userAttachmentUpload", formData)) {
+							toastr.success("上传成功!");
+							$("#" + modal_id).modal('hide');
+							doQuery();
+						}
+					}
+					toastr.success("添加成功！");
+				}
+			}, "json")
+		} else {
+			toastr.error("请检查是否包含有空项。");
+		}
+
 	});
 	$('.card_num').blur(getinfoByCardIdb);
 	$('.card_num').keyup(getinfoByCardIdk);

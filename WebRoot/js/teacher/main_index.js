@@ -461,9 +461,9 @@ var ImgManiFunc = {
 		}
 		reader.readAsDataURL(files);
 	},
-	setImgDiv : function(pahtValue) {
+	setImgDiv : function(pahtValue, userid) {
 		return `<div class="img-default"><div class="img">
-	   <img effect="imgshow" src="/jxkyglxt/System/system_Attachment?attachmentName=${pahtValue}!${data.tableName}" alt="" class="img-show"></div>
+	   <img effect="imgshow" src="/jxkyglxt/System/system_Attachment?attachmentUserid=${userid}&attachmentName=${pahtValue}!${data.tableName}" alt="" class="img-show"></div>
 	   <div class="info">
 		   <div class="img-control-btn img-modify-btn" title="编辑">
 		   <img effect="imgmodi" src="img/modi(5).png" /></div>

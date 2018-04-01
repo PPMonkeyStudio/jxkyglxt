@@ -110,12 +110,14 @@ input[type=checkbox] {
 	height: 2.5rem;
 	border-radius: 50%;
 	position: relative;
+	cursor: pointer;
 	top: 35%;
 	left: 0;
 	-webkit-transition: all 0.35s ease-in-out;
 	/*规定提示信息怎样出现ease-in-out以慢速度开始和结束*/
 	-moz-transition: all 0.35s ease-in-out;
 	transition: all 0.35s ease-in-out;
+	top: 35%;
 }
 
 /*最最重要的来了，鼠标化划过的时候刚开始info是opacity: 0;现在透明底变成1就显示出来了*/

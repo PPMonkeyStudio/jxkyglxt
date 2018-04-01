@@ -24,7 +24,6 @@
 									</button></li>
 							</ul>
 							<ul class="group-list">
-
 								<li><button value="2" class="btn btn-info btn-sm pro">
 										<i class="fa fa-times" aria-hidden="true"></i> <span>论文名称</span>
 									</button></li>

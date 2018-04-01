@@ -154,13 +154,8 @@
 									<tr></tr>
 									<tr class="title"></tr>
 								</tbody>
-
-
-
-
 								<tbody class="other">
 									<tr>
-
 										<td>授课类型:</td>
 										<td><select name="teacherInfo.teachingType"
 											class="form-control table_infomation">

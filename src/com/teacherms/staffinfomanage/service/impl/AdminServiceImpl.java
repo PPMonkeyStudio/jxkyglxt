@@ -5,6 +5,7 @@ import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import com.teacherms.all.domain.*;
 import com.teacherms.satffinfomanage.dao.AdminDao;
@@ -130,19 +131,29 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public TableInfoAndUserVo getTeacherTableInfoById(String tableName, String tableId) {
 		// list内部的元素为Object(字符串)+Object(字符串)+Object(对象)
-		TableInfoAndUserVo list = adminDao.getInfoById(tableName, getTableInfoIdName(tableName), tableId);
-		/*
-		 * // 将最后的对象转化为数组 Class cla = list.get(0)[2].getClass(); try { //
-		 * 创建与对象属性值等长的数组 Object[] oo = new
-		 * Object[cla.getDeclaredFields().length]; // 遍历每一个属性，并且获得属性值，存入数组中 for
-		 * (int i = 0; i < oo.length; i++) { Field f =
-		 * cla.getDeclaredFields()[i]; f.setAccessible(true); oo[i] =
-		 * f.get(list.get(0)[2]); } // list中对象的位置转存为数组 list.get(0)[2] = oo; }
-		 * catch (IllegalArgumentException e) { e.printStackTrace(); } catch
-		 * (IllegalAccessException e) { e.printStackTrace(); }
-		 */
-		// 返回List<Object[]>---list内部的元素为Object(字符串)+Object(字符串)+Object[]数组)
-		return list;
+		TableInfoAndUserVo vo = adminDao.getInfoById(tableName, getTableInfoIdName(tableName), tableId);
+		try {
+			Field field = vo.getObject().getClass().getDeclaredFields()[0];
+			field.setAccessible(true);
+			String infoId = (String) field.get(vo.getObject());
+			File[] file = new File(propertiesPath + vo.getUser().getUserId() + "/" + tableName).listFiles();
+			List<String> attachmentName = new ArrayList<String>();
+			if (file != null) {
+				for (File f0 : file) {
+					if (f0.getName().indexOf(infoId) > -1) {
+						attachmentName.add(f0.getName());
+					}
+				}
+				vo.setAttachmentName(attachmentName);
+			}
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			System.out.println("转换错误");
+		} catch (IllegalAccessException e) {
+			System.out.println("转换错误");
+		}
+		return vo;
 	}
 
 	@Override

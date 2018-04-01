@@ -30,6 +30,7 @@ public class SystemAction extends ActionSupport {
 	private String password; // 登录密码
 	private User user;// 用户信息
 	private String attachmentName;
+	private String attachmentUserid;
 	private final String propertiesPath = ResourceBundle.getBundle("_path").getString("filePath");
 
 	// 跳转到登录界面
@@ -42,7 +43,8 @@ public class SystemAction extends ActionSupport {
 		try {
 			Object result = systemService.login(user_id, password);
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
-			//User loginuser = (User) ActionContext.getContext().getSession().get("loginuser");
+			// User loginuser = (User)
+			// ActionContext.getContext().getSession().get("loginuser");
 			if (result instanceof String) {
 				System.out.println("登录异常");
 				ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result.toString() + "\"}");
@@ -54,12 +56,14 @@ public class SystemAction extends ActionSupport {
 				ActionContext.getContext().getSession().put("loginuser", (User) result);
 				ServletActionContext.getResponse().getWriter().write("{\"result\":\"success\"}");
 			}
-			/*if (loginuser != null && user_id.equals(loginuser.getUserId())) {
-				System.out.println("已登录");
-				ServletActionContext.getResponse().getWriter().write("{\"result\":\"帐号已经登录！请勿重复登录\"}");
-			} else {
-				
-			}*/
+			/*
+			 * if (loginuser != null && user_id.equals(loginuser.getUserId())) {
+			 * System.out.println("已登录");
+			 * ServletActionContext.getResponse().getWriter().write(
+			 * "{\"result\":\"帐号已经登录！请勿重复登录\"}"); } else {
+			 * 
+			 * }
+			 */
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -81,7 +85,8 @@ public class SystemAction extends ActionSupport {
 		try {
 			User user = (User) ActionContext.getContext().getSession().get("loginuser");
 			// 通过角色ID获取角色名称
-			//String rolename = systemService.getUserRoleNameByRoleId(user.getRoleId());
+			// String rolename =
+			// systemService.getUserRoleNameByRoleId(user.getRoleId());
 			List<Introduction> list = systemService.getIntroduction(user.getDepartmentId());
 			ServletActionContext.getRequest().setAttribute("Introductions", list);
 		} catch (Exception e) {
@@ -213,15 +218,11 @@ public class SystemAction extends ActionSupport {
 
 	// 查看图片
 	public void Attachment() {
-		System.out.println("获取图片");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		String[] img_name = attachmentName.split("!");
-		System.out.println(img_name.length);
-		System.out.println(img_name[0]);
-		System.out.println(img_name[1]);
+		System.out.println(propertiesPath + attachmentUserid + "/" + img_name[1] + "/" + img_name[0]);
 		try {
-			User u = (User) ActionContext.getContext().getSession().get("loginuser");
-			File file = new File(propertiesPath + u.getUserId() + "/" + img_name[1] + "/" + img_name[0]);
+			File file = new File(propertiesPath + attachmentUserid + "/" + img_name[1] + "/" + img_name[0]);
 			InputStream fis = new BufferedInputStream(new FileInputStream(file));
 			byte[] buffer = new byte[fis.available()];
 			fis.read(buffer);
@@ -272,6 +273,10 @@ public class SystemAction extends ActionSupport {
 
 	public void setAttachmentName(String attachmentName) {
 		this.attachmentName = attachmentName;
+	}
+
+	public void setAttachmentUserid(String attachmentUserid) {
+		this.attachmentUserid = attachmentUserid;
 	}
 
 }

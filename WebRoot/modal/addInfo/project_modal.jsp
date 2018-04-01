@@ -95,13 +95,12 @@
 								<tr class="img-control">
 									<td>附件:</td>
 									<td colspan="3" class="img-upload">
-										<div class="addInfo"
-											onclick="javascript:$(this).next().click()">
-											<div class="img-control-btn add-btn">
-												<img src="img/add.png" />
+										<div class="addInfo">
+											<div class="img-control-btn">
+												<img effect="imgadd" src="img/add.png" />
 											</div>
 										</div> <input name="" upload-type="project" type="file" multiple
-										onchange="previewFile(this)"
+										onchange="ImgManiFunc.previewFile(this)"
 										accept="image/gif, image/pdf, image/png, image/jpeg"
 										style="display:none">
 									</td>
