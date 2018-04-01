@@ -117,11 +117,6 @@ $(function() {
 				data.dataState = "40";
 				$.getScript("js/teacher/teacher_Information_management.js");
 			});			break;
-		case "学生信息查看": //管理员-学生
-			$('.right-side').load('page/student/student_information_audit.jsp #content', function() {
-				data.dataState = "20";
-				$.getScript("js/student/student_information_audit.js");
-			});			break;
 		case "学生信息管理": //管理员-学生
 			$('.right-side').load('page/student/student_information_management.jsp #content', function() {
 				data.dataState = "20";

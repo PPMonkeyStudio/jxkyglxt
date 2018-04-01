@@ -13,7 +13,8 @@
 		<div class="col-md-12">
 			<!--breadcrumbs start -->
 			<ul class="breadcrumb">
-				<li><a href="javascript:location.reload();"><i class="fa fa-home"></i> 首页</a></li>
+				<li><a href="javascript:location.reload();"><i
+						class="fa fa-home"></i> 首页</a></li>
 				<li class="active">学生信息管理</li>
 			</ul>
 			<!--breadcrumbs end -->
@@ -27,8 +28,8 @@
 			<ul class="nav nav-tabs">
 				<li class=""><a data-toggle="tab" href="#info">学生查看</a></li>
 				<li class=""><a data-toggle="tab" href="#award">奖励列表</a></li>
-				<li class=""><a data-toggle="tab" href="#paper">学生论文列表</a></li>				
 				<li class=""><a data-toggle="tab" href="#patent">学生专利列表</a></li>
+				<li class=""><a data-toggle="tab" href="#paper">学生论文列表</a></li>
 				<li class=""><a data-toggle="tab" href="#project">学生参与项目(课题)列表</a></li>
 				<li class=""><a data-toggle="tab" href="#class">班级查看</a></li>
 			</ul>
@@ -41,14 +42,9 @@
 							<!--表投上按钮组-->
 							<div class="box-tools m-b-15">
 								<div style="width: 100%;" class="input-group">
-									<!--筛选&查询&添加按钮位置-->
-									<button data-toggle="modal" data-target="#add_info_modal"
+									<button data-toggle="modal" data-target="#student_info_modal"
 										class="btn btn-default btn-addon btn-sm">
 										<i class="fa fa-plus"></i>添加学生
-									</button>
-									<button data-toggle="modal" data-target="#export_info"
-										class="btn btn-default btn-addon btn-sm">
-										<i class="fa fa-share-square"></i>学生信息导出
 									</button>
 									<!--按条件筛选-->
 									<button style="" class="btn btn-default btn-sm" type="button"
@@ -74,7 +70,6 @@
 												<label>指定条件搜索：</label> <select id="all_options"
 													class="all_options form-control ">
 													<option value="">请选择</option>
-													<!-- <option value="userName">姓名</option> -->
 													<option value="student_name">姓名</option>
 													<option value="studentId">学号</option>
 													<option value="studentName">姓名</option>
@@ -124,11 +119,11 @@
 							</div>
 							<!--查询存放信息的表格-->
 							<section class="panel"> <header
-								class="panel-heading second-panel-heading"> 用户信息
-								
+								class="panel-heading second-panel-heading"> 学生信息
+
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
-								<button style="display: none;float: right;"
+							<button style="display: none;float: right;"
 								class="btn btn-danger all_sure_export">导出全部</button>
 							</header>
 							<div class="panel-body table-responsive">
@@ -138,10 +133,11 @@
 											<th>序号</th>
 											<th>学号</th>
 											<th>姓名</th>
-											<th>学生类型</th>
-											<th>学生状态</th>
-											<th>专业</th>
-											<th>所在班级</th>
+											<th>性别</th>
+											<th>入学年份</th>
+											<th>身份证号码</th>
+											<th>所在学院</th>
+												<th>修改时间</th>
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -160,11 +156,15 @@
 								<div style="width: 100%; margin-bottom: 15px;"
 									class="input-group">
 									<!--筛选&查询&添加按钮位置-->
-									<button data-toggle="modal" data-target="#export_award"
+									<button data-toggle="modal" data-target="#student_export_award"
 										class="btn btn-default btn-addon btn-sm">
 										<i class="fa fa-share-square"></i>奖励信息导出
 									</button>
 									<!--按条件筛选-->
+									<button data-toggle="modal" data-target="#student_award_modal"
+										class="btn btn-default btn-addon btn-sm">
+										<i class="fa fa-plus"></i>添加奖励
+									</button>
 									<button style="" class="btn btn-default btn-sm" type="button"
 										data-toggle="collapse" data-target="#collapse_exam_award"
 										aria-expanded="false" aria-controls="collapseExample">
@@ -190,10 +190,9 @@
 													<option value="">请选择</option>
 													<option value="awardType">获奖类型</option>
 													<option value="awardName">获奖名称</option>
-													<option value="awardUserNames">获奖人姓名</option>
-													<option value="awardGrade">获奖等级</option>
-													<option value="awardLevel">获奖级别</option>
-													<option value="awardTime">获奖时间</option>
+													<option value="awardClass">获奖类型</option>
+													<option value="firstAward">获奖人姓名</option>
+													<option value="time">获奖时间</option>
 												</select>
 
 												<button style="float: right; margin-left: 6px;"
@@ -217,19 +216,22 @@
 									class="panel-heading second-panel-heading"> 奖励信息
 								<button style="display: none;float: right;"
 									class="btn btn-primary sure_export">确认导出</button>
-									<button style="display: none;float: right;"
-								class="btn btn-danger all_sure_export">导出全部</button>
+								<button style="display: none;float: right;"
+									class="btn btn-danger all_sure_export">导出全部</button>
 								</header>
 								<div class="panel-body table-responsive">
 									<table class="table table-hover" id="info_table">
 										<thead>
 											<tr>
 												<th>序号</th>
+												<th>学生学号</th>
+												<th>奖励ID</th>
 												<th>奖励名称</th>
-												<th>获奖者姓名</th>
 												<th>获奖级别</th>
+												<th>授权号</th>
 												<th>获奖时间</th>
-												<th>授予单位</th>
+												<th>是否第一获奖人</th>
+												<th>修改时间</th>
 												<th>操作</th>
 											</tr>
 										</thead>
@@ -248,9 +250,13 @@
 							<div class="box-tools m-b-15">
 								<div style="width: 100%;" class="input-group">
 									<!--筛选&查询&添加按钮位置-->
-									<button data-toggle="modal" data-target="#export_paper"
+									<button data-toggle="modal" data-target="#student_export_paper"
 										class="btn btn-default btn-addon btn-sm">
 										<i class="fa fa-share-square"></i>论文信息导出
+									</button>
+									<button data-toggle="modal" data-target="#student_paper_modal"
+										class="btn btn-default btn-addon btn-sm">
+										<i class="fa fa-plus"></i>添加论文
 									</button>
 									<!--按条件筛选-->
 									<button style="" class="btn btn-default btn-sm" type="button"
@@ -310,7 +316,7 @@
 								class="panel-heading second-panel-heading"> 论文信息
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
-								<button style="display: none;float: right;"
+							<button style="display: none;float: right;"
 								class="btn btn-danger all_sure_export">导出全部</button>
 							</header>
 							<div class="panel-body table-responsive">
@@ -318,11 +324,13 @@
 									<thead>
 										<tr>
 											<th>序号</th>
-											<th>1</th>
-											<th>2</th>
-											<th>3</th>
-											<th>4</th>
-											<th>5</th>
+											<th>论文ID</th>
+											<th>学生学号</th>
+											<th>发表期刊</th>
+											<th>发表时间</th>
+											<th>收录情况</th>
+											<th>修改时间</th>
+											<th>操作</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -342,6 +350,10 @@
 									<button data-toggle="modal" data-target="#export_patent"
 										class="btn btn-default btn-addon btn-sm">
 										<i class="fa fa-share-square"></i>专利信息导出
+									</button>
+									<button data-toggle="modal" data-target="#student_patent_modal"
+										class="btn btn-default btn-addon btn-sm">
+										<i class="fa fa-plus"></i>添加专利
 									</button>
 									<!--按条件筛选-->
 									<button style="" class="btn btn-default btn-sm" type="button"
@@ -368,7 +380,7 @@
 												<label>指定条件搜索：</label> <select id="all_options"
 													class="all_options form-control ">
 													<option value="">请选择</option>
-<!-- patent搜索条件 -->
+													<!-- patent搜索条件 -->
 												</select>
 												<button style="float: right; margin-left: 6px;"
 													class="btn btn-danger search_info">
@@ -392,19 +404,21 @@
 								class="panel-heading second-panel-heading"> 专利信息
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
-								<button style="display: none;float: right;"
+							<button style="display: none;float: right;"
 								class="btn btn-danger all_sure_export">导出全部</button>
 							</header>
 							<div class="panel-body table-responsive">
 								<table class="table table-hover" id="info_table">
 									<thead>
 										<tr>
-											<th>patent</th>
-											<th>1</th>
-											<th>2</th>
-											<th>3</th>
-											<th>4</th>
-											<th>5</th>
+											<th>专利ID</th>
+											<th>学号</th>
+											<th>专利名称</th>
+											<th>专利类型</th>
+											<th>专利授权号</th>
+											<th>获批时间</th>
+											<th>是否第一专利人</th>
+												<th>修改时间</th>
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -422,9 +436,13 @@
 							<div class="box-tools m-b-15">
 								<div style="width: 100%;" class="input-group">
 									<!--筛选&查询&添加按钮位置-->
-									<button data-toggle="modal" data-target="#export_project"
+									<button data-toggle="modal" data-target="#student_export_project"
 										class="btn btn-default btn-addon btn-sm">
 										<i class="fa fa-share-square"></i>项目信息导出
+									</button>
+									<button data-toggle="modal" data-target="#student_project_modal"
+										class="btn btn-default btn-addon btn-sm">
+										<i class="fa fa-plus"></i>添加项目
 									</button>
 									<!--按条件筛选-->
 									<button style="" class="btn btn-default btn-sm" type="button"
@@ -451,7 +469,7 @@
 												<label>指定条件搜索：</label> <select id="all_options"
 													class="all_options form-control ">
 													<option value="">请选择</option>
-<!-- project搜索条件 -->
+													<!-- project搜索条件 -->
 												</select>
 												<button style="float: right; margin-left: 6px;"
 													class="btn btn-danger search_info">
@@ -475,19 +493,20 @@
 								class="panel-heading second-panel-heading"> 课题(项目)信息
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
-								<button style="display: none;float: right;"
+							<button style="display: none;float: right;"
 								class="btn btn-danger all_sure_export">导出全部</button>
 							</header>
 							<div class="panel-body table-responsive">
 								<table class="table table-hover" id="info_table">
 									<thead>
 										<tr>
-											<th>project表</th>
-											<th>1</th>
-											<th>2</th>
-											<th>3</th>
-											<th>4</th>
-											<th>5</th>
+											<th>项目ID</th>
+											<th>项目名称</th>
+											<th>学号</th>
+											<th>项目带头人</th>
+											<th>带头人ID</th>
+											<th>修改时间</th>
+											<th>操作</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -497,17 +516,21 @@
 							</section>
 						</div>
 					</div>
-					
-						<div id="class" class="tab-pane">
+
+					<div id="class" class="tab-pane">
 						<!--管理员查看课题(项目)信息的表格-->
 						<div id="project_table_view">
 							<!--表投上按钮组-->
 							<div class="box-tools m-b-15">
 								<div style="width: 100%;" class="input-group">
 									<!--筛选&查询&添加按钮位置-->
-									<button data-toggle="modal" data-target="#export_project"
+									<button data-toggle="modal" data-target="#student_export_project"
 										class="btn btn-default btn-addon btn-sm">
 										<i class="fa fa-share-square"></i>项目信息导出
+									</button>
+									<button data-toggle="modal" data-target="#student_project_modal"
+										class="btn btn-default btn-addon btn-sm">
+										<i class="fa fa-plus"></i>添加项目
 									</button>
 									<!--按条件筛选-->
 									<button style="" class="btn btn-default btn-sm" type="button"
@@ -558,22 +581,22 @@
 							</div>
 							<!--查询存放信息的表格-->
 							<section class="panel"> <header
-								class="panel-heading second-panel-heading"> 课题(项目)信息
+								class="panel-heading second-panel-heading"> 班级信息管理
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
-								<button style="display: none;float: right;"
+							<button style="display: none;float: right;"
 								class="btn btn-danger all_sure_export">导出全部</button>
 							</header>
 							<div class="panel-body table-responsive">
 								<table class="table table-hover" id="info_table">
 									<thead>
 										<tr>
-											<th>班级</th>
-											<th>1</th>
-											<th>2</th>
-											<th>3源</th>
-											<th>4</th>
-											<th>5</th>
+											<th>序号</th>
+											<th>班级ID</th>
+											<th>班级名称</th>
+											<th>班主任</th>
+												<th>修改时间</th>
+											<th>操作</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -587,26 +610,19 @@
 
 
 
-					</div>
 				</div>
 			</div>
-			<div class="panel-footer">
-				<div id="page">
-					<ul class="pager">
-						<li><a>首页</a></li>
-						<li><a>上一页</a></li>
-						<li>management</li>
-						<li><a>下一页</a></li>
-						<li><a>尾页</a></li>
-						
-						
-						
-					</ul>
-				</div>
-			</div>
-			</section>
-			<!--breadcrumbs end -->
 		</div>
+		<div class="panel-footer">
+			<div id="page">
+				<ul class="pager">
+<!-- 插上一页下一页 -->
+				</ul>
+			</div>
+		</div>
+	</section>
+	<!--breadcrumbs end -->
+	</div>
 	</div>
 	</section>
 </body>
