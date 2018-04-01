@@ -300,68 +300,6 @@ function user_setting() {
 	});
 }
 
-/*图片预览*/
-function previewFile(input_obj) {
-	var files = $(input_obj).prop('files');
-	var modal_id = $('#' + $(input_obj).attr('upload-type') + "_modal");
-	var add_div = modal_id.find('.addInfo');
-	for (var i in files) {
-		var reader = new FileReader();
-		reader.onloadend = function() {
-			add_div.before('<div class="img-default">' + '<div class="img">'
-				+ '<img src="' + this.result + '" alt="" class="img-show">'
-				+ '</div>'
-				+ '<div class="img-info" onclick="javascript:$(this).prev().find(\'img\').click()">'
-				+ '<div class="img-control-btn img-modify-btn" title="编辑">'
-				+ '<img src="img/modi(5).png" />'
-				+ '</div>'
-				+ '<div class="img-control-btn img-delete-btn" title="删除">'
-				+ '<img src="img/delete(2).png" />'
-				+ '</div>'
-				+ '</div>'
-				+ '<input type="file" name="" onchange="modiFiles(this)" accept="image/gif, image/pdf, image/png, image/jpeg" style="display:none" >'
-				+ '</div>')
-			modal_id.find('.img-delete-btn').unbind().click(function() {
-				$(this).parent().parent().remove();
-			});
-			modal_id.find('.img-modify-btn').unbind().click(function() {
-				$(this).parent().siblings('input').click();
-			});
-			modal_id.find('.img-show').zoomify();
-		}
-		reader.readAsDataURL(files[i]);
-	}
-}
-
-/*修改上传的图片*/
-function modiFiles(this_obj) {
-	var files = $(this_obj).prop('files')[0];
-	var reader = new FileReader();
-	reader.onloadend = function() {
-		$(this_obj).siblings().children('img').attr("src", this.result);
-	}
-	reader.readAsDataURL(files);
-}
-
-//设置通过附件地址获得的图片，并放入盒子内
-function setImgDiv(pahtValue) {
-	return `<div class="img-default">
-   <div class="img">
-     <img src="/jxkyglxt/System/system_Attachment?attachmentName=${pahtValue}!${data.tableName}" alt="" class="img-show">
-   </div>
-   <div class="info" onclick="javascript:$(this).prev().find('img').click()">
-     <div class="img-control-btn img-modify-btn" title="编辑">
-       <img src="img/modi(5).png" />
-     </div>
-   <div class="img-control-btn img-delete-btn" title="删除">
-     <img src="img/delete(2).png" />
-   </div>
-   </div>
-   <input type="file" name="" onchange="modiFiles(this)" accept="image/gif, image/pdf, image/png, image/jpeg" style="display:none" >
- </div>`
-}
-
-
 /* 表单判空验证*/
 function formValidate() {
 	$('.tab input').blur(function() {
@@ -470,6 +408,153 @@ document.addEventListener('visibilitychange', function() {
 		document.title = normal_title;
 	}
 });
+
+//日期
+$('.mydate').datetimepicker({
+	yearStart : 1990, // 设置最小年份
+	yearEnd : 2050, // 设置最大年份
+	yearOffset : 0, // 年偏差
+	timepicker : false, // 关闭时间选项
+	format : 'Y-m-d', // 格式化日期年-月-日
+	minDate : '1990/01/01', // 设置最小日期
+	maxDate : '2030/01/01', // 设置最大日期
+});
+
+//包含图片的全部操作
+var ImgManiFunc = {
+	previewFile : function(input_obj) {
+		var files = $(input_obj).prop('files');
+		var modal_id = $('#' + $(input_obj).attr('upload-type') + "_modal");
+		var add_div = modal_id.find('.addInfo');
+		for (var i in files) {
+			var reader = new FileReader();
+			reader.onloadend = function() {
+				add_div.before('<div class="img-default">' + '<div class="img">'
+					+ '<img effect="imgshow" src="' + this.result + '" alt="" class="img-show">'
+					+ '</div>'
+					+ '<div class="img-info">'
+					+ '<div class="img-control-btn img-modify-btn" title="编辑">'
+					+ '<img effect="imgmodi" src="img/modi(5).png" />'
+					+ '</div>'
+					+ '<div class="img-control-btn img-delete-btn" title="删除">'
+					+ '<img effect="imgdel" src="img/delete(2).png" />'
+					+ '</div>'
+					+ '</div>'
+					+ '<input type="file" name="" onchange="ImgManiFunc.modiFiles(this)" accept="image/gif, image/pdf, image/png, image/jpeg" style="display:none" >'
+					+ '</div>')
+				modal_id.find('.img-delete-btn').unbind().click(function() {
+					$(this).parent().parent().remove();
+				});
+				modal_id.find('.img-modify-btn').unbind().click(function() {
+					$(this).parent().siblings('input').click();
+				});
+				modal_id.find('.img-show').zoomify();
+			}
+			reader.readAsDataURL(files[i]);
+		}
+	},
+	modiFiles : function(this_obj) {
+		var files = $(this_obj).prop('files')[0];
+		var reader = new FileReader();
+		reader.onloadend = function() {
+			$(this_obj).siblings().children('img').attr("src", this.result);
+		}
+		reader.readAsDataURL(files);
+	},
+	setImgDiv : function(pahtValue) {
+		return `<div class="img-default"><div class="img">
+	   <img effect="imgshow" src="/jxkyglxt/System/system_Attachment?attachmentName=${pahtValue}!${data.tableName}" alt="" class="img-show"></div>
+	   <div class="info">
+		   <div class="img-control-btn img-modify-btn" title="编辑">
+		   <img effect="imgmodi" src="img/modi(5).png" /></div>
+		   <div class="img-control-btn img-delete-btn" title="删除">
+		   <img effect="imgdel" src="img/delete(2).png" /></div>
+	   </div>
+	   <input type="file" name="" onchange="ImgManiFunc.modiFiles(this)" accept="image/gif, image/pdf, image/png, image/jpeg" style="display:none" >
+	 </div>`
+
+	},
+}
+
+$('.img-upload').on("click", function(e) {
+	var Ele = e.target;
+	if (Ele.tagName == "IMG") {
+		var effect_ = Ele.attributes.effect.value;
+		if (effect_ == "imgadd") {
+			$(Ele).parent().parent().next().click();
+		} else if (effect_ == "imgmodi") {
+			var fil_input = $(Ele).parent().parent().next();
+			ImgManiFunc.modiFiles(fil_input);
+		} else if (effect_ == "imgdel") {
+			$(Ele).parent().parent().parent().remove();
+		}
+	} else {
+	}
+});
+$("body").on("click", ".img-show", function() {
+	$(this).zoomify("zoom");
+})
+
+/*图片预览
+function previewFile(input_obj) {
+	var files = $(input_obj).prop('files');
+	var modal_id = $('#' + $(input_obj).attr('upload-type') + "_modal");
+	var add_div = modal_id.find('.addInfo');
+	for (var i in files) {
+		var reader = new FileReader();
+		reader.onloadend = function() {
+			add_div.before('<div class="img-default">' + '<div class="img">'
+				+ '<img src="' + this.result + '" alt="" class="img-show">'
+				+ '</div>'
+				+ '<div class="img-info">'
+				+ '<div class="img-control-btn img-modify-btn" title="编辑">'
+				+ '<img src="img/modi(5).png" />'
+				+ '</div>'
+				+ '<div class="img-control-btn img-delete-btn" title="删除">'
+				+ '<img src="img/delete(2).png" />'
+				+ '</div>'
+				+ '</div>'
+				+ '<input type="file" name="" onchange="modiFiles(this)" accept="image/gif, image/pdf, image/png, image/jpeg" style="display:none" >'
+				+ '</div>')
+			modal_id.find('.img-delete-btn').unbind().click(function() {
+				$(this).parent().parent().remove();
+			});
+			modal_id.find('.img-modify-btn').unbind().click(function() {
+				$(this).parent().siblings('input').click();
+			});
+			modal_id.find('.img-show').zoomify();
+		}
+		reader.readAsDataURL(files[i]);
+	}
+}
+
+修改上传的图片
+function modiFiles(this_obj) {
+	var files = $(this_obj).prop('files')[0];
+	var reader = new FileReader();
+	reader.onloadend = function() {
+		$(this_obj).siblings().children('img').attr("src", this.result);
+	}
+	reader.readAsDataURL(files);
+}
+
+//设置通过附件地址获得的图片，并放入盒子内
+function setImgDiv(pahtValue) {
+	return `<div class="img-default">
+   <div class="img">
+     <img src="/jxkyglxt/System/system_Attachment?attachmentName=${pahtValue}!${data.tableName}" alt="" class="img-show">
+   </div>
+   <div class="info" onclick="javascript:$(this).prev().find('img').click()">
+     <div class="img-control-btn img-modify-btn" title="编辑">
+       <img effect="imgmodi" src="img/modi(5).png" />
+     </div>
+   <div class="img-control-btn img-delete-btn" title="删除">
+     <img effect="imgdel" src="img/delete(2).png" />
+   </div>
+   </div>
+   <input type="file" name="" onchange="modiFiles(this)" accept="image/gif, image/pdf, image/png, image/jpeg" style="display:none" >
+ </div>`
+}*/
 
 function selectSeacher() {
 	$(document).on("change", "#all_options", function() {
@@ -644,14 +729,4 @@ function selectSeacher() {
 			}
 		}
 	})
-
-	$('.mydate').datetimepicker({
-		yearStart : 1990, // 设置最小年份
-		yearEnd : 2050, // 设置最大年份
-		yearOffset : 0, // 年偏差
-		timepicker : false, // 关闭时间选项
-		format : 'Y-m-d', // 格式化日期年-月-日
-		minDate : '1990/01/01', // 设置最小日期
-		maxDate : '2030/01/01', // 设置最大日期
-	});
 }

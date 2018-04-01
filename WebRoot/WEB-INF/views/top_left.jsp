@@ -373,7 +373,7 @@
 	<!-- Director App -->
 	<script type="text/javascript">
 		$.datetimepicker.setLocale('ch');
-		
+	
 		/* document.getElementsByClassName("riliDate").flatpickr();
 		//创建一个当前日期对象
 		var now = new Date();
@@ -387,7 +387,6 @@
 	
 		$(function() {
 			var top_val = 240 - (parseInt($("#info_ul li").length / 8) - 1) * 180;
-			console.log(parseInt($("#info_ul li").length / 8));
 			$("#info_ul").on({
 				mousedown : function(e) {
 					if (e.target.parentElement.id == "info_ul") {

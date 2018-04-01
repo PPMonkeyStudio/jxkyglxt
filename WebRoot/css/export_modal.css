@@ -68,7 +68,7 @@ input[type=checkbox] {
 	position: relative;
 	width: 130px;
 	height: 90px;
-	border: 1px solid rgba(0, 0, 0, .1);
+	border: 3px solid rgba(0, 0, 0, .1);
 	margin-bottom: 5px;
 	float: left;
 }
@@ -110,18 +110,12 @@ input[type=checkbox] {
 	height: 2.5rem;
 	border-radius: 50%;
 	position: relative;
-	top: 0;
+	top: 35%;
 	left: 0;
 	-webkit-transition: all 0.35s ease-in-out;
 	/*规定提示信息怎样出现ease-in-out以慢速度开始和结束*/
 	-moz-transition: all 0.35s ease-in-out;
 	transition: all 0.35s ease-in-out;
-}
-
-.add-btn img {
-	position: relative;
-	top: 100%;
-	left: 5%;
 }
 
 /*最最重要的来了，鼠标化划过的时候刚开始info是opacity: 0;现在透明底变成1就显示出来了*/

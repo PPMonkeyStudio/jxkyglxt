@@ -66,10 +66,13 @@ public class AdminAction extends ActionSupport {
 	// 分页查询获取指定---未审核or固化---信息（给指定参数）并进行时间排序（属于自己学院的信息）
 	public void getSpecifiedInformationByPaging() {
 		try {
+			HttpServletResponse response = ServletActionContext.getResponse();
 			PageVO<Object> list = adminService.getSpecifiedInformationByPaging(tableName, page == null ? "1" : page,
-					time_interval, dataState, getSecondaryCollegeInfo("name"), getInfoObjectBytableName(),user, fuzzy_query);
-			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
-			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(list));
+					time_interval, dataState, getSecondaryCollegeInfo("name"), getInfoObjectBytableName(), user,fuzzy_query);
+			
+			response.setCharacterEncoding("utf-8");
+			response.setHeader("Content-Type", "application/octet-stream");
+			response.getWriter().write(new Gson().toJson(list));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -78,9 +81,12 @@ public class AdminAction extends ActionSupport {
 	// 通过ID获取单条信息
 	public void getTeacherTableInfoById() {
 		try {
+			HttpServletResponse response = ServletActionContext.getResponse();
 			TableInfoAndUserVo list = adminService.getTeacherTableInfoById(tableName, tableId);
-			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
-			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(list));
+			
+			response.setCharacterEncoding("utf-8");
+			response.setHeader("Content-Type", "application/octet-stream");
+			response.getWriter().write(new Gson().toJson(list));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -89,9 +95,12 @@ public class AdminAction extends ActionSupport {
 	// 添加教职工信息
 	public void addTeacherInfo() {
 		try {
+			HttpServletResponse response = ServletActionContext.getResponse();
 			String result = adminService.addTeacherInfo(teacherInfo, getSecondaryCollegeInfo("id"));
-			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
-			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
+			
+			response.setCharacterEncoding("utf-8");
+			response.setHeader("Content-Type", "application/octet-stream");
+			response.getWriter().write("{\"result\":\"" + result + "\"}");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -100,9 +109,12 @@ public class AdminAction extends ActionSupport {
 	// 管理员修改信息状态+修改信息内容
 	public void modifiedInfomation() {
 		try {
+			HttpServletResponse response = ServletActionContext.getResponse();
 			String result = adminService.curingInfomation(getInfoObjectBytableName());
-			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
-			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
+			
+			response.setCharacterEncoding("utf-8");
+			response.setHeader("Content-Type", "application/octet-stream");
+			response.getWriter().write("{\"result\":\"" + result + "\"}");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -111,9 +123,12 @@ public class AdminAction extends ActionSupport {
 	// 管理员解除固化
 	public void LiftCuring() {
 		try {
+			HttpServletResponse response = ServletActionContext.getResponse();
 			String result = adminService.adminLiftCuring(tableName, tableId, dataState);
-			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
-			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
+			
+			response.setCharacterEncoding("utf-8");
+			response.setHeader("Content-Type", "application/octet-stream");
+			response.getWriter().write("{\"result\":\"" + result + "\"}");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -122,9 +137,12 @@ public class AdminAction extends ActionSupport {
 	// 管理员获取输入用户名字，获取用户的id排名
 	public void getUserIdOrderingByUserName() {
 		try {
+			HttpServletResponse response = ServletActionContext.getResponse();
 			String result = adminService.getUserIdOrderingByUserName(user.getUserName());
-			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
-			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
+			
+			response.setCharacterEncoding("utf-8");
+			response.setHeader("Content-Type", "application/octet-stream");
+			response.getWriter().write("{\"result\":\"" + result + "\"}");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -201,9 +219,12 @@ public class AdminAction extends ActionSupport {
 
 	public void getOneOfIntroduction() {
 		try {
+			HttpServletResponse response = ServletActionContext.getResponse();
 			Introduction introduction = adminService.getOneOfIntroduction(tableId);
-			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
-			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(introduction));
+			
+			response.setCharacterEncoding("utf-8");
+			response.setHeader("Content-Type", "application/octet-stream");
+			response.getWriter().write(new Gson().toJson(introduction));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -211,9 +232,12 @@ public class AdminAction extends ActionSupport {
 
 	public void modifyIntroduction() {
 		try {
+			HttpServletResponse response = ServletActionContext.getResponse();
 			String result = adminService.modifyIntroduction(introduction);
-			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
-			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
+			
+			response.setCharacterEncoding("utf-8");
+			response.setHeader("Content-Type", "application/octet-stream");
+			response.getWriter().write("{\"result\":\"" + result + "\"}");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -221,21 +245,26 @@ public class AdminAction extends ActionSupport {
 
 	public void setIntroduction() {
 		try {
+			HttpServletResponse response = ServletActionContext.getResponse();
 			User user = (User) ActionContext.getContext().getSession().get("loginuser");
 			String result = adminService.setIntroduction(introduction, user.getDepartmentId());
-			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
-			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
+			
+			response.setCharacterEncoding("utf-8");
+			response.setHeader("Content-Type", "application/octet-stream");
+			response.getWriter().write("{\"result\":\"" + result + "\"}");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void deleteIntroduction() {
 		try {
-			System.out.println(introduction);
+			HttpServletResponse response = ServletActionContext.getResponse();
 			String result = adminService.deleteIntroduction(introduction);
-			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
-			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
+			
+			response.setCharacterEncoding("utf-8");
+			response.setHeader("Content-Type", "application/octet-stream");
+			response.getWriter().write("{\"result\":\"" + result + "\"}");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

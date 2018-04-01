@@ -7,10 +7,10 @@ $(function() {
 	//信息添加
 	var add_info = function() {
 		$("#" + modal_id).find('.sure_add').show();
+		$("#" + modal_id).find('.addInfo').show();
 		$("#" + modal_id).modal({
 			keyboard : true
 		})
-
 	}
 	var getinfoByCardIdb = function() {
 		var reg = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/;
@@ -203,6 +203,8 @@ $(function() {
 	var modiInfo = function() {
 		//获取id
 		var id = $(this).siblings('input').val();
+		//获取当前操作模态框
+		var active_modal = $("#" + modal_id);
 		//查询单条信息
 		$.post("/jxkyglxt/Teacher/teacher_userGetTableInfoByTableId",
 			{
@@ -220,24 +222,10 @@ $(function() {
 					else $(this).val(xhr.object[na]);
 				})
 				$.each(xhr.attachmentName, function(i, v) {
-					$("#" + modal_id + " .addInfo").before(setImgDiv(v));
-					/*$("#" + modal_id + " .addInfo").before('<div class="img-default">' + '<div class="img">'
-						+ '<img src="/jxkyglxt/System/system_Attachment?attachmentName=' + v + '!' + data.tableName + '" alt="" class="img-show">'
-						+ '</div>'
-						+ '<div class="info" onclick="javascript:$(this).prev().find(\'img\').click()">'
-						+ '<div class="img-control-btn modify-btn" title="编辑">'
-						+ '<img src="img/modi(5).png" />'
-						+ '</div>'
-						+ '<div class="img-control-btn delete-btn" title="删除">'
-						+ '<img src="img/delete(2).png" />'
-						+ '</div>'
-						+ '</div>'
-						+ '<input type="file" name="" onchange="modiFiles(this)" accept="image/gif, image/pdf, image/png, image/jpeg" style="display:none" >'
-						+ '</div>')*/
+					$("#" + modal_id + " .addInfo").before(ImgManiFunc.setImgDiv(v));
 				})
-
 				//确定修改按钮显示并添加绑定事件
-				$("#" + modal_id).find('.sure_mod').unbind().click(function() {
+				active_modal.find('.sure_mod').unbind().click(function() {
 					var review_data = $("#" + modal_id + " form").serialize() + "&tableName=" + data.tableName;
 					$.post("/jxkyglxt/Teacher/teacher_userSetTableInfo", review_data, function(sxh_data) {
 						if (sxh_data.result == "success") {
@@ -247,7 +235,8 @@ $(function() {
 						}
 					}, "json")
 				}).show();
-				$("#" + modal_id).modal({
+				active_modal.find('.addInfo').hide();
+				active_modal.modal({
 					keyboard : true
 				})
 			}, "json");
@@ -273,6 +262,7 @@ $(function() {
 					}
 					else $(this).val(xhr.object[na]);
 				})
+				$("#" + modal_id).find('.addInfo').hide();
 				//显示出模态框
 				$("#" + modal_id).modal({
 					keyboard : true
