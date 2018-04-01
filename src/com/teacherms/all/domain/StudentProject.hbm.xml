@@ -21,12 +21,12 @@
 		</property>
 		<property name="projectLeading" type="string">
 			<column name="project_leading" length="10" not-null="true">
-				<comment>发表期刊</comment>
+				<comment>项目带头人</comment>
 			</column>
 		</property>
 		<property name="userId" type="string">
 			<column name="user_id" length="40" not-null="true">
-				<comment>发表时间</comment>
+				<comment>带头人ID</comment>
 			</column>
 		</property>
 		<property name="alterTime" type="string">

@@ -28,7 +28,7 @@ $(function() {
 					else $(this).val(xhr.ObjDatas[i].object[na]);
 				})
 				//等全部信息加载完毕，再将模态框显示出来，避免模态框出现但是对应的值还未加载情况
-				//如果为用户信息，则只显示基础部分（当前为用户审核页面）
+				//如果为用户信息，则只显示基础部分（当前是学生管理页面）
 				if (a_href == "info") {
 					$("#" + modal_id).find('.other').show();
 					$("#" + modal_id).find('.basic').hide();
@@ -130,6 +130,17 @@ $(function() {
 				}
 			});
 		}
+	});
+	//学生添加
+	$('.sure_add_info').click(function() {
+		var review_data = $("#add_info_modal form").serialize() + "&tableName=" + data.tableName;
+		$.post("/jxkyglxt/Student/student_setStudentAllInfo", review_data, function(sxh_data) {
+			if (sxh_data.result == "success") {
+				toastr.success('添加成功!')
+			} else {
+				toastr.error('添加失败!');
+			}
+		}, "json")
 	});
 	//模糊查询
 	$('.fuzzy_query').click(function() {
@@ -296,6 +307,7 @@ $(function() {
 				str += "<td>" + xhr.ObjDatas[i].object.enrolmentYear + "</td>";
 				str += "<td>" + xhr.ObjDatas[i].object.certificateNo + "</td>";
 				str += "<td>" + xhr.ObjDatas[i].object.departmentId + "</td>";
+				str += "<td>" + xhr.ObjDatas[i].object.alterTime + "</td>";
 				str += '<td><input type="hidden" value="' + xhr.ObjDatas[i].studentId + '" >'
 					+ '<button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button>'
 					+ '<button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button>'
@@ -312,12 +324,14 @@ $(function() {
 			for (i = 0; i < xhr.ObjDatas.length; i++) {
 				str += "<tr>";
 				str += "<td>" + (i + 1) + "</td>";
+				str += "<td>" + xhr.ObjDatas[i].object.studentId + "</td>";
 				str += "<td>" + xhr.ObjDatas[i].object.awardId + "</td>";
 				str += "<td>" + xhr.ObjDatas[i].object.awardName + "</td>";
 				str += "<td>" + xhr.ObjDatas[i].object.awardClass + "</td>";
 				str += "<td>" + xhr.ObjDatas[i].object.authorizationNo + "</td>";
 				str += "<td>" + xhr.ObjDatas[i].object.time + "</td>";
 				str += "<td>" + xhr.ObjDatas[i].object.firstAward + "</td>";
+				str += "<td>" + xhr.ObjDatas[i].object.alterTime + "</td>";
 				str += '<td><input type="hidden" value="' + xhr.ObjDatas[i].object.awardId + '" >'
 					+ '<button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button>'
 					+ '<button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button>'
@@ -339,6 +353,7 @@ $(function() {
 				str += "<td>" + xhr.ObjDatas[i].object.authorizationNo + "</td>";
 				str += "<td>" + xhr.ObjDatas[i].object.time + "</td>";
 				str += "<td>" + xhr.ObjDatas[i].object.firstPatent + "</td>";
+				str += "<td>" + xhr.ObjDatas[i].object.alterTime + "</td>";
 				str += '<td><input type="hidden" value="' + xhr.ObjDatas[i].object.patentId + '" >'
 					+ '<button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button>'
 					+ '<button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button>'
@@ -357,6 +372,7 @@ $(function() {
 				str += "<td>" + xhr.ObjDatas[i].object.periodical + "</td>";
 				str += "<td>" + xhr.ObjDatas[i].object.publishTime + "</td>";
 				str += "<td>" + xhr.ObjDatas[i].object.includedSituation + "</td>";
+				str += "<td>" + xhr.ObjDatas[i].object.alterTime + "</td>";
 				str += '<td><input type="hidden" value="' + xhr.ObjDatas[i].object.paperId + '" >'
 					+ '<button class="btn btn-default btn-xs modiButton" title="修改"><i class="fa fa-pencil-square-o fa-lg"></i></button>'
 					+ '<button class="btn btn-default btn-xs solidButton" title="固化"><i class="fa fa-chain fa-lg" ></i></button>'

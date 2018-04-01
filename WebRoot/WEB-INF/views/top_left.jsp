@@ -217,7 +217,6 @@
 					<div id="sub2" class="collapse" aria-expanded="false"
 						style="height: 0px;">
 						<ul class="nav">
-							<li><a class="">学生信息查看</a></li>
 							<li><a class="">学生信息管理</a></li>
 						</ul>
 					</div></li>
@@ -244,7 +243,6 @@
 					<div id="sub2" class="collapse" aria-expanded="false"
 						style="height: 0px;">
 						<ul class="nav">
-							<li><a class="">学生信息查看</a></li>
 							<li><a class="">学生信息管理</a></li>
 						</ul>
 					</div></li>
@@ -271,7 +269,6 @@
 					<div id="sub2" class="collapse" aria-expanded="false"
 						style="height: 0px;">
 						<ul class="nav">
-							<li><a class="">学生信息查看</a></li>
 							<li><a class="">学生信息管理</a></li>
 						</ul>
 					</div></li>
