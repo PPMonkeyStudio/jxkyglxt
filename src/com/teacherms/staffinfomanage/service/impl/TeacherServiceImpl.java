@@ -7,19 +7,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.teacherms.all.domain.TeacherAward;
@@ -33,14 +29,13 @@ import com.teacherms.satffinfomanage.dao.TeacherDao;
 import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 import com.teacherms.staffinfomanage.service.TeacherService;
 
-import sun.misc.BASE64Encoder;
-import util.Attachment;
 import util.ExcelHead;
 import util.ExportExcelCollection;
 import util.GudgmentImage;
 import util.MapUtil;
 import util.PageVO;
 import util.uuid;
+
 
 public class TeacherServiceImpl implements TeacherService {
 	private TeacherDao teacherDao;
@@ -89,7 +84,6 @@ public class TeacherServiceImpl implements TeacherService {
 			time_interval = "and t.createTime between '" + time_interval.split(",")[0] + "' and '"
 					+ time_interval.split(",")[1] + "'";
 		}
-
 		// 条件查询块----------------
 		boolean haveMulti_condition = false;// 是否包含指定查询的内容,用来判断是否执行模糊查询
 		StringBuffer Multi_condition = new StringBuffer();// 指定查询中的字符串
@@ -203,10 +197,8 @@ public class TeacherServiceImpl implements TeacherService {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
 			System.out.println("转换错误");
-			// e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			System.out.println("转换错误");
-			// e.printStackTrace();
 		}
 		return vo;
 	}
@@ -407,7 +399,6 @@ public class TeacherServiceImpl implements TeacherService {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return info;
@@ -427,8 +418,8 @@ public class TeacherServiceImpl implements TeacherService {
 		String[] downloadInfoId_arr = downloadInfoId.split(",");
 		for (String infoId : downloadInfoId_arr) {
 			// 获取信息名字.对应信息id
-			id_name_Map.put(infoId, teacherDao.getTableInfoName(tableName, getTableInfoName(tableName),
-					getTableInfoIdName(tableName), infoId));
+			id_name_Map.put(infoId, teacherDao.getTableInfoName(tableName,
+					tableName.replaceAll("Teacher", "").toLowerCase() + "Name", getTableInfoIdName(tableName), infoId));
 			for (File f1 : fs) {
 				if (f1.getName().indexOf(infoId) > -1) {
 					List_attachment.add(f1);
@@ -479,7 +470,7 @@ public class TeacherServiceImpl implements TeacherService {
 	 * @return 第一个参数的Name
 	 */
 	private String getTableInfoIdName(String tableName) {
-		Class cla = null;
+		Class<? extends Object> cla = null;
 		if (("TeacherAward").equals(tableName)) {
 			cla = TeacherAward.class;
 		}
@@ -500,71 +491,4 @@ public class TeacherServiceImpl implements TeacherService {
 		}
 		return cla.getDeclaredFields()[0].getName();
 	}
-
-	/**
-	 * 获取信息的名称
-	 * 
-	 * @return 名称
-	 */
-	private String getTableInfoName(String tableName) {
-		String str = tableName.replaceAll("Teacher", "").toLowerCase() + "Name";
-		/*
-		 * switch (tableName) { case "TeacherAward": str = "awardName"; break;
-		 * case "TeacherInfo": str = ""; break; case "TeacherPaper": str =
-		 * "paperName"; break; case "TeacherPatent": str = "patentName"; break;
-		 * case "TeacherProject": str = "projectName"; break; case
-		 * "TeacherWorks": str = "worksName"; break; default: break; }
-		 */
-		return str;
-	}
-
-	/**
-	 * ---反射改变对象中的值
-	 * 
-	 * @param mothed
-	 *            持久层类的set方法，用于获取set方法改变属性值
-	 * @param obj
-	 *            持久化对象
-	 * @return 获得的属性值
-	 */
-	private Object changeTableInfoBySetMothed(String mothed, Object obj, String value) {
-		try {
-			Method M = obj.getClass().getMethod(mothed, null);
-			M.invoke(obj, value);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return obj;
-	}
-
-	/**
-	 * ---通过查询信息表名字，封装sql查询不同表的信息(教职工)
-	 * 
-	 * @param tableName
-	 *            持久层类名称
-	 * @return 部分sql语句
-	 */
-	private String getSqlToQueryByTableName(String tableName) {
-		String str = null;
-		if (("TeacherAward").equals(tableName)) {
-			str = "t.awardName,t.awardType,t.awardLevel,t.awardCertificationNo,t.createTime,t.dataStatus,t.awardId";
-		}
-		if (("TeacherInfo").equals(tableName)) {
-			str = "t.professionalTitle,t.teacherCertificateNo,t.teachingType,t.createTime,t.dataStatus,t.teacherInfoId";
-		}
-		if (("TeacherPaper").equals(tableName)) {
-			str = "t.paperName,t.paperType,t.createTime,t.dataStatus,t.paperId";
-		}
-		if (("TeacherPatent").equals(tableName)) {
-			str = "t.patentName,t.patentType,t.authorizationNo,t.createTime,t.dataStatus,t.patentId";
-		}
-		if (("TeacherProject").equals(tableName)) {
-			str = "t.projectName,t.projectSource,t.projectNo,t.createTime,t.dataStatus,t.projectId";
-		}
-		if (("TeacherWorks").equals(tableName)) {
-			str = "t.worksName,t.worksType,t.selectedSituation,t.createTime,t.dataStatus,t.worksId";
-		}
-		return str;
-	}
-
 }

@@ -118,4 +118,11 @@ public interface AdminDao {
 	 */
 	boolean modifyIntroduction(Introduction introduction) throws IllegalArgumentException, IllegalAccessException;
 
+	/**
+	 * 删除介绍信息
+	 * @param introduction
+	 * @return
+	 */
+	boolean deleteInfo(Introduction introduction);
+
 }

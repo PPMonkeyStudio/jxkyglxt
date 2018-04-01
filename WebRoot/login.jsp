@@ -10,8 +10,9 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>登录</title>
-
+<title>登录到系统</title>
+<!-- 提示框css -->
+<link rel="stylesheet" href="<%=basePath%>css/toastr.css" />
 <link rel="stylesheet" href="<%=basePath%>/css/bootstrap.min.css" />
 <link rel="stylesheet" href="<%=basePath%>/css/login.css" />
 </head>
@@ -41,29 +42,28 @@
 
 			</div>
 		</div>
-		<div id="copyRight">CopyRight@2018      本科数据管理系统 版权所有</div>
+		<div id="copyRight">CopyRight@2018 本科数据管理系统 版权所有</div>
 	</div>
 
 
 	<script type="text/javascript"
 		src="<%=basePath%>js/jquery-3.1.1.min.js"></script>
-
+	<script type="text/javascript" src="<%=basePath%>js/toastr.js"></script>
 	<script type="text/javascript">
 		function fun() {
 			$.ajax({
 				url : "/jxkyglxt/System/system_login",
-				type : "get",
+				type : "post",
 				timeout : 3000,
 				data : $("form").serialize(),
 				dataType : "json",
 				success : function(xhr_data) {
-
+	
 					if (xhr_data.result == "success") {
-						location.href = "page/teacher/main_index.jsp";
+						location.href = "page/main_index.jsp";
+					} else {
+						toastr.error("登录失败，" + xhr_data.result);
 					}
-					else{
-						window.alert("登录失败，请检查您的用户名或密码是否有误！");
-						}
 				},
 				error : function() {}
 			});

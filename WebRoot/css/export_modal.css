@@ -51,16 +51,15 @@ input[type=checkbox] {
 	width: 100%;
 }
 
-.img-control td:first-child {
+/* .img-control td:first-child {
 	position: fixed;
 	margin-left: 4%;
-}
-
+} */
 .img-default {
 	position: relative;
 	width: 130px;
 	height: 90px;
-	border: 1px solid rgba(0, 0, 0, .1);
+	border: 1px solid rgba(255, 0, 0, .1);
 	margin-bottom: 5px;
 	float: left;
 }
@@ -82,7 +81,7 @@ input[type=checkbox] {
 	max-width: 100%;
 }
 
-.img-default .info {
+.img-default .img-info {
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -106,7 +105,7 @@ input[type=checkbox] {
 	color: #fff;
 	display: inline-block;
 	text-align: center;
-	border: 1px solid #fff;
+	/* border: 1px solid #fff; */
 	width: 2.5rem;
 	height: 2.5rem;
 	border-radius: 50%;
@@ -119,7 +118,14 @@ input[type=checkbox] {
 	transition: all 0.35s ease-in-out;
 }
 
-.modify-btn {
+.add-btn img {
+	position: relative;
+	top: 100%;
+	left: 5%;
+}
+
+/*最最重要的来了，鼠标化划过的时候刚开始info是opacity: 0;现在透明底变成1就显示出来了*/
+.img-modify-btn {
 	top: 35%;
 	left: 0;
 	-webkit-transition: all 0.35s ease-in-out;
@@ -128,7 +134,7 @@ input[type=checkbox] {
 	transition: all 0.35s ease-in-out;
 }
 
-.delete-btn {
+.img-delete-btn {
 	top: 0;
 	left: 5%;
 	-webkit-transition: all 0.35s ease-in-out;
@@ -137,22 +143,16 @@ input[type=checkbox] {
 	transition: all 0.35s ease-in-out;
 }
 
-.add-btn img {
-	position: relative;
-	top: 100%;
-	left: 5%;
-}
-/*最最重要的来了，鼠标化划过的时候刚开始info是opacity: 0;现在透明底变成1就显示出来了*/
-.img-default:hover .info {
+.img-default:hover .img-info {
 	opacity: 1; /*有opacity有0变成1*/
 }
 
-.img-default:hover .modify-btn {
+.img-default:hover .img-modify-btn {
 	top: 35%;
 	left: 5%;
 }
 
-.img-default:hover .delete-btn {
+.img-default:hover .img-delete-btn {
 	top: 35%;
 	left: 5%;
 }

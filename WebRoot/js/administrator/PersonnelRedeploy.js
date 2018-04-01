@@ -4,7 +4,6 @@
 $(function() {
 	//加载完毕时关闭加载提示
 	$('.PersonnelRedeploy-loading').hide();
-	
 	$('.personnelRedeploy').on('click', function(e) {
 		var tag = e.target;
 		if (tag.tagName == "A") {
@@ -61,7 +60,12 @@ $(function() {
 							if (xhr_data.length > 0) {
 								toastr.success("修改成功");
 								//重新刷新该页面
-								$(tag).text(name);
+								$('.right-side').load('page/administrator/PersonnelRedeploy.jsp #content', function() {
+									$.getScript("js/administrator/PersonnelRedeploy.js", function() {
+										$('a[href="#' + $(tag).parent().parent().attr("id") + '"]').click();
+									});
+
+								});
 							} else {
 								toastr.error("修改失败,ID已使用");
 							}

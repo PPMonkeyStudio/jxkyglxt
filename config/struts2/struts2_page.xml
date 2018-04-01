@@ -8,7 +8,6 @@
 			method="{1}">
 			<result name="page_index">/WEB-INF/views/index.jsp</result>
 			<result name="page_nav">/WEB-INF/views/top_left.jsp</result>
-
 		</action>
 	</package>
 </struts>

@@ -17,61 +17,56 @@
 						<div id="main_body">
 							<table class="tab com-table">
 								<tr>
-									<td>专利名称：</td>
+									<td>专利名称:</td>
 									<td><input name="teacherPatent.patentName"
 										class="form-control table_infomation" type="text"></td>
-								</tr>
-								<tr>
-									<td>作者姓名：</td>
+									<td>作者姓名:</td>
 									<td><input name="teacherPatent.authorUserNames"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
-									<td>作者工号_排名：</td>
+									<td>作者工号_排名:</td>
 									<td><input name="teacherPatent.authorUserIds"
 										class="form-control table_infomation" type="text"></td>
-								</tr>
-								<tr>
-									<td>专利类型：</td>
+									<td>专利类型:</td>
 									<td><input name="teacherPatent.patentType"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
-									<td>授权号：</td>
+									<td>授权号:</td>
 									<td><input name="teacherPatent.authorizationNo"
 										class="form-control table_infomation" type="text"></td>
-								</tr>
-								<tr>
-									<td>获批日期：</td>
+									<td>获批日期:</td>
 									<td><input name="teacherPatent.approvedDate"
 										class="form-control table_infomation laydate-icon"
 										onfocus="time()" type="text"></td>
 								</tr>
 								<tr>
-									<td>是否应用：</td>
+									<td>是否应用:</td>
 									<td><select name="teacherPatent.isApplication"
 										class="form-control table_infomation">
 											<option>否</option>
 											<option>是</option>
 									</select></td>
-								</tr>
-								<tr>
-									<td>是否行业联合专利（著作权）：</td>
+									<td>行业联合专利(著作权):</td>
 									<td><select name="teacherPatent.sfhylh"
 										class="form-control table_infomation">
 											<option>否</option>
 											<option>是</option>
 									</select></td>
 								</tr>
-
 								<tr class="img-control">
-									<td>附件：</td>
-									<td class="img-upload">
-										<div class="addInfo">
+									<td>附件:</td>
+									<td colspan="3" class="img-upload">
+										<div class="addInfo"
+											onclick="javascript:$(this).next().click()">
 											<div class="img-control-btn add-btn">
 												<img src="img/add.png" />
 											</div>
-										</div>
+										</div> <input name="" upload-type="patent" type="file" multiple
+										onchange="previewFile(this)"
+										accept="image/gif, image/pdf, image/png, image/jpeg"
+										style="display:none">
 									</td>
 								</tr>
 							</table>

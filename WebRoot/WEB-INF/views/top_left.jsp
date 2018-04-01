@@ -34,7 +34,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>My JSP 'MyJsp.jsp' starting page</title>
+<title>nav page</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -59,8 +59,7 @@
 <!-- 图片查看插件css -->
 <link rel="stylesheet" href="<%=basePath%>css/zoomify.min.css" />
 
-<%-- <link rel="stylesheet" href="<%=basePath%>css/calendar.css" /> --%>
-<link rel="stylesheet" href="<%=basePath%>css/flatpickr.min.css" />
+<link rel="stylesheet" href="<%=basePath%>css/jquery.datetimepicker.css" />
 
 <script type="text/javascript" src="<%=basePath%>js/jquery-3.1.1.min.js"></script>
 
@@ -74,7 +73,8 @@
 
 <script type="text/javascript" src="<%=basePath%>js/zoomify.min.js"></script>
 
-<script type="text/javascript" src="<%=basePath%>js/flatpickr.min.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/jquery.datetimepicker.full.js"></script>
 
 </head>
 
@@ -125,7 +125,7 @@
 			<li class="dropdown user user-menu"><a class="dropdown-toggle"
 				data-toggle="dropdown"> <i class="fa fa-user"></i> <span
 					class="userName_info"><s:property
-							value="#session.user.userName" /> <i class="caret"></i> </span>
+							value="#session.loginuser.userName" /> <i class="caret"></i> </span>
 			</a>
 				<ul class="dropdown-menu dropdown-custom dropdown-menu-right">
 					<li class="dropdown-header text-center">帐号</li>
@@ -167,7 +167,7 @@
 			<div class="pull-left info">
 				<p>
 					<%=greeting%>
-					<s:property value="#session.user.userName" />
+					<s:property value="#session.loginuser.userName" />
 					。
 				</p>
 				<a><i class="fa fa-circle text-success"></i> 在线</a>
@@ -372,7 +372,9 @@
 	<!-- ./wrapper -->
 	<!-- Director App -->
 	<script type="text/javascript">
-		document.getElementsByClassName("riliDate").flatpickr();
+		$.datetimepicker.setLocale('ch');
+		
+		/* document.getElementsByClassName("riliDate").flatpickr();
 		//创建一个当前日期对象
 		var now = new Date();
 		//格式化日，如果小于9，前面补0
@@ -381,10 +383,11 @@
 		var month = ("0" + (now.getMonth() + 1)).slice(-2);
 		//拼装完整日期格式
 		var today = now.getFullYear() + "-" + (month) + "-" + (day);
-		$(".riliDate").val(today);
+		$(".riliDate").val(today); */
 	
 		$(function() {
-			var top_val = 240 - (Math.floor($("#info_ul li").length % 4) - 1) * 180;
+			var top_val = 240 - (parseInt($("#info_ul li").length / 8) - 1) * 180;
+			console.log(parseInt($("#info_ul li").length / 8));
 			$("#info_ul").on({
 				mousedown : function(e) {
 					if (e.target.parentElement.id == "info_ul") {
@@ -400,13 +403,15 @@
 					}
 				},
 				mouseup : function(e) {
+					console.log(top_val);
 					if ($(this).offset().top > 425) {
-						$(this).css('transition', 'all 1.5s');
+						$(this).css('transition', 'all 1s');
 						$(this).offset({
 							top : 425,
 						});
-					} else if ($(this).offset().top < top_val) {
-						$(this).css('transition', 'all 2s');
+					}
+					if ($(this).offset().top < top_val) {
+						$(this).css('transition', 'all 1s');
 						$(this).offset({
 							top : top_val,
 						});
@@ -442,6 +447,20 @@
 				}
 			});
 		}
+		//监听窗口关闭
+		$(window).unload(function(evt) {
+			if (typeof evt == 'undefined') {
+				evt = window.event;
+			}
+			if (evt) {
+				var n = window.event.screenX - window.screenLeft;
+				var b = n > document.documentElement.scrollWidth - 20;
+				if (b && window.event.clientY < 0 || window.event.altKey) {
+					tosstr.info('已退出登录');
+					$.post('/jxkyglxt/System/system_exit', {}, function(xhr) {}, 'json');
+				}
+			}
+		});
 	</script>
 </body>
 </html>

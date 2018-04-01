@@ -17,22 +17,18 @@
 						<div id="main_body">
 							<table class="tab com-table">
 								<tr>
-									<td>论文名称：</td>
+									<td>论文名称:</td>
 									<td><input name="teacherPaper.paperName"
 										class="form-control table_infomation" type="text"></td>
-								</tr>
-								<tr>
-									<td>作者：</td>
+									<td>作者:</td>
 									<td><input name="teacherPaper.authorUserNames"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
-									<td>作者工号_排名：</td>
+									<td>作者工号_排名:</td>
 									<td><input name="teacherPaper.authorUserIds"
 										class="form-control table_infomation" type="text"></td>
-								</tr>
-								<tr>
-									<td>论文类别：</td>
+									<td>论文类别:</td>
 									<td><select name="teacherPaper.paperType"
 										class="form-control table_infomation">
 											<option>科研</option>
@@ -40,23 +36,19 @@
 									</select></td>
 								</tr>
 								<tr>
-									<td>发表期刊：</td>
+									<td>发表期刊:</td>
 									<td><input name="teacherPaper.periodical"
 										class="form-control table_infomation" type="text"></td>
-								</tr>
-								<tr>
-									<td>期号：</td>
+									<td>期号:</td>
 									<td><input name="teacherPaper.periodicalNo"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
 								<tr>
-									<td>发表日期：</td>
+									<td>发表日期:</td>
 									<td><input name="teacherPaper.publishTime"
 										class="form-control  table_infomation laydate-icon"
 										onfocus="time()" type="text"></td>
-								</tr>
-								<tr>
-									<td>收录情况：</td>
+									<td>收录情况:</td>
 									<td><select name="teacherPaper.includedSituation"
 										class="form-control table_infomation">
 											<option>SCI</option>
@@ -68,12 +60,10 @@
 									</select></td>
 								</tr>
 								<tr>
-									<td>他引次数：</td>
+									<td>他引次数:</td>
 									<td><input name="teacherPaper.totalCitations"
 										class="form-control table_infomation" type="text"></td>
-								</tr>
-								<tr>
-									<td>是否与行业联合发表：</td>
+									<td>与行业联合发表:</td>
 									<td><select name="teacherPaper.sfyhylhfb"
 										class="form-control table_infomation">
 											<option>否</option>
@@ -81,15 +71,13 @@
 									</select></td>
 								</tr>
 								<tr>
-									<td>是否与地方联合发表：</td>
+									<td>与地方联合发表:</td>
 									<td><select name="teacherPaper.sfydflhfb"
 										class="form-control table_infomation">
 											<option>否</option>
 											<option>是</option>
 									</select></td>
-								</tr>
-								<tr>
-									<td>是否与国际联合发表：</td>
+									<td>与国际联合发表:</td>
 									<td><select name="teacherPaper.sfygjlhfb"
 										class="form-control table_infomation">
 											<option>否</option>
@@ -97,27 +85,28 @@
 									</select></td>
 								</tr>
 								<tr>
-									<td>是否是跨学科论文：</td>
+									<td>跨学科论文:</td>
 									<td><select name="teacherPaper.sfskxklw"
 										class="form-control table_infomation">
 											<option>否</option>
 											<option>是</option>
 									</select></td>
-								</tr>
-								<tr>
-									<td>成果字数：</td>
+									<td>成果字数:</td>
 									<td><input name="teacherPaper.wordsNum"
 										class="form-control table_infomation" type="text"></td>
 								</tr>
-
 								<tr class="img-control">
-									<td>附件：</td>
-									<td class="img-upload">
-										<div class="addInfo">
+									<td>附件:</td>
+									<td colspan="3" class="img-upload">
+										<div class="addInfo"
+											onclick="javascript:$(this).next().click()">
 											<div class="img-control-btn add-btn">
 												<img src="img/add.png" />
 											</div>
-										</div>
+										</div> <input name="" upload-type="paper" type="file" multiple
+										onchange="previewFile(this)"
+										accept="image/gif, image/pdf, image/png, image/jpeg"
+										style="display:none">
 									</td>
 								</tr>
 

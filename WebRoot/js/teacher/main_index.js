@@ -88,13 +88,7 @@ var info_data = {
 		"studentInfo.deformed" : "",
 	},
 	getQueryInfo : function() {
-		return this.merge(data, this[data.tableName]);
-	},
-	merge : function(destination, source) {
-		var new_destination = destination;
-		for (var property in source)
-			new_destination[property] = source[property];
-		return new_destination;
+		return $.extend({}, data, this[data.tableName]);
 	}
 }
 
@@ -148,14 +142,15 @@ $(function() {
 	})
 	//清除内容
 	$("div[id$='_modal']").on('hidden.bs.modal', function() {
-		$(this).find('.sure_add').unbind().hide();
-		$(this).find('.sure_mod').unbind().hide();
+		$(this).find('.sure_add').hide();
+		$(this).find('.sure_mod').hide();
 		$(this).find('input').each(function() {
 			$(this).val('');
 		});
 		$(this).find('select').each(function() {
 			$(this).find('option:first-child').attr("selected", "selected");
 		});
+		$(this).find('.img-upload').children('div[class!="addInfo"]').remove();
 	})
 });
 
@@ -308,30 +303,31 @@ function user_setting() {
 /*图片预览*/
 function previewFile(input_obj) {
 	var files = $(input_obj).prop('files');
+	var modal_id = $('#' + $(input_obj).attr('upload-type') + "_modal");
+	var add_div = modal_id.find('.addInfo');
 	for (var i in files) {
 		var reader = new FileReader();
 		reader.onloadend = function() {
-			//(this.result); 
-			$('.addInfo').before('<div class="img-default">' + '<div class="img">'
+			add_div.before('<div class="img-default">' + '<div class="img">'
 				+ '<img src="' + this.result + '" alt="" class="img-show">'
 				+ '</div>'
-				+ '<div class="info" onclick="javascript:$(this).prev().find(\'img\').click()">'
-				+ '<div class="img-control-btn modify-btn" title="编辑">'
+				+ '<div class="img-info" onclick="javascript:$(this).prev().find(\'img\').click()">'
+				+ '<div class="img-control-btn img-modify-btn" title="编辑">'
 				+ '<img src="img/modi(5).png" />'
 				+ '</div>'
-				+ '<div class="img-control-btn delete-btn" title="删除">'
+				+ '<div class="img-control-btn img-delete-btn" title="删除">'
 				+ '<img src="img/delete(2).png" />'
 				+ '</div>'
 				+ '</div>'
 				+ '<input type="file" name="" onchange="modiFiles(this)" accept="image/gif, image/pdf, image/png, image/jpeg" style="display:none" >'
 				+ '</div>')
-			$('.delete-btn').unbind().click(function() {
+			modal_id.find('.img-delete-btn').unbind().click(function() {
 				$(this).parent().parent().remove();
 			});
-			$('.modify-btn').unbind().click(function() {
+			modal_id.find('.img-modify-btn').unbind().click(function() {
 				$(this).parent().siblings('input').click();
 			});
-			$('.img-show').zoomify();
+			modal_id.find('.img-show').zoomify();
 		}
 		reader.readAsDataURL(files[i]);
 	}
@@ -347,6 +343,25 @@ function modiFiles(this_obj) {
 	reader.readAsDataURL(files);
 }
 
+//设置通过附件地址获得的图片，并放入盒子内
+function setImgDiv(pahtValue) {
+	return `<div class="img-default">
+   <div class="img">
+     <img src="/jxkyglxt/System/system_Attachment?attachmentName=${pahtValue}!${data.tableName}" alt="" class="img-show">
+   </div>
+   <div class="info" onclick="javascript:$(this).prev().find('img').click()">
+     <div class="img-control-btn img-modify-btn" title="编辑">
+       <img src="img/modi(5).png" />
+     </div>
+   <div class="img-control-btn img-delete-btn" title="删除">
+     <img src="img/delete(2).png" />
+   </div>
+   </div>
+   <input type="file" name="" onchange="modiFiles(this)" accept="image/gif, image/pdf, image/png, image/jpeg" style="display:none" >
+ </div>`
+}
+
+
 /* 表单判空验证*/
 function formValidate() {
 	$('.tab input').blur(function() {
@@ -355,7 +370,6 @@ function formValidate() {
 			 $(this).parent().prev('td').css({
 	        			  "color":"red"
 			 })*/
-
 			$(this).after('<span>' + '<img src="img/cuo.png"/>' + 不能为空 + '</span>');
 		} else {
 			$(this).removeClass('has-error ');
@@ -630,4 +644,14 @@ function selectSeacher() {
 			}
 		}
 	})
+
+	$('.mydate').datetimepicker({
+		yearStart : 1990, // 设置最小年份
+		yearEnd : 2050, // 设置最大年份
+		yearOffset : 0, // 年偏差
+		timepicker : false, // 关闭时间选项
+		format : 'Y-m-d', // 格式化日期年-月-日
+		minDate : '1990/01/01', // 设置最小日期
+		maxDate : '2030/01/01', // 设置最大日期
+	});
 }

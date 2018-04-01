@@ -14,7 +14,7 @@
 					</div>
 					<div class="modal-body">
 						<div id="main_body">
-							<table class="tab">
+							<table class="tab" style="width: 700px; margin: auto;">
 								<tbody>
 									<tr>
 										<td>工号：</td>
@@ -55,8 +55,8 @@
 											placeholder="请输入任教专业代码"></td>
 										<td>专业任教时间：</td>
 										<td><input name="teacherInfo.professionTeachingDate"
-											class="form-control table_infomation " type="text"
-											placeholder="请输入专业任教时间"></td>
+											class="form-control table_infomation mydate"
+											data-enable-time="true" type="text" placeholder="专业任教时间"></td>
 									</tr>
 									<tr>
 										<td>是否实验技术人员：</td>

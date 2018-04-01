@@ -10,27 +10,27 @@
 			<generator class="identity" />
 		</id>
 		<property name="introductionName" type="string">
-			<column name="Introduction_name" length="8" not-null="true">
+			<column name="Introduction_name" length="8">
 				<comment>名字</comment>
 			</column>
 		</property>
 		<property name="introductionContent" type="string">
-			<column name="Introduction_content" not-null="true">
+			<column name="Introduction_content">
 				<comment>内容</comment>
 			</column>
 		</property>
 		<property name="introductionDepartment" type="string">
-			<column name="Introduction_department" length="3" not-null="true">
+			<column name="Introduction_department" length="3">
 				<comment>部门</comment>
 			</column>
 		</property>
 		<property name="introductionImage" type="string">
-			<column name="Introduction_image" length="40" not-null="false">
+			<column name="Introduction_image" length="40">
 				<comment>头像</comment>
 			</column>
 		</property>
 		<property name="introductionRanking" type="integer">
-			<column name="Introduction_ranking" not-null="true">
+			<column name="Introduction_ranking">
 				<comment>排名</comment>
 			</column>
 		</property>

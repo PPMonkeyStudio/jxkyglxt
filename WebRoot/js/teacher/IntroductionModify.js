@@ -1,6 +1,3 @@
-/**
- * 
- */
 $(function() {
 	$('.table-responsive').on('click', function(e) {
 		if (e.target.tagName == 'A') {
@@ -41,7 +38,7 @@ $(function() {
 			backgroundDismiss : true,
 			content : content_str,
 			buttons : {
-				deleteUser : {
+				modifiyUser : {
 					btnClass : 'btn-blue',
 					text : '修改',
 					action : function() {
@@ -51,6 +48,20 @@ $(function() {
 								toIntroductionModify();
 							} else {
 								toastr.error("修改失败");
+							}
+						}, 'json');
+					}
+				},
+				deleteinfo : {
+					btnClass : 'btn-danger',
+					text : '删除',
+					action : function() {
+						$.post('/jxkyglxt/Admin/admin_deleteIntroduction', $('#Introduction_update').serialize(), function(xhr_data) {
+							if (xhr_data.result == "success") {
+								toastr.success("删除成功");
+								toIntroductionModify();
+							} else {
+								toastr.error("删除失败");
 							}
 						}, 'json');
 					}
@@ -91,7 +102,7 @@ $(function() {
 			buttons : {
 				deleteUser : {
 					btnClass : 'btn-blue',
-					text : '修改',
+					text : '添加',
 					action : function() {
 						$.post('/jxkyglxt/Admin/admin_setIntroduction', $('#Introduction_add').serialize(), function(xhr_data) {
 							if (xhr_data.result > 0) {

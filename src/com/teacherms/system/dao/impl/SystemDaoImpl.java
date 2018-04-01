@@ -36,14 +36,24 @@ public class SystemDaoImpl implements SystemDao {
 	}
 
 	@Override
-	public User updateUser(User loging_user) {
+	public User saveUser(User user) {
 		try {
-			getSession().merge(loging_user);
-			getSession().saveOrUpdate(loging_user);
+			getSession().save(user);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return loging_user;
+		return user;
+	}
+
+	@Override
+	public User updateUser(User user) {
+		try {
+			getSession().merge(user);
+			getSession().update(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return user;
 	}
 
 	@Override
@@ -88,5 +98,4 @@ public class SystemDaoImpl implements SystemDao {
 		String hql = "from User where departmentId ='" + departmentId + "'";
 		return getSession().createQuery(hql).list();
 	}
-
 }

@@ -1,6 +1,5 @@
 package com.teacherms.satffinfomanage.dao.impl;
 
-import java.lang.reflect.Field;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -30,12 +29,12 @@ public class AdminDaoImpl implements AdminDao {
 	public List<Object> getAllStatusInfo(String table, String time, String status, String collegeName,
 			String multi_condition, String fuzzy) {
 		String hql = "select t,u from " + table
-				+ " t,User u,Department d where u.userId=t.userId and u.departmentId=d.departmentId and d.departmentName='"
+				+ " t,User u,Department d where u.userId=t.userId and u.departmentId=d.departmentId and d.departmentName like '"
 				+ collegeName + "' and t.dataStatus = '" + status + "'" + time + multi_condition + fuzzy;
-		if("TeacherInfo".equals(table)){
-			hql+=" and u.roleId!='20'";
+		if ("TeacherInfo".equals(table)) {
+			hql += " and u.roleId!='20'";
 		}
-		System.out.println(hql);
+		hql = hql + " order by t.createTime desc";
 		return getSession().createQuery(hql).list();
 	}
 
@@ -55,7 +54,6 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public Object getAInfomationByTableId(String tableName, String tableInfoIdName, String string) {
 		String hql = " from " + tableName + " where " + tableInfoIdName + " = '" + string + "'";
-		System.out.println(hql);
 		return getSession().createQuery(hql).uniqueResult();
 	}
 
@@ -108,6 +106,18 @@ public class AdminDaoImpl implements AdminDao {
 		try {
 			getSession().merge(introduction);
 			getSession().saveOrUpdate(introduction);
+		} catch (Exception e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean deleteInfo(Introduction introduction) {
+		boolean flag = true;
+		try {
+			getSession().delete(introduction);
 		} catch (Exception e) {
 			flag = false;
 			e.printStackTrace();

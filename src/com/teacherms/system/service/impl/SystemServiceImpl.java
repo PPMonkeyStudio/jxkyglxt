@@ -26,11 +26,10 @@ public class SystemServiceImpl implements SystemService {
 	public Object login(String user_id, String password) {
 		User user = systemDao.getUserByUser_id(user_id);
 		if (user == null) {
-			return "nouser";
+			return "无此用户。请检查帐号是否正确";
 		}
-		System.out.println(user.getPassword().equals(md5.GetMD5Code(password)));
 		if (!user.getPassword().equals(md5.GetMD5Code(password))) {
-			return "passworderror";
+			return "密码错误，请检查密码。";
 		}
 		return user;
 	}
@@ -86,10 +85,11 @@ public class SystemServiceImpl implements SystemService {
 		Class<? extends Object> cla = user.getClass();
 		Field[] fields = cla.getDeclaredFields();
 		User u = systemDao.getUserByUser_id(user.getUserId());
-
+		System.out.println(u);
 		for (Field f : fields) {
 			f.setAccessible(true);
-			if (!"".equals(f.get(user)) && f.get(user) != null && !f.get(u).equals(f.get(user))) {
+			System.out.println(f.getName());
+			if (!"".equals(f.get(user)) && null != f.get(user) && !f.get(u).equals(f.get(user))) {
 				f.set(u, f.get(user));
 			}
 		}
@@ -107,7 +107,7 @@ public class SystemServiceImpl implements SystemService {
 	public String setAdminUser(User user) {
 		user.setPassword(md5.GetMD5Code("000000"));
 		user.setRoleId("20");
-		return systemDao.updateUser(user).getUserId();
+		return systemDao.saveUser(user).getUserId();
 	}
 
 	@Override

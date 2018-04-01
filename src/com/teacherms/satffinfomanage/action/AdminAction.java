@@ -2,13 +2,9 @@ package com.teacherms.satffinfomanage.action;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,12 +25,10 @@ import com.teacherms.all.domain.User;
 import com.teacherms.satffinfomanage.vo.TableInfoAndUserVo;
 import com.teacherms.staffinfomanage.service.AdminService;
 
-import util.ExcelHead;
 import util.ExcelToBean2;
-import util.ExportExcelCollection;
-import util.MapUtil;
 import util.PageVO;
 
+@SuppressWarnings("serial")
 public class AdminAction extends ActionSupport {
 	private AdminService adminService;
 
@@ -64,7 +58,6 @@ public class AdminAction extends ActionSupport {
 	private TeacherWorks teacherWorks;
 	private Introduction introduction;
 	private User user;
-	private Object obj;
 
 	public void setAdminService(AdminService adminService) {
 		this.adminService = adminService;
@@ -73,12 +66,8 @@ public class AdminAction extends ActionSupport {
 	// 分页查询获取指定---未审核or固化---信息（给指定参数）并进行时间排序（属于自己学院的信息）
 	public void getSpecifiedInformationByPaging() {
 		try {
-			// 给Object对象赋值
-			getObjectByTableName(tableName);
-			System.out.println("" + obj.toString());
 			PageVO<Object> list = adminService.getSpecifiedInformationByPaging(tableName, page == null ? "1" : page,
-					time_interval, dataState, getSecondaryCollegeInfo("name"), obj,user, fuzzy_query);
-			System.out.println(new Gson().toJson(list));
+					time_interval, dataState, getSecondaryCollegeInfo("name"), getInfoObjectBytableName(),user, fuzzy_query);
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write(new Gson().toJson(list));
 		} catch (IOException e) {
@@ -100,7 +89,6 @@ public class AdminAction extends ActionSupport {
 	// 添加教职工信息
 	public void addTeacherInfo() {
 		try {
-			System.out.println(teacherInfo.toString());
 			String result = adminService.addTeacherInfo(teacherInfo, getSecondaryCollegeInfo("id"));
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
@@ -112,10 +100,7 @@ public class AdminAction extends ActionSupport {
 	// 管理员修改信息状态+修改信息内容
 	public void modifiedInfomation() {
 		try {
-			// 给Object对象赋值
-			getObjectByTableName(tableName);
-
-			String result = adminService.curingInfomation(obj);
+			String result = adminService.curingInfomation(getInfoObjectBytableName());
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
 		} catch (IOException e) {
@@ -173,13 +158,10 @@ public class AdminAction extends ActionSupport {
 	}
 
 	// execl信息表导入到数据库
-	@SuppressWarnings("unchecked")
 	public void importDatabase() {
 		try {
 			FileInputStream is = new FileInputStream(file);
 			String propertiesName = null;
-			System.out.println(fileFileName);
-			System.out.println(fileContentType);
 			Class cla = null;
 			if (fileFileName.contains("奖励")) {
 				propertiesName = "z_teacher_award";
@@ -202,7 +184,6 @@ public class AdminAction extends ActionSupport {
 			} else {
 			}
 			XSSFWorkbook workbook = new XSSFWorkbook(is);
-
 			List<Object> list = ExcelToBean2.toObjectPerproList(
 					ExcelToBean2.parseUpdateExcel(workbook, "com.teacherms.all.domain." + propertiesName), cla);
 			adminService.addinfo(list);
@@ -214,7 +195,7 @@ public class AdminAction extends ActionSupport {
 	}
 
 	public String getSecondaryCollegeInfo(String what) {
-		User user = (User) ActionContext.getContext().getSession().get("user");
+		User user = (User) ActionContext.getContext().getSession().get("loginuser");
 		return adminService.getDepartmentNameByDepartmentId(user.getDepartmentId(), what);
 	}
 
@@ -240,7 +221,7 @@ public class AdminAction extends ActionSupport {
 
 	public void setIntroduction() {
 		try {
-			User user = (User) ActionContext.getContext().getSession().get("user");
+			User user = (User) ActionContext.getContext().getSession().get("loginuser");
 			String result = adminService.setIntroduction(introduction, user.getDepartmentId());
 			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
 			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
@@ -248,38 +229,37 @@ public class AdminAction extends ActionSupport {
 			e.printStackTrace();
 		}
 	}
-
-	// 通过tablename来判断给信息对象赋值
-	private void getObjectByTableName(String tableName) {
-		if (("TeacherAward").equals(tableName)) {
-			obj = teacherAward;
-		} else if (("TeacherInfo").equals(tableName)) {
-			obj = teacherInfo;
-		} else if (("TeacherPaper").equals(tableName)) {
-			obj = teacherPaper;
-		} else if (("TeacherPatent").equals(tableName)) {
-			obj = teacherPatent;
-		} else if (("TeacherProject").equals(tableName)) {
-			obj = teacherProject;
-		} else if (("TeacherWorks").equals(tableName)) {
-			obj = teacherWorks;
-		} else {
-			return;
+	
+	public void deleteIntroduction() {
+		try {
+			System.out.println(introduction);
+			String result = adminService.deleteIntroduction(introduction);
+			ServletActionContext.getResponse().setCharacterEncoding("utf-8");
+			ServletActionContext.getResponse().getWriter().write("{\"result\":\"" + result + "\"}");
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
-	/*
-	 * public void gethtml() { try { String path =
-	 * ServletActionContext.getServletContext().getRealPath("/"); File html =
-	 * new File(path + "WEB-INF/views/myhtml.jsp"); InputStream in = new
-	 * FileInputStream(html); byte[] fileimg = new byte[1024 * 1024];
-	 * in.read(fileimg); HttpServletResponse response =
-	 * ServletActionContext.getResponse(); OutputStream out =
-	 * response.getOutputStream();
-	 * response.setContentType("html;charset=UTF-8"); out.write(fileimg);
-	 * out.flush(); out.close(); } catch (FileNotFoundException e) {
-	 * e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); } }
-	 */
+	// 通过tablename来判断给信息对象
+	private Object getInfoObjectBytableName() {
+		switch (this.tableName) {
+		case "TeacherAward":
+			return teacherAward;
+		case "TeacherInfo":
+			return teacherInfo;
+		case "TeacherPaper":
+			return teacherPaper;
+		case "TeacherPatent":
+			return teacherPatent;
+		case "TeacherProject":
+			return teacherProject;
+		case "TeacherWorks":
+			return teacherWorks;
+		default:
+			return null;
+		}
+	}
 
 	public void setPage(String page) {
 		this.page = page;
