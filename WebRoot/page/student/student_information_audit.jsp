@@ -13,8 +13,13 @@
 		<div class="col-md-12">
 			<!--breadcrumbs start -->
 			<ul class="breadcrumb">
+<<<<<<< HEAD
+				<li><a><i class="fa fa-home"></i> 首页</a></li>
+				<li class="active">学生信息管理</li>
+=======
 				<li><a href="javascript:location.reload();"><i class="fa fa-home"></i> 首页</a></li>
 				<li class="active">学生信息查看</li>
+>>>>>>> 868a397f72943a3840e580ebb2fc93a7bbc24575
 			</ul>
 			<!--breadcrumbs end -->
 		</div>
@@ -28,9 +33,7 @@
 				<li class=""><a data-toggle="tab" href="#info">学生查看</a></li>
 				<li class=""><a data-toggle="tab" href="#award">奖励列表</a></li>
 				<li class=""><a data-toggle="tab" href="#patent">学生专利列表</a></li>
-				
 				<li class=""><a data-toggle="tab" href="#paper">学生论文列表</a></li>
-			
 				<li class=""><a data-toggle="tab" href="#project">学生参与项目(课题)列表</a></li>
 				<li class=""><a data-toggle="tab" href="#class">班级查看</a></li>
 			</ul>
@@ -43,6 +46,10 @@
 							<!--表头上按钮组-->
 							<div class="box-tools m-b-15">
 								<div style="width: 100%;" class="input-group">
+								<button data-toggle="modal" data-target="#student_info_modal"
+										class="btn btn-default btn-addon btn-sm">
+										<i class="fa fa-plus"></i>添加学生
+									</button>
 									<!--按条件筛选-->
 									<button style="" class="btn btn-default btn-sm" type="button"
 										data-toggle="collapse" data-target="#collapse_exam_user"
@@ -518,11 +525,7 @@
 			<div class="panel-footer">
 				<div id="page">
 					<ul class="pager">
-						<li><a>首页</a></li>
-						<li><a>上一页</a></li>
-						<li>audit</li>
-						<li><a>下一页</a></li>
-						<li><a>尾页</a></li>
+<!-- 	插首页下一页 -->
 					</ul>
 				</div>
 			</div>

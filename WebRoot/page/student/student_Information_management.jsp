@@ -27,8 +27,8 @@
 			<ul class="nav nav-tabs">
 				<li class=""><a data-toggle="tab" href="#info">学生查看</a></li>
 				<li class=""><a data-toggle="tab" href="#award">奖励列表</a></li>
-				<li class=""><a data-toggle="tab" href="#paper">学生论文列表</a></li>				
 				<li class=""><a data-toggle="tab" href="#patent">学生专利列表</a></li>
+				<li class=""><a data-toggle="tab" href="#paper">学生论文列表</a></li>
 				<li class=""><a data-toggle="tab" href="#project">学生参与项目(课题)列表</a></li>
 				<li class=""><a data-toggle="tab" href="#class">班级查看</a></li>
 			</ul>
@@ -41,14 +41,9 @@
 							<!--表投上按钮组-->
 							<div class="box-tools m-b-15">
 								<div style="width: 100%;" class="input-group">
-									<!--筛选&查询&添加按钮位置-->
-									<button data-toggle="modal" data-target="#add_info_modal"
+								<button data-toggle="modal" data-target="#student_info_modal"
 										class="btn btn-default btn-addon btn-sm">
 										<i class="fa fa-plus"></i>添加学生
-									</button>
-									<button data-toggle="modal" data-target="#export_info"
-										class="btn btn-default btn-addon btn-sm">
-										<i class="fa fa-share-square"></i>学生信息导出
 									</button>
 									<!--按条件筛选-->
 									<button style="" class="btn btn-default btn-sm" type="button"
@@ -74,14 +69,13 @@
 												<label>指定条件搜索：</label> <select id="all_options"
 													class="all_options form-control ">
 													<option value="">请选择</option>
-													<!-- <option value="userName">姓名</option> -->
 													<option value="student_name">姓名</option>
 													<option value="studentId">学号</option>
 													<option value="studentName">姓名</option>
-													<option value="calendarYear">年制</option>
-													<option value="enrolmentYear">入学年份</option>
-													<option value="certificateType">证件类型</option>
-													<option value="certificateNo">身份证/护照号码</option>
+													<option value="calendarYear">年制</option>												
+													<option value="enrolmentYear">入学年份</option>										
+													<option value="certificateType">证件类型</option>												
+													<option value="certificateNo">身份证/护照号码</option>												
 													<option value="sex">性别</option>
 													<option value="nation">民族</option>
 													<option value="politicalStatus">政治面貌</option>
@@ -124,7 +118,7 @@
 							</div>
 							<!--查询存放信息的表格-->
 							<section class="panel"> <header
-								class="panel-heading second-panel-heading"> 用户信息
+								class="panel-heading second-panel-heading"> 学生信息
 								
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
@@ -138,10 +132,10 @@
 											<th>序号</th>
 											<th>学号</th>
 											<th>姓名</th>
-											<th>学生类型</th>
-											<th>学生状态</th>
-											<th>专业</th>
-											<th>所在班级</th>
+											<th>性别</th>
+											<th>入学年份</th>
+											<th>身份证号码</th>
+											<th>所在学院</th>
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -190,10 +184,9 @@
 													<option value="">请选择</option>
 													<option value="awardType">获奖类型</option>
 													<option value="awardName">获奖名称</option>
-													<option value="awardUserNames">获奖人姓名</option>
-													<option value="awardGrade">获奖等级</option>
-													<option value="awardLevel">获奖级别</option>
-													<option value="awardTime">获奖时间</option>
+													<option value="awardClass">获奖类型</option>
+													<option value="firstAward">获奖人姓名</option>
+													<option value="time">获奖时间</option>
 												</select>
 
 												<button style="float: right; margin-left: 6px;"
