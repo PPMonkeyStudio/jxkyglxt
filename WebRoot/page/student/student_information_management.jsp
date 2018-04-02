@@ -91,36 +91,31 @@
 													<option value="teacherTraining">是否师范类</option>
 													<option value="deformed">是否残疾</option>
 													<option value="changes">异动类型</option>
-													<option value="entranceRecord">入学学历</option>、
+													<option value="entranceRecord">入学学历</option>
 													<option value="enrolmentStyle">招生方式</option>
 													<option value="droppingReason">休退学原因</option>
 													<option value="registeredType">户口类型</option>
 													<option value="degree">是否授予学位</option>
 													<option value="alterTime">修改时间</option>
 												</select>
-
 												<button style="float: right; margin-left: 6px;"
 													class="btn btn-danger search_info">
 													<i class="fa fa-exclamation-circle" aria-hidden="true"></i>清空搜索
 												</button>
-
 												<button style="float: right;"
 													class="btn btn-info search_info">
 													<i class="fa fa-check-square-o" aria-hidden="true"></i>确认搜索
 												</button>
-
 												<div style="width: 100%; margin-top: 6px;" id="search_input"></div>
 											</div>
 										</div>
 									</div>
-
 									<!--<input type="text" class="form-control" />-->
 								</div>
 							</div>
 							<!--查询存放信息的表格-->
 							<section class="panel"> <header
 								class="panel-heading second-panel-heading"> 学生信息
-
 							<button style="display: none;float: right;"
 								class="btn btn-primary sure_export">确认导出</button>
 							<button style="display: none;float: right;"
@@ -137,12 +132,11 @@
 											<th>入学年份</th>
 											<th>身份证号码</th>
 											<th>所在学院</th>
-												<th>修改时间</th>
+											<th>修改时间</th>
 											<th>操作</th>
 										</tr>
 									</thead>
 									<tbody>
-
 									</tbody>
 								</table>
 							</div>
@@ -204,7 +198,6 @@
 													class="btn btn-info search_info">
 													<i class="fa fa-check-square-o" aria-hidden="true"></i>确认搜索
 												</button>
-
 												<div style="width: 100%; margin-top: 6px;" id="search_input"></div>
 											</div>
 										</div>
@@ -275,7 +268,6 @@
 											</button>
 										</div>
 									</div>
-
 									<div style="width: 100%; margin-top: 6px;" class="collapse"
 										id="collapse_exam_paper">
 										<div class="well">
@@ -298,12 +290,10 @@
 													class="btn btn-danger search_info">
 													<i class="fa fa-exclamation-circle" aria-hidden="true"></i>清空搜索
 												</button>
-
 												<button style="float: right;"
 													class="btn btn-info search_info">
 													<i class="fa fa-check-square-o" aria-hidden="true"></i>确认搜索
 												</button>
-
 												<div style="width: 100%; margin-top: 6px;" id="search_input"></div>
 											</div>
 										</div>
@@ -418,7 +408,7 @@
 											<th>专利授权号</th>
 											<th>获批时间</th>
 											<th>是否第一专利人</th>
-												<th>修改时间</th>
+											<th>修改时间</th>
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -436,11 +426,13 @@
 							<div class="box-tools m-b-15">
 								<div style="width: 100%;" class="input-group">
 									<!--筛选&查询&添加按钮位置-->
-									<button data-toggle="modal" data-target="#student_export_project"
+									<button data-toggle="modal"
+										data-target="#student_export_project"
 										class="btn btn-default btn-addon btn-sm">
 										<i class="fa fa-share-square"></i>项目信息导出
 									</button>
-									<button data-toggle="modal" data-target="#student_project_modal"
+									<button data-toggle="modal"
+										data-target="#student_project_modal"
 										class="btn btn-default btn-addon btn-sm">
 										<i class="fa fa-plus"></i>添加项目
 									</button>
@@ -516,7 +508,6 @@
 							</section>
 						</div>
 					</div>
-
 					<div id="class" class="tab-pane">
 						<!--管理员查看课题(项目)信息的表格-->
 						<div id="project_table_view">
@@ -524,11 +515,13 @@
 							<div class="box-tools m-b-15">
 								<div style="width: 100%;" class="input-group">
 									<!--筛选&查询&添加按钮位置-->
-									<button data-toggle="modal" data-target="#student_export_project"
+									<button data-toggle="modal"
+										data-target="#student_export_project"
 										class="btn btn-default btn-addon btn-sm">
 										<i class="fa fa-share-square"></i>项目信息导出
 									</button>
-									<button data-toggle="modal" data-target="#student_project_modal"
+									<button data-toggle="modal"
+										data-target="#student_project_modal"
 										class="btn btn-default btn-addon btn-sm">
 										<i class="fa fa-plus"></i>添加项目
 									</button>
@@ -566,12 +559,10 @@
 													class="btn btn-danger search_info">
 													<i class="fa fa-exclamation-circle" aria-hidden="true"></i>清空搜索
 												</button>
-
 												<button style="float: right;"
 													class="btn btn-info search_info">
 													<i class="fa fa-check-square-o" aria-hidden="true"></i>确认搜索
 												</button>
-
 												<div style="width: 100%; margin-top: 6px;" id="search_input"></div>
 											</div>
 										</div>
@@ -595,7 +586,7 @@
 											<th>班级ID</th>
 											<th>班级名称</th>
 											<th>班主任</th>
-												<th>修改时间</th>
+											<th>修改时间</th>
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -606,23 +597,21 @@
 							</section>
 						</div>
 					</div>
-
-
-
-
 				</div>
 			</div>
-		</div>
-		<div class="panel-footer">
-			<div id="page">
-				<ul class="pager">
-<!-- 插上一页下一页 -->
-				</ul>
+			<div class="panel-footer">
+				<div id="page">
+					<ul class="pager">
+						<li><a>首页</a></li>
+						<li><a>上一页</a></li>
+						<li><a>下一页</a></li>
+						<li><a>尾页</a></li>
+					</ul>
+				</div>
 			</div>
+			</section>
+			<!--breadcrumbs end -->
 		</div>
-	</section>
-	<!--breadcrumbs end -->
-	</div>
 	</div>
 	</section>
 </body>

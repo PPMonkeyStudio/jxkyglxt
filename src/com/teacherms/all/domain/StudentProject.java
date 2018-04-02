@@ -13,7 +13,7 @@ public class StudentProject implements java.io.Serializable {
 	private String studentId;
 	private String projectLeading;
 	private String userId;
-	private String alterTime;
+	private String createTime;
 
 	// Constructors
 
@@ -23,13 +23,13 @@ public class StudentProject implements java.io.Serializable {
 
 	/** full constructor */
 	public StudentProject(String projectId, String projectName, String studentId, String projectLeading, String userId,
-			String alterTime) {
+			String createTime) {
 		this.projectId = projectId;
 		this.projectName = projectName;
 		this.studentId = studentId;
 		this.projectLeading = projectLeading;
 		this.userId = userId;
-		this.alterTime = alterTime;
+		this.createTime = createTime;
 	}
 
 	// Property accessors
@@ -74,18 +74,18 @@ public class StudentProject implements java.io.Serializable {
 		this.userId = userId;
 	}
 
-	public String getAlterTime() {
-		return this.alterTime;
+	public String getcreateTime() {
+		return this.createTime;
 	}
 
-	public void setAlterTime(String alterTime) {
-		this.alterTime = alterTime;
+	public void setcreateTime(String createTime) {
+		this.createTime = createTime;
 	}
 
 	@Override
 	public String toString() {
 		return "StudentProject [projectId=" + projectId + ", projectName=" + projectName + ", studentId=" + studentId
-				+ ", projectLeading=" + projectLeading + ", userId=" + userId + ", alterTime=" + alterTime + "]";
+				+ ", projectLeading=" + projectLeading + ", userId=" + userId + ", createTime=" + createTime + "]";
 	}
 
 }

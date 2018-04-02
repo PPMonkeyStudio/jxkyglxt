@@ -34,7 +34,7 @@ public class StudentInfo implements java.io.Serializable {
 	private String droppingReason;
 	private String registeredType;
 	private String degree;
-	private String alterTime;
+	private String createTime;
 
 	// Constructors
 
@@ -48,7 +48,7 @@ public class StudentInfo implements java.io.Serializable {
 			String politicalStatus, String studentSource, String studentType, String enrolmentType, String classType,
 			String classNumber, String className, String inClassName, Integer departmentId, String teacherTraining,
 			String deformed, String changes, String entranceRecord, String enrolmentStyle, String droppingReason,
-			String registeredType, String degree, String alterTime) {
+			String registeredType, String degree, String createTime) {
 		this.studentId = studentId;
 		this.studentName = studentName;
 		this.calendarYear = calendarYear;
@@ -75,7 +75,7 @@ public class StudentInfo implements java.io.Serializable {
 		this.droppingReason = droppingReason;
 		this.registeredType = registeredType;
 		this.degree = degree;
-		this.alterTime = alterTime;
+		this.createTime = createTime;
 	}
 
 	// Property accessors
@@ -288,12 +288,12 @@ public class StudentInfo implements java.io.Serializable {
 		this.degree = degree;
 	}
 
-	public String getAlterTime() {
-		return this.alterTime;
+	public String getcreateTime() {
+		return this.createTime;
 	}
 
-	public void setAlterTime(String alterTime) {
-		this.alterTime = alterTime;
+	public void setcreateTime(String createTime) {
+		this.createTime = createTime;
 	}
 
 	@Override
@@ -307,7 +307,7 @@ public class StudentInfo implements java.io.Serializable {
 				+ departmentId + ", teacherTraining=" + teacherTraining + ", deformed=" + deformed + ", changes="
 				+ changes + ", entranceRecord=" + entranceRecord + ", enrolmentStyle=" + enrolmentStyle
 				+ ", droppingReason=" + droppingReason + ", registeredType=" + registeredType + ", degree=" + degree
-				+ ", alterTime=" + alterTime + "]";
+				+ ", createTime=" + createTime + "]";
 	}
 
 }

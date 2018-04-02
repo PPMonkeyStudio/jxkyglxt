@@ -118,7 +118,7 @@ $(function() {
 				$.getScript("js/teacher/teacher_Information_management.js");
 			});			break;
 		case "学生信息管理": //管理员-学生
-			$('.right-side').load('page/student/student_information_management.jsp #content', function() {
+			$('.right-side').load('page/student/student_information_management.jsp #content', selectSeacher(), function() {
 				data.dataState = "20";
 				$.getScript("js/student/student_information_management.js");
 			});			break;

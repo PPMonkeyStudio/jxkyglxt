@@ -15,7 +15,7 @@ public class StudentPatent implements java.io.Serializable {
 	private String authorizationNo;
 	private String time;
 	private String firstPatent;
-	private String alterTime;
+	private String createTime;
 
 	// Constructors
 
@@ -25,7 +25,7 @@ public class StudentPatent implements java.io.Serializable {
 
 	/** full constructor */
 	public StudentPatent(String patentId, String studentId, String awardName, String awardClass, String authorizationNo,
-			String time, String firstPatent, String alterTime) {
+			String time, String firstPatent, String createTime) {
 		this.patentId = patentId;
 		this.studentId = studentId;
 		this.awardName = awardName;
@@ -33,7 +33,7 @@ public class StudentPatent implements java.io.Serializable {
 		this.authorizationNo = authorizationNo;
 		this.time = time;
 		this.firstPatent = firstPatent;
-		this.alterTime = alterTime;
+		this.createTime = createTime;
 	}
 
 	// Property accessors
@@ -94,19 +94,19 @@ public class StudentPatent implements java.io.Serializable {
 		this.firstPatent = firstPatent;
 	}
 
-	public String getAlterTime() {
-		return this.alterTime;
+	public String getcreateTime() {
+		return this.createTime;
 	}
 
-	public void setAlterTime(String alterTime) {
-		this.alterTime = alterTime;
+	public void setcreateTime(String createTime) {
+		this.createTime = createTime;
 	}
 
 	@Override
 	public String toString() {
 		return "StudentPatent [patentId=" + patentId + ", studentId=" + studentId + ", awardName=" + awardName
 				+ ", awardClass=" + awardClass + ", authorizationNo=" + authorizationNo + ", time=" + time
-				+ ", firstPatent=" + firstPatent + ", alterTime=" + alterTime + "]";
+				+ ", firstPatent=" + firstPatent + ", createTime=" + createTime + "]";
 	}
 
 }

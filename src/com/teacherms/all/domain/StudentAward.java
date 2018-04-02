@@ -15,7 +15,7 @@ public class StudentAward implements java.io.Serializable {
 	private String authorizationNo;
 	private String time;
 	private String firstAward;
-	private String alterTime;
+	private String createTime;
 
 	// Constructors
 
@@ -25,7 +25,7 @@ public class StudentAward implements java.io.Serializable {
 
 	/** full constructor */
 	public StudentAward(String awardId, String studentId, String awardName, String awardClass, String authorizationNo,
-			String time, String firstAward, String alterTime) {
+			String time, String firstAward, String createTime) {
 		this.awardId = awardId;
 		this.studentId = studentId;
 		this.awardName = awardName;
@@ -33,7 +33,7 @@ public class StudentAward implements java.io.Serializable {
 		this.authorizationNo = authorizationNo;
 		this.time = time;
 		this.firstAward = firstAward;
-		this.alterTime = alterTime;
+		this.createTime = createTime;
 	}
 
 	// Property accessors
@@ -94,19 +94,19 @@ public class StudentAward implements java.io.Serializable {
 		this.firstAward = firstAward;
 	}
 
-	public String getAlterTime() {
-		return this.alterTime;
+	public String getCreateTime() {
+		return createTime;
 	}
 
-	public void setAlterTime(String alterTime) {
-		this.alterTime = alterTime;
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
 	}
 
 	@Override
 	public String toString() {
 		return "StudentAward [awardId=" + awardId + ", studentId=" + studentId + ", awardName=" + awardName
 				+ ", awardClass=" + awardClass + ", authorizationNo=" + authorizationNo + ", time=" + time
-				+ ", firstAward=" + firstAward + ", alterTime=" + alterTime + "]";
+				+ ", firstAward=" + firstAward + ", alterTime=" + createTime + "]";
 	}
 
 }

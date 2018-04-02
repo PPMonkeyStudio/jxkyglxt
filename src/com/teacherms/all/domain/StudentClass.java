@@ -11,7 +11,7 @@ public class StudentClass implements java.io.Serializable {
 	private String classId;
 	private String className;
 	private String userId;
-	private String alterTime;
+	private String createTime;
 
 	// Constructors
 
@@ -20,11 +20,11 @@ public class StudentClass implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public StudentClass(String classId, String className, String userId, String alterTime) {
+	public StudentClass(String classId, String className, String userId, String createTime) {
 		this.classId = classId;
 		this.className = className;
 		this.userId = userId;
-		this.alterTime = alterTime;
+		this.createTime = createTime;
 	}
 
 	// Property accessors
@@ -53,18 +53,18 @@ public class StudentClass implements java.io.Serializable {
 		this.userId = userId;
 	}
 
-	public String getAlterTime() {
-		return this.alterTime;
+	public String getcreateTime() {
+		return this.createTime;
 	}
 
-	public void setAlterTime(String alterTime) {
-		this.alterTime = alterTime;
+	public void setcreateTime(String createTime) {
+		this.createTime = createTime;
 	}
 
 	@Override
 	public String toString() {
-		return "StudentClass [classId=" + classId + ", className=" + className + ", userId=" + userId + ", alterTime="
-				+ alterTime + "]";
+		return "StudentClass [classId=" + classId + ", className=" + className + ", userId=" + userId + ", createTime="
+				+ createTime + "]";
 	}
 
 }

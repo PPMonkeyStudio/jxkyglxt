@@ -19,9 +19,21 @@ import util.PageVO;
 
 public class StudentAction extends ActionSupport {
 
-	private StudentService studentService;
+	// 导出
+	private String export_name;// 导出execl表的属性条件,逗号隔开
+	private String export_id;// 导出execl表的ID字段条件,逗号隔开
+
+	// 信息筛选查询
+	private String time_interval;// 时间区间,逗号隔开
 	private String page;// 分页
-	private String tableName;
+	private String tableName;// 查询的表名
+	private String tableId; // 查询表的ID
+	private String dataState; // 数据状态
+	private String fuzzy_query;// 模糊查询字段
+
+	// 注入
+	private StudentService studentService;
+
 	private StudentInfo studentInfo;
 	private StudentAward studentAward;
 	private StudentPatent studentPatent;
@@ -179,6 +191,74 @@ public class StudentAction extends ActionSupport {
 
 	public void setPage(String page) {
 		this.page = page;
+	}
+
+	public String getExport_name() {
+		return export_name;
+	}
+
+	public void setExport_name(String export_name) {
+		this.export_name = export_name;
+	}
+
+	public String getExport_id() {
+		return export_id;
+	}
+
+	public void setExport_id(String export_id) {
+		this.export_id = export_id;
+	}
+
+	public String getTime_interval() {
+		return time_interval;
+	}
+
+	public void setTime_interval(String time_interval) {
+		this.time_interval = time_interval;
+	}
+
+	public String getTableId() {
+		return tableId;
+	}
+
+	public void setTableId(String tableId) {
+		this.tableId = tableId;
+	}
+
+	public String getDataState() {
+		return dataState;
+	}
+
+	public void setDataState(String dataState) {
+		this.dataState = dataState;
+	}
+
+	public String getFuzzy_query() {
+		return fuzzy_query;
+	}
+
+	public void setFuzzy_query(String fuzzy_query) {
+		this.fuzzy_query = fuzzy_query;
+	}
+
+	public User getSessionuser() {
+		return sessionuser;
+	}
+
+	public void setSessionuser(User sessionuser) {
+		this.sessionuser = sessionuser;
+	}
+
+	public String getPage() {
+		return page;
+	}
+
+	public String getTableName() {
+		return tableName;
+	}
+
+	public StudentService getStudentService() {
+		return studentService;
 	}
 
 }

@@ -135,7 +135,6 @@ $(function() {
 		})
 		console.log(data.export_name);
 		if (data.export_id != "" && data.export_name != "") {
-			//console.log("export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
 			window.open("/jxkyglxt/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1));
 		//location.href = "/jxkyglxt/Admin/admin_ExportExcelCollection?tableName=" + data.tableName + "&export_id=" + (data.export_id).substring(0, data.export_id.length - 1) + "&export_name=" + (data.export_name).substring(0, data.export_name.length - 1);
 		} else {

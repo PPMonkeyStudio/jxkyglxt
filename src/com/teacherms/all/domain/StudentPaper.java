@@ -15,7 +15,7 @@ public class StudentPaper implements java.io.Serializable {
 	private String periodical;
 	private Date publishTime;
 	private String includedSituation;
-	private String alterTime;
+	private String createTime;
 
 	// Constructors
 
@@ -25,13 +25,13 @@ public class StudentPaper implements java.io.Serializable {
 
 	/** full constructor */
 	public StudentPaper(String paperId, String studentId, String periodical, Date publishTime, String includedSituation,
-			String alterTime) {
+			String createTime) {
 		this.paperId = paperId;
 		this.studentId = studentId;
 		this.periodical = periodical;
 		this.publishTime = publishTime;
 		this.includedSituation = includedSituation;
-		this.alterTime = alterTime;
+		this.createTime = createTime;
 	}
 
 	// Property accessors
@@ -76,19 +76,19 @@ public class StudentPaper implements java.io.Serializable {
 		this.includedSituation = includedSituation;
 	}
 
-	public String getAlterTime() {
-		return this.alterTime;
+	public String getcreateTime() {
+		return this.createTime;
 	}
 
-	public void setAlterTime(String alterTime) {
-		this.alterTime = alterTime;
+	public void setcreateTime(String createTime) {
+		this.createTime = createTime;
 	}
 
 	@Override
 	public String toString() {
 		return "StudentPaper [paperId=" + paperId + ", studentId=" + studentId + ", periodical=" + periodical
-				+ ", publishTime=" + publishTime + ", includedSituation=" + includedSituation + ", alterTime="
-				+ alterTime + "]";
+				+ ", publishTime=" + publishTime + ", includedSituation=" + includedSituation + ", createTime="
+				+ createTime + "]";
 	}
 
 }
