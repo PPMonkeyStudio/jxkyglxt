@@ -46,6 +46,28 @@
 										class="btn btn-default btn-addon btn-sm">
 										<i class="fa fa-plus"></i>添加学生
 									</button>
+									
+									<button data-toggle="modal" data-target="#student_award_modal"
+										class="btn btn-default btn-addon btn-sm">
+										<i class="fa fa-plus"></i>添加award
+									</button>
+									<button data-toggle="modal" data-target="#student_patent_modal"
+										class="btn btn-default btn-addon btn-sm">
+										<i class="fa fa-plus"></i>添加patent
+									</button>
+									<button data-toggle="modal" data-target="#student_paper_modal"
+										class="btn btn-default btn-addon btn-sm">
+										<i class="fa fa-plus"></i>添加paper
+									</button>
+									<button data-toggle="modal" data-target="#student_project_modal"
+										class="btn btn-default btn-addon btn-sm">
+										<i class="fa fa-plus"></i>添加project
+									</button>
+									<button data-toggle="modal" data-target="#student_class_modal"
+										class="btn btn-default btn-addon btn-sm">
+										<i class="fa fa-plus"></i>添加class
+									</button>
+									
 									<!--按条件筛选-->
 									<button style="" class="btn btn-default btn-sm" type="button"
 										data-toggle="collapse" data-target="#collapse_exam_user"

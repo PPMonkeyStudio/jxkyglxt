@@ -35,6 +35,12 @@
 	<jsp:include page="/modal/addInfo/patent_modal.jsp" flush="true"></jsp:include>
 	<jsp:include page="/modal/addInfo/add_info_modal.jsp" flush="true"></jsp:include>
 	<jsp:include page="/modal/addInfo/userSetting.jsp" flush="true"></jsp:include>
+	<jsp:include page="/modal/addInfo/student_info_add.jsp" flush="true"></jsp:include>
+	<jsp:include page="/modal/addInfo/student_award_add.jsp" flush="true"></jsp:include>
+	<jsp:include page="/modal/addInfo/student_patent_add.jsp" flush="true"></jsp:include>
+	<jsp:include page="/modal/addInfo/student_paper_add.jsp" flush="true"></jsp:include>
+	<jsp:include page="/modal/addInfo/student_project_add.jsp" flush="true"></jsp:include>
+	<jsp:include page="/modal/addInfo/student_class_add.jsp" flush="true"></jsp:include>
 
 	<jsp:include page="/modal/exportInfo/info_modal.jsp" flush="true"></jsp:include>
 	<jsp:include page="/modal/exportInfo/award_modal.jsp" flush="true"></jsp:include>
